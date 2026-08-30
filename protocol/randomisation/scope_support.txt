@@ -1,0 +1,8 @@
+NorthAmerica
+EMEA
+APAC
+LatAm
+Global
+Domestic
+International
+Other

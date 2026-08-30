@@ -1,0 +1,9 @@
+# UNFROZEN DRAFT — DO NOT USE FOR A BINDING EXPERIMENT
+You are given NO source document and NO handoff evidence. Answer the TARGET field only from the standardized
+identity/framing context and your existing knowledge. If you genuinely cannot determine it, return UNKNOWN.
+
+CONTEXT:
+{identity_framing_context}
+
+TARGET FIELD:
+{target_slot}

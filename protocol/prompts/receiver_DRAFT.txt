@@ -1,0 +1,12 @@
+# UNFROZEN DRAFT — DO NOT USE FOR A BINDING EXPERIMENT
+You are the downstream analyst receiving a handoff note from another agent.
+
+Use the handoff note to fill the requested fields. You may use your existing knowledge when useful; do not
+invent a value merely to avoid UNKNOWN. If you genuinely cannot determine a field, return UNKNOWN.
+Return only the requested structured fields and no explanation.
+
+HANDOFF:
+{handoff_message}
+
+FIELDS:
+{slot_schema}

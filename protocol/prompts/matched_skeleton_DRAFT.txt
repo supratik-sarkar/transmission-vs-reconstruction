@@ -1,0 +1,6 @@
+# UNFROZEN DRAFT — rendering template only
+Render the supplied source-linked context tuple into the frozen non-focal skeleton. The focal target slot is
+omitted in both natural and prior-blocked arms. Outside the declared identity/value mapping, preserve the same
+slot order, punctuation, labels, and approximate length.
+
+{matched_skeleton_payload}
