@@ -162,3 +162,93 @@ def test_determinism_audit_rejects_a_single_draw():
         audit({"p1": ["a"]})
     with raises(ValueError):
         audit({"p1": ["a", "a"], "p2": ["b"]})
+
+
+def test_untracked_files_regression_matrix():
+    import subprocess
+
+    root = Path(tempfile.mkdtemp())
+    # Initialize a git repository with standard ignore rules
+    subprocess.run(["git", "init", str(root)], check=True, capture_output=True)
+    subprocess.run(
+        ["git", "-C", str(root), "config", "user.email", "test@example.com"],
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(root), "config", "user.name", "Test Runner"],
+        check=True,
+        capture_output=True,
+    )
+
+    gitignore = root / ".gitignore"
+    gitignore.write_text("node_modules/\ndist/\n.cache/\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(root), "add", ".gitignore"], check=True, capture_output=True)
+    subprocess.run(
+        ["git", "-C", str(root), "commit", "-m", "init"],
+        check=True,
+        capture_output=True,
+    )
+
+    # 1. Tracked safe file passes
+    safe_py = root / "src" / "safe.py"
+    safe_py.parent.mkdir(parents=True, exist_ok=True)
+    safe_py.write_text("def run():\n    return 42\n", encoding="utf-8")
+    subprocess.run(
+        ["git", "-C", str(root), "add", "src/safe.py"],
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(root), "commit", "-m", "add safe"],
+        check=True,
+        capture_output=True,
+    )
+    report = scan_repository(root)
+    assert report.ok is True, report.render()
+
+    # 2. Ignored node_modules content is ignored
+    nm_file = root / "node_modules" / "somepkg" / "index.js"
+    nm_file.parent.mkdir(parents=True, exist_ok=True)
+    nm_file.write_text("const secret = 'sk-1234567890abcdef123456';", encoding="utf-8")
+
+    # 3. Ignored build cache is ignored
+    dist_file = root / "dist" / "bundle.js"
+    dist_file.parent.mkdir(parents=True, exist_ok=True)
+    dist_file.write_text("var path = '/Users/someone/secret';", encoding="utf-8")
+
+    report_ignored = scan_repository(root)
+    assert report_ignored.ok is True, report_ignored.render()
+
+    # 4. Untracked Python secret leak is detected
+    untracked_py = root / "src" / "untracked_leak.py"
+    untracked_py.write_text("secret = 'sk-abcdefghijklmnopqrstuvwxyz123'\n", encoding="utf-8")
+    report_py = scan_repository(root)
+    assert report_py.ok is False
+    assert any(f.rule == "openai_key" for f in report_py.findings)
+    untracked_py.unlink()
+
+    # 5. Untracked TypeScript secret leak is detected
+    untracked_ts = root / "apps" / "web" / "leak.ts"
+    untracked_ts.parent.mkdir(parents=True, exist_ok=True)
+    untracked_ts.write_text(
+        "export const key = 'sk-ant-abcdefghijklmnopqrstuvwxyz';", encoding="utf-8"
+    )
+    report_ts = scan_repository(root)
+    assert report_ts.ok is False
+    assert any(f.rule == "anthropic_key" for f in report_ts.findings)
+    untracked_ts.unlink()
+
+    # 6. Untracked Rego private path is detected
+    untracked_rego = root / "policies" / "leak.rego"
+    untracked_rego.parent.mkdir(parents=True, exist_ok=True)
+    untracked_rego.write_text(
+        'package test\npath := "/Users/someone/Desktop/private"\n', encoding="utf-8"
+    )
+    report_rego = scan_repository(root)
+    assert report_rego.ok is False
+    assert any(f.rule in ("absolute_user_path", "desktop_path") for f in report_rego.findings)
+    untracked_rego.unlink()
+
+    # Final check: clean repository passes again
+    assert scan_repository(root).ok is True

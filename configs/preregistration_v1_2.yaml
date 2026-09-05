@@ -22,7 +22,7 @@ source_frame:
   # Was a bare value with no binding status, i.e. frozen silently. The primary
   # domain is a scientific commitment and must carry a status like any other.
   section: {value: mdna, status: frozen}
-  window_tokens: {value: 2000, status: proposed}
+  window_tokens: {value: 2000, status: frozen}
   tokenizer: {value: cl100k_base, status: frozen}
   truncation: {value: hard, status: frozen}
   min_section_chars: {value: 500, status: frozen}
@@ -36,7 +36,12 @@ atomizer:
   duplicate_merge_key: {value: [role, canonical_value], status: frozen}
   conflict_groups_excluded: {value: true, status: frozen}
   human_verification_blocking: {value: true, status: frozen}
-  kappa_gate: {value: 0.70, status: proposed}
+  kappa_gate: {value: 0.80, status: frozen}
+  # PABAK is a DIAGNOSTIC for the kappa paradox. It may not override a failed
+  # kappa gate.
+  report_raw_agreement: {value: true, status: frozen}
+  report_label_marginals: {value: true, status: frozen}
+  pabak_is_diagnostic_only: {value: true, status: frozen}
 
 sampling:
   k: {value: 3, status: frozen}
@@ -54,14 +59,30 @@ models:
   decoder_regime_primary: {value: D, status: frozen}
   decoder_regime_robustness: {value: S, status: frozen}
   determinism_audit:
-    prompts: {value: 50, status: proposed}
-    repeats: {value: 5, status: proposed}
+    prompts: {value: 100, status: frozen}
+    prompt_strata: {value: [entity, scope, period, numeric, provenance], status: frozen}
+    repeats: {value: 10, status: frozen}
     required_agreement: {value: 1.0, status: frozen}
     on_calibration_only: {value: true, status: frozen}
 
 budget:
-  primary_output_tokens: {value: 500, status: proposed}
-  sweep_percent: {value: [100, 50, 25, 10], status: proposed}
+  # CALIBRATION-SELECTED. The realisation does not exist yet, so the leaf stays
+  # `proposed`; the SELECTION RULE is frozen. B* = argmin_B |median_i(F_i/B) - 2|
+  # over the candidate grid, ties toward the LARGER B, where F_i is the
+  # deterministic full-inventory render cost of calibration document i. The rule
+  # may read only deterministic source/render properties -- never receiver
+  # outcomes, CausalRelay scores, comparator performance or final-test data.
+  primary_output_tokens:
+    value: null
+    status: proposed
+    resolution_stage: CALIBRATION
+    selection_rule_status: FROZEN
+    candidate_grid: [200, 250, 300, 350, 400, 500]
+    target_rho: 2.0
+    tie_break: larger
+    rule: "argmin_B |median_i(F_i / B) - 2|"
+  # Full context remains a separate reference row, not a sweep point.
+  sweep_percent: {value: [50, 25, 10, 5], status: frozen}
   hard_ceiling: {value: true, status: frozen}
   same_tokenizer_all_methods: {value: true, status: frozen}
 
@@ -71,8 +92,9 @@ intervention:
   insertion_position: {value: new_final_line, status: frozen}
   non_focal_invariance_checked: {value: true, status: frozen}
   delete_all_canonical_occurrences: {value: true, status: frozen}
-  failure_cap_overall: {value: 0.15, status: proposed}
-  failure_differential_cap: {value: 0.10, status: proposed}
+  failure_cap_overall: {value: 0.15, status: frozen}
+  failure_differential_cap: {value: 0.05, status: frozen}
+  on_breach: {value: STOP_AND_REPAIR, status: frozen}
 
 matcher:
   token_boundary: {value: true, status: frozen}
@@ -86,8 +108,20 @@ matcher:
 sham:
   per_mechanism: {value: true, status: frozen}
   sign_convention: {value: "s = 2T - 1", status: frozen}
-  rate: {value: 0.20, status: proposed}
-  epsilon_bar_grid: {value: [0.0, 0.02, 0.05, 0.10], status: proposed}
+  # SUPERSEDES the global 20% rule. Drawn independently of receiver OUTCOMES,
+  # but selection MAY depend on observed T -- that is what makes equal precision
+  # per mechanism achievable. Inclusion probabilities are persisted.
+  sampling: {value: mechanism_stratified, status: frozen}
+  min_deletion_shams: {value: 50, status: frozen}
+  min_insertion_shams: {value: 50, status: frozen}
+  rate_floor: {value: 0.20, status: frozen}
+  may_depend_on_observed_T: {value: true, status: frozen}
+  may_depend_on_receiver_outcomes: {value: false, status: frozen}
+  report_mechanisms_separately_before_pooling: {value: true, status: frozen}
+  epsilon_bar_grid: {value: [0.0, 0.02, 0.05, 0.10, 0.15, 0.20], status: frozen}
+  # Smallest epsilon_bar at which the region includes zero. Pure arithmetic on
+  # existing estimates: requires NO additional provider calls.
+  report_breakdown_point: {value: true, status: frozen}
   primary_analysis: {value: population_partial_identification, status: frozen}
   placebo_establishes_exclusion: {value: false, status: frozen}
 
@@ -102,9 +136,15 @@ experiment_b:
     # The support is not approved (status), AND it additionally carries an
     # unmet precondition. Conflating the two in one field made the status
     # vocabulary unenforceable.
-    entity: {size: 200, k_eff: 199, status: proposed,
-             blocking_precondition: human_screening_against_real_issuer_registry,
-             precondition_met: false}
+    # Support size frozen. The pre-outcome screening procedure is defined in
+    # S11.1 of the prose preregistration and must complete before calibration.
+    entity:
+      size: 200
+      k_eff: 199
+      status: frozen
+      screening_procedure: pre_outcome_registry_screen
+      screening_status: NOT_STARTED
+      screening_blocks: [CALIBRATION, STAGE1, STAGE2_DEV, STAGE2_TEST]
     period_annual: {size: 6, k_eff: 5, status: frozen}
     period_quarter: {size: 24, k_eff: 23, status: frozen}
     numeric_subtypes_randomised: {value: [pct], status: frozen}
@@ -113,10 +153,14 @@ experiment_b:
 
 prior_probe:
   option: {value: B_stochastic_fresh_context, status: frozen}
-  m_prior: {value: 10, status: proposed}
+  m_prior: {value: 10, status: frozen}
   one_atom_per_query: {value: true, status: frozen}
-  bins: {value: [[0.0, 0.3333], [0.3333, 0.6667], [0.6667, 1.0]], status: proposed}
-  order_invariance_subset: {value: 50, status: proposed}
+  # Half-open [lo, hi) with the final bin closed at 1.0. Secondary to the
+  # continuous measurement-error-aware dose-response, which is primary.
+  bins: {value: [[0.0, 0.3333], [0.3333, 0.6667], [0.6667, 1.0]], status: frozen}
+  bin_boundary_convention: {value: half_open_lower_closed_final_bin_closed, status: frozen}
+  dose_response_primary: {value: continuous_measurement_error_aware, status: frozen}
+  order_invariance_subset: {value: 50, status: frozen}
   dose_response_form: {value: reliability_aware_stratification, status: frozen}
   errors_in_variables_model_used: {value: false, status: frozen}
   fallback: {value: A_binary_under_D, status: frozen}
@@ -134,15 +178,28 @@ gate:
   prior_threshold: {value: 0.10, status: frozen}
   reconstruction_threshold: {value: 0.10, status: frozen}
   rule: {value: "proceed if either clears; halt only if both fail", status: frozen}
-  eligible_prior_classes: {value: [scope, period, numeric], status: proposed}
+  # Entity is deliberately EXCLUDED: prior access is strongest there, so
+  # including it would make the gate easiest to clear. Provenance is excluded
+  # because a note reference carries essentially no real-world prior.
+  eligible_prior_classes: {value: [scope, period, numeric], status: frozen}
   is_significance_test: {value: false, status: frozen}
   post_hoc_adjustment_allowed: {value: false, status: frozen}
+
+development_instrumentation:
+  # Bounds the largest cost item in the project. Selection is role-stratified and
+  # NEVER depends on receiver outcomes or observed Delta.
+  max_instrumented_candidates_per_document: {value: 30, status: frozen}
+  selection: {value: role_stratified_without_replacement, status: frozen}
+  persist_second_stage_probability: {value: true, status: frozen}
+  q_iz_positive: {value: true, status: frozen}
 
 stages:
   calibration: {documents: null, status: frozen}
   stage1: {documents: 100, status: frozen}
-  stage2_dev: {documents: 100, status: proposed}
-  stage2_test: {documents: 200, status: proposed}
+  stage2_dev: {documents: 100, status: frozen}
+  # May not be decreased after DEVELOPMENT. Any amendment must precede
+  # final-test exposure.
+  stage2_test: {documents: 200, status: frozen}
   stage1_stage2_overlap: {value: 0, status: frozen}
   issuer_disjoint: {value: true, status: frozen}
   test_manifest_immutable_after_freeze: {value: true, status: frozen}
@@ -160,8 +217,19 @@ causalrelay:
   fit_split: {value: stage2_dev, status: frozen}
   target: {value: delta_budget, status: frozen}
   features: {value: frozen_pretreatment_source_side, status: frozen}
-  primary_family: {value: HistGradientBoostingRegressor, status: proposed}
-  ablation_family: {value: Ridge, status: proposed}
+  # DEVELOPMENT-ADAPTIVE. The search space is frozen now; the winner is frozen
+  # at the final-test freeze. No final-test adaptation is permitted.
+  primary_family:
+    value: null
+    status: proposed
+    resolution_stage: DEVELOPMENT
+    search_rule_status: FROZEN
+    search_space: [HistGradientBoostingRegressor, Ridge, ExtraTreesRegressor]
+    selection: grouped_cv_by_document_on_development_only
+  ablation_family: {value: Ridge, status: frozen}
+  # Low-capacity source-only control. Model identity is fixed;
+  # regularisation strength may be development-tuned.
+  trivial_control: {value: role_only_mean_utility, status: frozen}
   cv: {value: grouped_by_document, status: frozen}
   renderer_shared_with_uniform: {value: true, status: frozen}
   renderer_uses_model: {value: false, status: frozen}
@@ -170,14 +238,35 @@ causalrelay:
 experiment_c:
   post_gate: {value: true, status: frozen}
   fully_instrumented_candidate_set: {value: true, status: frozen}
-  subset_size: {value: null, status: proposed}
-  eviction_tolerance_tokens: {value: 2, status: proposed}
-  interaction_threshold: {value: 0.25, status: proposed}
+  subset_size:
+    value: null
+    status: proposed
+    resolution_stage: CALIBRATION
+    selection_rule_status: FROZEN
+    candidate_grid: [20, 30, 50]
+    rule: "largest candidate with projected Experiment-C receiver calls <= 15% of the planned DEVELOPMENT receiver-call budget AND matched-pair retention >= 80%"
+    call_budget_fraction: 0.15
+    retention_floor: 0.80
+  eviction_tolerance_tokens:
+    value: null
+    status: proposed
+    resolution_stage: CALIBRATION
+    selection_rule_status: FROZEN
+    candidate_grid: [0, 1, 2, 4, 8]
+    rule: "smallest tolerance retaining >= 80% of otherwise-eligible matched pairs"
+    retention_floor: 0.80
+  # Normalised interaction ratio:
+  #   r = mean_z |Delta^bu_z(with z') - Delta^bu_z(without z')| / mean_z |Delta^bu_z|
+  # The ratio is ALWAYS reported with a bootstrap interval. Exceeding the
+  # threshold removes the first-order oracle interpretation of G*; it never
+  # hides the interaction.
+  interaction_threshold: {value: 0.15, status: frozen}
+  interaction_ratio_always_reported: {value: true, status: frozen}
   g_star_is_true_optimum: {value: false, status: frozen}
   eta_u_imputed_when_undefined: {value: false, status: frozen}
 
 multihop:
-  depths: {value: [1, 2, 3, 5], status: proposed}
+  depths: {value: [1, 2, 3, 5], status: frozen}
   post_gate: {value: true, status: frozen}
   monotonicity_enforced: {value: false, status: frozen}
   dpi_claim: {value: false, status: frozen}

@@ -78,6 +78,18 @@ def main() -> int:
 
     counts = Counter(status for _, status in declared)
 
+    # A `proposed` leaf is only acceptable if its RESOLUTION RULE is already
+    # frozen. Otherwise it is an open value with no plan, which is
+    # indistinguishable from having been forgotten.
+    unruled: list[str] = []
+    for path, kind, payload in walk(sections):
+        if kind != "declared" or str(payload.get("status")) != "proposed":
+            continue
+        stage = payload.get("resolution_stage")
+        ruled = payload.get("selection_rule_status") or payload.get("search_rule_status")
+        if stage not in {"CALIBRATION", "DEVELOPMENT"} or ruled != "FROZEN":
+            unruled.append(path)
+
     # ---- prose document cross-check --------------------------------------
     md = Path(args.md).read_text(encoding="utf-8")
     # Count only the BOLD status marker. The bare word also appears in
@@ -117,6 +129,7 @@ def main() -> int:
         "by_status": dict(sorted(counts.items())),
         "undeclared_leaves": [p for p, _ in undeclared],
         "invalid_status_values": bad_status,
+        "proposed_without_frozen_rule": unruled,
         "integrity_unfilled": integrity_unfilled,
         "prose_proposed_status_markers": md_proposed,
         "prose_proposed_word_occurrences": md_proposed_word_total,
@@ -141,6 +154,10 @@ def main() -> int:
         for path, status in bad_status:
             print(f"  INVALID STATUS  {path}: {status!r}")
     print()
+    print(f"proposed leaves lacking a frozen resolution rule: {len(unruled)}")
+    for path in unruled:
+        print(f"  UNRULED  {path}")
+    print()
     print(f"integrity fields still unfilled: {len(integrity_unfilled)} -> {integrity_unfilled}")
     print(
         f"prose PROPOSED status markers: {md_proposed}"
@@ -161,7 +178,7 @@ def main() -> int:
         )
         print(f"\nwrote {args.json}")
 
-    problems = len(undeclared) + len(bad_status) + len(stage_mismatch)
+    problems = len(undeclared) + len(bad_status) + len(stage_mismatch) + len(unruled)
     return 0 if problems == 0 else 1
 
 
