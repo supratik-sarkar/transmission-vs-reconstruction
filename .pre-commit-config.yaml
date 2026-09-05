@@ -11,7 +11,7 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: detect-private-key
-        exclude: "^tests/test_privacy_scan\\.py$"
+        exclude: "^(tests/test_privacy_scan\\.py|tests/providers/test_secrets\\.py)$"
       - id: no-commit-to-branch
         stages: [pre-push]
         args: ["--branch", "main"]
@@ -46,7 +46,7 @@ repos:
     rev: v1.5.0
     hooks:
       - id: detect-secrets
-        args: ["--exclude-files", "(^|/)\\.git/|tests/test_privacy_scan\\.py|protocol/PROTOCOL_ARTIFACTS\\.json"]
+        args: ["--exclude-files", "(^|/)\\.git/|(^|/)node_modules/|tests/test_privacy_scan\\.py|tests/providers/test_secrets\\.py|protocol/PROTOCOL_ARTIFACTS\\.json"]
 
   - repo: local
     hooks:

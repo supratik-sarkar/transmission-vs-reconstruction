@@ -107,3 +107,18 @@ Thumbs.db
 .vscode/
 *.swp
 *~
+
+# Frontend build tooling and output
+node_modules/
+apps/web/dist/
+apps/web/.vite/
+apps/web/playwright-report/
+apps/web/test-results/
+apps/web/coverage/
+*.tsbuildinfo
+
+# Runtime stores that are infrastructure, not evidence
+.langgraph/
+langgraph_checkpoints/
+otel-store/
+provider_ledger/

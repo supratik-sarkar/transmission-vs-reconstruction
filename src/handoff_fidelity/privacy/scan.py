@@ -29,6 +29,10 @@ from pathlib import Path
 SELF_ALLOWLIST: tuple[str, ...] = (
     "src/handoff_fidelity/privacy/scan.py",
     "tests/test_privacy_scan.py",
+    # Deliberate fake-credential fixtures. They are shaped like real keys ON
+    # PURPOSE: a test using "not-a-key" would prove nothing about the patterns
+    # that matter. Allowlisted narrowly -- this one file, not the tests tree.
+    "tests/providers/test_secrets.py",
     "docs/reproducibility.md",
 )
 
@@ -36,6 +40,13 @@ SELF_ALLOWLIST: tuple[str, ...] = (
 TEXT_SUFFIXES: frozenset[str] = frozenset(
     {
         ".py",
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".rego",
+        ".css",
+        ".html",
         ".md",
         ".txt",
         ".yaml",
@@ -128,17 +139,45 @@ class ScanReport:
 
 
 def tracked_files(root: Path) -> list[Path]:
-    """Only GIT-TRACKED files. Untracked scratch is not public."""
+    """Candidate files: tracked, staged, and untracked non-ignored files.
+
+    Untracked non-ignored files are included so newly created source files
+    cannot escape the privacy scanner before being staged.
+    """
     try:
         out = subprocess.run(
-            ["git", "-C", str(root), "ls-files", "-z"],
+            [
+                "git",
+                "-C",
+                str(root),
+                "ls-files",
+                "--cached",
+                "--others",
+                "--exclude-standard",
+                "-z",
+            ],
             capture_output=True,
             check=True,
             text=True,
         ).stdout
         return [root / p for p in out.split("\0") if p]
     except Exception:
-        return [p for p in root.rglob("*") if p.is_file() and ".git" not in p.parts]
+        ignored_dirs = {
+            ".git",
+            "node_modules",
+            "dist",
+            ".pytest_cache",
+            ".mypy_cache",
+            ".ruff_cache",
+            "build",
+            ".venv",
+            ".venv-handoff-fidelity",
+        }
+        return [
+            p
+            for p in root.rglob("*")
+            if p.is_file() and not any(part in ignored_dirs for part in p.parts)
+        ]
 
 
 # A note on what is deliberately NOT a content rule.

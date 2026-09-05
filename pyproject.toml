@@ -45,6 +45,16 @@ dev = [
   "detect-secrets>=1.5,<2",
   "types-PyYAML>=6.0",
 ]
+# Application stack. Installing the scientific core pulls NONE of this:
+# the core must stay runnable and testable with the standard library and NumPy.
+app           = ["fastapi>=0.115,<1", "uvicorn[standard]>=0.32,<1"]
+orchestration = ["langgraph>=0.2,<1"]
+observability = ["opentelemetry-api>=1.29,<2", "opentelemetry-sdk>=1.29,<2",
+                 "opentelemetry-exporter-otlp>=1.29,<2"]
+policy        = []          # the OPA binary is external; the mirror needs nothing
+guardrails    = ["nemoguardrails>=0.11,<1"]
+langsmith     = ["langsmith>=0.2,<1"]
+
 all = [
   "handoff-fidelity[tokenizer,ml,figures,data]",
 ]
@@ -75,6 +85,7 @@ ignore = [
 [tool.mypy]
 python_version = "3.12"
 packages = ["handoff_fidelity"]
+exclude = ["apps.web.*", "apps/web/*"]
 mypy_path = "src"
 # Not --strict. The codebase is typed throughout, but several modules interface
 # with optional third-party libraries that have no stubs; demanding strictness
@@ -90,6 +101,8 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"
 testpaths = ["tests"]
+pythonpath = ["src", "apps/api"]
+norecursedirs = ["apps/web/node_modules", "apps/web/dist"]
 markers = [
   "slow: deselect with '-m \"not slow\"'",
 ]
