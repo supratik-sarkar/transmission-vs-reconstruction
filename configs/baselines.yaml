@@ -1,0 +1,159 @@
+# Immutable baseline registry.
+#
+# STATUS OF THIS FILE: every external method ships NOT_READY with an unresolved
+# commit/checkpoint. Those fields are deliberately null rather than guessed --
+# a fabricated revision would make the reproducibility chain a fiction. They are
+# resolved at install time, in the private workspace, and the resolved copy is
+# what enters the freeze record.
+#
+# A method becomes benchmark-eligible only after every REQUIRED field is
+# resolved AND the reproduction gate passes on a public/native task.
+
+version: 1
+resolved: false
+
+superiority:
+  required_wins: 3
+  denominator_role: PRIMARY_CAUSAL     # the legacy anchor never counts
+  criteria:
+    - lower_95CI(delta_A) > 0
+    - lower_95CI(delta_Ccomm) > 0
+  bootstrap_replicates: 10000
+  pairing: document-clustered
+
+baselines:
+
+  full_context:
+    role: CONTROL
+    status: READY
+    produces_text: true
+    notes: "Reference upper bound. NOT budget matched."
+    counts_toward_superiority: false
+
+  head_truncation:
+    role: CONTROL
+    status: READY
+    produces_text: true
+    counts_toward_superiority: false
+
+  uniform_atoms:
+    role: CONTROL
+    status: READY
+    produces_text: true
+    notes: >-
+      Uses the EXACT same renderer as CausalRelay. This control is mandatory:
+      it is what makes CausalRelay-vs-Uniform an allocation comparison rather
+      than a rendering comparison.
+    counts_toward_superiority: false
+
+  vanilla_relay:
+    role: CONTROL
+    status: NOT_READY
+    produces_text: true
+    notes: "Requires a pinned relay model. Uses the frozen global downstream task only."
+    counts_toward_superiority: false
+
+  provence:
+    role: PRIMARY_CAUSAL
+    status: NOT_READY
+    produces_text: true
+    paper_citation_key: ProvenceICLR2025
+    official_repository: https://github.com/naver/bergen
+    commit: null                      # RESOLVE AT INSTALL
+    release_tag: null                 # RESOLVE AT INSTALL
+    checkpoint_revision: null         # RESOLVE AT INSTALL
+    licence: null                     # RESOLVE AT INSTALL - do not assume
+    python_requirement: null
+    install_command: null
+    native_benchmark: null
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: true
+
+  adaptive_queryselect:
+    role: PRIMARY_CAUSAL
+    status: NOT_READY
+    produces_text: true
+    paper_citation_key: AdaptiveQuerySelectNeurIPS2024
+    official_repository: https://github.com/UTAustin-ITML/fundamental-limits
+    commit: null
+    release_tag: null
+    checkpoint_revision: null
+    licence: null
+    python_requirement: null
+    install_command: null
+    native_benchmark: null
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: true
+
+  cpc:
+    role: PRIMARY_CAUSAL
+    status: NOT_READY
+    produces_text: true
+    paper_citation_key: CPC_AAAI2025
+    official_repository: https://github.com/Workday/cpc
+    commit: null
+    release_tag: null
+    checkpoint_revision: null
+    licence: null
+    python_requirement: null
+    install_command: null
+    native_benchmark: null
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: true
+
+  llmlingua2:
+    role: PRIMARY_CAUSAL
+    status: NOT_READY
+    produces_text: true
+    paper_citation_key: LLMLingua2ACL2024
+    official_repository: https://github.com/microsoft/LLMLingua
+    commit: null
+    release_tag: null
+    checkpoint_revision: null
+    licence: null
+    python_requirement: null
+    install_command: null
+    native_benchmark: null
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: true
+
+  recomp_extractive:
+    role: LEGACY_ANCHOR
+    status: NOT_READY
+    produces_text: true
+    paper_citation_key: RECOMPICLR2024
+    official_repository: https://github.com/carriex/recomp
+    commit: null
+    release_tag: null
+    checkpoint_revision: null
+    licence: null
+    python_requirement: null
+    install_command: null
+    native_benchmark: null
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: false
+    notes: "Accepted legacy anchor. Appears in the full table; never counts toward the three."
+
+  parallelcomp:
+    role: ENDPOINT_ONLY
+    status: ENDPOINT_ONLY
+    produces_text: false
+    paper_citation_key: ParallelCompICML2025
+    counts_toward_superiority: false
+    notes: >-
+      Latent/KV-cache compressed state. Literal atom presence T_z is undefined,
+      so it may populate endpoint and efficiency metrics only. No pseudo-T is
+      manufactured for hidden states.
+
+  comi:
+    role: ENDPOINT_ONLY
+    status: ENDPOINT_ONLY
+    produces_text: false
+    paper_citation_key: COMI2026
+    counts_toward_superiority: false
+    notes: "Latent merged memory units. Endpoint-only for the same reason."

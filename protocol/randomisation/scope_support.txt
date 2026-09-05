@@ -1,8 +1,38 @@
-NorthAmerica
-EMEA
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+# n=34  K_eff=33  (the natural value is excluded from its own redraw)
 APAC
-LatAm
-Global
-Domestic
-International
-Other
+Americas
+Asia Pacific
+Asia-Pacific
+Australia
+Brazil
+Canada
+China
+Cloud
+Commercial
+Consumer
+EMEA
+Enterprise
+Europe
+France
+Germany
+Hardware
+India
+Industrial
+Japan
+Latin America
+Licensing
+Manufacturing
+Mexico
+North America
+Products
+Retail
+Services
+Software
+South America
+Subscription
+United Kingdom
+United States
+Wholesale

@@ -1,0 +1,184 @@
+# Machine-consumable form of PREREGISTRATION v1.2.
+#
+# Every value carries an explicit status. "proposed" means NOT APPROVED: it is
+# written down so a reviewer can accept or reject it, rather than discovering
+# later that a number was frozen silently. Loading code must refuse to treat a
+# proposed value as binding.
+
+version: "1.2"
+binding: false
+resolved: false
+supersedes: "1.1"
+note: "The v1.1 hash is void as a commitment."
+
+integrity:
+  authored_utc: null
+  frozen_utc: null
+  artifact_manifest_sha256: null
+  source_pool_sha256: null
+  code_commit: null
+
+source_frame:
+  # Was a bare value with no binding status, i.e. frozen silently. The primary
+  # domain is a scientific commitment and must carry a status like any other.
+  section: {value: mdna, status: frozen}
+  window_tokens: {value: 2000, status: proposed}
+  tokenizer: {value: cl100k_base, status: frozen}
+  truncation: {value: hard, status: frozen}
+  min_section_chars: {value: 500, status: frozen}
+  inventory_equals_frame: {value: true, status: frozen}
+
+atomizer:
+  tiers: {value: [tier1], status: frozen}
+  roles: {value: [entity, scope, period, numeric, provenance], status: frozen}
+  model_used: {value: false, status: frozen}
+  overlap_rule: {value: longest_span_then_role_order_then_start, status: frozen}
+  duplicate_merge_key: {value: [role, canonical_value], status: frozen}
+  conflict_groups_excluded: {value: true, status: frozen}
+  human_verification_blocking: {value: true, status: frozen}
+  kappa_gate: {value: 0.70, status: proposed}
+
+sampling:
+  k: {value: 3, status: frozen}
+  rule: {value: "uniform WOR over ALL populated strata; one atom uniform within each", status: frozen}
+  pi_formula: {value: "(k / m_i) * (1 / n_is)", status: frozen}
+  sum_pi_equals_k: {value: true, status: frozen}
+  min_populated_strata: {value: 3, status: frozen}
+  before_relay: {value: true, status: frozen}
+  hidden_from_compressors: {value: true, status: frozen}
+  master_seed: {value: 20260907, status: frozen}
+
+models:
+  relay_model: {value: null, status: must_be_pinned}
+  receiver_model: {value: null, status: must_be_pinned}
+  decoder_regime_primary: {value: D, status: frozen}
+  decoder_regime_robustness: {value: S, status: frozen}
+  determinism_audit:
+    prompts: {value: 50, status: proposed}
+    repeats: {value: 5, status: proposed}
+    required_agreement: {value: 1.0, status: frozen}
+    on_calibration_only: {value: true, status: frozen}
+
+budget:
+  primary_output_tokens: {value: 500, status: proposed}
+  sweep_percent: {value: [100, 50, 25, 10], status: proposed}
+  hard_ceiling: {value: true, status: frozen}
+  same_tokenizer_all_methods: {value: true, status: frozen}
+
+intervention:
+  natural_message_edited: {value: false, status: frozen}
+  insertion_rule: {value: overrun, status: frozen}
+  insertion_position: {value: new_final_line, status: frozen}
+  non_focal_invariance_checked: {value: true, status: frozen}
+  delete_all_canonical_occurrences: {value: true, status: frozen}
+  failure_cap_overall: {value: 0.15, status: proposed}
+  failure_differential_cap: {value: 0.10, status: proposed}
+
+matcher:
+  token_boundary: {value: true, status: frozen}
+  substring_matching: {value: false, status: frozen}
+  precision_gate: {value: 0.95, status: frozen}
+  recall_gate: {value: 0.95, status: frozen}
+  audit_n: {value: 200, status: frozen}
+  audit_stratification: {value: {presence: 100, absence: 100}, status: frozen}
+  blinded: {value: true, status: frozen}
+
+sham:
+  per_mechanism: {value: true, status: frozen}
+  sign_convention: {value: "s = 2T - 1", status: frozen}
+  rate: {value: 0.20, status: proposed}
+  epsilon_bar_grid: {value: [0.0, 0.02, 0.05, 0.10], status: proposed}
+  primary_analysis: {value: population_partial_identification, status: frozen}
+  placebo_establishes_exclusion: {value: false, status: frozen}
+
+experiment_b:
+  local_window: {value: same_sentence, status: frozen}
+  min_populated_roles: {value: 3, status: frozen}
+  focal_absent_in_both_arms: {value: true, status: frozen}
+  omitted_token: {value: "<<OMITTED>>", status: frozen}
+  structure_assert: {value: true, status: frozen}
+  t_bar_difference_role: {value: manipulation_check_only, status: frozen}
+  supports:
+    # The support is not approved (status), AND it additionally carries an
+    # unmet precondition. Conflating the two in one field made the status
+    # vocabulary unenforceable.
+    entity: {size: 200, k_eff: 199, status: proposed,
+             blocking_precondition: human_screening_against_real_issuer_registry,
+             precondition_met: false}
+    period_annual: {size: 6, k_eff: 5, status: frozen}
+    period_quarter: {size: 24, k_eff: 23, status: frozen}
+    numeric_subtypes_randomised: {value: [pct], status: frozen}
+  chance_reporting: {value: [nominal_1_over_k_eff, empirical_no_evidence], status: frozen}
+  pooled_chance_reported: {value: false, status: frozen}
+
+prior_probe:
+  option: {value: B_stochastic_fresh_context, status: frozen}
+  m_prior: {value: 10, status: proposed}
+  one_atom_per_query: {value: true, status: frozen}
+  bins: {value: [[0.0, 0.3333], [0.3333, 0.6667], [0.6667, 1.0]], status: proposed}
+  order_invariance_subset: {value: 50, status: proposed}
+  dose_response_form: {value: reliability_aware_stratification, status: frozen}
+  errors_in_variables_model_used: {value: false, status: frozen}
+  fallback: {value: A_binary_under_D, status: frozen}
+
+inference:
+  default_estimator: {value: hajek, status: frozen}
+  two_phase_supported: {value: true, status: frozen}
+  q_in_pilot: {value: 1.0, status: frozen}
+  bootstrap: {value: document_clustered, status: frozen}
+  replicates_final: {value: 10000, status: frozen}
+  n_reported_in: {value: documents, status: frozen}
+  unweighted_pooled_alone: {value: false, status: frozen}
+
+gate:
+  prior_threshold: {value: 0.10, status: frozen}
+  reconstruction_threshold: {value: 0.10, status: frozen}
+  rule: {value: "proceed if either clears; halt only if both fail", status: frozen}
+  eligible_prior_classes: {value: [scope, period, numeric], status: proposed}
+  is_significance_test: {value: false, status: frozen}
+  post_hoc_adjustment_allowed: {value: false, status: frozen}
+
+stages:
+  calibration: {documents: null, status: frozen}
+  stage1: {documents: 100, status: frozen}
+  stage2_dev: {documents: 100, status: proposed}
+  stage2_test: {documents: 200, status: proposed}
+  stage1_stage2_overlap: {value: 0, status: frozen}
+  issuer_disjoint: {value: true, status: frozen}
+  test_manifest_immutable_after_freeze: {value: true, status: frozen}
+
+benchmark:
+  primary_required_textual_state: {value: true, status: frozen}
+  reproduction_tolerance_pp: {value: 2.0, status: frozen}
+  required_wins: {value: 3, status: frozen}
+  criteria: {value: ["lower_95CI(delta_A) > 0", "lower_95CI(delta_Ccomm) > 0"], status: frozen}
+  comparator_deletion_allowed: {value: false, status: frozen}
+  comparator_substitution_allowed: {value: false, status: frozen}
+  focal_secrecy_enforced: {value: true, status: frozen}
+
+causalrelay:
+  fit_split: {value: stage2_dev, status: frozen}
+  target: {value: delta_budget, status: frozen}
+  features: {value: frozen_pretreatment_source_side, status: frozen}
+  primary_family: {value: HistGradientBoostingRegressor, status: proposed}
+  ablation_family: {value: Ridge, status: proposed}
+  cv: {value: grouped_by_document, status: frozen}
+  renderer_shared_with_uniform: {value: true, status: frozen}
+  renderer_uses_model: {value: false, status: frozen}
+  test_labels_accessible: {value: false, status: frozen}
+
+experiment_c:
+  post_gate: {value: true, status: frozen}
+  fully_instrumented_candidate_set: {value: true, status: frozen}
+  subset_size: {value: null, status: proposed}
+  eviction_tolerance_tokens: {value: 2, status: proposed}
+  interaction_threshold: {value: 0.25, status: proposed}
+  g_star_is_true_optimum: {value: false, status: frozen}
+  eta_u_imputed_when_undefined: {value: false, status: frozen}
+
+multihop:
+  depths: {value: [1, 2, 3, 5], status: proposed}
+  post_gate: {value: true, status: frozen}
+  monotonicity_enforced: {value: false, status: frozen}
+  dpi_claim: {value: false, status: frozen}
+  plot_A_and_Tbar_together: {value: true, status: frozen}

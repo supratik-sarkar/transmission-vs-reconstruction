@@ -1,0 +1,22 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+
+# ONE shared receiver prompt is used for the natural arm, the
+# counterfactual arm, both matched-skeleton arms and the no-evidence
+# baseline. Different prompts across arms would confound a prompt
+# difference with the availability contrast.
+
+You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field value only, with no explanation, no units of explanation, and no surrounding sentence.
+
+--- EXAMPLE RENDERING ---
+You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field value only, with no explanation, no units of explanation, and no surrounding sentence.
+
+--- HANDOFF NOTE ---
+- scope: North America
+- period: FY2019
+--- END NOTE ---
+
+Question: For the issuer, what is the reported value of the change in segment margin? Answer with the number and its unit only.
+Answer format: number+unit
+Answer:

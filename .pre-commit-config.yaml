@@ -1,11 +1,58 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.6
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=512"]
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: detect-private-key
+        exclude: "^tests/test_privacy_scan\\.py$"
+      - id: no-commit-to-branch
+        stages: [pre-push]
+        args: ["--branch", "main"]
+
+  # Ruff runs from the PROJECT environment, not from a separately pinned mirror.
+  #
+  # The mirror was pinned at v0.8.6 while pyproject allowed `ruff>=0.8,<1`, so
+  # the venv resolved a much newer Ruff. The two then disagreed: `ruff check .`
+  # passed while the hook reported UP038, a rule the newer Ruff has since
+  # deprecated. Pinning two versions and hoping they match is the defect; using
+  # one binary makes the skew impossible by construction.
+  #
+  # Requires the dev extra to be installed, which every documented workflow and
+  # CI already does.
+  - repo: local
     hooks:
       - id: ruff
-        args: [--fix]
+        name: ruff check
+        entry: ruff check --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+        args: ["--fix"]
       - id: ruff-format
+        name: ruff format
+        entry: ruff format --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.5.0
     hooks:
       - id: detect-secrets
+        args: ["--exclude-files", "(^|/)\\.git/|tests/test_privacy_scan\\.py|protocol/PROTOCOL_ARTIFACTS\\.json"]
+
+  - repo: local
+    hooks:
+      - id: privacy-scan
+        name: privacy and path scan
+        entry: python -m handoff_fidelity.cli privacy-scan --root .
+        language: system
+        pass_filenames: false
+        always_run: true

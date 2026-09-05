@@ -1,0 +1,17 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+
+# The EMPIRICAL chance baseline. This is the operative chance level,
+# because a receiver free to answer outside the candidate set matches
+# with probability P(output in K)/K <= 1/K.
+
+You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field value only, with no explanation, no units of explanation, and no surrounding sentence.
+
+--- HANDOFF NOTE ---
+(no note was provided)
+--- END NOTE ---
+
+Question: For the issuer, which reporting period does the statement about the change in segment margin refer to? Answer as FYYYYY or FYYYYYQn.
+Answer format: FYYYYY | FYYYYYQn
+Answer:

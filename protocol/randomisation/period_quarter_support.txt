@@ -1,3 +1,15 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+# n=24  K_eff=23  (the natural value is excluded from its own redraw)
+FY2016Q1
+FY2016Q2
+FY2016Q3
+FY2016Q4
+FY2017Q1
+FY2017Q2
+FY2017Q3
+FY2017Q4
 FY2018Q1
 FY2018Q2
 FY2018Q3
@@ -14,11 +26,3 @@ FY2021Q1
 FY2021Q2
 FY2021Q3
 FY2021Q4
-FY2022Q1
-FY2022Q2
-FY2022Q3
-FY2022Q4
-FY2023Q1
-FY2023Q2
-FY2023Q3
-FY2023Q4

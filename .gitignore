@@ -1,45 +1,109 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-build/
-dist/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-.venv/
-.venv-*/
-venv/
-venv-*/
+# ---------------------------------------------------------------------------
+# Security boundary. Everything the runtime produces stays out of version
+# control: credentials, raw sources, model outputs, caches and freeze material
+# belong in the private workspace, never here.
+# ---------------------------------------------------------------------------
 
-# Secrets — NEVER COMMIT
+# Credentials
 .env
 .env.*
 !.env.example
 *.pem
 *.key
+*.p12
+*.pfx
 credentials/
+credentials*
 secrets/
-token*
+secrets*
+token
+token.*
+tokens/
 api_keys*
+service-account*.json
+.netrc
 
-# Private/runtime data — keep in ~/Desktop/handoff-fidelity
+# Environments
+.venv/
+.venv*/
+venv/
+venv*/
+env/
+envs/
+conda-env/
+.python-version
+
+# Private runtime data and outputs
 data/
+raw/
 runs/
 cache/
+caches/
 logs/
 artifacts/
 calibration/
-private/
-protocol_freeze/
 source_manifests/
+protocol_freeze/
+test_freeze/
+preregistration/private/
+manuscript_exports/
+private/
+third_party/
+tables/*.tex
+figures/*.pdf
+figures/*.png
+!figures/.gitkeep
+!tables/.gitkeep
 
-# OS/IDE
+# Model and dataset caches
+*.ckpt
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+.cache/
+huggingface/
+.torch/
+transformers_cache/
+
+# Filings and corpora
+*.htm.gz
+*.sgml
+edgar/
+filings/
+
+# Python build artefacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+pip-wheel-metadata/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.hypothesis/
+
+# Notebooks
+.ipynb_checkpoints/
+notebooks/**/outputs/
+
+# OS and editor
 .DS_Store
+Thumbs.db
 .idea/
 .vscode/
-
-# Jupyter
-.ipynb_checkpoints/
+*.swp
+*~

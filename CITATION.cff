@@ -1,16 +1,19 @@
 cff-version: 1.2.0
-message: "If you use this software or protocol, please cite the associated paper."
-title: "Transmission vs Reconstruction"
+message: "If you use this software, please cite it using the metadata below."
+title: "handoff-fidelity: causal measurement of transmission versus reconstruction in chained language-model workflows"
+abstract: >-
+  A toolkit for separating information that survives a language-model handoff
+  from information the receiving model reconstructs, using availability
+  interventions, design-based estimation and a matched-budget comparison
+  protocol.
 type: software
-version: 0.1.0
-date-released: 2026-08-31
+version: 0.2.0
 license: MIT
-repository-code: "https://github.com/<YOUR_GITHUB_USERNAME>/transmission-vs-reconstruction"
+repository-code: "https://github.com/supratik-sarkar/transmission-vs-reconstruction"
+keywords:
+  - causal inference
+  - information transmission
+  - evaluation
+  - context compression
 authors:
-  - name: "Anonymous research authors"
-preferred-citation:
-  type: article
-  title: "What Survived the Handoff? Causally Separating Transmission from Reconstruction in Multi-Agent LLM Workflows"
-  authors:
-    - name: "Anonymous authors"
-  year: 2026
+  - name: "The handoff-fidelity contributors"

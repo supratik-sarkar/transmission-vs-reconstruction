@@ -1,367 +1,327 @@
 # Transmission vs Reconstruction
 
-> **Causal measurement of what actually survives an LLM-to-LLM handoff.**
+A causal measurement and benchmarking toolkit for distinguishing **transmitted**
+from **reconstructed** information in chained language-model workflows.
 
-This repository is the public, GitHub-safe implementation for the research project behind the manuscript **“What Survived the Handoff? Causally Separating Transmission from Reconstruction in Multi-Agent LLM Workflows.”**
-
-The central question is simple:
-
-> If a downstream agent gives the correct answer, did that information actually survive the handoff, or did the receiver reconstruct what the sender had already dropped?
-
-A relay can send only _“North America margins improved”_ while a receiver outputs _“North America margins improved by 6.2% in FY2023.”_ Endpoint accuracy alone cannot distinguish successful transmission from successful reconstruction.
-
-The project therefore treats the relay as a causal assignment mechanism and measures:
-
-- **focal-omission reconstruction** `R^-`: recovery when the focal atom is absent but the rest of the natural handoff is retained;
-- **explicit-transmission recovery** `D^+`;
-- **availability surplus** `Δ^avail = D^+ - R^-`;
-- the endpoint-fidelity decomposition
-
-  `A = R̄₀ + T̄ Δ̄ + Cov(T, Δ)`;
-- observational selection bias from studying only naturally omitted atoms;
-- matched prior-access effects under a fixed handoff skeleton;
-- post-gate budget-neutral targeting and multi-hop behavior.
-
-## Current research status
-
-- **Manuscript scientific architecture:** frozen at v2.7.
-- **Experimental execution protocol:** **not yet binding**. The preregistration is still being hardened before any Stage-1 experimental model call.
-- **Stage 1:** planned 100-document discovery pilot.
-- **Stage 2:** planned 300 new-document confirmatory run if a pre-registered gate clears.
-- **Important:** this repository deliberately refuses a real Stage-1 run unless the private workspace contains a valid freeze record.
-
-See [`EXPERIMENTAL_DESIGN_AND_EXECUTION_STATUS.md`](EXPERIMENTAL_DESIGN_AND_EXECUTION_STATUS.md) for the full design, current blockers, and MacBook/Colab execution plan.
+When one model hands work to another, the receiving model routinely states
+information the sending model never communicated: a pretrained receiver
+reconstructs plausible content from surrounding context and from what it already
+knows. Endpoint correctness cannot separate the two, because an item that
+survived a handoff and an item that was dropped and then guessed produce
+identical downstream text.
 
 ---
 
-## 1. Public repo vs private runtime workspace
+## Why this matters
 
-The project intentionally uses **two directories** on the research machine.
+A relay sends only
 
-### Public Git repository
+> North America margins improved.
 
-```text
-~/Desktop/My_Git/transmission-vs-reconstruction
-```
+and the receiver writes
 
-Contains only:
+> North America margins improved by 6.2% in FY2023.
 
-- source code;
-- tests;
-- prompts/specifications once frozen;
-- public documentation;
-- preregistration templates and public freeze metadata;
-- no credentials;
-- no raw/private data;
-- no unpublished run outputs.
+The final sentence may be entirely correct. It does not follow that any of it was
+communicated: the figure and the period may have been supplied by the receiver
+from surrounding cues and prior knowledge.
 
-### Private, non-Git runtime workspace
+The two mechanisms fail differently. Transmitted information does not require the
+receiver to reconstruct anything. Reconstructed information evaporates when the
+entity is unfamiliar or the domain shifts. A pipeline measured only at the
+endpoint can therefore report high fidelity on familiar cases and degrade sharply
+in deployment, with no diagnostic signal in between.
 
-```text
-~/Desktop/handoff-fidelity
-```
-
-Contains:
-
-- `.venv-handoff-fidelity`;
-- `.env` and private API credentials;
-- raw SEC/source files;
-- calibration material;
-- model outputs;
-- run ledgers;
-- intermediate artifacts;
-- private freeze material before public release.
-
-**Never initialize Git inside `~/Desktop/handoff-fidelity`.**
-
-The code defaults mutable outputs to the private workspace through `HANDOFF_PRIVATE_HOME`.
+The obstacle is causal rather than statistical. One might try to estimate
+reconstructability from the items a relay happened to omit — but the relay
+*chooses* what to omit, plausibly dropping what it judges predictable, so the
+omitted set is selected on the very quantity being measured.
 
 ---
 
-## 2. Fast installation on macOS (Apple Silicon / M4 Pro)
+## Core idea
 
-### Prerequisites
+Each factual item in a source document is treated as an **atom** carrying
+potential outcomes under two availabilities: present in the handoff, or absent
+from it. The relay is modelled as a **non-ignorable assignment mechanism** — the
+sender, not the experimenter, decides which atoms are transmitted.
 
-- macOS on Apple Silicon;
-- Homebrew;
-- `git`;
-- Python **3.12.13** (the bootstrap uses `pyenv` to pin it exactly).
+The pieces the toolkit measures:
 
-### A. Put the public repo in the requested location
+| Quantity | Reads as |
+|---|---|
+| `R^-` | recovery when the focal atom is **absent** but everything else the relay actually sent remains |
+| `D^+` | recovery when the focal atom is **present** |
+| `Δ^avail = D^+ − R^-` | the availability transmission surplus |
+| `T̄` | the rate at which atoms survive the handoff |
+| `R̄₀` | population reconstruction baseline |
+| `C_comm = A − R̄₀` | net causal communication contribution (signed) |
+| `C_recon = E[(1−T)·R^-]` | correctness that depended on reconstruction |
+| `Cov(T, Δ)` | assignment–effect alignment |
 
-```bash
-mkdir -p ~/Desktop/My_Git
-cd ~/Desktop/My_Git
-unzip transmission-vs-reconstruction.zip
-cd transmission-vs-reconstruction
+Endpoint fidelity then decomposes without residual:
+
+```
+A  =  R̄₀  +  T̄·Δ̄  +  Cov(T, Δ)
+   reconstruction   volume     alignment
 ```
 
-If this repo is already on GitHub:
+The identity is elementary — it is the law of total expectation for a binary
+treatment — and the toolkit claims no algebraic novelty for it. What matters is
+that each term is separately **identifiable by intervention** rather than by
+assumption, and that they answer different questions.
+
+Two consequences drive the whole design:
+
+- **Endpoints do not identify the triple.** A two-parameter family of causal
+  worlds induces exactly the same observed law while realising different values
+  of all three terms.
+- **The observational estimator is biased by `−Cov(T, R^-)/(1−T̄)`.** A relay that
+  preferentially drops recoverable content is precisely the relay whose
+  observational estimate misleads most — so the better the compressor, the worse
+  the naive estimate.
+
+A note on wording: `Cov(T, Δ)` is called **assignment–effect alignment**, not
+"communicative competence". A positive value says transmitted atoms tend to carry
+larger surplus. That is an association, not evidence of deliberate or efficient
+allocation.
+
+---
+
+## What the toolkit does
+
+- **Corpus preparation** — deterministic section extraction, normalisation and
+  construction of a hashed *relay-visible source frame*.
+- **Atom extraction** — rule-based, no model judge, with human-verification
+  tooling and pre-treatment eligibility filtering.
+- **Focal sampling** — fixed-size role-stratified sampling *before* the relay
+  runs, with recorded inclusion probabilities.
+- **Handoff measurement** — token-boundary canonical matching for entities,
+  scopes, periods, numerics and references.
+- **Causal interventions** — availability edits with mechanical non-focal
+  invariance checks, semantics-preserving sham edits, matched-skeleton
+  construction, and budget-neutral swaps.
+- **Estimation** — design-weighted Horvitz–Thompson and Hájek estimators, a
+  two-phase form, sham partial identification, and document-clustered bootstrap.
+- **Comparator adapters** — a common `compress()` interface with hard budget
+  enforcement and focal secrecy.
+- **`CausalRelay`** — a deployable relay policy fitted on development data only.
+- **Provenance** — artifact manifests, freeze records and a results manifest that
+  binds every exported table and figure to the run that produced it.
+- **Export** — code-generated LaTeX fragments and figures; no number is typed in
+  by hand.
+
+---
+
+## Installation
+
+Requires Python 3.12.
 
 ```bash
-mkdir -p ~/Desktop/My_Git
-cd ~/Desktop/My_Git
-git clone https://github.com/supratik-sarkar/transmission-vs-reconstruction.git
-cd transmission-vs-reconstruction
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
 ```
 
-### B. Create the private workspace and venv
+Optional extras, installed only when needed:
 
 ```bash
-bash scripts/bootstrap_macos_private.sh
+pip install -e ".[ml]"          # scikit-learn, for the gradient-boosted policy
+pip install -e ".[figures]"     # matplotlib, for figure export
+pip install -e ".[tokenizer]"   # tiktoken, for the frozen tokenizer
+pip install -e ".[providers]"   # model provider clients
 ```
 
-This creates:
+The scientific core — sampling, matching, editing, estimators, bootstrap,
+provenance — depends only on the standard library and NumPy, so the invariants
+can be checked without installing the optional extras. This is a statement about
+*dependencies*, not about interpreters: Python 3.12 is required throughout.
 
-```text
-~/Desktop/handoff-fidelity/
-└── .venv-handoff-fidelity/
-```
+---
 
-using Python 3.12.13, then installs this public repo in editable mode.
+## Quick start
 
-Activate it later with:
+Everything below is deterministic, offline, and requires no credentials.
 
 ```bash
-source ~/Desktop/handoff-fidelity/.venv-handoff-fidelity/bin/activate
+handoff version
+handoff self-test          # design invariants: positivity, identities, determinism
+handoff stages             # declared stages and their guard conditions
+handoff baselines          # comparator registry resolution and eligibility
+handoff privacy-scan       # fail if tracked files leak private material
+handoff doctor             # configuration, compute routing, public/private boundary
 ```
 
-### C. Verify the installation
+`self-test` checks properties that must hold for the analysis to mean anything:
+that inclusion probabilities sum to `k` exactly and are strictly positive
+everywhere, that the decomposition closes with zero residual, that the selection
+bias equals its closed form, that the sham sign convention is
+mechanism-dependent, and that the allocation solver is order-independent.
+
+---
+
+## Configuration
+
+All configuration comes from the environment; no path belonging to any
+particular machine appears in this repository.
+
+| Variable | Meaning |
+|---|---|
+| `HANDOFF_PRIVATE_HOME` | runtime workspace for data, runs, caches and credentials |
+| `HANDOFF_RELAY_MODEL` / `HANDOFF_RECEIVER_MODEL` | exact pinned version strings |
+| `HANDOFF_RELAY_PROVIDER` / `HANDOFF_RECEIVER_PROVIDER` | `mock` by default |
+| `HANDOFF_TOKENIZER` | frozen tokenizer name |
+| `HANDOFF_SOURCE_WINDOW_TOKENS` | relay-visible window |
+| `HANDOFF_RELAY_BUDGET_TOKENS` | matched output budget |
+| `HANDOFF_MASTER_SEED` | root of all derived seeds |
+| `HANDOFF_ALLOW_NETWORK` | off by default |
+
+Credentials are read from the environment only. They are never accepted as
+arguments, written to disk, logged, or included in a repr. `handoff doctor`
+reports only *whether* a credential is present.
+
+Model identifiers default to `UNFROZEN`, and an unpinned run is a hard error
+rather than a silent default: a moving alias would make measurement claims
+unreproducible.
+
+See [`.env.example`](.env.example) for the shape of a local environment file.
+Keep the real one outside this repository.
+
+---
+
+## Reproducibility
+
+The freeze chain is deliberately acyclic:
+
+1. freeze prompts, specifications, code, support files and source artifacts;
+2. hash them into an **artifact manifest**;
+3. finalise the pre-registration, which *cites* the manifest hash;
+4. create a **freeze record** carrying the pre-registration hash, manifest hash,
+   source-pool hash, commit, model versions and a UTC timestamp;
+5. verify before running;
+6. record every deviation.
+
+There are two records. A **protocol freeze** precedes the discovery stage. A
+separate **final-test freeze** additionally binds the sealed test documents,
+focal samples, atom inventories, prompts, comparator revisions, the fitted policy
+artifact, the feature schema, the renderer, budgets, tokenizer and every analysis
+and export script. No final-test runner executes without a valid record.
+
+`handoff manuscript-check` fails if a manuscript still carries unresolved
+placeholders, missing generated fragments, or assets absent from the results
+manifest. It distinguishes intentionally static conceptual diagrams from
+unresolved experimental figures — and it never makes itself pass by inventing
+data.
+
+---
+
+## Benchmarking
+
+Comparators are wrapped behind one interface:
+
+```python
+compress(source_text, downstream_task, token_budget, config) -> HandoffResult
+```
+
+Two invariants are enforced in code rather than trusted:
+
+- **Budget.** Every adapter verifies its realised output against the hard
+  ceiling. No method gets a larger effective context because its native
+  tokenizer differs.
+- **Focal secrecy.** Sampled atom identities and values never enter a compressor
+  prompt or configuration. Otherwise focal sampling would become supervision for
+  query-aware methods.
+
+Comparators are split by the kind of state they produce. A method whose
+compressed state is textual can have atom presence audited by the same frozen
+matcher and may participate in the causal comparison. A method whose compressed
+state is latent or a cache is **endpoint-only**: literal atom presence is
+undefined for hidden states, and the toolkit does not manufacture a substitute
+for them.
+
+External methods ship as `NOT_READY` and require their own official
+implementations and licences. Bringing one online means cloning the official
+repository, pinning an exact revision and checkpoint, and passing a reproduction
+gate on a public task before any comparison is produced. A method that fails its
+reproduction gate is reported as unreproduced; it is never approximated, and
+never swapped out after results are visible.
+
+Comparative claims are governed by a rule that lives in code, with a fixed
+denominator and a fixed criterion, evaluated by paired document-clustered
+bootstrap. If the criterion is not met, the complete comparison is reported
+without comparative language.
+
+---
+
+## Tests
 
 ```bash
-handoff doctor
 pytest -q
-```
-
-A healthy fresh install should pass all deterministic unit/self-tests without making any LLM call.
-
----
-
-## 3. Private API keys — never commit them
-
-The bootstrap creates:
-
-```text
-~/Desktop/handoff-fidelity/.env
-```
-
-from the private template. Put credentials only there, for example:
-
-```dotenv
-OPENAI_API_KEY=
-ANTHROPIC_API_KEY=
-GEMINI_API_KEY=
-SEC_USER_AGENT="Your Name your.email@example.com"
-```
-
-The public repo contains **no live secrets** and `.gitignore` blocks common secret/data paths. The CLI also warns if the configured private workspace is inside the public repository.
-
-Use only providers/models that are explicitly pinned in the final preregistration. Provider adapters are scaffolding, not permission to change models after freeze.
-
----
-
-## 4. Repository layout
-
-```text
-transmission-vs-reconstruction/
-├── README.md
-├── EXPERIMENTAL_DESIGN_AND_EXECUTION_STATUS.md
-├── pyproject.toml
-├── Makefile
-├── CITATION.cff
-├── LICENSE
-├── CONTRIBUTING.md
-├── SECURITY.md
-├── .gitignore
-├── .pre-commit-config.yaml
-├── src/handoff_fidelity/
-│   ├── cli.py
-│   ├── config.py
-│   ├── models.py
-│   ├── sampling.py
-│   ├── matcher.py
-│   ├── editor.py
-│   ├── estimands.py
-│   ├── gates.py
-│   ├── bootstrap.py
-│   ├── integrity.py
-│   ├── runner.py
-│   └── providers/
-├── protocol/
-│   ├── prompts/
-│   ├── specs/
-│   ├── randomisation/
-│   └── templates/
-├── docs/
-│   ├── preregistration/
-│   └── architecture/
-├── scripts/
-├── tests/
-├── notebooks/
-└── .github/workflows/
-```
-
----
-
-## 5. Safe first commands
-
-### Inspect the private/public boundary
-
-```bash
-handoff doctor
-```
-
-### Run design self-tests
-
-```bash
-handoff self-test
-```
-
-### Validate a protocol manifest
-
-```bash
-handoff protocol verify --private-home ~/Desktop/handoff-fidelity
-```
-
-### Dry-run Stage 1 without any provider call
-
-```bash
-handoff stage1 --dry-run
-```
-
-### Real Stage 1
-
-A real Stage-1 call is intentionally guarded. It requires a valid private freeze record and explicit opt-in:
-
-```bash
-handoff stage1 --execute
-```
-
-If the protocol is not frozen, the command exits before any provider request.
-
----
-
-## 6. Experimental workflow at a glance
-
-### Experiment A — Natural relay decomposition
-
-1. construct the exact relay-visible source `X_i`;
-2. build a verified Tier-1 atom inventory from that same source;
-3. sample focal atoms **before** relay generation;
-4. run the natural relay and observe transmission `T_iz`;
-5. query the natural receiver output;
-6. create only the missing availability arm:
-   - transmitted atom → delete it;
-   - omitted atom → insert it;
-7. recover/estimate `R^-`, `D^+`, `Δ^avail`;
-8. compute the weighted natural decomposition and observational-bias diagnostic.
-
-### Experiment B — Matched prior-access contrast
-
-Hold a matched non-focal handoff skeleton fixed while changing the natural versus prior-blocked identity/value mapping, with the focal target absent in both arms. This isolates prior-assisted reconstruction from changed message composition.
-
-### Experiment C — Post-gate budget-neutral targeting
-
-Only after the discovery gate passes. A smaller fully instrumented candidate set receives matched-length insert/evict swaps to estimate `Δ^budget`. First-order targeting metrics are explicitly not treated as the true joint causal optimum unless interaction diagnostics support approximate additivity.
-
-### Multi-hop extension
-
-Post-gate, repeat at handoff depths `h ∈ {1,2,3,5}` to test whether endpoint fidelity can remain high while actually transmitted content deteriorates.
-
----
-
-## 7. Stage gates
-
-The current draft protocol retains the following planned discovery logic, but the preregistration is **not binding until final freeze**:
-
-- prior-access effect gate: `ΔR_prior^matched ≥ 0.10` on a predeclared eligible class;
-- natural reconstruction contribution gate: `E[(1-T)R^-] ≥ 0.10`;
-- proceed if **either** clears;
-- halt if **both** fail.
-
-No p-value gate should substitute for these predeclared effect-size gates.
-
----
-
-## 8. M4 Pro vs Colab A100
-
-### MacBook Pro M4 Pro
-
-Best for:
-
-- environment/bootstrap;
-- source ingestion and manifests;
-- deterministic atom/matcher/editor tests;
-- API-based relay/receiver runs;
-- Stage-1 orchestration if providers are remote APIs;
-- analysis, bootstrap, tables, plots;
-- small open-weight model checks through MPS.
-
-### Google Colab Pro / A100
-
-Best for:
-
-- larger open-weight relay/receiver models;
-- repeated local stochastic prior probes;
-- high-throughput model inference when API calls are not used;
-- larger Stage-2/depth sweeps;
-- CUDA-only libraries.
-
-The included notebook template uses Colab Secrets / environment variables and never embeds API keys in the notebook.
-
----
-
-## 9. Reproducibility and integrity
-
-The intended freeze chain is non-circular:
-
-1. freeze prompts/specs/code/support/source artifacts;
-2. hash them into an artifact manifest;
-3. finalize the preregistration with the artifact-manifest hash;
-4. create a separate freeze record containing preregistration hash, manifest hash, source-pool hash, Git commit, model versions, and UTC timestamp;
-5. verify before Stage 1;
-6. record every deviation in `DEVIATIONS.md`.
-
-The CLI's `protocol verify` command implements the mechanical checks; scientific approval remains a human responsibility.
-
----
-
-## 10. Development
-
-```bash
-source ~/Desktop/handoff-fidelity/.venv-handoff-fidelity/bin/activate
-pip install -e '.[dev]'
 ruff check .
 mypy src
-pytest -q
+handoff privacy-scan
 ```
 
-Optional provider/local-model extras:
+Continuous integration runs deterministic checks only: no credentials, no
+private data, no model calls, no external repository clones, no experiments.
 
-```bash
-pip install -e '.[openai]'
-pip install -e '.[anthropic]'
-pip install -e '.[gemini]'
-pip install -e '.[hf]'
+---
+
+## Project status
+
+Early. The measurement, estimation, provenance and export machinery is
+implemented and covered by deterministic tests against synthetic fixtures. The
+experimental protocol is written but **not yet executed**: no corpus has been
+acquired, no model has been pinned, and no result exists.
+
+Accordingly this repository makes **no empirical claims of any kind**. Comparator
+adapters are declared but not bound to implementations, and several protocol
+values are marked `PROPOSED` pending approval rather than silently frozen.
+
+---
+
+## Repository layout
+
+```text
+src/handoff_fidelity/
+  corpus/        section extraction, normalisation, source frame + hashing
+  atomizer/      rule-based Tier-1 extraction, verification, eligibility
+  sampling/      role-stratified design and inclusion probabilities
+  matcher/       canonicalisation, token-boundary matching, validation
+  editing/       availability editor, sham edits, invariance checks
+  relay/         the frozen global downstream task
+  receiver/      slot schemas and the single shared receiver prompt
+  interventions/ matched skeleton, prior probe, budget-neutral swaps
+  causal/        estimands, weighting, sham regions, targeting, gates, multi-hop
+  causalrelay/   features, model, renderer, allocation
+  baselines/     adapter API, controls, registry, external adapters
+  benchmark/     orchestration, reproduction gate, comparison rule
+  inference/     document-clustered bootstrap
+  provenance/    hashing, manifests, freeze records, results manifest
+  export/        table fragments, figures, manuscript guard
+  stages/        stage specifications and execution guards
+  compute/       device routing
+  privacy/       repository scan and public/private boundary
+docs/            design, estimands, protocol, reproducibility, architecture
+configs/         comparator registry, example configs, schemas
+tests/           deterministic tests over synthetic fixtures only
 ```
 
 ---
 
-## 11. Academic citation
+## Citation
 
-See [`CITATION.cff`](CITATION.cff). Replace anonymous/draft metadata when the paper is public.
+See [`CITATION.cff`](CITATION.cff). The metadata is intentionally minimal while
+the associated write-up is unpublished.
 
 ---
 
-## 12. What this repository does **not** do automatically
+## Contributing
 
-It does not:
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). Two rules matter more than the rest:
+no result may be entered by hand into an exported artifact, and no comparator may
+be added or removed on the basis of how it performs.
 
-- invent the final model/version strings;
-- inspect experimental outcomes before freeze;
-- replace human atom/matcher audits;
-- decide whether a protocol deviation is scientifically acceptable;
-- make Stage-1 provider calls unless explicitly enabled after freeze;
-- store any private API credential in Git.
+## Licence
 
-Those boundaries are intentional.
+MIT. See [`LICENSE`](LICENSE).

@@ -1,0 +1,15 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+
+# Closed book, fresh context, ONE focal atom per query. A batched
+# autoregressive vector would let earlier slots condition later ones, so
+# the probe would partly measure self-conditioning rather than prior
+# access.
+
+Answer from your own knowledge. No document is provided.
+Reply with the requested field value only.
+
+Question: For the issuer, which business segment or geography does the statement about the segment whose margin improved apply to? Answer with the segment or geography label only.
+Answer format: segment-label
+Answer:

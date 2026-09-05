@@ -1,0 +1,27 @@
+{
+  "entity": {
+    "answer_format": "organisation-name",
+    "constrained": false,
+    "question_template": "Which company or organisation is described as {attribute}? Answer with the organisation name only."
+  },
+  "numeric": {
+    "answer_format": "number+unit",
+    "constrained": false,
+    "question_template": "For {subject}, what is the reported value of {attribute}? Answer with the number and its unit only."
+  },
+  "period": {
+    "answer_format": "FYYYYY | FYYYYYQn",
+    "constrained": true,
+    "question_template": "For {subject}, which reporting period does the statement about {attribute} refer to? Answer as FYYYYY or FYYYYYQn."
+  },
+  "provenance": {
+    "answer_format": "Note N | Item N | Exhibit N",
+    "constrained": true,
+    "question_template": "For {subject}, which note, item or exhibit is cited for {attribute}? Answer with the reference only."
+  },
+  "scope": {
+    "answer_format": "segment-label",
+    "constrained": true,
+    "question_template": "For {subject}, which business segment or geography does the statement about {attribute} apply to? Answer with the segment or geography label only."
+  }
+}

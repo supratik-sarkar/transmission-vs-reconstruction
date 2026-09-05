@@ -1,0 +1,23 @@
+{
+  "artifacts": {
+    "protocol/prompts/downstream_task.txt": "328b6cf2a380d090624899585c91e06f0698e60b60dd42fa61d8dac432d98947",
+    "protocol/prompts/no_evidence_baseline.txt": "e43591ca1891fd4e8a3a2e40b1cfa4aecf467c733a4aee5dd3c45566528d882e",
+    "protocol/prompts/prior_probe.txt": "0de768dedacdc6f07eb79675a6195e25864d08ba58e5851ec9087154daccbc5c",
+    "protocol/prompts/receiver.txt": "cc8e4b1e41126c75459b760378e4d1349382d0c786d5b775a1d2b1417225533a",
+    "protocol/randomisation/entity_support.txt": "6c2db22726f5e3087753ec39610fbdc2fd7bb5d63d0104e6b3c06e1338f0944f",
+    "protocol/randomisation/numeric_support.md": "52e150accbcaf68e9df621679198b7806f661038961c639973e092d454d38fcd",
+    "protocol/randomisation/period_annual_support.txt": "e26577f8d8f741f13141efadb031b369dbacce40ed0760fd3c9360bff96e7bce",
+    "protocol/randomisation/period_quarter_support.txt": "c22ac205d7522fd1999360d233450fd4ac7b709cc4f1d1100855c4786d4ba2a7",
+    "protocol/randomisation/scope_support.txt": "c75cbf3623694403c270d8effb15b5aa2db55ba83f406a0750f4e530d33ab0a7",
+    "protocol/specs/slot_schema.json": "d26bf803acb2673ed18cd7c935b7f1be5722cd02cd4b2c3d1ee9018d7d10c454"
+  },
+  "downstream_task_sha256": "8a0845724152930fd8898229270093ec9d4a3544c5238b6f37df03d08d91a576",
+  "min_populated_roles": 3,
+  "omitted_token": "<<OMITTED>>",
+  "prompt_hashes": {
+    "receiver_instruction": "6133d09c725dbf300e56d7a7bf30229167b5e5862a5d25d39662b6b65c50cdb5",
+    "slot_schemas": "678e10ea8785735c04b4bc1e567fb23ef4bda5d7093109c923c432518654d9d2"
+  },
+  "renderer_sha256": "3e21e215073c0441fd55f06b2d934633892d113256870a9871cbf2af4fa9cad8",
+  "renderer_version": "atomline-v1"
+}

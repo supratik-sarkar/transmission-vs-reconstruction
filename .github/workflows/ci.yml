@@ -1,19 +1,66 @@
 name: CI
+
 on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  test:
+  checks:
+    name: deterministic checks
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # CI never has credentials, never reaches a provider and never runs an
+      # experiment. These are asserted rather than assumed.
+      HANDOFF_ALLOW_NETWORK: "false"
+      HANDOFF_RELAY_PROVIDER: mock
+      HANDOFF_RECEIVER_PROVIDER: mock
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - run: python -m pip install --upgrade pip
-      - run: pip install -e '.[dev]'
-      - run: ruff check .
-      - run: mypy src
-      - run: pytest -q
-      - run: detect-secrets scan --all-files --exclude-files '(^|/)\.git/'
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e '.[dev,ml,figures,data]'
+
+      - name: Compile all sources
+        run: python -m compileall -q src tests scripts
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Type check
+        run: mypy src
+
+      - name: Tests
+        run: pytest -q
+
+      - name: Design invariants
+        run: handoff self-test
+
+      - name: Pre-registration leaf accounting
+        # Fails if any scientific parameter carries a value without a binding
+        # status, i.e. has been frozen silently.
+        run: python scripts/prereg_accounting.py
+
+      - name: Privacy and path scan
+        run: handoff privacy-scan --root .
+
+      - name: Secret scan
+        run: detect-secrets scan --all-files --exclude-files '(^|/)\.git/'
+
+      - name: Assert no experiment artefacts are tracked
+        run: |
+          if git ls-files | grep -E '^(data|runs|cache|logs|artifacts|third_party|protocol_freeze|test_freeze)/'; then
+            echo "private runtime artefacts are tracked" >&2
+            exit 1
+          fi
+          echo "no private runtime artefacts tracked"

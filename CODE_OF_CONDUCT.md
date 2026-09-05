@@ -1,3 +1,10 @@
-# Code of Conduct
+# Code of conduct
 
-Be respectful, evidence-driven, and transparent about experimental changes. Research disagreements should be resolved through reproducible checks, explicit assumptions, and documented deviations rather than personal criticism.
+This project follows the [Contributor Covenant](https://www.contributor-covenant.org/version/2/1/code_of_conduct/),
+version 2.1.
+
+In short: be respectful, assume good faith, and keep technical disagreement
+technical. Harassment and personal attacks are not tolerated.
+
+Report concerns privately through the repository's contact mechanism. Reports are
+handled confidentially.

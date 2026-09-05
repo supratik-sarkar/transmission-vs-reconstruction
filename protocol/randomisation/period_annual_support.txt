@@ -1,6 +1,10 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+# n=6  K_eff=5  (the natural value is excluded from its own redraw)
+FY2016
+FY2017
 FY2018
 FY2019
 FY2020
 FY2021
-FY2022
-FY2023

@@ -1,0 +1,5 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+
+You are preparing a handoff note for a second analyst who will not see the source document. Within the stated token budget, preserve the information an analyst would need to answer factual questions about the source: named entities, business segments and geographies, reporting periods, numeric values with their units, and references to notes or exhibits. Do not add information that is not in the source. Do not speculate.

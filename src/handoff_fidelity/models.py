@@ -1,14 +1,23 @@
+"""Core record types.
+
+Deliberately stdlib-only (dataclasses, not pydantic) so that the scientific
+core can be imported, executed and tested without any third-party runtime.
+Heavier dependencies are confined to optional adapters.
+"""
+
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, field
 from enum import StrEnum
-from pathlib import Path
 from typing import Any
-
-from pydantic import BaseModel, Field
 
 
 class AtomRole(StrEnum):
+    """Tier-1 roles. Tier-2 (relation strength, certainty, counterevidence) is
+    deliberately excluded from the causal core: those atoms are paraphrasable,
+    so presence detection would require a model judge inside the primary
+    outcome."""
+
     ENTITY = "entity"
     SCOPE = "scope"
     PERIOD = "period"
@@ -16,60 +25,184 @@ class AtomRole(StrEnum):
     PROVENANCE = "provenance"
 
 
-class Atom(BaseModel):
+TIER1_ROLES: tuple[AtomRole, ...] = (
+    AtomRole.ENTITY,
+    AtomRole.SCOPE,
+    AtomRole.PERIOD,
+    AtomRole.NUMERIC,
+    AtomRole.PROVENANCE,
+)
+
+
+class VerificationStatus(StrEnum):
+    UNVERIFIED = "unverified"
+    ACCEPTED = "accepted"
+    REJECTED = "rejected"
+    CONFLICTED = "conflicted"
+
+
+@dataclass(frozen=True, slots=True)
+class SourceFrame:
+    """The relay-visible source window.
+
+    Everything downstream -- atomizer, eligibility filter, focal sampler and
+    every compressor -- operates on exactly ``text``. No atom may exist outside
+    it, because an atom the compressor never saw cannot be a transmission
+    failure.
+    """
+
+    document_id: str
+    text: str
+    token_count: int
+    tokenizer: str
+    window_tokens: int
+    truncated: bool
+    sha256: str
+    section: str = "mdna"
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True, slots=True)
+class Atom:
     document_id: str
     atom_id: str
     role: AtomRole
-    value: str
     canonical_value: str
-    source_text: str | None = None
-    source_start: int | None = None
-    source_end: int | None = None
-    metadata: dict[str, Any] = Field(default_factory=dict)
+    surface_form: str
+    char_start: int
+    char_end: int
+    token_start: int
+    token_end: int
+    local_context: str
+    sentence_index: int
+    verification: VerificationStatus = VerificationStatus.UNVERIFIED
+    occurrence_count: int = 1
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        d = asdict(self)
+        d["role"] = self.role.value
+        d["verification"] = self.verification.value
+        return d
 
 
-class FocalSelection(BaseModel):
+@dataclass(frozen=True, slots=True)
+class FocalSelection:
+    """One sampled focal atom together with its first-order inclusion
+    probability under the fixed-size role-stratified design."""
+
     document_id: str
     atom_id: str
     role: AtomRole
-    pi: float = Field(gt=0, le=1)
-    stratum_size: int = Field(gt=0)
-    populated_strata: int = Field(ge=3)
+    pi: float
+    stratum_size: int
+    populated_strata: int
+    k: int
 
 
-class ReceiverOutcome(BaseModel):
-    document_id: str
-    atom_id: str
-    availability: int = Field(ge=0, le=1)
-    recovered: int = Field(ge=0, le=1)
-    raw_output: str | None = None
+@dataclass(frozen=True, slots=True)
+class HandoffResult:
+    """Uniform return type for every compressor/relay adapter."""
+
+    text: str
+    input_tokens: int
+    output_tokens: int
+    latency_s: float
+    method: str
+    revision: str
+    configuration_hash: str
+    warnings: tuple[str, ...] = ()
+    budget: int | None = None
+
+    @property
+    def within_budget(self) -> bool:
+        return self.budget is None or self.output_tokens <= self.budget
 
 
-class AtomCausalRecord(BaseModel):
+@dataclass(frozen=True, slots=True)
+class AtomCausalRecord:
+    """One focal atom, fully instrumented.
+
+    ``r_minus`` and ``d_plus`` are on the mean-response scale; under decoder
+    regime (D) they are {0,1}-valued, under (S) they are unbiased single draws
+    (or means of ``m`` draws).
+    """
+
     document_id: str
     atom_id: str
     role: AtomRole
-    pi: float = Field(gt=0, le=1)
-    transmitted: int = Field(ge=0, le=1)
-    r_minus: float = Field(ge=0, le=1)
-    d_plus: float = Field(ge=0, le=1)
+    pi: float
+    transmitted: int
+    r_minus: float
+    d_plus: float
+    method: str = "natural"
+    q: float = 1.0
+    edit_mechanism: str = ""
+    eligible: bool = True
 
     @property
     def delta_avail(self) -> float:
         return self.d_plus - self.r_minus
 
+    @property
+    def y_obs(self) -> float:
+        return self.d_plus if self.transmitted == 1 else self.r_minus
 
-class GateResult(BaseModel):
+    @property
+    def sign(self) -> int:
+        """s = 2T - 1. Deletion (T=1) and insertion (T=0) require opposite
+        offsets when correcting for the editor's mechanical artefact."""
+        return 2 * self.transmitted - 1
+
+
+@dataclass(frozen=True, slots=True)
+class BudgetNeutralRecord:
+    """Experiment C: matched-length insert/evict swap."""
+
+    document_id: str
+    atom_id: str
+    role: AtomRole
+    transmitted: int
+    delta_budget: float
+    rendered_tokens: int
+    evicted_atom_id: str | None = None
+    value: float = 1.0
+
+
+@dataclass(frozen=True, slots=True)
+class MatchedSkeletonRecord:
+    """Experiment B: one focal slot under a common skeleton H_{-z}, focal atom
+    absent in BOTH arms."""
+
+    document_id: str
+    slot_id: str
+    role: AtomRole
+    natural_recovered: int
+    blocked_recovered: int
+    k_eff: int
+    prior_probe: float | None = None
+    t_bar_natural: float | None = None
+    t_bar_blocked: float | None = None
+
+    @property
+    def paired_difference(self) -> int:
+        return self.natural_recovered - self.blocked_recovered
+
+
+@dataclass(frozen=True, slots=True)
+class GateResult:
     reconstruction_contribution: float
     prior_effects: dict[str, float]
     reconstruction_gate: float
     prior_gate: float
-    eligible_prior_classes: list[str]
+    eligible_prior_classes: tuple[str, ...]
     proceed: bool
     reason: str
 
 
-class FreezeRecord(BaseModel):
+@dataclass(frozen=True, slots=True)
+class FreezeRecord:
+    kind: str
     preregistration_sha256: str
     artifact_manifest_sha256: str
     source_pool_sha256: str
@@ -77,9 +210,4 @@ class FreezeRecord(BaseModel):
     frozen_utc: str
     relay_model: str
     receiver_model: str
-
-
-@dataclass(frozen=True)
-class ArtifactHash:
-    path: Path
-    sha256: str
+    extra: dict[str, str] = field(default_factory=dict)

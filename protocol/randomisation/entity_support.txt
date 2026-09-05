@@ -1,0 +1,206 @@
+# GENERATED FROM CODE by scripts/export_protocol_artifacts.py.
+Do not edit by hand: a hand-edited specification can drift away from the
+implementation it claims to describe.
+# seed=20260907  n=200  K_eff=199
+# HUMAN SCREENING AGAINST A REAL-ISSUER REGISTRY IS BLOCKING AND HAS NOT
+# BEEN PERFORMED. Nothing here asserts these names are unused.
+Alder Bourne Systems
+Alder Corporation
+Alder Field Resources
+Alder Field Systems
+Alder Point Technologies
+Alder Ridge Corporation
+Alder Ridge Systems
+Alder Vale Holdings
+Alder Wick Industries
+Brant Bourne Group
+Brant Bourne Resources
+Brant Cross Holdings
+Brant Cross Partners
+Brant Field Systems
+Brant Systems
+Brant Wick Partners
+Brant Wick Technologies
+Calder Field Group
+Calder Point Holdings
+Calder Point Technologies
+Calder Technologies
+Calder Vale Corporation
+Calder Vale Industries
+Calder Wick Holdings
+Calder Wick Systems
+Denby Bourne Resources
+Denby Cross Technologies
+Denby Group
+Denby Holdings
+Denby Systems
+Denby Vale Corporation
+Denby Vale Group
+Denby Wick Industries
+Ellery Bourne Corporation
+Ellery Bourne Group
+Ellery Cross Industries
+Ellery Field Group
+Ellery Field Partners
+Ellery Wick Holdings
+Fenwick Cross Holdings
+Fenwick Cross Technologies
+Fenwick Field Group
+Fenwick Field Holdings
+Fenwick Field Partners
+Fenwick Field Systems
+Fenwick Industries
+Fenwick Partners
+Fenwick Point Technologies
+Fenwick Ridge Holdings
+Fenwick Vale Technologies
+Fenwick Wick Resources
+Fenwick Wick Technologies
+Gilby Bourne Industries
+Gilby Field Group
+Gilby Field Holdings
+Gilby Point Industries
+Gilby Point Systems
+Gilby Point Technologies
+Gilby Wick Resources
+Gilby Wick Systems
+Harlow Corporation
+Harlow Field Holdings
+Harlow Field Partners
+Harlow Point Group
+Harlow Point Resources
+Harlow Resources
+Harlow Ridge Systems
+Ilford Bourne Group
+Ilford Corporation
+Ilford Field Group
+Ilford Point Group
+Ilford Point Resources
+Ilford Point Technologies
+Ilford Vale Corporation
+Ilford Vale Holdings
+Jarrow Bourne Systems
+Jarrow Field Corporation
+Jarrow Field Resources
+Jarrow Field Systems
+Jarrow Industries
+Jarrow Point Systems
+Jarrow Vale Partners
+Jarrow Vale Resources
+Jarrow Vale Systems
+Jarrow Wick Holdings
+Jarrow Wick Systems
+Jarrow Wick Technologies
+Kelby Bourne Systems
+Kelby Corporation
+Kelby Cross Group
+Kelby Resources
+Kelby Vale Group
+Kelby Vale Systems
+Kelby Wick Group
+Kelby Wick Holdings
+Kelby Wick Resources
+Lomond Cross Technologies
+Lomond Field Resources
+Lomond Field Systems
+Lomond Point Industries
+Lomond Vale Group
+Lomond Vale Industries
+Lomond Vale Systems
+Lomond Wick Holdings
+Marden Cross Industries
+Marden Group
+Marden Point Industries
+Marden Point Systems
+Marden Ridge Corporation
+Marden Wick Resources
+Norbury Cross Partners
+Norbury Cross Resources
+Norbury Group
+Norbury Ridge Industries
+Norbury Technologies
+Norbury Vale Corporation
+Norbury Vale Group
+Norbury Wick Technologies
+Orwell Bourne Partners
+Orwell Cross Resources
+Orwell Field Resources
+Orwell Point Corporation
+Orwell Ridge Corporation
+Orwell Ridge Resources
+Orwell Vale Industries
+Orwell Wick Corporation
+Orwell Wick Holdings
+Pelham Corporation
+Pelham Cross Group
+Pelham Cross Partners
+Pelham Field Group
+Pelham Group
+Pelham Point Resources
+Pelham Ridge Systems
+Pelham Vale Industries
+Pelham Wick Holdings
+Quarry Bourne Industries
+Quarry Cross Technologies
+Quarry Field Industries
+Quarry Field Partners
+Quarry Field Technologies
+Redmoor Bourne Resources
+Redmoor Cross Partners
+Redmoor Cross Systems
+Redmoor Point Partners
+Redmoor Wick Systems
+Stanmore Bourne Industries
+Stanmore Field Holdings
+Stanmore Point Technologies
+Stanmore Ridge Resources
+Stanmore Technologies
+Stanmore Wick Resources
+Thackley Cross Industries
+Thackley Cross Partners
+Thackley Field Holdings
+Thackley Group
+Thackley Point Corporation
+Thackley Vale Industries
+Thackley Vale Systems
+Thackley Wick Industries
+Ulverton Bourne Group
+Ulverton Bourne Technologies
+Ulverton Cross Corporation
+Ulverton Cross Group
+Ulverton Field Corporation
+Ulverton Field Resources
+Ulverton Industries
+Ulverton Partners
+Ulverton Ridge Group
+Ulverton Vale Partners
+Ulverton Vale Systems
+Vantry Bourne Systems
+Vantry Cross Holdings
+Vantry Cross Resources
+Vantry Field Partners
+Vantry Ridge Group
+Vantry Ridge Systems
+Vantry Vale Corporation
+Westby Corporation
+Westby Cross Industries
+Westby Field Group
+Westby Field Partners
+Westby Holdings
+Westby Industries
+Westby Partners
+Westby Point Technologies
+Westby Ridge Group
+Westby Ridge Partners
+Westby Ridge Resources
+Westby Wick Partners
+Westby Wick Systems
+Yardley Cross Corporation
+Yardley Cross Resources
+Yardley Field Corporation
+Yardley Field Holdings
+Yardley Point Technologies
+Yardley Ridge Group
+Yardley Ridge Industries
+Yardley Technologies
+Yardley Wick Industries
