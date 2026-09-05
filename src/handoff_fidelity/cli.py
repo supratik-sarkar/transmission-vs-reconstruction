@@ -202,6 +202,103 @@ def _cmd_freeze_verify(args: argparse.Namespace) -> int:
     return 0 if ok else 4
 
 
+def _cmd_app_doctor(_: argparse.Namespace) -> int:
+    """Non-network report of the application stack."""
+    import platform
+
+    from .app_contracts.modes import AppMode
+    from .orchestration.graph import langgraph_available, topology_description
+    from .policy.engine import PolicyEngine, opa_available
+    from .providers.adapters import provider_status_table
+    from .telemetry.guardrails import resolve as guardrails_resolve
+    from .telemetry.langsmith import resolve as langsmith_resolve
+    from .telemetry.spans import otel_available
+
+    settings = load_settings()
+    mode = AppMode.RESEARCH
+    print(f"python              {platform.python_version()}")
+    print(f"mode                {mode.value}")
+    print(
+        f"langgraph           {'available' if langgraph_available() else 'not installed (sequential executor)'}"
+    )
+    print(
+        f"opentelemetry       {'available' if otel_available() else 'not installed (in-memory tracer)'}"
+    )
+    print(
+        f"opa binary          {'available' if opa_available() else 'not installed (fail-closed mirror)'}"
+    )
+    print(f"langsmith           {langsmith_resolve(mode).reason}")
+    print(f"nemo guardrails     {guardrails_resolve(mode).reason}")
+    print(f"policy engine       {PolicyEngine().describe()['active_engine']}")
+    print(f"graph topology      fixed, {len(topology_description()['stages'])} stages")
+    print("providers (presence only, never key material):")
+    for row in provider_status_table():
+        print(
+            f"  {row['provider']:<10s} {row['state']:<15s} "
+            f"secret={'yes' if row['secret_configured'] else 'no':<3s} "
+            f"model={'pinned' if row['model_pinned'] else 'MUST_PIN'}"
+        )
+    print(f"relay/receiver      {settings.relay_model} / {settings.receiver_model}")
+    return 0
+
+
+def _cmd_providers(args: argparse.Namespace) -> int:
+    from .providers.adapters import provider_status_table
+
+    rows = provider_status_table()
+    if args.json:
+        print(json.dumps(rows, indent=2))
+    else:
+        for row in rows:
+            print(
+                f"{row['provider']:<12s} {row['state']:<15s} "
+                f"sdk={row['sdk_available']!s:<5s} secret={row['secret_configured']!s:<5s} "
+                f"pinned={row['model_pinned']!s}"
+            )
+    return 0
+
+
+def _cmd_policy_check(args: argparse.Namespace) -> int:
+    from .policy.decisions import Action, PolicyInput, Subject
+    from .policy.engine import PolicyEngine
+
+    try:
+        action = Action(args.action)
+        subject = Subject(args.subject)
+    except ValueError as exc:
+        print(f"invalid: {exc}", file=sys.stderr)
+        return 2
+    decision = PolicyEngine().evaluate(PolicyInput(action=action, subject=subject))
+    print(f"engine: {decision.engine}")
+    print("ALLOW" if decision.allow else "DENY")
+    for reason in decision.reasons:
+        print(f"  {reason}")
+    return 0 if decision.allow else 1
+
+
+def _cmd_mock_e2e(args: argparse.Namespace) -> int:
+    from .orchestration.mock_pipeline import run_mock_pipeline
+
+    result = run_mock_pipeline(seed=args.seed)
+    print(result.marker)
+    print(f"engine   {result.engine}")
+    for key, value in sorted(result.state.summary().items()):
+        print(f"  {key:<20s} {value}")
+    dec = result.state.decomposition
+    if dec:
+        print("decomposition (SYNTHETIC, no evidentiary status):")
+        for key in (
+            "endpoint_fidelity",
+            "r_bar_zero",
+            "t_bar",
+            "c_comm",
+            "c_recon",
+            "identity_residual",
+        ):
+            print(f"  {key:<20s} {dec[key]}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="handoff",
@@ -289,6 +386,22 @@ def build_parser() -> argparse.ArgumentParser:
         help="pre-run mode: report placeholders without failing",
     )
     p.set_defaults(func=_cmd_manuscript_check)
+
+    p = sub.add_parser("app-doctor", help="report the application stack, without any network call")
+    p.set_defaults(func=_cmd_app_doctor)
+
+    p = sub.add_parser("providers", help="provider configuration status (never shows key material)")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=_cmd_providers)
+
+    p = sub.add_parser("policy-check", help="evaluate a lifecycle policy decision")
+    p.add_argument("--action", required=True)
+    p.add_argument("--subject", default="cli")
+    p.set_defaults(func=_cmd_policy_check)
+
+    p = sub.add_parser("mock-e2e", help="run the synthetic end-to-end pipeline (no network)")
+    p.add_argument("--seed", type=int, default=2)
+    p.set_defaults(func=_cmd_mock_e2e)
 
     p = sub.add_parser("freeze-verify", help="validate a freeze record")
     p.add_argument("--record", required=True)
