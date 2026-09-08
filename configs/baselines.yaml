@@ -1,16 +1,73 @@
 # Immutable baseline registry.
 #
-# STATUS OF THIS FILE: every external method ships NOT_READY with an unresolved
-# commit/checkpoint. Those fields are deliberately null rather than guessed --
-# a fabricated revision would make the reproducibility chain a fiction. They are
-# resolved at install time, in the private workspace, and the resolved copy is
-# what enters the freeze record.
+# STATUS OF THIS FILE: fields resolved on 2026-09-05 from official release pages
+# and the Hugging Face model API carry their real values. Fields that could not
+# be resolved from official evidence remain null and name the reason -- a
+# fabricated revision would make the reproducibility chain a fiction. Remaining
+# nulls are resolved at install time, on a networked host, and the resolved copy
+# is what enters the freeze record.
+#
+# NO METHOD IS BENCHMARK_READY. No checkpoint has been downloaded, no dependency
+# installed, no native example executed and no Mac timing measured. Every method
+# still requires the reproduction gate on a public/native task.
 #
 # A method becomes benchmark-eligible only after every REQUIRED field is
 # resolved AND the reproduction gate passes on a public/native task.
+#
+# Every comparator runs in its OWN isolated virtual environment, invoked
+# out-of-process behind the adapter boundary. None of these dependencies may
+# enter the core package, whose scientific core is stdlib + NumPy.
 
 version: 1
 resolved: false
+resolution_date: "2026-09-06"
+resolution_evidence: "github release pages + raw files + huggingface model API; no SHA or hash inferred"
+
+# Pre-outcome amendment history. Nothing here may be edited after a benchmark
+# outcome exists; the record is what lets a reader verify that comparator
+# changes were not results-driven.
+amendments:
+  - id: P-6
+    date: "2026-09-06"
+    kind: comparator_substitution
+    benchmark_outcomes_observed_before_amendment: 0
+    original_primary_set: [provence, adaptive_queryselect, cpc, llmlingua2]
+    amended_primary_set: [provence, cpc, llmlingua2, dac]
+    removed: adaptive_queryselect
+    removal_reason: missing_executable_artefact
+    removal_evidence_date: "2026-09-05"
+    removal_evidence: >-
+      No Adaptive QuerySelect checkpoint is published. The author's Hugging Face
+      account holds exactly three models and none of them is one; the repository
+      README describes training "the QuerySelect and Adaptive QuerySelect encoder
+      model" but links a single artefact, acnagle/QuerySelect. The repository
+      also carries no LICENSE file, so no redistribution permission is granted by
+      default.
+    rejected_alternatives:
+      - "Run acnagle/QuerySelect and report it as Adaptive QuerySelect -- rejected: misreports what was benchmarked."
+      - "Retrain Adaptive QuerySelect to preserve the row -- rejected: outside the compute plan."
+    added: dac
+    addition_rationale: >-
+      DAC emits a hard compressed text, so atom-level transmission T_z stays
+      observable through the same deterministic matcher that every other primary
+      comparator uses. It is also a genuinely distinct method family.
+    contingency_added: selective_context
+    contingency_role: CONTINGENCY_CAUSAL
+
+  - id: P-7
+    date: "2026-09-06"
+    kind: superiority_rule
+    benchmark_outcomes_observed_before_amendment: 0
+    before: "at least 3 qualifying wins among PRIMARY_CAUSAL comparators"
+    after: >-
+      at least 3 qualifying wins spanning at least 3 distinct declared method
+      families; fewer than 3 distinct BENCHMARK_READY families means no
+      SOTA-superiority headline at all
+    reason: >-
+      Two of the originally pre-registered primaries shared the XLM-RoBERTa-large
+      token-classification backbone and the LLMLingua-2 training pipeline, so the
+      original rule could be satisfied by two members of one family. Counting
+      those as two independent wins overstates breadth.
 
 superiority:
   required_wins: 3
@@ -20,6 +77,41 @@ superiority:
     - lower_95CI(delta_Ccomm) > 0
   bootstrap_replicates: 10000
   pairing: document-clustered
+
+  # BINDING as of the 2026-09-06 pre-outcome amendment (P-7).
+  #
+  # Wins over comparators that share a backbone and a training pipeline are not
+  # independent tests. The amended rule requires breadth of METHOD FAMILY, not
+  # merely a count of comparators.
+  #
+  #   >= 4 BENCHMARK_READY primaries : need >= 3 qualifying wins from >= 3 families
+  #   exactly 3 distinct families     : must beat all three
+  #   < 3 distinct families           : NO SOTA-SUPERIORITY HEADLINE
+  #
+  # This may not be weakened after results are seen.
+  family_aware: true
+  required_distinct_families: 3
+  legacy_anchor_counts_toward_headline: false
+
+# Declared method families. A family label is asserted only where the technical
+# implementation justifies it: shared backbone architecture, shared compression
+# formulation, and shared training-data construction lineage.
+method_families:
+  # XLM-RoBERTa-large token classification. llmlingua2 and the retired
+  # adaptive_queryselect differ by 102,400 parameters -- a classifier head --
+  # and QuerySelect was trained through a vendored copy of the LLMLingua-2
+  # data-collection and training pipeline. That is one family, not two.
+  token_classification_xlmr: [llmlingua2, adaptive_queryselect]
+  cross_encoder_sentence: [provence]
+  decoder_lora_sentence: [cpc]
+  bi_encoder_sentence: [recomp_extractive]
+  # DAC scores tokens from a small causal decoder's attention and entropy, with
+  # no trained compressor of its own. Distinct formulation, distinct backbone.
+  decoder_attention_entropy_token: [dac]
+  # Selective Context scores lexical units by self-information from a base LM.
+  # Related to DAC in using a frozen LM, but the signal (self-information over
+  # lexical units) and the unit of selection differ.
+  self_information_lexical: [selective_context]
 
 baselines:
 
@@ -55,82 +147,289 @@ baselines:
 
   provence:
     role: PRIMARY_CAUSAL
-    status: NOT_READY
+    status: LICENCE_CLARIFICATION_REQUIRED   # unresolved, not adjudicated here
     produces_text: true
+    method_family: cross_encoder_sentence
     paper_citation_key: ProvenceICLR2025
     official_repository: https://github.com/naver/bergen
-    commit: null                      # RESOLVE AT INSTALL
-    release_tag: null                 # RESOLVE AT INSTALL
-    checkpoint_revision: null         # RESOLVE AT INSTALL
-    licence: null                     # RESOLVE AT INSTALL - do not assume
-    python_requirement: null
-    install_command: null
+    commit: NOT_REQUIRED
+    commit_not_required_reason: >-
+      Inference code ships inside the checkpoint repository as
+      modeling_provence.py and is registered through auto_map; bergen is
+      training/evaluation code only. Its single release v0.1 (Oct 2024) predates
+      the Provence work, so no bergen tag would be the right pin anyway.
+    release_tag: null
+    checkpoint: naver/provence-reranker-debertav3-v1
+    checkpoint_revision: ef49e233e3c6e50efc476c68f1390f8a63add4d4  # pragma: allowlist secret
+    checkpoint_last_modified: "2025-09-26T12:13:44Z"
+    checkpoint_parameters: 435064835
+    checkpoint_weight_format: safetensors
+    context_length: 512
+    licence: cc-by-nc-nd-4.0           # HF metadata; see licence_conflict
+    licence_conflict: >-
+      The model card states three different licences: metadata and cardData say
+      cc-by-nc-nd-4.0, the header prose says "Attribution-NonCommercial-ShareAlike
+      4.0 [CC BY-NC-ND 4.0]", and the License section says CC BY-NC 4.0. This
+      registry records the discrepancy and reaches no conclusion about permitted
+      use. Written clarification from the authors, or appropriate institutional
+      review, is required before the comparator is run or reported. This
+      repository does not give legal advice. The comparator is NOT dropped:
+      inconvenience is not a scientific reason to remove a pre-registered method.
+    requires_trust_remote_code: true   # executes modeling_provence.py at load
+    runtime_network_dependency: "nltk punkt_tab must be pre-staged"
+    python_requirement: null           # RESOLVE ON HOST - 3.12.13 support unverified
+    install_command: null              # RESOLVE ON HOST - isolated venv
     native_benchmark: null
     native_expected_metric: null
     reproduction_tolerance: 2.0
     counts_toward_superiority: true
 
   adaptive_queryselect:
-    role: PRIMARY_CAUSAL
-    status: NOT_READY
+    role: RETIRED_PRE_OUTCOME          # amended out on 2026-09-06, see `amendments`
+    status: RETIRED_PRE_OUTCOME
+    retired_on: "2026-09-06"
+    retired_reason: >-
+      No published Adaptive QuerySelect checkpoint exists, and the repository
+      carries no LICENSE file. Running plain QuerySelect under this name would
+      misreport what was benchmarked; retraining is outside the compute plan.
+    replaced_by: dac
     produces_text: true
+    method_family: token_classification_xlmr
     paper_citation_key: AdaptiveQuerySelectNeurIPS2024
     official_repository: https://github.com/UTAustin-ITML/fundamental-limits
     commit: null
+    commit_unresolved_reason: "repository has no tags or releases"
     release_tag: null
-    checkpoint_revision: null
+    checkpoint: null
+    checkpoint_unresolved_reason: >-
+      No Adaptive QuerySelect checkpoint is published. The author's Hugging Face
+      account holds exactly three models and none of them is one. The repository
+      README describes training "the QuerySelect and Adaptive QuerySelect encoder
+      model" and links a single artefact, acnagle/QuerySelect.
+    nearest_published_artefact: acnagle/QuerySelect
+    nearest_published_revision: 69bc0aac4e659ff61c1cf36f5eb79c706b56f28f  # pragma: allowlist secret
+    nearest_published_licence: mit
+    nearest_published_parameters: 558842882
     licence: null
+    licence_unresolved_reason: >-
+      The repository has no LICENSE file, so no redistribution or derivative-work
+      permission is granted by default.
     python_requirement: null
     install_command: null
     native_benchmark: null
     native_expected_metric: null
     reproduction_tolerance: 2.0
+    counts_toward_superiority: false   # retired: contributes nothing to any claim
+    retention_reason: >-
+      Kept in the registry as an explicit amendment record. Deleting the row
+      would erase the fact that this comparator was pre-registered and then
+      replaced pre-outcome, which is exactly the history a reader needs in order
+      to check that the substitution was not results-driven.
+
+  # ADDED 2026-09-06 by pre-outcome amendment, replacing adaptive_queryselect.
+  # Zero benchmark outcomes had been observed at the time of the amendment.
+  dac:
+    role: PRIMARY_CAUSAL
+    status: NOT_READY
+    added_on: "2026-09-06"
+    replaces: adaptive_queryselect
+    produces_text: true                # hard compressed text; matcher stays valid
+    method_family: decoder_attention_entropy_token
+    paper_citation_key: DAC_ACL2025
+    paper_title: "DAC: A Dynamic Attention-aware Approach for Task-Agnostic Prompt Compression"
+    venue: "ACL 2025 Main, Long Papers, pp. 19395-19407"
+    arxiv: "2507.11942"
+    official_repository: https://github.com/QQQ-yi/DAC
+    commit: null
+    commit_unresolved_reason: >-
+      Repository has no tags or releases (5 commits on main); api.github.com is
+      unreachable from the build sandbox. Resolve with `git ls-remote` on a
+      networked host and record the retrieval timestamp beside the SHA.
+    release_tag: null
+    checkpoint: null
+    checkpoint_not_required_reason: >-
+      DAC trains no compressor of its own. It scores tokens from a frozen causal
+      LM's attention and entropy, so the artefact to pin is the base model, not a
+      DAC checkpoint.
+    base_model: Qwen/Qwen2-0.5B-Instruct
+    base_model_revision: null          # RESOLVE ON HOST via the HF model API
+    licence: Apache-2.0                # LICENSE file text is the Apache 2.0 licence
+    licence_conflict: >-
+      The README carries a shields.io badge reading "license-MIT" that links to
+      the LICENSE file, while the LICENSE file itself contains the Apache License
+      2.0 text and GitHub detects Apache-2.0. The badge appears to be an error.
+      Recorded rather than resolved; confirm with the authors before publication.
+    python_requirement: null           # README specifies conda python=3.10
+    python_requirement_note: >-
+      The project's own instructions create a python=3.10 environment. The
+      repository runtime is 3.12.13, so DAC runs in an isolated environment,
+      possibly on a different interpreter.
+    dependency_pinning_risk: >-
+      requirements.txt uses lower bounds only (torch>=2.0.0, transformers>=4.30.0,
+      accelerate>=0.20.0) with no upper bounds, so a fresh install resolves to
+      whatever is current. Pin the resolved versions at install time and record
+      them in the freeze record.
+    repository_inconsistency: >-
+      The README instructs the user to reproduce the environment "using the
+      provided environment.yml", but the repository root contains only
+      requirements.txt. A committed __pycache__ directory is also present.
+    budget_semantics: compress_ratio   # fraction REMOVED; 0.9 keeps 10% of tokens
+    budget_adapter_required: true
+    budget_adapter_note: >-
+      DAC exposes a compression ratio, not a token budget. The adapter must
+      search the ratio to hit the primary budget B in the shared tokenizer, and
+      the realised token count must be reported alongside the requested B --
+      the same treatment every ratio-parameterised comparator gets.
+    install_command: null              # RESOLVE ON HOST - isolated venv
+    native_benchmark: null             # candidates: LongBench, GSM8K, BBH
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
     counts_toward_superiority: true
+    cpu_feasibility: HOST_VERIFICATION_REQUIRED
+    mps_feasibility: HOST_VERIFICATION_REQUIRED
+    feasibility_note: >-
+      At 0.5B parameters the base model is the smallest of any comparator here,
+      which makes DAC the most plausible Mac candidate in the set. No timing was
+      measured; plausibility is not a measurement.
+
+  # CONTINGENCY ONLY. Not a fifth primary comparator.
+  selective_context:
+    role: CONTINGENCY_CAUSAL
+    status: NOT_READY
+    added_on: "2026-09-06"
+    produces_text: true                # hard compressed text
+    method_family: self_information_lexical
+    paper_citation_key: SelectiveContextEMNLP2023
+    paper_title: "Compressing Context to Enhance Inference Efficiency of Large Language Models"
+    venue: "EMNLP 2023 Main"
+    arxiv: "2310.06201"
+    official_repository: https://github.com/liyucheng09/Selective_Context
+    commit: b8ad75c18f696571c1543817004914f06ba093f2  # pragma: allowlist secret
+    commit_signature: "github-verified GPG key 4AEE18F83AFDEB23 (key expired)"
+    release_tag: v0.1.0rc1
+    alternative_release: "v0.1.0 = 6b5e064bdcaa0abf6e0a675398e3986492a00bea"
+    pypi_package: selective-context
+    pypi_version: "0.1.4"
+    licence: MIT
+    licence_evidence: >-
+      Declared in pyproject.toml as the trove classifier
+      "License :: OSI Approved :: MIT License", and asserted in the README.
+    licence_caveat: >-
+      There is no LICENSE file at the repository root: the README's link to
+      blob/main/LICENSE resolves to nothing and GitHub detects no licence. The
+      claim rests on package metadata and README prose. Recorded as a gap, not
+      resolved.
+    base_model: gpt2                   # default model_type in the published API
+    python_requirement: ">=3.7"        # declared in pyproject.toml
+    dependency_pinning_risk: >-
+      pyproject.toml hard-pins spacy==3.2.0 and click==8.0.4. spaCy 3.2 predates
+      Python 3.11 support, so this is the binding compatibility constraint and
+      very likely forces an older interpreter in the isolated environment.
+      Requires the en_core_web_sm model to be pre-staged.
+    budget_semantics: reduce_ratio
+    budget_adapter_required: true
+    install_command: null              # RESOLVE ON HOST - isolated venv
+    native_benchmark: null             # arxiv / BBC news / ShareGPT, four tasks
+    native_expected_metric: null
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: false   # never, while it is CONTINGENCY_CAUSAL
+    promotion_rule: >-
+      May be promoted to PRIMARY_CAUSAL only to replace a primary that has been
+      declared unusable BEFORE any CausalRelay benchmark outcome exists, and only
+      for one of: licence prohibition, missing executable artefact, irreproducible
+      native implementation, irrecoverable technical incompatibility. The decision
+      and its reason are frozen before outcomes. A comparator may NEVER be
+      replaced because CausalRelay performs poorly against it.
+    promotion_permitted_reasons:
+      - licence_prohibition
+      - missing_executable_artefact
+      - irreproducible_native_implementation
+      - irrecoverable_technical_incompatibility
 
   cpc:
     role: PRIMARY_CAUSAL
     status: NOT_READY
     produces_text: true
+    method_family: decoder_lora_sentence
     paper_citation_key: CPC_AAAI2025
     official_repository: https://github.com/Workday/cpc
     commit: null
+    commit_unresolved_reason: >-
+      Repository has no tags or releases (5 commits on main); api.github.com is
+      unreachable from the build sandbox, so no HEAD SHA could be read from an
+      official source. Resolve with `git ls-remote` on a networked host and
+      record the retrieval timestamp alongside the SHA.
     release_tag: null
-    checkpoint_revision: null
+    checkpoint: deadcode99/cpc-1.0-mistral-7b-ds-v5-iter66-lora-bidirectional-attn
+    checkpoint_revision: 188171fde0dc163836cd4106d7cbfb9dc3324255  # pragma: allowlist secret
+    tokenizer: deadcode99/cpc-1.0-mistral-7b-tokenizer
+    tokenizer_revision: d87726f037fa2603d5538b608db2b8196ded88d9  # pragma: allowlist secret
+    artefact_kind: lora_adapter        # ~84 MB; requires a separate Mistral-7B base
+    code_licence: Apache-2.0
     licence: null
+    licence_unresolved_reason: >-
+      Neither checkpoint repository declares a licence, and both sit on a personal
+      account (deadcode99) rather than the Workday organisation that owns the
+      Apache-2.0 code. Provenance is asserted only by a README link. The absence
+      of a weight licence is NOT equivalent to an Apache-2.0 weight licence
+      merely because the code repository is Apache-2.0; the two artefacts are
+      licensed separately and only one of them carries a licence. Unresolved.
+      The comparator is not dropped on this basis.
+    base_model_required: true
+    memory_note: "~15 GB fp16 working set; a cpc-1.0-llama-1b variant exists and is the realistic Mac target"
     python_requirement: null
     install_command: null
-    native_benchmark: null
+    native_benchmark: null             # repo documents LongBench and ZeroSCROLLs
     native_expected_metric: null
     reproduction_tolerance: 2.0
     counts_toward_superiority: true
 
   llmlingua2:
     role: PRIMARY_CAUSAL
-    status: NOT_READY
+    status: HOST_VERIFICATION_REQUIRED  # fully pinned; not yet executed
     produces_text: true
+    method_family: token_classification_xlmr
     paper_citation_key: LLMLingua2ACL2024
     official_repository: https://github.com/microsoft/LLMLingua
-    commit: null
-    release_tag: null
-    checkpoint_revision: null
-    licence: null
-    python_requirement: null
-    install_command: null
-    native_benchmark: null
+    commit: a411a3fa61df74411157b2512b592d5357bd8f17  # pragma: allowlist secret
+    commit_signature: "github-verified GPG key B5690EEEBB952194"
+    release_tag: v0.2.2
+    checkpoint: microsoft/llmlingua-2-xlm-roberta-large-meetingbank
+    checkpoint_revision: ebaba9b0e874dadd3003ffcff828e4397e568089  # pragma: allowlist secret
+    checkpoint_last_modified: "2025-01-08T02:12:15Z"
+    checkpoint_parameters: 558945282
+    checkpoint_weight_format: safetensors
+    licence: MIT                        # repository and checkpoint agree
+    mps_evidence: "release v0.1.5 'support mps' = bf6723c3eca3569d23c4ec367c588660dc2e65e7"
+    python_requirement: null            # RESOLVE ON HOST - 3.12.13 support unverified
+    install_command: null               # RESOLVE ON HOST - isolated venv
+    native_benchmark: null              # candidates: MeetingBank-QA-Summary, LongBench, ZeroSCROLLs
     native_expected_metric: null
     reproduction_tolerance: 2.0
     counts_toward_superiority: true
+    notes: "The only comparator with an unambiguous code pin, checkpoint pin and licence."
 
   recomp_extractive:
     role: LEGACY_ANCHOR
     status: NOT_READY
     produces_text: true
+    method_family: bi_encoder_sentence
     paper_citation_key: RECOMPICLR2024
     official_repository: https://github.com/carriex/recomp
     commit: null
+    commit_unresolved_reason: "repository has no tags or releases (9 commits on main)"
     release_tag: null
-    checkpoint_revision: null
+    checkpoint: fangyuan/nq_extractive_compressor
+    checkpoint_revision: 46f98c1f57fa919c72d86ced16e3ece3403f9e9e  # pragma: allowlist secret
+    checkpoint_last_modified: "2024-02-28T16:26:49Z"
+    checkpoint_weight_format: pytorch_model.bin   # pickle: executes code on load
+    code_licence: MIT
     licence: null
+    licence_unresolved_reason: "the checkpoint repository declares no licence; only the code is MIT"
+    data_provenance_risk: >-
+      Paper data (prompts, compressor inputs) is distributed via a Google Drive
+      folder: not content-addressable, not archival. Hash every file locally after
+      download and record the hashes in the freeze record.
     python_requirement: null
     install_command: null
     native_benchmark: null
