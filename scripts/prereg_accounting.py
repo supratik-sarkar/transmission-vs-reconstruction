@@ -26,7 +26,53 @@ import yaml
 
 VALID_STATUSES = {"frozen", "proposed", "must_be_pinned", "derived"}
 #: Keys that are metadata about the document, not scientific parameters.
-META_KEYS = {"version", "binding", "resolved", "supersedes", "note", "integrity"}
+#:
+#: `amendments` is provenance: a dated, append-only log of pre-outcome design
+#: changes with their reasons. Its fields are not parameters and must not be
+#: counted as leaves -- but they are also not exempt from scrutiny, which is why
+#: `check_amendments` below validates their shape instead.
+META_KEYS = {
+    "version",
+    "binding",
+    "resolved",
+    "supersedes",
+    "note",
+    "integrity",
+    "amendments",
+}
+
+#: Every amendment record must carry these, so that a reader can check the
+#: change was made before outcomes existed and for a stated reason.
+AMENDMENT_REQUIRED_FIELDS = (
+    "id",
+    "date",
+    "kind",
+    "reason",
+    "benchmark_outcomes_observed_before_amendment",
+)
+
+
+def check_amendments(doc) -> list[str]:
+    """Structural validation of the amendment log.
+
+    An amendment that does not record how many outcomes had been seen when it
+    was made is indistinguishable from a post-hoc rationalisation.
+    """
+    problems: list[str] = []
+    for i, entry in enumerate(doc.get("amendments") or []):
+        if not isinstance(entry, dict):
+            problems.append(f"amendments[{i}]: not a mapping")
+            continue
+        for key in AMENDMENT_REQUIRED_FIELDS:
+            if key not in entry:
+                problems.append(f"amendments[{i}] ({entry.get('id', '?')}): missing {key!r}")
+        seen = entry.get("benchmark_outcomes_observed_before_amendment")
+        if seen not in (0, None) and isinstance(seen, int) and seen > 0:
+            problems.append(
+                f"amendments[{i}] ({entry.get('id', '?')}): {seen} benchmark outcomes were "
+                "already observed -- this is a POST-OUTCOME change and must be reported as one"
+            )
+    return problems
 
 
 def walk(node, path=""):
@@ -121,6 +167,8 @@ def main() -> int:
                 f"{p.name}: documents={actual} but preregistration says {declared_docs}"
             )
 
+    amendment_problems = check_amendments(doc)
+
     report = {
         "yaml": args.yaml,
         "binding": doc.get("binding"),
@@ -135,6 +183,8 @@ def main() -> int:
         "prose_proposed_word_occurrences": md_proposed_word_total,
         "prose_blank_slots": md_blanks,
         "stage_config_mismatches": stage_mismatch,
+        "amendments": [a.get("id") for a in (doc.get("amendments") or [])],
+        "amendment_problems": amendment_problems,
         "proposed_paths": sorted(p for p, s in declared if s == "proposed"),
         "must_pin_paths": sorted(p for p, s in declared if s == "must_be_pinned"),
     }
@@ -170,6 +220,13 @@ def main() -> int:
             print(f"  STAGE MISMATCH  {m}")
     else:
         print("stage configs agree with the pre-registration")
+    print()
+    ids = [a.get("id") for a in (doc.get("amendments") or [])]
+    print(f"pre-outcome amendments: {len(ids)} -> {ids}")
+    for problem in amendment_problems:
+        print(f"  AMENDMENT PROBLEM  {problem}")
+    if ids and not amendment_problems:
+        print("  every amendment records its date, reason and outcomes-seen count (all 0)")
 
     if args.json:
         Path(args.json).parent.mkdir(parents=True, exist_ok=True)
@@ -178,7 +235,13 @@ def main() -> int:
         )
         print(f"\nwrote {args.json}")
 
-    problems = len(undeclared) + len(bad_status) + len(stage_mismatch) + len(unruled)
+    problems = (
+        len(undeclared)
+        + len(bad_status)
+        + len(stage_mismatch)
+        + len(unruled)
+        + len(amendment_problems)
+    )
     return 0 if problems == 0 else 1
 
 
