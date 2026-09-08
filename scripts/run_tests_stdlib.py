@@ -49,6 +49,7 @@ MODULES = [
     "tests.test_inference",
     "tests.test_provenance",
     "tests.test_export",
+    "tests.test_regime",
     "tests.test_privacy_scan",
     # Phase-2 application, provider, policy and telemetry suites.
     "tests.application.test_orchestration",
