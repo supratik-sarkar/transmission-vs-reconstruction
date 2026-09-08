@@ -14,7 +14,11 @@ from handoff_fidelity.baselines.base import (
 )
 from handoff_fidelity.baselines.controls import FullContext, HeadTruncation, UniformAtoms
 from handoff_fidelity.baselines.external import BUILDERS, PRIMARY_SOTA
-from handoff_fidelity.baselines.registry import BaselineEntry, Registry
+from handoff_fidelity.baselines.registry import (
+    RESOLVED_AS_INAPPLICABLE,
+    BaselineEntry,
+    Registry,
+)
 from handoff_fidelity.benchmark.reproduction import ReproductionRun, TestInspectionError
 from handoff_fidelity.benchmark.runner import (
     BenchmarkPlan,
@@ -23,7 +27,10 @@ from handoff_fidelity.benchmark.runner import (
     assert_causal_allowed,
     run_document,
 )
-from handoff_fidelity.benchmark.superiority import PairedComparison, evaluate
+from handoff_fidelity.benchmark.superiority import (
+    PairedComparison,
+    evaluate,
+)
 from handoff_fidelity.models import AtomRole
 from handoff_fidelity.relay.task import GLOBAL_DOWNSTREAM_TASK, FocalLeakError, assert_no_focal_leak
 
@@ -248,3 +255,193 @@ def test_denominator_is_the_registered_suite_not_the_eligible_subset():
 
 def test_config_hash_is_order_independent():
     assert config_hash({"a": 1, "b": 2}) == config_hash({"b": 2, "a": 1})
+
+
+def test_a_bare_not_required_sentinel_does_not_resolve_a_field():
+    """`NOT_REQUIRED` is a resolution only when it comes with a reason.
+
+    Without the paired reason it is indistinguishable from a placeholder typed
+    to make a gate go green, so the field stays unresolved.
+    """
+    bare = BaselineEntry(name="x", role="PRIMARY_CAUSAL", commit=RESOLVED_AS_INAPPLICABLE)
+    assert "commit" in bare.unresolved()
+
+    justified = BaselineEntry(
+        name="x",
+        role="PRIMARY_CAUSAL",
+        commit=RESOLVED_AS_INAPPLICABLE,
+        commit_not_required_reason="inference code ships inside the checkpoint repository",
+    )
+    assert "commit" not in justified.unresolved()
+
+
+def test_the_amended_primary_set_spans_four_distinct_families():
+    """After the P-6/P-7 amendment the four primaries are genuinely distinct.
+
+    The original set put two XLM-RoBERTa-large token classifiers -- differing by
+    a classifier head and sharing a training pipeline -- in a set of four, so
+    `required_wins = 3` could be met by two members of one family. Replacing the
+    unrunnable one with DAC removes that collapse.
+    """
+    registry = Registry.load("configs/baselines.yaml")
+    primaries = sorted(n for n, e in registry.entries.items() if e.role == "PRIMARY_CAUSAL")
+    assert primaries == ["cpc", "dac", "llmlingua2", "provence"]
+    assert len(registry.families_of(primaries)) == 4
+    # The original collision is still recorded, so the reason for the amendment
+    # does not quietly disappear from the config.
+    assert registry.method_families["token_classification_xlmr"] == [
+        "llmlingua2",
+        "adaptive_queryselect",
+    ]
+
+
+def test_adaptive_queryselect_is_retired_pre_outcome_not_deleted():
+    registry = Registry.load("configs/baselines.yaml")
+    entry = registry.entries["adaptive_queryselect"]
+    assert entry.role == "RETIRED_PRE_OUTCOME"
+    assert entry.replaced_by == "dac"
+    assert entry.counts_toward_superiority is False
+    ok, reason = entry.benchmark_eligible()
+    assert ok is False
+    assert "retired pre-outcome" in reason
+    # The amendment history must survive in machine-readable form.
+    p6 = next(a for a in registry.amendments if a["id"] == "P-6")
+    assert p6["benchmark_outcomes_observed_before_amendment"] == 0
+    assert p6["removed"] == "adaptive_queryselect"
+    assert p6["added"] == "dac"
+    assert p6["removal_reason"] == "missing_executable_artefact"
+
+
+def test_dac_is_an_active_primary_but_not_benchmark_ready():
+    registry = Registry.load("configs/baselines.yaml")
+    entry = registry.entries["dac"]
+    assert entry.role == "PRIMARY_CAUSAL"
+    assert entry.counts_toward_superiority is True
+    assert entry.produces_text is True  # hard text keeps T_z observable
+    assert entry.base_model == "Qwen/Qwen2-0.5B-Instruct"
+    assert entry.budget_adapter_required is True
+    ok, _ = entry.benchmark_eligible()
+    assert ok is False
+    assert "dac" not in registry.eligible_primary()
+
+
+def test_selective_context_is_contingency_only():
+    registry = Registry.load("configs/baselines.yaml")
+    entry = registry.entries["selective_context"]
+    assert entry.role == "CONTINGENCY_CAUSAL"
+    assert entry.counts_toward_superiority is False
+    # It is pinnable -- that is not the same as being in the primary set.
+    assert entry.commit == "b8ad75c18f696571c1543817004914f06ba093f2"  # pragma: allowlist secret
+    assert entry.release_tag == "v0.1.0rc1"
+    ok, reason = entry.benchmark_eligible()
+    assert ok is False
+    assert "contingency" in reason
+    assert "irreproducible_native_implementation" in entry.promotion_permitted_reasons
+    # A contingency comparator is not counted in the primary denominator.
+    assert registry.superiority_denominator() == 4
+
+
+def test_no_resolved_comparator_is_benchmark_eligible_without_a_reproduction_run():
+    """Phase 3 pinned LLMLingua-2 completely. Pinning is not eligibility."""
+    registry = Registry.load("configs/baselines.yaml")
+    entry = registry.entries["llmlingua2"]
+    assert entry.commit == "a411a3fa61df74411157b2512b592d5357bd8f17"  # pragma: allowlist secret
+    assert (
+        entry.checkpoint_revision
+        == "ebaba9b0e874dadd3003ffcff828e4397e568089"  # pragma: allowlist secret
+    )
+    ok, reason = entry.benchmark_eligible()
+    assert ok is False
+    assert "unresolved registry fields" in reason
+
+
+# --------------------------------------------------------------------------
+# P-7: the family-aware superiority gate
+# --------------------------------------------------------------------------
+
+_FAMILIES = {
+    "provence": "cross_encoder_sentence",
+    "cpc": "decoder_lora_sentence",
+    "llmlingua2": "token_classification_xlmr",
+    "dac": "decoder_attention_entropy_token",
+}
+
+
+def _win(name):
+    return PairedComparison(name, (0.05, 0.01, 0.09), (0.04, 0.01, 0.07))
+
+
+def _loss(name):
+    return PairedComparison(name, (0.01, -0.02, 0.04), (0.01, -0.02, 0.04))
+
+
+def test_family_gate_rejects_a_field_narrower_than_three_families():
+    """Fewer than three distinct ready families means no headline at all.
+
+    This fires before any comparison is examined: a narrow field is a design
+    limitation, not a lost contest.
+    """
+    verdict = evaluate(
+        [_win("llmlingua2"), _win("dac")],
+        eligible_primary=["llmlingua2", "dac"],
+        registered_primary=["provence", "cpc", "llmlingua2", "dac"],
+        family_map=_FAMILIES,
+    )
+    assert verdict.headline_eligible is False
+    assert verdict.permitted is False
+    assert "NO SOTA-SUPERIORITY HEADLINE" in verdict.statement
+    assert len(verdict.eligible_families) == 2
+
+
+def test_family_gate_requires_beating_all_three_when_exactly_three_families():
+    eligible = ["provence", "cpc", "llmlingua2"]
+    two_of_three = evaluate(
+        [_win("provence"), _win("cpc"), _loss("llmlingua2")],
+        eligible_primary=eligible,
+        registered_primary=["provence", "cpc", "llmlingua2", "dac"],
+        family_map=_FAMILIES,
+    )
+    assert two_of_three.headline_eligible is True
+    assert two_of_three.permitted is False
+    assert "all eligible comparators must be beaten" in two_of_three.statement
+
+    all_three = evaluate(
+        [_win("provence"), _win("cpc"), _win("llmlingua2")],
+        eligible_primary=eligible,
+        registered_primary=["provence", "cpc", "llmlingua2", "dac"],
+        family_map=_FAMILIES,
+    )
+    assert all_three.permitted is True
+    assert len(all_three.winning_families) == 3
+
+
+def test_family_gate_permits_three_wins_spanning_three_families_out_of_four():
+    verdict = evaluate(
+        [_win("provence"), _win("cpc"), _win("dac"), _loss("llmlingua2")],
+        eligible_primary=["provence", "cpc", "llmlingua2", "dac"],
+        family_map=_FAMILIES,
+    )
+    assert verdict.permitted is True
+    assert verdict.winning_families == (
+        "cross_encoder_sentence",
+        "decoder_attention_entropy_token",
+        "decoder_lora_sentence",
+    )
+
+
+def test_three_wins_inside_two_families_do_not_permit_a_headline():
+    """The exact failure P-7 exists to prevent.
+
+    Three wins, but two of them are the same method with a different classifier
+    head. Under the old count-only rule this passed.
+    """
+    families = dict(_FAMILIES)
+    families["adaptive_queryselect"] = "token_classification_xlmr"
+    verdict = evaluate(
+        [_win("llmlingua2"), _win("adaptive_queryselect"), _win("provence"), _loss("cpc")],
+        eligible_primary=["llmlingua2", "adaptive_queryselect", "provence", "cpc"],
+        family_map=families,
+    )
+    assert len(verdict.wins) == 3
+    assert verdict.permitted is False
+    assert "distinct method families" in verdict.statement

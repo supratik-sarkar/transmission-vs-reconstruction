@@ -64,17 +64,66 @@ def provence() -> ExternalAdapter:
 
 
 def adaptive_queryselect() -> ExternalAdapter:
+    """RETIRED PRE-OUTCOME on 2026-09-06. Kept so the amendment stays visible.
+
+    No Adaptive QuerySelect checkpoint is published and the repository carries
+    no LICENSE file. Running plain QuerySelect under this name would misreport
+    what was benchmarked, and retraining is outside the compute plan. Replaced
+    by DAC before any benchmark outcome existed.
+    """
     return ExternalAdapter(
         name="adaptive_queryselect",
         official_repository="https://github.com/UTAustin-ITML/fundamental-limits",
-        entry_point="Adaptive QuerySelect hard-prompt compressor",
+        entry_point="RETIRED: no published Adaptive QuerySelect checkpoint exists",
         integration_notes=(
-            "Query-aware, variable-rate hard-prompt compression. It receives the SAME "
-            "frozen global downstream task as every other method and never a focal "
-            "atom identity; its variable rate must be pinned to the common budget on "
-            "development data."
+            "RETIRED_PRE_OUTCOME (2026-09-06), replaced by DAC. Retained only as an "
+            "amendment record: deleting the row would erase the fact that this "
+            "comparator was pre-registered and then replaced, which is the history a "
+            "reader needs to check that the substitution was not results-driven."
+        ),
+        status=AdapterStatus.NOT_READY,
+        role=BenchmarkRole.LEGACY_ANCHOR,
+    )
+
+
+def dac() -> ExternalAdapter:
+    """Replaces Adaptive QuerySelect in the primary set (P-6, 2026-09-06)."""
+    return ExternalAdapter(
+        name="dac",
+        official_repository="https://github.com/QQQ-yi/DAC",
+        entry_point="DAC dynamic attention-aware task-agnostic prompt compression",
+        integration_notes=(
+            "Scores tokens from a frozen causal LM's attention and entropy and emits "
+            "HARD TEXT, so atom presence T_z stays auditable by the same frozen "
+            "matcher. It trains no compressor of its own; the artefact to pin is the "
+            "base model. Its knob is a compression RATIO, not a token budget, so the "
+            "adapter must search the ratio to hit the common budget and report the "
+            "realised token count alongside the requested one."
         ),
         role=BenchmarkRole.PRIMARY_CAUSAL,
+    )
+
+
+def selective_context() -> ExternalAdapter:
+    """CONTINGENCY ONLY. Not a fifth primary comparator.
+
+    May be promoted to replace a primary only if that primary is declared
+    unusable BEFORE any CausalRelay benchmark outcome exists, and only for a
+    licence prohibition, a missing executable artefact, an irreproducible native
+    implementation, or an irrecoverable technical incompatibility. Never because
+    CausalRelay performs poorly against it.
+    """
+    return ExternalAdapter(
+        name="selective_context",
+        official_repository="https://github.com/liyucheng09/Selective_Context",
+        entry_point="Selective Context self-information lexical-unit filtering",
+        integration_notes=(
+            "CONTINGENCY_CAUSAL. Emits hard text and is pinnable to a signed tag, but "
+            "it does not enter the primary set or the superiority denominator while it "
+            "holds this role. Its knob is a reduce ratio, so it needs the same budget "
+            "adapter as DAC."
+        ),
+        role=BenchmarkRole.LEGACY_ANCHOR,
     )
 
 
@@ -148,13 +197,20 @@ def comi() -> ExternalAdapter:
     )
 
 
-PRIMARY_SOTA: tuple[str, ...] = ("provence", "adaptive_queryselect", "cpc", "llmlingua2")
+#: Amended 2026-09-06 (P-6): adaptive_queryselect out, dac in, pre-outcome.
+PRIMARY_SOTA: tuple[str, ...] = ("provence", "cpc", "llmlingua2", "dac")
+#: Retired pre-outcome. Not a comparator; retained as an amendment record.
+RETIRED_PRE_OUTCOME: tuple[str, ...] = ("adaptive_queryselect",)
+#: Predeclared contingency. Never counts toward the superiority headline.
+CONTINGENCY_SOTA: tuple[str, ...] = ("selective_context",)
 LEGACY_ANCHOR: tuple[str, ...] = ("recomp_extractive",)
 ENDPOINT_ONLY: tuple[str, ...] = ("parallelcomp", "comi")
 
 BUILDERS = {
     "provence": provence,
     "adaptive_queryselect": adaptive_queryselect,
+    "dac": dac,
+    "selective_context": selective_context,
     "cpc": cpc,
     "llmlingua2": llmlingua2,
     "recomp_extractive": recomp_extractive,

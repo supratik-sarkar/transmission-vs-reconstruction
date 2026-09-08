@@ -56,8 +56,44 @@ sampling:
 models:
   relay_model: {value: null, status: must_be_pinned}
   receiver_model: {value: null, status: must_be_pinned}
-  decoder_regime_primary: {value: D, status: frozen}
-  decoder_regime_robustness: {value: S, status: frozen}
+  # Provider identity is metadata attached to each role and to each recorded
+  # call, not a separate scientific parameter. The two leaves above remain the
+  # only pinned model identities.
+  # ---- amendment P-5, 2026-09-06: the decoder regime is audited ----------
+  regime_assignment_from_documentation_allowed: {value: false, status: frozen}
+  decoder_regime_initial_state: {value: NOT_AUDITED, status: frozen}
+  regime_audit_inputs: {value: 100, status: frozen}
+  regime_audit_repeats: {value: 10, status: frozen}
+  regime_audit_prompts_span_receiver_atom_strata: {value: true, status: frozen}
+  regime_D_rule:
+    value: "every audited input must yield the same canonical receiver outcome across all repeats"
+    status: frozen
+  regime_majority_vote_allowed: {value: false, status: frozen}
+  regime_object_is_canonical_outcome_not_raw_bytes: {value: true, status: frozen}
+  byte_identical_rate_reported_as_diagnostic: {value: true, status: frozen}
+  # ---- regime-(S) replication rule, frozen before any data --------------
+  replication_grid: {value: [1, 2, 3, 5], status: frozen}
+  decode_variance_target_ratio: {value: 0.10, status: frozen}
+  replication_fallback_m: {value: 5, status: frozen}
+  replication_fallback_keeps_decode_bootstrap_level: {value: true, status: frozen}
+  replication_selected_on_calibration_material_only: {value: true, status: frozen}
+  atom_level_probability_claims_require_D_or_repeated_design: {value: true, status: frozen}
+  # ---- recorded run identity -------------------------------------------
+  recorded_run_identity_fields:
+    value:
+      - requested_model_id
+      - returned_model_id
+      - documented_version_semantics
+      - provider_backend_version
+      - system_fingerprint
+      - request_id
+      - timestamp_utc
+      - sdk_version
+      - api_version
+      - configuration_hash
+    status: frozen
+  moving_alias_admissible_as_primary_confirmatory: {value: false, status: frozen}
+  moving_alias_permitted_in_labelled_robustness_role: {value: true, status: frozen}
   determinism_audit:
     prompts: {value: 100, status: frozen}
     prompt_strata: {value: [entity, scope, period, numeric, provenance], status: frozen}
@@ -85,6 +121,14 @@ budget:
   sweep_percent: {value: [50, 25, 10, 5], status: frozen}
   hard_ceiling: {value: true, status: frozen}
   same_tokenizer_all_methods: {value: true, status: frozen}
+  # Which tokenizer computes F_i, stated explicitly. Not the repository proxy,
+  # not the receiver's, not a previous generation's. Tokenizers differ across
+  # model generations by enough to move the rho=2 target a full grid step, so
+  # B* is not portable and is recomputed whenever the primary relay model or
+  # provider changes.
+  f_i_tokenizer: {value: primary_relay_model_tokenizer, status: frozen}
+  recompute_B_star_on_relay_model_change: {value: true, status: frozen}
+  report_realised_rho: {value: true, status: frozen}
 
 intervention:
   natural_message_edited: {value: false, status: frozen}
@@ -204,14 +248,116 @@ stages:
   issuer_disjoint: {value: true, status: frozen}
   test_manifest_immutable_after_freeze: {value: true, status: frozen}
 
+# ---------------------------------------------------------------------------
+# PRE-OUTCOME AMENDMENT LOG
+#
+# Append-only provenance, not scientific parameters. Every entry records the
+# date, the reason, and how many benchmark outcomes had been observed when the
+# change was made. All three amendments below were made at zero observed
+# outcomes; the accounting script fails if any entry omits those fields or
+# records a non-zero count without saying so.
+#
+# Nothing here may be edited once an outcome exists.
+# ---------------------------------------------------------------------------
+amendments:
+  - id: P-5
+    date: "2026-09-06"
+    kind: decoder_regime_assignment
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      The protocol asserted deterministic generation at a pinned configuration as
+      the primary regime and treated stochastic generation as a robustness check.
+      Provider documentation cannot establish operational determinism, and an
+      undocumented seed parameter cannot rule it out either. Regime assignment is
+      now ternary and empirical: NOT_AUDITED until the 100x10 operational
+      reproducibility audit runs on the pinned receiver configuration.
+    before: "regime (D) is the primary protocol; (S) is a robustness check"
+    after: >-
+      regime assigned only by audit; (D) requires unanimous canonical outcomes on
+      every audited input; otherwise (S); initial state NOT_AUDITED
+    theory_unchanged: >-
+      Regime (D) remains a live theoretical case. Theorem 1(ii-a) and the
+      atom-level minimality results are retained unchanged; only the empirical
+      assignment rule changed.
+    also_frozen: "regime-(S) replication rule m* on the {1,2,3,5} grid at ratio 0.10"
+
+  - id: P-6
+    date: "2026-09-06"
+    kind: comparator_substitution
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      No Adaptive QuerySelect checkpoint is published; the authors' released
+      weights correspond to the non-adaptive variant and the repository carries no
+      LICENSE file. Running the published artefact under the adaptive name would
+      misreport what was benchmarked, and retraining is outside the compute plan.
+      Evidence gathered 2026-09-05 from the official repository and the authors'
+      model host.
+    original_primary_set: [provence, adaptive_queryselect, cpc, llmlingua2]
+    amended_primary_set: [provence, cpc, llmlingua2, dac]
+    removed: adaptive_queryselect
+    removal_reason: missing_executable_artefact
+    removal_evidence_date: "2026-09-05"
+    added: dac
+    addition_rationale: >-
+      DAC (ACL 2025 Main) emits hard compressed text, so atom-level transmission
+      T_z remains observable through the same deterministic matcher, and it is a
+      genuinely distinct method family.
+    rejected_alternatives:
+      - "run the non-adaptive checkpoint under the adaptive name: misreports the benchmark"
+      - "retrain the adaptive variant: outside the compute plan"
+    contingency_added: selective_context
+    contingency_reasons_enumerated: true
+
+  - id: P-7
+    date: "2026-09-06"
+    kind: superiority_rule
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      Two of the originally pre-registered primaries shared the XLM-RoBERTa-large
+      token-classification backbone and the LLMLingua-2 training pipeline,
+      differing by a 102,400-parameter classifier head. The original count-only
+      rule could therefore be satisfied by two members of one family, which
+      overstates the breadth of the result.
+    before: "at least 3 qualifying wins among PRIMARY_CAUSAL comparators"
+    after: >-
+      at least 3 qualifying wins spanning at least 3 distinct declared method
+      families; all eligible must be beaten when exactly 3 families are ready;
+      fewer than 3 distinct ready families means no SOTA-superiority headline
+    may_not_be_weakened_after_results: true
+
+
 benchmark:
   primary_required_textual_state: {value: true, status: frozen}
   reproduction_tolerance_pp: {value: 2.0, status: frozen}
   required_wins: {value: 3, status: frozen}
   criteria: {value: ["lower_95CI(delta_A) > 0", "lower_95CI(delta_Ccomm) > 0"], status: frozen}
   comparator_deletion_allowed: {value: false, status: frozen}
+  # Substitution remains forbidden once outcomes exist. The narrow pre-outcome
+  # contingency mechanism below is the only exception, and it is bounded by an
+  # enumerated list of reasons that cannot include "we did badly against it".
   comparator_substitution_allowed: {value: false, status: frozen}
   focal_secrecy_enforced: {value: true, status: frozen}
+  # ---- amendment P-7, 2026-09-06, zero outcomes observed -----------------
+  # Wins over comparators sharing a backbone and a training pipeline are not
+  # independent tests, so the headline requires breadth of METHOD FAMILY.
+  family_aware_superiority: {value: true, status: frozen}
+  required_distinct_families: {value: 3, status: frozen}
+  must_beat_all_when_exactly_required_families: {value: true, status: frozen}
+  no_headline_below_required_families: {value: true, status: frozen}
+  legacy_anchor_counts_toward_headline: {value: false, status: frozen}
+  # ---- amendment P-6, 2026-09-06, zero outcomes observed -----------------
+  primary_comparators: {value: [provence, cpc, llmlingua2, dac], status: frozen}
+  retired_pre_outcome: {value: [adaptive_queryselect], status: frozen}
+  contingency_comparators: {value: [selective_context], status: frozen}
+  contingency_substitution_pre_outcome_only: {value: true, status: frozen}
+  contingency_substitution_reasons:
+    value:
+      - licence_prohibition
+      - missing_executable_artefact
+      - irreproducible_native_implementation
+      - irrecoverable_technical_incompatibility
+    status: frozen
+  budget_adapter_required_for_ratio_parameterised_methods: {value: true, status: frozen}
 
 causalrelay:
   fit_split: {value: stage2_dev, status: frozen}
@@ -226,6 +372,12 @@ causalrelay:
     search_rule_status: FROZEN
     search_space: [HistGradientBoostingRegressor, Ridge, ExtraTreesRegressor]
     selection: grouped_cv_by_document_on_development_only
+    # This is the UTILITY-PREDICTOR ESTIMATOR family. It is not an LLM provider
+    # family. Provider canary results -- latency, spend, fingerprints, decode
+    # variance -- are not evidence about which regressor predicts atom surplus
+    # and may never resolve this leaf.
+    parameter_kind: utility_predictor_estimator_family
+    resolvable_from_provider_evidence: false
   ablation_family: {value: Ridge, status: frozen}
   # Low-capacity source-only control. Model identity is fixed;
   # regularisation strength may be development-tuned.
