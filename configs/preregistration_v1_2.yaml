@@ -54,8 +54,8 @@ sampling:
   master_seed: {value: 20260907, status: frozen}
 
 models:
-  relay_model: {value: null, status: must_be_pinned}
-  receiver_model: {value: null, status: must_be_pinned}
+  relay_model: {value: gpt-5.6-terra, status: frozen}
+  receiver_model: {value: gpt-5.6-terra, status: frozen}
   # Provider identity is metadata attached to each role and to each recorded
   # call, not a separate scientific parameter. The two leaves above remain the
   # only pinned model identities.

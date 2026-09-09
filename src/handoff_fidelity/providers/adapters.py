@@ -65,6 +65,12 @@ class OpenAIAdapter(BaseProviderAdapter):
         out_tokens = resp.usage.completion_tokens if resp.usage else -1
         returned_model = resp.model or model_name
         req_id = resp.id or ""
+        system_fingerprint = getattr(resp, "system_fingerprint", "") or ""
+        reasoning_tokens = 0
+        if resp.usage and hasattr(resp.usage, "completion_tokens_details"):
+            details = getattr(resp.usage, "completion_tokens_details", None)
+            if details and hasattr(details, "reasoning_tokens"):
+                reasoning_tokens = getattr(details, "reasoning_tokens", 0) or 0
 
         return GenerationResponse(
             text=text,
@@ -76,6 +82,8 @@ class OpenAIAdapter(BaseProviderAdapter):
             output_tokens=out_tokens,
             latency_s=latency,
             finish_reason=finish_reason,
+            system_fingerprint=system_fingerprint,
+            reasoning_tokens=reasoning_tokens,
         )
 
 
@@ -117,6 +125,12 @@ class DeepSeekAdapter(BaseProviderAdapter):
         out_tokens = resp.usage.completion_tokens if resp.usage else -1
         returned_model = resp.model or model_name
         req_id = resp.id or ""
+        system_fingerprint = getattr(resp, "system_fingerprint", "") or ""
+        reasoning_tokens = 0
+        if resp.usage and hasattr(resp.usage, "completion_tokens_details"):
+            details = getattr(resp.usage, "completion_tokens_details", None)
+            if details and hasattr(details, "reasoning_tokens"):
+                reasoning_tokens = getattr(details, "reasoning_tokens", 0) or 0
 
         return GenerationResponse(
             text=text,
@@ -128,6 +142,8 @@ class DeepSeekAdapter(BaseProviderAdapter):
             output_tokens=out_tokens,
             latency_s=latency,
             finish_reason=finish_reason,
+            system_fingerprint=system_fingerprint,
+            reasoning_tokens=reasoning_tokens,
         )
 
     def status_dict(self) -> dict[str, Any]:

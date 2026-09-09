@@ -49,6 +49,8 @@ class GenerationResponse:
     latency_s: float = 0.0
     finish_reason: str = ""
     raw_ref: str = ""  # pointer into private raw storage; never the payload
+    system_fingerprint: str = ""
+    reasoning_tokens: int = 0
 
 
 @runtime_checkable
