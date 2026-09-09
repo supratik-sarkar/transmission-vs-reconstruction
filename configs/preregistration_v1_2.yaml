@@ -62,6 +62,8 @@ models:
   # ---- amendment P-5, 2026-09-06: the decoder regime is audited ----------
   regime_assignment_from_documentation_allowed: {value: false, status: frozen}
   decoder_regime_initial_state: {value: NOT_AUDITED, status: frozen}
+  decoder_regime_audited_state: {value: S_CONFIRMED, status: frozen}
+  replication_m_star: {value: 2, status: frozen}
   regime_audit_inputs: {value: 100, status: frozen}
   regime_audit_repeats: {value: 10, status: frozen}
   regime_audit_prompts_span_receiver_atom_strata: {value: true, status: frozen}
