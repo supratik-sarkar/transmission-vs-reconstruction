@@ -29,15 +29,53 @@ class OpenAIAdapter(BaseProviderAdapter):
     sdk_module: str = "openai"
 
     def _generate(self, request: GenerationRequest) -> GenerationResponse:
-        # Integration point. A compliant implementation constructs the client
-        # from the environment, uses the Responses API, and records the RETURNED
-        # model identifier alongside the requested one -- they differ whenever a
-        # provider resolves an alias to a snapshot, and only the returned value
-        # is reproducible.
-        raise NotImplementedError(
-            "OpenAI execution is an explicit integration point, enabled in the "
-            "provider-validation phase. It must record: returned model, request id, "
-            "usage, latency and finish reason; and must never log the key."
+        import os
+
+        from openai import OpenAI
+
+        api_key = os.environ.get(self.key_env)
+        client = OpenAI(api_key=api_key)
+        start_time = time.perf_counter()
+
+        model_name = request.model or self.model
+        is_reasoning = any(prefix in model_name for prefix in ("gpt-5.6", "gpt-6", "o1", "o3"))
+        kwargs: dict[str, Any] = {
+            "model": model_name,
+            "messages": [{"role": "user", "content": request.prompt}],
+        }
+        if is_reasoning:
+            kwargs["max_completion_tokens"] = request.max_output_tokens
+        else:
+            kwargs["max_tokens"] = request.max_output_tokens
+            kwargs["temperature"] = request.temperature
+            kwargs["top_p"] = request.top_p
+            if request.seed is not None:
+                kwargs["seed"] = request.seed
+
+        if request.stop:
+            kwargs["stop"] = list(request.stop)
+
+        resp = client.chat.completions.create(**kwargs)
+        latency = time.perf_counter() - start_time
+
+        choice = resp.choices[0]
+        text = choice.message.content or ""
+        finish_reason = choice.finish_reason or ""
+        in_tokens = resp.usage.prompt_tokens if resp.usage else -1
+        out_tokens = resp.usage.completion_tokens if resp.usage else -1
+        returned_model = resp.model or model_name
+        req_id = resp.id or ""
+
+        return GenerationResponse(
+            text=text,
+            provider=self.name,
+            requested_model=model_name,
+            returned_model=returned_model,
+            provider_request_id=req_id,
+            input_tokens=in_tokens,
+            output_tokens=out_tokens,
+            latency_s=latency,
+            finish_reason=finish_reason,
         )
 
 
@@ -49,10 +87,47 @@ class DeepSeekAdapter(BaseProviderAdapter):
     base_url: str = ""  # from configuration; never hard-coded
 
     def _generate(self, request: GenerationRequest) -> GenerationResponse:
-        raise NotImplementedError(
-            "DeepSeek execution is an explicit integration point. Although the HTTP "
-            "surface is OpenAI-compatible, its metadata is recorded separately: the "
-            "providers are not interchangeable for provenance purposes."
+        import os
+
+        from openai import OpenAI
+
+        api_key = os.environ.get(self.key_env)
+        base_url = self.base_url or "https://api.deepseek.com"
+        client = OpenAI(api_key=api_key, base_url=base_url)
+        start_time = time.perf_counter()
+
+        model_name = request.model or self.model
+        kwargs: dict[str, Any] = {
+            "model": model_name,
+            "messages": [{"role": "user", "content": request.prompt}],
+            "max_tokens": request.max_output_tokens,
+            "temperature": request.temperature,
+            "top_p": request.top_p,
+        }
+        if request.stop:
+            kwargs["stop"] = list(request.stop)
+
+        resp = client.chat.completions.create(**kwargs)
+        latency = time.perf_counter() - start_time
+
+        choice = resp.choices[0]
+        text = choice.message.content or ""
+        finish_reason = choice.finish_reason or ""
+        in_tokens = resp.usage.prompt_tokens if resp.usage else -1
+        out_tokens = resp.usage.completion_tokens if resp.usage else -1
+        returned_model = resp.model or model_name
+        req_id = resp.id or ""
+
+        return GenerationResponse(
+            text=text,
+            provider=self.name,
+            requested_model=model_name,
+            returned_model=returned_model,
+            provider_request_id=req_id,
+            input_tokens=in_tokens,
+            output_tokens=out_tokens,
+            latency_s=latency,
+            finish_reason=finish_reason,
         )
 
     def status_dict(self) -> dict[str, Any]:
@@ -72,7 +147,46 @@ class AnthropicAdapter(BaseProviderAdapter):
     sdk_module: str = "anthropic"
 
     def _generate(self, request: GenerationRequest) -> GenerationResponse:
-        raise NotImplementedError("Anthropic execution is an explicit integration point.")
+        import os
+
+        import anthropic
+
+        api_key = os.environ.get(self.key_env)
+        client = anthropic.Anthropic(api_key=api_key)
+        start_time = time.perf_counter()
+        model_name = request.model or self.model
+
+        kwargs: dict[str, Any] = {
+            "model": model_name,
+            "max_tokens": request.max_output_tokens,
+            "messages": [{"role": "user", "content": request.prompt}],
+        }
+        if request.stop:
+            kwargs["stop_sequences"] = list(request.stop)
+
+        resp = client.messages.create(**kwargs)
+        latency = time.perf_counter() - start_time
+
+        text = "".join(
+            b.text for b in resp.content if getattr(b, "type", "") == "text" and hasattr(b, "text")
+        )
+        finish_reason = resp.stop_reason or ""
+        in_tokens = resp.usage.input_tokens if resp.usage else -1
+        out_tokens = resp.usage.output_tokens if resp.usage else -1
+        returned_model = resp.model or model_name
+        req_id = resp.id or ""
+
+        return GenerationResponse(
+            text=text,
+            provider=self.name,
+            requested_model=model_name,
+            returned_model=returned_model,
+            provider_request_id=req_id,
+            input_tokens=in_tokens,
+            output_tokens=out_tokens,
+            latency_s=latency,
+            finish_reason=finish_reason,
+        )
 
 
 @dataclass(slots=True)
@@ -82,7 +196,44 @@ class GeminiAdapter(BaseProviderAdapter):
     sdk_module: str = "google.genai"
 
     def _generate(self, request: GenerationRequest) -> GenerationResponse:
-        raise NotImplementedError("Gemini execution is an explicit integration point.")
+        import os
+
+        from google import genai
+
+        api_key = os.environ.get(self.key_env)
+        client = genai.Client(api_key=api_key)
+        start_time = time.perf_counter()
+        model_name = request.model or self.model
+
+        resp = client.models.generate_content(
+            model=model_name,
+            contents=request.prompt,
+        )
+        latency = time.perf_counter() - start_time
+
+        text = resp.text or ""
+        in_tokens = (
+            resp.usage_metadata.prompt_token_count
+            if (resp.usage_metadata and resp.usage_metadata.prompt_token_count is not None)
+            else -1
+        )
+        out_tokens = (
+            resp.usage_metadata.candidates_token_count
+            if (resp.usage_metadata and resp.usage_metadata.candidates_token_count is not None)
+            else -1
+        )
+
+        return GenerationResponse(
+            text=text,
+            provider=self.name,
+            requested_model=model_name,
+            returned_model=model_name,
+            provider_request_id="",
+            input_tokens=in_tokens,
+            output_tokens=out_tokens,
+            latency_s=latency,
+            finish_reason="",
+        )
 
 
 @dataclass(slots=True)
