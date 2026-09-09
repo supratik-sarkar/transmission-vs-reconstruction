@@ -109,8 +109,8 @@ budget:
   # may read only deterministic source/render properties -- never receiver
   # outcomes, CausalRelay scores, comparator performance or final-test data.
   primary_output_tokens:
-    value: null
-    status: proposed
+    value: 200
+    status: frozen
     resolution_stage: CALIBRATION
     selection_rule_status: FROZEN
     candidate_grid: [200, 250, 300, 350, 400, 500]
@@ -453,8 +453,8 @@ experiment_c:
   post_gate: {value: true, status: frozen}
   fully_instrumented_candidate_set: {value: true, status: frozen}
   subset_size:
-    value: null
-    status: proposed
+    value: 20
+    status: frozen
     resolution_stage: CALIBRATION
     selection_rule_status: FROZEN
     candidate_grid: [20, 30, 50]
@@ -462,8 +462,8 @@ experiment_c:
     call_budget_fraction: 0.15
     retention_floor: 0.80
   eviction_tolerance_tokens:
-    value: null
-    status: proposed
+    value: 0
+    status: frozen
     resolution_stage: CALIBRATION
     selection_rule_status: FROZEN
     candidate_grid: [0, 1, 2, 4, 8]
