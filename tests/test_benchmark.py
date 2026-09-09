@@ -170,10 +170,13 @@ def test_registry_blocks_a_method_outside_reproduction_tolerance():
     assert "UNREPRODUCED" in reason
 
 
-def test_shipped_registry_has_every_external_method_unresolved():
+def test_registry_has_three_benchmark_ready_primary_families_and_two_blocked():
     registry = Registry.load("configs/baselines.yaml")
-    assert registry.eligible_primary() == []
-    assert registry.superiority_denominator() == 4
+    assert registry.eligible_primary() == ["dac", "llmlingua2", "longllmlingua"]
+    assert registry.superiority_denominator() == 5
+    ok, statement = registry.headline_eligible()
+    assert ok is True
+    assert "3 distinct families available" in statement
 
 
 def test_reproduction_may_not_be_pointed_at_the_sealed_test_split():
@@ -249,7 +252,7 @@ def test_denominator_is_the_registered_suite_not_the_eligible_subset():
     verdict = evaluate(
         comparisons, eligible_primary=PRIMARY_SOTA[:2], registered_primary=PRIMARY_SOTA
     )
-    assert verdict.denominator == 4
+    assert verdict.denominator == len(PRIMARY_SOTA)
     assert verdict.permitted is False
 
 
@@ -275,23 +278,24 @@ def test_a_bare_not_required_sentinel_does_not_resolve_a_field():
     assert "commit" not in justified.unresolved()
 
 
-def test_the_amended_primary_set_spans_four_distinct_families():
-    """After the P-6/P-7 amendment the four primaries are genuinely distinct.
-
-    The original set put two XLM-RoBERTa-large token classifiers -- differing by
-    a classifier head and sharing a training pipeline -- in a set of four, so
-    `required_wins = 3` could be met by two members of one family. Replacing the
-    unrunnable one with DAC removes that collapse.
+def test_the_amended_primary_set_spans_five_distinct_families():
+    """After P-6, P-7, and P-9 the five primaries span five distinct families.
+    Provence (cross_encoder_sentence), CPC (decoder_lora_sentence),
+    LLMLingua-2 (token_classification_xlmr), DAC (decoder_attention_entropy_token),
+    and LongLLMLingua (causal_lm_perplexity_conditioned_compression).
     """
     registry = Registry.load("configs/baselines.yaml")
     primaries = sorted(n for n, e in registry.entries.items() if e.role == "PRIMARY_CAUSAL")
-    assert primaries == ["cpc", "dac", "llmlingua2", "provence"]
-    assert len(registry.families_of(primaries)) == 4
+    assert primaries == ["cpc", "dac", "llmlingua2", "longllmlingua", "provence"]
+    assert len(registry.families_of(primaries)) == 5
     # The original collision is still recorded, so the reason for the amendment
     # does not quietly disappear from the config.
     assert registry.method_families["token_classification_xlmr"] == [
         "llmlingua2",
         "adaptive_queryselect",
+    ]
+    assert registry.method_families["causal_lm_perplexity_conditioned_compression"] == [
+        "longllmlingua"
     ]
 
 
@@ -312,19 +316,6 @@ def test_adaptive_queryselect_is_retired_pre_outcome_not_deleted():
     assert p6["removal_reason"] == "missing_executable_artefact"
 
 
-def test_dac_is_an_active_primary_but_not_benchmark_ready():
-    registry = Registry.load("configs/baselines.yaml")
-    entry = registry.entries["dac"]
-    assert entry.role == "PRIMARY_CAUSAL"
-    assert entry.counts_toward_superiority is True
-    assert entry.produces_text is True  # hard text keeps T_z observable
-    assert entry.base_model == "Qwen/Qwen2-0.5B-Instruct"
-    assert entry.budget_adapter_required is True
-    ok, _ = entry.benchmark_eligible()
-    assert ok is False
-    assert "dac" not in registry.eligible_primary()
-
-
 def test_selective_context_is_contingency_only():
     registry = Registry.load("configs/baselines.yaml")
     entry = registry.entries["selective_context"]
@@ -338,21 +329,89 @@ def test_selective_context_is_contingency_only():
     assert "contingency" in reason
     assert "irreproducible_native_implementation" in entry.promotion_permitted_reasons
     # A contingency comparator is not counted in the primary denominator.
-    assert registry.superiority_denominator() == 4
+    assert registry.superiority_denominator() == 5
 
 
-def test_no_resolved_comparator_is_benchmark_eligible_without_a_reproduction_run():
-    """Phase 3 pinned LLMLingua-2 completely. Pinning is not eligibility."""
-    registry = Registry.load("configs/baselines.yaml")
-    entry = registry.entries["llmlingua2"]
-    assert entry.commit == "a411a3fa61df74411157b2512b592d5357bd8f17"  # pragma: allowlist secret
-    assert (
-        entry.checkpoint_revision
-        == "ebaba9b0e874dadd3003ffcff828e4397e568089"  # pragma: allowlist secret
+def test_native_example_pass_cannot_satisfy_benchmark_ready_gate():
+    """NATIVE_EXAMPLE_PASS != BENCHMARK_READY. The status alone must fail benchmark_eligible."""
+    entry = BaselineEntry(
+        name="test_method",
+        role="PRIMARY_CAUSAL",
+        status="NATIVE_EXAMPLE_PASS",
+        paper_citation_key="key",
+        official_repository="repo",
+        commit="commit",
+        release_tag="tag",
+        checkpoint_revision="rev",
+        licence="MIT",
+        python_requirement="3.11",
+        install_command="pip install x",
+        native_benchmark="bench",
+        native_expected_metric=50.0,
+        native_reproduced_metric=50.0,
+        reproduction_deviation=0.0,
+        reproduction_tolerance=2.0,
     )
     ok, reason = entry.benchmark_eligible()
     assert ok is False
-    assert "unresolved registry fields" in reason
+    assert "adapter status is NATIVE_EXAMPLE_PASS" in reason
+
+
+def test_blocked_provence_and_cpc_cannot_silently_become_eligible():
+    """Blocked comparators must remain ineligible unless formally resolved."""
+    registry = Registry.load("configs/baselines.yaml")
+    prov_ok, prov_reason = registry.entries["provence"].benchmark_eligible()
+    assert prov_ok is False
+    assert registry.entries["provence"].status == "LICENCE_CLARIFICATION_REQUIRED"
+    assert "unresolved" in prov_reason or "LICENCE_CLARIFICATION_REQUIRED" in prov_reason
+
+    cpc_ok, cpc_reason = registry.entries["cpc"].benchmark_eligible()
+    assert cpc_ok is False
+    assert registry.entries["cpc"].status == "NOT_READY"
+    assert "unresolved" in cpc_reason or "NOT_READY" in cpc_reason
+
+
+def test_calibration_documents_equals_50():
+    """Amendment P-8 sets calibration documents to 50, frozen."""
+    from pathlib import Path
+
+    import yaml
+
+    doc = yaml.safe_load(Path("configs/preregistration_v1_2.yaml").read_text(encoding="utf-8"))
+    assert doc["stages"]["calibration"]["documents"] == 50
+    assert doc["stages"]["calibration"]["status"] == "frozen"
+
+
+def test_amendments_p8_and_p9_zero_outcome_timing():
+    """P-8 and P-9 were enacted with zero observed benchmark outcomes."""
+    from pathlib import Path
+
+    import yaml
+
+    doc = yaml.safe_load(Path("configs/preregistration_v1_2.yaml").read_text(encoding="utf-8"))
+    p8 = next(a for a in doc["amendments"] if a["id"] == "P-8")
+    assert p8["benchmark_outcomes_observed_before_amendment"] == 0
+    assert p8["kind"] == "PRE_OUTCOME_PROTOCOL_COMPLETION"
+
+    p9 = next(a for a in doc["amendments"] if a["id"] == "P-9")
+    assert p9["benchmark_outcomes_observed_before_amendment"] == 0
+    assert p9["kind"] == "comparator_contingency_activation"
+
+
+def test_third_family_gate_requires_distinct_method_families():
+    """Superiority headline requires >= 3 distinct declared method families."""
+    registry = Registry.load("configs/baselines.yaml")
+    ready_primaries = registry.eligible_primary()
+    assert len(ready_primaries) >= 3
+    distinct_families = registry.families_of(ready_primaries)
+    assert len(distinct_families) >= 3
+    assert distinct_families == {
+        "token_classification_xlmr",
+        "decoder_attention_entropy_token",
+        "causal_lm_perplexity_conditioned_compression",
+    }
+    ok, _ = registry.headline_eligible()
+    assert ok is True
 
 
 # --------------------------------------------------------------------------
@@ -364,6 +423,7 @@ _FAMILIES = {
     "cpc": "decoder_lora_sentence",
     "llmlingua2": "token_classification_xlmr",
     "dac": "decoder_attention_entropy_token",
+    "longllmlingua": "causal_lm_perplexity_conditioned_compression",
 }
 
 

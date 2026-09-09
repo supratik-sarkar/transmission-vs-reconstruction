@@ -259,12 +259,12 @@ def test_preregistration_amendments_are_all_pre_outcome():
 
     doc = yaml.safe_load(pathlib.Path("configs/preregistration_v1_2.yaml").read_text())
     amendments = doc["amendments"]
-    assert [a["id"] for a in amendments] == ["P-5", "P-6", "P-7"]
+    assert [a["id"] for a in amendments] == ["P-5", "P-6", "P-7", "P-8", "P-9"]
     for a in amendments:
         # The count is what distinguishes an amendment from a rationalisation.
         assert a["benchmark_outcomes_observed_before_amendment"] == 0
         assert a["reason"].strip()
-        assert a["date"] == "2026-09-06"
+        assert a["date"] in ("2026-09-06", "2026-09-09")
 
     p6 = amendments[1]
     assert p6["original_primary_set"] == ["provence", "adaptive_queryselect", "cpc", "llmlingua2"]

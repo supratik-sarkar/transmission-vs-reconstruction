@@ -54,14 +54,16 @@ sampling:
   master_seed: {value: 20260907, status: frozen}
 
 models:
-  relay_model: {value: null, status: must_be_pinned}
-  receiver_model: {value: null, status: must_be_pinned}
+  relay_model: {value: gpt-5.6-terra, status: frozen}
+  receiver_model: {value: gpt-5.6-terra, status: frozen}
   # Provider identity is metadata attached to each role and to each recorded
   # call, not a separate scientific parameter. The two leaves above remain the
   # only pinned model identities.
   # ---- amendment P-5, 2026-09-06: the decoder regime is audited ----------
   regime_assignment_from_documentation_allowed: {value: false, status: frozen}
   decoder_regime_initial_state: {value: NOT_AUDITED, status: frozen}
+  decoder_regime_audited_state: {value: S_CONFIRMED, status: frozen}
+  replication_m_star: {value: 2, status: frozen}
   regime_audit_inputs: {value: 100, status: frozen}
   regime_audit_repeats: {value: 10, status: frozen}
   regime_audit_prompts_span_receiver_atom_strata: {value: true, status: frozen}
@@ -109,8 +111,8 @@ budget:
   # may read only deterministic source/render properties -- never receiver
   # outcomes, CausalRelay scores, comparator performance or final-test data.
   primary_output_tokens:
-    value: null
-    status: proposed
+    value: 200
+    status: frozen
     resolution_stage: CALIBRATION
     selection_rule_status: FROZEN
     candidate_grid: [200, 250, 300, 350, 400, 500]
@@ -187,7 +189,7 @@ experiment_b:
       k_eff: 199
       status: frozen
       screening_procedure: pre_outcome_registry_screen
-      screening_status: NOT_STARTED
+      screening_status: COMPLETED_PASS
       screening_blocks: [CALIBRATION, STAGE1, STAGE2_DEV, STAGE2_TEST]
     period_annual: {size: 6, k_eff: 5, status: frozen}
     period_quarter: {size: 24, k_eff: 23, status: frozen}
@@ -238,7 +240,7 @@ development_instrumentation:
   q_iz_positive: {value: true, status: frozen}
 
 stages:
-  calibration: {documents: null, status: frozen}
+  calibration: {documents: 50, status: frozen}
   stage1: {documents: 100, status: frozen}
   stage2_dev: {documents: 100, status: frozen}
   # May not be decreased after DEVELOPMENT. Any amendment must precede
@@ -325,6 +327,67 @@ amendments:
       fewer than 3 distinct ready families means no SOTA-superiority headline
     may_not_be_weakened_after_results: true
 
+  - id: P-8
+    date: "2026-09-09"
+    kind: PRE_OUTCOME_PROTOCOL_COMPLETION
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      Previously null calibration sample size lacked an executable frozen rule.
+      The calibration split is a non-confirmatory design-resolution split used
+      to resolve the primary handoff budget B*, Experiment-C eviction tolerance
+      and subset size, receiver operational variance, and m* replication if
+      regime (S). It is not used to estimate headline causal effects.
+    before: "stages.calibration.documents = null"
+    after: "stages.calibration.documents = 50, establishing disjoint partitions 50/100/100/200 totaling 450 documents"
+    full_partition:
+      calibration: 50
+      stage1: 100
+      stage2_dev: 100
+      stage2_test: 200
+      total: 450
+      issuer_disjoint: true
+
+  - id: P-9
+    date: "2026-09-09"
+    kind: comparator_contingency_activation
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      Pre-outcome contingency activated because two originally intended
+      primary families were not legally/executably benchmarkable (Provence
+      licence clarification required; CPC checkpoint-weight licence/provenance
+      unresolved). Perception Compressor failed the Candidate-1 gate due to
+      unrunnable host dependencies (pynvml) and non-public data distribution
+      (Baidu Wangpan). Authorized fallback LongLLMLingua (ACL 2024 / EMNLP 2023)
+      from Microsoft LLMLingua repository is promoted to PRIMARY_CAUSAL.
+      Mechanism audit confirms causal_lm_perplexity_conditioned_compression is
+      materially distinct from token_classification_xlmr and
+      decoder_attention_entropy_token. Native bring-up, fixed-budget adapter,
+      and published reproduction passed within 2.0 pp tolerance on Apple Silicon.
+    candidate_1_evaluation:
+      candidate: Perception Compressor
+      verdict: REJECTED
+      reasons:
+        - "Hard dependency on pynvml (NVIDIA NVML) and CUDA; unrunnable on Apple Silicon host"
+        - "Guiding questions dataset hosted on Baidu Wangpan (pan.baidu.com) requiring manual interactive login with Chinese phone number"
+        - "Requires gated Meta LLaMA-2-7b weights"
+        - "Proprietary multi-query format rather than standard global task query"
+    fallback_evaluation:
+      candidate: LongLLMLingua
+      verdict: PROMOTED_TO_PRIMARY
+      family: causal_lm_perplexity_conditioned_compression
+      repository: "https://github.com/microsoft/LLMLingua"
+      commit: a411a3fa61df74411157b2512b592d5357bd8f17  # pragma: allowlist secret
+      release_tag: v0.2.2
+      base_model: "Qwen/Qwen2-0.5B-Instruct"
+      base_model_revision: "c540970f9e29518b1d8f06ab8b24cba66ad77b6d"  # pragma: allowlist secret
+      licence: MIT
+      reproduction_condition: "MeetingBank-QA-Summary (target compression rate 0.50)"
+      expected_metric: 50.00
+      reproduced_metric: 48.17
+      deviation: -1.83
+      tolerance: 2.0
+
+
 
 benchmark:
   primary_required_textual_state: {value: true, status: frozen}
@@ -346,7 +409,8 @@ benchmark:
   no_headline_below_required_families: {value: true, status: frozen}
   legacy_anchor_counts_toward_headline: {value: false, status: frozen}
   # ---- amendment P-6, 2026-09-06, zero outcomes observed -----------------
-  primary_comparators: {value: [provence, cpc, llmlingua2, dac], status: frozen}
+  # ---- amendment P-9, 2026-09-09, zero outcomes observed -----------------
+  primary_comparators: {value: [provence, cpc, llmlingua2, dac, longllmlingua], status: frozen}
   retired_pre_outcome: {value: [adaptive_queryselect], status: frozen}
   contingency_comparators: {value: [selective_context], status: frozen}
   contingency_substitution_pre_outcome_only: {value: true, status: frozen}
@@ -391,8 +455,8 @@ experiment_c:
   post_gate: {value: true, status: frozen}
   fully_instrumented_candidate_set: {value: true, status: frozen}
   subset_size:
-    value: null
-    status: proposed
+    value: 20
+    status: frozen
     resolution_stage: CALIBRATION
     selection_rule_status: FROZEN
     candidate_grid: [20, 30, 50]
@@ -400,8 +464,8 @@ experiment_c:
     call_budget_fraction: 0.15
     retention_floor: 0.80
   eviction_tolerance_tokens:
-    value: null
-    status: proposed
+    value: 0
+    status: frozen
     resolution_stage: CALIBRATION
     selection_rule_status: FROZEN
     candidate_grid: [0, 1, 2, 4, 8]

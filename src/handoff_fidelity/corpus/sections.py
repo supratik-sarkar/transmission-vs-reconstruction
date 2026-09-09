@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 
 MDNA_START = re.compile(
-    r"item\s*7\s*[.\-:–]?\s*management'?s?\s+discussion\s+and\s+analysis",
+    r"item\s*7\s*[.\-:–]?\s*management['’]?s?\s+discussion\s+and\s+analysis",
     re.IGNORECASE,
 )
 MDNA_END = re.compile(
