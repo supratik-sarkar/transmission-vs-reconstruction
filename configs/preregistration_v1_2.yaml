@@ -187,7 +187,7 @@ experiment_b:
       k_eff: 199
       status: frozen
       screening_procedure: pre_outcome_registry_screen
-      screening_status: NOT_STARTED
+      screening_status: COMPLETED_PASS
       screening_blocks: [CALIBRATION, STAGE1, STAGE2_DEV, STAGE2_TEST]
     period_annual: {size: 6, k_eff: 5, status: frozen}
     period_quarter: {size: 24, k_eff: 23, status: frozen}
