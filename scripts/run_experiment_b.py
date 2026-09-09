@@ -52,7 +52,7 @@ from handoff_fidelity.models import AtomRole  # noqa: E402
 from handoff_fidelity.providers.adapters import OpenAIAdapter  # noqa: E402
 from handoff_fidelity.providers.protocol import GenerationRequest  # noqa: E402
 from handoff_fidelity.receiver.prompt import build_receiver_prompt  # noqa: E402
-from handoff_fidelity.sampling.design import select_focal  # noqa: E402
+from handoff_fidelity.sampling.design import all_inclusion_probabilities, select_focal  # noqa: E402
 from handoff_fidelity.seeds import derive_seed, rng_for  # noqa: E402
 
 PINNED_MODEL = "gpt-5.1-2025-11-13"
@@ -181,12 +181,22 @@ def main() -> int:
         rng = rng_for(settings.master_seed, "stage1", doc_id)
         focals = select_focal(rep.eligible, rng=rng, k=3)
         focal_ids = {f.atom_id for f in focals}
+        pis = all_inclusion_probabilities(rep.eligible, k=3)
 
         for tup in tuples:
             all_tuples.append((doc_id, tup, focal_ids))
             for focal_role in tup.populated_roles:
                 focal_atom = tup.slots[focal_role]
                 is_focal_sampled = focal_atom.atom_id in focal_ids
+                pi = pis.get(focal_atom.atom_id, 0.0)
+                numeric_subtype = (
+                    ("pct" if "%" in focal_atom.canonical_value else "currency_or_other")
+                    if focal_role == AtomRole.NUMERIC
+                    else None
+                )
+                is_frozen_numeric_compliant = (
+                    focal_role != AtomRole.NUMERIC or "%" in focal_atom.canonical_value
+                )
 
                 # Deterministic RNG for this slot intervention
                 seed_gen = rng_for(
@@ -277,6 +287,9 @@ def main() -> int:
                                 "is_eligible_class": focal_role.value in eligible_classes,
                                 "is_focal_sampled": is_focal_sampled,
                                 "canonical_value": focal_atom.canonical_value,
+                                "pi": pi,
+                                "numeric_subtype": numeric_subtype,
+                                "is_frozen_numeric_compliant": is_frozen_numeric_compliant,
                                 "arm": arm,
                                 "rep": rep,
                                 "seed": seed,
@@ -397,6 +410,9 @@ def main() -> int:
         rec["atom_id"] = r["atom_id"]
         rec["is_focal_sampled"] = r["is_focal_sampled"]
         rec["canonical_value"] = r["canonical_value"]
+        rec["pi"] = r.get("pi", 0.0)
+        rec["numeric_subtype"] = r.get("numeric_subtype")
+        rec["is_frozen_numeric_compliant"] = r.get("is_frozen_numeric_compliant", True)
         if r["arm"] == "natural":
             rec["natural_reps"].append(r["recovered"])
         else:
@@ -417,83 +433,162 @@ def main() -> int:
                 "role": role,
                 "is_focal_sampled": data["is_focal_sampled"],
                 "canonical_value": data["canonical_value"],
+                "pi": data["pi"],
+                "numeric_subtype": data["numeric_subtype"],
+                "is_frozen_numeric_compliant": data["is_frozen_numeric_compliant"],
                 "y_nat": y_nat,
                 "y_blk": y_blk,
                 "paired_diff": diff,
             }
         )
 
-    # Summary by role
-    by_role_summary = {}
     rng_boot = np.random.default_rng(20260904)
 
-    for role_name in ("scope", "period", "numeric", "entity", "provenance"):
-        slots_role = [s for s in paired_slots if s["role"] == role_name]
-        if not slots_role:
-            by_role_summary[role_name] = {
+    # 1. Canonical Estimation (Frozen Stage-1 Focal Atoms, Frozen Support Compliant)
+    canonical_by_role_summary: dict[str, Any] = {}
+    for role_name in ("scope", "period", "numeric"):
+        focal_slots_role = [
+            s
+            for s in paired_slots
+            if s["role"] == role_name and s["is_focal_sampled"] and s["is_frozen_numeric_compliant"]
+        ]
+        if not focal_slots_role:
+            canonical_by_role_summary[role_name] = {
+                "status": "NOT_ESTIMABLE_NO_ELIGIBLE_MATCHED_UNITS",
                 "n_slots": 0,
                 "n_docs": 0,
-                "r_minus_nat": 0.0,
-                "r_minus_blk": 0.0,
-                "delta_r_prior_matched": 0.0,
-                "ci_95": [0.0, 0.0],
+                "r_minus_nat": None,
+                "r_minus_blk": None,
+                "hajek_estimate": None,
+                "unweighted_diagnostic_mean": None,
+                "delta_r_prior_matched": None,
+                "ci_95": None,
                 "clears_threshold": False,
             }
             continue
 
-        n_slots = len(slots_role)
-        docs_role = sorted({s["doc_id"] for s in slots_role})
+        n_slots = len(focal_slots_role)
+        docs_role = sorted({s["doc_id"] for s in focal_slots_role})
         n_docs = len(docs_role)
 
-        r_nat = statistics.mean(s["y_nat"] for s in slots_role)
-        r_blk = statistics.mean(s["y_blk"] for s in slots_role)
-        delta = r_nat - r_blk
+        r_nat = statistics.mean(s["y_nat"] for s in focal_slots_role)
+        r_blk = statistics.mean(s["y_blk"] for s in focal_slots_role)
+
+        # Hájek weighted estimator
+        weights = [1.0 / s["pi"] for s in focal_slots_role]
+        w_sum = sum(weights)
+        hajek_est = (
+            sum(w * s["paired_diff"] for w, s in zip(weights, focal_slots_role, strict=True))
+            / w_sum
+        )
+        unweighted_mean = statistics.mean(s["paired_diff"] for s in focal_slots_role)
 
         # Document-clustered bootstrap (10,000 resamples)
         boot_diffs = []
         doc_map = defaultdict(list)
-        for s in slots_role:
-            doc_map[s["doc_id"]].append(s["paired_diff"])
+        for s in focal_slots_role:
+            doc_map[s["doc_id"]].append(s)
 
         doc_keys = list(doc_map.keys())
         for _ in range(10000):
             sampled_docs = rng_boot.choice(doc_keys, size=len(doc_keys), replace=True)
-            resampled_vals = []
+            resampled_slots = []
             for d in sampled_docs:
-                resampled_vals.extend(doc_map[d])
-            boot_diffs.append(statistics.mean(resampled_vals))
+                resampled_slots.extend(doc_map[d])
+            w_boot = [1.0 / s["pi"] for s in resampled_slots]
+            boot_diffs.append(
+                sum(w * s["paired_diff"] for w, s in zip(w_boot, resampled_slots, strict=True))
+                / sum(w_boot)
+            )
 
         ci_low = float(np.percentile(boot_diffs, 2.5))
         ci_high = float(np.percentile(boot_diffs, 97.5))
 
-        by_role_summary[role_name] = {
+        canonical_by_role_summary[role_name] = {
+            "status": "ESTIMABLE",
             "n_slots": n_slots,
             "n_docs": n_docs,
             "r_minus_nat": round(r_nat, 4),
             "r_minus_blk": round(r_blk, 4),
-            "delta_r_prior_matched": round(delta, 4),
+            "delta_r_prior_matched": round(hajek_est, 4),
+            "unweighted_diagnostic_mean": round(unweighted_mean, 4),
             "ci_95": [round(ci_low, 4), round(ci_high, 4)],
-            "clears_threshold": delta >= 0.10,
+            "clears_threshold": hajek_est >= 0.10,
         }
 
-    print("\n================ EXPERIMENT B RESULTS ================")
-    for r, sm in sorted(by_role_summary.items()):
+    # 2. Exploratory full-tuple sensitivity (all 27 slots)
+    exploratory_full_tuple_sensitivity = {}
+    for role_name in ("scope", "period", "numeric", "entity", "provenance"):
+        slots_role = [s for s in paired_slots if s["role"] == role_name]
+        if not slots_role:
+            exploratory_full_tuple_sensitivity[role_name] = {
+                "n_slots": 0,
+                "n_docs": 0,
+                "r_minus_nat": None,
+                "r_minus_blk": None,
+                "delta_r_prior_matched": None,
+                "ci_95": None,
+            }
+            continue
+        n_slots = len(slots_role)
+        docs_role = sorted({s["doc_id"] for s in slots_role})
+        r_nat = statistics.mean(s["y_nat"] for s in slots_role)
+        r_blk = statistics.mean(s["y_blk"] for s in slots_role)
+        delta = r_nat - r_blk
+        doc_map_all = defaultdict(list)
+        for s in slots_role:
+            doc_map_all[s["doc_id"]].append(s["paired_diff"])
+        doc_keys_all = list(doc_map_all.keys())
+        boot_diffs_all = []
+        for _ in range(10000):
+            sampled_docs = rng_boot.choice(doc_keys_all, size=len(doc_keys_all), replace=True)
+            resampled_vals = []
+            for d in sampled_docs:
+                resampled_vals.extend(doc_map_all[d])
+            boot_diffs_all.append(statistics.mean(resampled_vals))
+        ci_low = float(np.percentile(boot_diffs_all, 2.5))
+        ci_high = float(np.percentile(boot_diffs_all, 97.5))
+        exploratory_full_tuple_sensitivity[role_name] = {
+            "n_slots": n_slots,
+            "n_docs": len(docs_role),
+            "r_minus_nat": round(r_nat, 4),
+            "r_minus_blk": round(r_blk, 4),
+            "delta_r_prior_matched": round(delta, 4),
+            "ci_95": [round(ci_low, 4), round(ci_high, 4)],
+        }
+
+    print("\n================ CANONICAL EXPERIMENT B RESULTS ================")
+    for r, sm in sorted(canonical_by_role_summary.items()):
         print(
-            f"Role: {r:12s} | N_slots={sm['n_slots']} | R_nat={sm['r_minus_nat']:.4f} | R_blk={sm['r_minus_blk']:.4f} | Delta_matched={sm['delta_r_prior_matched']:+.4f} | 95% CI={sm['ci_95']} | Clears 0.10: {sm['clears_threshold']}"
+            f"Role: {r:12s} | Status={sm['status']} | N_slots={sm['n_slots']} | Delta_matched={sm['delta_r_prior_matched']} | 95% CI={sm['ci_95']} | Clears 0.10: {sm['clears_threshold']}"
         )
-    print("======================================================\n")
+    print("================================================================\n")
 
     # Persist outputs
+    effective_spend = total_spend
+    if effective_spend == 0.0:
+        effective_spend = sum(
+            json.loads(f.read_text(encoding="utf-8")).get("cost_usd", 0.0)
+            for f in cache_dir.glob("*.json")
+        )
+
     out_data = {
         "event": "EXPERIMENT_B_RESULTS",
         "timestamp_utc": datetime.now(UTC).isoformat(),
         "model": PINNED_MODEL,
         "m_star": M_STAR,
         "total_calls": len(work_tasks),
-        "total_spend_usd": round(total_spend, 4),
+        "total_spend_usd": round(effective_spend, 4),
         "ceiling_usd": EXPERIMENT_B_CEILING_USD,
-        "ceiling_respected": total_spend <= EXPERIMENT_B_CEILING_USD,
-        "by_role_summary": by_role_summary,
+        "ceiling_respected": effective_spend <= EXPERIMENT_B_CEILING_USD,
+        "manipulation_check": {
+            "quantity": "Tbar_nat - Tbar_blk",
+            "status": "NOT_EXECUTED",
+            "note": "Relay manipulation check not executed; no randomized-twin relay calls run in Stage 1.",
+        },
+        "canonical_by_role_summary": canonical_by_role_summary,
+        "by_role_summary": canonical_by_role_summary,
+        "exploratory_full_tuple_sensitivity": exploratory_full_tuple_sensitivity,
         "slots_detail": paired_slots,
     }
 

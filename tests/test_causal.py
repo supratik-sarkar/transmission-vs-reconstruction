@@ -280,6 +280,17 @@ def test_reconstruction_gate_must_use_c_recon_not_rbar0():
     assert gate_true.proceed != gate_erroneous.proceed
 
 
+def test_gate_handles_not_estimable_strata_without_raising():
+    """When a class is NOT_ESTIMABLE (mapped to None), evaluate_stage1_gate
+    must treat it as not cleared rather than raising TypeError or treating it as zero."""
+    res = evaluate_stage1_gate(
+        reconstruction_contribution=0.0042,
+        prior_effects={"scope": 0.0, "period": None, "numeric": None},
+    )
+    assert res.proceed is False
+    assert "Halt" in res.reason
+
+
 def test_gate_ignores_classes_outside_the_predeclared_set():
     """Allowing any class to clear the gate would be optional stopping across
     atom classes."""

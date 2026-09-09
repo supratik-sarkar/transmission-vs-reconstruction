@@ -82,18 +82,20 @@ def test_chronology_and_quarantine_artifacts():
     assert res["overall_intervention_failure_rate"] <= 0.15
     assert res["differential_intervention_failure_rate"] <= 0.05
 
-    # 5. Corrected Stage 1 Discovery Gate Verdict
+    # 5. Final Stage 1 Discovery Gate Verdict
     gate_path = audits_dir / "STAGE1_GATE_LOW_COST_PRIMARY.json"
     assert gate_path.exists(), "STAGE1_GATE_LOW_COST_PRIMARY.json missing"
     gate = json.loads(gate_path.read_text(encoding="utf-8"))
-    assert gate["verdict"] == "STAGE1_GATE_AUDIT_CORRECTED_FAIL"
+    assert gate["verdict"] == "STAGE1_GATE_FINAL_FAIL"
     assert gate["provisional_superseded_verdict"] == "STAGE1_GATE_PASS"
     assert gate["reconstruction_gate_verdict"] == "FAIL"
-    assert gate["prior_gate_verdict"] == "FAIL"
+    assert gate["prior_gate_verdict"] == "FAIL_NO_CLASS_CLEARED"
     assert gate["proceed"] is False
     assert gate["reconstruction_contribution_c_recon"] < 0.10
     for cls in ("scope", "period", "numeric"):
-        assert gate["prior_effects_matched"][cls] < 0.10
+        eff = gate["prior_effects_matched"][cls]
+        if eff is not None:
+            assert eff < 0.10
 
     # 6. Stage-1 Uncertainty Package
     unc_path = audits_dir / "STAGE1_UNCERTAINTY_PACKAGE.json"
@@ -118,8 +120,13 @@ def test_chronology_and_quarantine_artifacts():
     assert exp_b["total_calls"] == 108
     assert exp_b["ceiling_respected"] is True
     assert exp_b["total_spend_usd"] <= exp_b["ceiling_usd"]
-    for cls in ("scope", "period", "numeric"):
-        assert exp_b["by_role_summary"][cls]["delta_r_prior_matched"] == 0.0
+    assert exp_b["by_role_summary"]["scope"]["delta_r_prior_matched"] == 0.0
+    assert exp_b["by_role_summary"]["period"]["delta_r_prior_matched"] is None
+    assert exp_b["by_role_summary"]["period"]["status"] == "NOT_ESTIMABLE_NO_ELIGIBLE_MATCHED_UNITS"
+    assert exp_b["by_role_summary"]["numeric"]["delta_r_prior_matched"] is None
+    assert (
+        exp_b["by_role_summary"]["numeric"]["status"] == "NOT_ESTIMABLE_NO_ELIGIBLE_MATCHED_UNITS"
+    )
 
 
 def test_zero_development_calls_and_zero_final_test_exposure():
@@ -177,3 +184,148 @@ def test_stage1_cache_homogeneity_and_terra_quarantine():
 
     # Total calls: 100 relay + 1192 receiver + 1730 prior probe + 108 experiment_b = 3130
     assert call_count == 3130
+
+
+def test_canonical_experiment_b_uses_only_frozen_focal_ids():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    audit_path = Path(raw_home) / "audits" / "STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json"
+    if not audit_path.exists():
+        pytest.skip("STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json missing")
+
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    counts = audit["summary_counts"]
+    assert counts["total_executed_slots"] == 27
+    assert counts["total_frozen_focal_slots"] == 9
+    assert counts["frozen_focal_slots_by_role"] == {
+        "entity": 5,
+        "scope": 3,
+        "provenance": 1,
+        "numeric": 0,
+        "period": 0,
+    }
+    assert counts["frozen_focal_slots_in_eligible_classes"] == 3
+    assert counts["eligible_focal_slots_by_role"] == {
+        "scope": 3,
+        "period": 0,
+        "numeric": 0,
+    }
+
+
+def test_all_slot_tuple_execution_cannot_silently_enter_canonical_estimator():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    exp_b_path = Path(raw_home) / "audits" / "EXPERIMENT_B_RESULTS.json"
+    if not exp_b_path.exists():
+        pytest.skip("EXPERIMENT_B_RESULTS.json missing")
+
+    exp_b = json.loads(exp_b_path.read_text(encoding="utf-8"))
+    canonical = exp_b["canonical_by_role_summary"]
+    exploratory = exp_b["exploratory_full_tuple_sensitivity"]
+
+    # In exploratory, scope has 7 slots, period has 1, numeric has 8
+    assert exploratory["scope"]["n_slots"] == 7
+    assert exploratory["period"]["n_slots"] == 1
+    assert exploratory["numeric"]["n_slots"] == 8
+
+    # In canonical, only frozen focal slots are admitted (scope: 3, period: 0, numeric: 0)
+    assert canonical["scope"]["n_slots"] == 3
+    assert canonical["period"]["n_slots"] == 0
+    assert canonical["numeric"]["n_slots"] == 0
+
+
+def test_hajek_weights_use_frozen_pi_iz():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    audit_path = Path(raw_home) / "audits" / "STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json"
+    if not audit_path.exists():
+        pytest.skip("STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json missing")
+
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    focal_scope_slots = [
+        s for s in audit["slots_detail"] if s["is_focal_sampled"] and s["role"] == "scope"
+    ]
+    assert len(focal_scope_slots) == 3
+    # Check that each slot has a positive valid inclusion probability pi
+    for s in focal_scope_slots:
+        assert 0.0 < s["stage1_inclusion_probability_pi"] <= 1.0
+
+
+def test_empty_role_stratum_produces_not_estimable_never_zero():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    exp_b_path = Path(raw_home) / "audits" / "EXPERIMENT_B_RESULTS.json"
+    if not exp_b_path.exists():
+        pytest.skip("EXPERIMENT_B_RESULTS.json missing")
+
+    exp_b = json.loads(exp_b_path.read_text(encoding="utf-8"))
+    for cls in ("period", "numeric"):
+        rec = exp_b["canonical_by_role_summary"][cls]
+        assert rec["status"] == "NOT_ESTIMABLE_NO_ELIGIBLE_MATCHED_UNITS"
+        assert rec["hajek_estimate"] is None
+        assert rec["ci_95"] is None
+        assert rec["clears_threshold"] is False
+
+
+def test_unsupported_numeric_subtypes_cannot_enter_canonical_experiment_b():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    audit_path = Path(raw_home) / "audits" / "STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json"
+    if not audit_path.exists():
+        pytest.skip("STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json missing")
+
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    counts = audit["summary_counts"]
+    assert counts["unsupported_numeric_slots_count"] == 6
+    assert counts["eligible_numeric_focal_slots_satisfying_frozen_pct_support"] == 0
+
+    # Ensure all currency slots were tagged as OUTSIDE_FROZEN_NUMERIC_SUPPORT
+    for s in audit["slots_detail"]:
+        if s["role"] == "numeric" and "%" not in s["canonical_value"]:
+            assert s["numeric_support_status"] == "OUTSIDE_FROZEN_NUMERIC_SUPPORT"
+
+
+def test_manipulation_check_cannot_be_declared_zero_without_relay_observations():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    exp_b_path = Path(raw_home) / "audits" / "EXPERIMENT_B_RESULTS.json"
+    if not exp_b_path.exists():
+        pytest.skip("EXPERIMENT_B_RESULTS.json missing")
+
+    exp_b = json.loads(exp_b_path.read_text(encoding="utf-8"))
+    mc = exp_b.get("manipulation_check", {})
+    assert mc["status"] == "NOT_EXECUTED"
+    assert "0.0000" not in str(mc.get("estimate"))
+
+
+def test_receiver_prompt_subject_identity_audit_verdict():
+    import os
+
+    raw_home = os.environ.get("HANDOFF_PRIVATE_HOME")
+    if not raw_home:
+        pytest.skip("HANDOFF_PRIVATE_HOME not set")
+    audit_path = Path(raw_home) / "audits" / "STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json"
+    if not audit_path.exists():
+        pytest.skip("STAGE1_EXPERIMENT_B_SAMPLING_AUDIT.json missing")
+
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    id_audit = audit["receiver_prompt_subject_identity_audit"]
+    assert id_audit["verdict"] == "SUBJECT_IDENTITY_FIXED_BY_FROZEN_DESIGN"
