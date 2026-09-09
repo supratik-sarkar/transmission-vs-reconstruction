@@ -71,10 +71,12 @@ class BaselineEntry:
     commit_signature: str | None = None
     commit_not_required_reason: str = ""
     commit_unresolved_reason: str = ""
+    release_tag_not_required_reason: str = ""
     checkpoint: str | None = None
     checkpoint_last_modified: str | None = None
     checkpoint_parameters: int | None = None
     checkpoint_weight_format: str | None = None
+    checkpoint_revision_not_required_reason: str = ""
     checkpoint_unresolved_reason: str = ""
     tokenizer: str | None = None
     tokenizer_revision: str | None = None

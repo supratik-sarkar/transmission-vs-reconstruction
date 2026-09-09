@@ -197,8 +197,24 @@ def comi() -> ExternalAdapter:
     )
 
 
+def longllmlingua() -> ExternalAdapter:
+    """Added 2026-09-09 by pre-outcome amendment P-9 (fallback third family)."""
+    return ExternalAdapter(
+        name="longllmlingua",
+        official_repository="https://github.com/microsoft/LLMLingua",
+        entry_point="LongLLMLingua question-aware causal LM perplexity compression",
+        integration_notes=(
+            "Causal LM perplexity-conditioned compression with target_token budget enforcement. "
+            "Promoted under pre-outcome amendment P-9 fallback after Perception Compressor "
+            "failed executable artifact requirements."
+        ),
+        role=BenchmarkRole.PRIMARY_CAUSAL,
+    )
+
+
 #: Amended 2026-09-06 (P-6): adaptive_queryselect out, dac in, pre-outcome.
-PRIMARY_SOTA: tuple[str, ...] = ("provence", "cpc", "llmlingua2", "dac")
+#: Amended 2026-09-09 (P-9): longllmlingua added as third ready primary family.
+PRIMARY_SOTA: tuple[str, ...] = ("provence", "cpc", "llmlingua2", "dac", "longllmlingua")
 #: Retired pre-outcome. Not a comparator; retained as an amendment record.
 RETIRED_PRE_OUTCOME: tuple[str, ...] = ("adaptive_queryselect",)
 #: Predeclared contingency. Never counts toward the superiority headline.
@@ -213,6 +229,7 @@ BUILDERS = {
     "selective_context": selective_context,
     "cpc": cpc,
     "llmlingua2": llmlingua2,
+    "longllmlingua": longllmlingua,
     "recomp_extractive": recomp_extractive,
     "parallelcomp": parallelcomp,
     "comi": comi,

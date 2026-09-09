@@ -41,7 +41,7 @@ cache/
 caches/
 logs/
 artifacts/
-calibration/
+/calibration/
 source_manifests/
 protocol_freeze/
 test_freeze/

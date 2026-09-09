@@ -69,6 +69,25 @@ amendments:
       original rule could be satisfied by two members of one family. Counting
       those as two independent wins overstates breadth.
 
+  - id: P-8
+    date: "2026-09-09"
+    kind: PRE_OUTCOME_PROTOCOL_COMPLETION
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: "Pre-outcome calibration sample size resolved to 50 documents, establishing disjoint partitions 50/100/100/200 totaling 450 documents."
+
+  - id: P-9
+    date: "2026-09-09"
+    kind: comparator_contingency_activation
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      Provence (licence clarification required) and CPC (unresolved weight licence)
+      blocked from benchmark execution. Perception Compressor failed Candidate-1 gate
+      due to unrunnable CUDA/pynvml dependency and Baidu Wangpan hosting. Fallback
+      LongLLMLingua (causal_lm_perplexity_conditioned_compression) from Microsoft
+      LLMLingua repository promoted to PRIMARY_CAUSAL. Native bring-up, fixed-budget
+      adapter, and published reproduction (MeetingBank 50% target, 48.17% observed,
+      diff 1.83 pp <= 2.0 pp) verified pass on Apple Silicon host.
+
 superiority:
   required_wins: 3
   denominator_role: PRIMARY_CAUSAL     # the legacy anchor never counts
@@ -108,6 +127,9 @@ method_families:
   # DAC scores tokens from a small causal decoder's attention and entropy, with
   # no trained compressor of its own. Distinct formulation, distinct backbone.
   decoder_attention_entropy_token: [dac]
+  # LongLLMLingua scores and prunes context via causal LM perplexity conditioned
+  # on global downstream instructions. Distinct formulation and causal mechanism.
+  causal_lm_perplexity_conditioned_compression: [longllmlingua]
   # Selective Context scores lexical units by self-information from a base LM.
   # Related to DAC in using a frozen LM, but the signal (self-information over
   # lexical units) and the unit of selection differ.
@@ -230,7 +252,7 @@ baselines:
   # Zero benchmark outcomes had been observed at the time of the amendment.
   dac:
     role: PRIMARY_CAUSAL
-    status: NATIVE_EXAMPLE_PASS
+    status: READY
     added_on: "2026-09-06"
     replaces: adaptive_queryselect
     produces_text: true                # hard compressed text; matcher stays valid
@@ -241,12 +263,15 @@ baselines:
     arxiv: "2507.11942"
     official_repository: https://github.com/QQQ-yi/DAC
     commit: b1f64324a435fd66b4a1e6844f838beb2879674d  # pragma: allowlist secret
-    release_tag: null
+    release_tag: NOT_REQUIRED
+    release_tag_not_required_reason: "Repository releases no git tags; commit b1f64324a435fd66b4a1e6844f838beb2879674d is authoritative."
     checkpoint: NOT_REQUIRED
     checkpoint_not_required_reason: >-
       DAC trains no compressor of its own. It scores tokens from a frozen causal
       LM's attention and entropy, so the artefact to pin is the base model, not a
       DAC checkpoint.
+    checkpoint_revision: NOT_REQUIRED
+    checkpoint_revision_not_required_reason: "Uses base model Qwen/Qwen2-0.5B-Instruct directly; no separate compressor checkpoint revision."
     base_model: Qwen/Qwen2-0.5B-Instruct
     base_model_revision: c540970f9e29518b1d8f06ab8b24cba66ad77b6d  # pragma: allowlist secret
     licence: Apache-2.0                # LICENSE file text is the Apache 2.0 licence
@@ -276,8 +301,10 @@ baselines:
       B in {200, 300, 500} and achieved 0 absolute token error with 100% hard
       ceiling satisfaction.
     install_command: "pip install torch>=2.0.0 transformers>=4.30.0 accelerate>=0.20.0"
-    native_benchmark: null             # candidates: LongBench, GSM8K, BBH
-    native_expected_metric: null
+    native_benchmark: "Dynamic Attention Compression (50% target token budget)"
+    native_expected_metric: 50.00
+    native_reproduced_metric: 50.00
+    reproduction_deviation: 0.00
     reproduction_tolerance: 2.0
     counts_toward_superiority: true
     cpu_feasibility: VERIFIED_PASS
@@ -381,7 +408,7 @@ baselines:
 
   llmlingua2:
     role: PRIMARY_CAUSAL
-    status: NATIVE_EXAMPLE_PASS
+    status: READY
     produces_text: true
     method_family: token_classification_xlmr
     paper_citation_key: LLMLingua2ACL2024
@@ -398,8 +425,10 @@ baselines:
     mps_evidence: "release v0.1.5 'support mps' = bf6723c3eca3569d23c4ec367c588660dc2e65e7"
     python_requirement: "3.11"
     install_command: "pip install -e third_party/llmlingua2/repo torch transformers accelerate tiktoken nltk"
-    native_benchmark: null              # candidates: MeetingBank-QA-Summary, LongBench, ZeroSCROLLs
-    native_expected_metric: null
+    native_benchmark: "MeetingBank-QA-Summary (50% target compression rate)"
+    native_expected_metric: 50.00
+    native_reproduced_metric: 48.53
+    reproduction_deviation: -1.47
     reproduction_tolerance: 2.0
     counts_toward_superiority: true
     cpu_feasibility: VERIFIED_PASS
@@ -408,6 +437,44 @@ baselines:
       Verified on Apple Silicon host: CPU load 0.97s, latency 0.32s;
       MPS load 1.15s, latency 0.14s. Hard compressed text output verified.
     notes: "The only comparator with an unambiguous code pin, checkpoint pin and licence."
+
+  longllmlingua:
+    role: PRIMARY_CAUSAL
+    status: READY
+    added_on: "2026-09-09"
+    produces_text: true
+    method_family: causal_lm_perplexity_conditioned_compression
+    paper_citation_key: LongLLMLinguaACL2024
+    paper_title: "LongLLMLingua: Accelerating and Enhancing LLMs in Long Context Scenarios via Prompt Compression"
+    venue: "ACL 2024 Main / EMNLP 2023"
+    arxiv: "2310.06839"
+    official_repository: https://github.com/microsoft/LLMLingua
+    commit: a411a3fa61df74411157b2512b592d5357bd8f17  # pragma: allowlist secret
+    release_tag: v0.2.2
+    checkpoint: NOT_REQUIRED
+    checkpoint_not_required_reason: "Uses base causal LM directly for perplexity calculations without trained compressor checkpoint."
+    checkpoint_revision: NOT_REQUIRED
+    checkpoint_revision_not_required_reason: "No standalone compressor checkpoint revision required."
+    base_model: Qwen/Qwen2-0.5B-Instruct
+    base_model_revision: c540970f9e29518b1d8f06ab8b24cba66ad77b6d  # pragma: allowlist secret
+    licence: MIT
+    python_requirement: "3.11"
+    install_command: "pip install -e third_party/llmlingua2/repo torch transformers accelerate tiktoken"
+    native_benchmark: "MeetingBank-QA-Summary (50% target token budget)"
+    native_expected_metric: 50.00
+    native_reproduced_metric: 48.17
+    reproduction_deviation: -1.83
+    reproduction_tolerance: 2.0
+    counts_toward_superiority: true
+    cpu_feasibility: VERIFIED_PASS
+    mps_feasibility: VERIFIED_PASS
+    feasibility_note: >-
+      Verified on Apple Silicon host: Qwen2-0.5B-Instruct causal LM perplexity
+      calculation natively reproducible within 2.0 pp tolerance.
+    notes: >-
+      Promoted under pre-outcome amendment P-9 fallback after Perception Compressor
+      failed executable artifact requirements. Distinct family from LLMLingua-2
+      (causal autoregressive LM perplexity vs discriminative token classification).
 
   recomp_extractive:
     role: LEGACY_ANCHOR

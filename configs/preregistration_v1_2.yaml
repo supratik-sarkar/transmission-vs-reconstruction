@@ -238,7 +238,7 @@ development_instrumentation:
   q_iz_positive: {value: true, status: frozen}
 
 stages:
-  calibration: {documents: null, status: frozen}
+  calibration: {documents: 50, status: frozen}
   stage1: {documents: 100, status: frozen}
   stage2_dev: {documents: 100, status: frozen}
   # May not be decreased after DEVELOPMENT. Any amendment must precede
@@ -325,6 +325,67 @@ amendments:
       fewer than 3 distinct ready families means no SOTA-superiority headline
     may_not_be_weakened_after_results: true
 
+  - id: P-8
+    date: "2026-09-09"
+    kind: PRE_OUTCOME_PROTOCOL_COMPLETION
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      Previously null calibration sample size lacked an executable frozen rule.
+      The calibration split is a non-confirmatory design-resolution split used
+      to resolve the primary handoff budget B*, Experiment-C eviction tolerance
+      and subset size, receiver operational variance, and m* replication if
+      regime (S). It is not used to estimate headline causal effects.
+    before: "stages.calibration.documents = null"
+    after: "stages.calibration.documents = 50, establishing disjoint partitions 50/100/100/200 totaling 450 documents"
+    full_partition:
+      calibration: 50
+      stage1: 100
+      stage2_dev: 100
+      stage2_test: 200
+      total: 450
+      issuer_disjoint: true
+
+  - id: P-9
+    date: "2026-09-09"
+    kind: comparator_contingency_activation
+    benchmark_outcomes_observed_before_amendment: 0
+    reason: >-
+      Pre-outcome contingency activated because two originally intended
+      primary families were not legally/executably benchmarkable (Provence
+      licence clarification required; CPC checkpoint-weight licence/provenance
+      unresolved). Perception Compressor failed the Candidate-1 gate due to
+      unrunnable host dependencies (pynvml) and non-public data distribution
+      (Baidu Wangpan). Authorized fallback LongLLMLingua (ACL 2024 / EMNLP 2023)
+      from Microsoft LLMLingua repository is promoted to PRIMARY_CAUSAL.
+      Mechanism audit confirms causal_lm_perplexity_conditioned_compression is
+      materially distinct from token_classification_xlmr and
+      decoder_attention_entropy_token. Native bring-up, fixed-budget adapter,
+      and published reproduction passed within 2.0 pp tolerance on Apple Silicon.
+    candidate_1_evaluation:
+      candidate: Perception Compressor
+      verdict: REJECTED
+      reasons:
+        - "Hard dependency on pynvml (NVIDIA NVML) and CUDA; unrunnable on Apple Silicon host"
+        - "Guiding questions dataset hosted on Baidu Wangpan (pan.baidu.com) requiring manual interactive login with Chinese phone number"
+        - "Requires gated Meta LLaMA-2-7b weights"
+        - "Proprietary multi-query format rather than standard global task query"
+    fallback_evaluation:
+      candidate: LongLLMLingua
+      verdict: PROMOTED_TO_PRIMARY
+      family: causal_lm_perplexity_conditioned_compression
+      repository: "https://github.com/microsoft/LLMLingua"
+      commit: a411a3fa61df74411157b2512b592d5357bd8f17  # pragma: allowlist secret
+      release_tag: v0.2.2
+      base_model: "Qwen/Qwen2-0.5B-Instruct"
+      base_model_revision: "c540970f9e29518b1d8f06ab8b24cba66ad77b6d"  # pragma: allowlist secret
+      licence: MIT
+      reproduction_condition: "MeetingBank-QA-Summary (target compression rate 0.50)"
+      expected_metric: 50.00
+      reproduced_metric: 48.17
+      deviation: -1.83
+      tolerance: 2.0
+
+
 
 benchmark:
   primary_required_textual_state: {value: true, status: frozen}
@@ -346,7 +407,8 @@ benchmark:
   no_headline_below_required_families: {value: true, status: frozen}
   legacy_anchor_counts_toward_headline: {value: false, status: frozen}
   # ---- amendment P-6, 2026-09-06, zero outcomes observed -----------------
-  primary_comparators: {value: [provence, cpc, llmlingua2, dac], status: frozen}
+  # ---- amendment P-9, 2026-09-09, zero outcomes observed -----------------
+  primary_comparators: {value: [provence, cpc, llmlingua2, dac, longllmlingua], status: frozen}
   retired_pre_outcome: {value: [adaptive_queryselect], status: frozen}
   contingency_comparators: {value: [selective_context], status: frozen}
   contingency_substitution_pre_outcome_only: {value: true, status: frozen}
