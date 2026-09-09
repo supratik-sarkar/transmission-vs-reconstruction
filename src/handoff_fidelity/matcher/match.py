@@ -16,7 +16,7 @@ from .canonical import canonical_numeric, canonical_period, canonicalize, normal
 _TOKEN = re.compile(r"\w+|[^\w\s]", re.UNICODE)
 
 _NUMERIC_SPAN = re.compile(
-    r"(?:\$|usd|eur|gbp|£|€)?\s*-?\d[\d,]*(?:\.\d+)?\s*"
+    r"(?:\$|usd|eur|gbp|£|€)?\s*-?\d[\d,]*(?:\.\d+)?\s*(?:\|)?\s*"
     r"(?:%|percent|pct|billion|million|thousand|bn|mm|m|k)?",
     re.IGNORECASE,
 )
@@ -55,14 +55,19 @@ def find_spans(message: str, *, canonical_value: str, role: str) -> list[MatchSp
     canonical-equivalent occurrence, not just the first."""
     spans: list[MatchSpan] = []
     if role == "numeric":
+        target = canonical_numeric(canonical_value)
         for m in _NUMERIC_SPAN.finditer(message):
             text = m.group().strip()
-            if text and canonical_numeric(text) == canonical_value:
-                spans.append(MatchSpan(m.start(), m.start() + len(m.group().rstrip()), text))
+            if text and canonical_numeric(text) == target:
+                start_offset = len(m.group()) - len(m.group().lstrip())
+                spans.append(
+                    MatchSpan(m.start() + start_offset, m.start() + len(m.group().rstrip()), text)
+                )
         return _dedupe(spans)
     if role == "period":
+        target = canonical_period(canonical_value)
         for m in _PERIOD_SPAN.finditer(message):
-            if canonical_period(m.group()) == canonical_value:
+            if canonical_period(m.group()) == target:
                 spans.append(MatchSpan(m.start(), m.end(), m.group()))
         return _dedupe(spans)
 

@@ -23,21 +23,13 @@ from dataclasses import dataclass, field
 from typing import Literal
 
 from ..matcher.match import find_spans
-from .invariance import non_focal_invariant, non_focal_invariant_insertion
+from .invariance import (
+    _cleanup,
+    non_focal_invariant,
+    non_focal_invariant_insertion,
+)
 
 Mechanism = Literal["del", "ins"]
-
-# Deterministic clean-up after a deletion. Applied in a fixed order.
-_CLEANUP: tuple[tuple[re.Pattern[str], str], ...] = (
-    (re.compile(r"[ \t]{2,}"), " "),
-    (re.compile(r"\s+([,.;:%])"), r"\1"),
-    (re.compile(r"([(\[])\s+"), r"\1"),
-    (re.compile(r"\s+([)\]])"), r"\1"),
-    (re.compile(r"\(\s*\)"), ""),
-    (re.compile(r",\s*,"), ","),
-    (re.compile(r"\s+\n"), "\n"),
-    (re.compile(r"[ \t]+$", re.MULTILINE), ""),
-)
 
 # A deletion is refused when the focal span sits inside one of these
 # constructions, because removing it leaves a sentence whose meaning is altered
@@ -71,12 +63,6 @@ class EditLog:
 class EditResult:
     text: str
     log: EditLog
-
-
-def _cleanup(text: str) -> str:
-    for pattern, repl in _CLEANUP:
-        text = pattern.sub(repl, text)
-    return text.strip()
 
 
 def _entangled(message: str, start: int, end: int) -> bool:

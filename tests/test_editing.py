@@ -199,3 +199,44 @@ def test_sham_insertion_refuses_to_introduce_the_focal_atom():
             role="numeric",
             redundant_rendered="- numeric: 6.2%",
         )
+
+
+def test_deletion_with_parenthetical_punctuation_cleanup():
+    msg = "direct/OEM $4,718,993 (43%); other $155,895 (1%)."
+    out = delete_atom(msg, document_id="d", atom_id="a", canonical_value="43%", role="numeric")
+    assert "43%" not in out.text
+    assert out.text == "direct/OEM $4,718,993; other $155,895 (1%)."
+    assert is_transmitted(out.text, canonical_value="43%", role="numeric") is False
+
+
+def test_insertion_of_quarterly_period_and_currency_atoms():
+    base = "Revenue reported for company."
+    out_q = insert_atom(
+        base,
+        document_id="d",
+        atom_id="p1",
+        canonical_value="FY2025Q1",
+        role="period",
+        rendered="- period: FY2025Q1",
+    )
+    assert is_transmitted(out_q.text, canonical_value="FY2025Q1", role="period") is True
+
+    out_c1 = insert_atom(
+        base,
+        document_id="d",
+        atom_id="n1",
+        canonical_value="$14",
+        role="numeric",
+        rendered="- numeric: $14",
+    )
+    assert is_transmitted(out_c1.text, canonical_value="$14", role="numeric") is True
+
+    out_c2 = insert_atom(
+        base,
+        document_id="d",
+        atom_id="n2",
+        canonical_value="$127.2|million",
+        role="numeric",
+        rendered="- numeric: $127.2|million",
+    )
+    assert is_transmitted(out_c2.text, canonical_value="$127.2|million", role="numeric") is True

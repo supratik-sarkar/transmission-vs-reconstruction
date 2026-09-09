@@ -106,3 +106,37 @@ def test_validation_passes_a_good_matcher():
 def test_wilson_interval_brackets_the_point():
     lo, hi = wilson_interval(95, 100)
     assert lo < 0.95 < hi
+
+
+def test_quarterly_period_canonicalization_and_matching():
+    assert canonical_period("FY2025Q1") == "FY2025Q1"
+    assert canonical_period("FY 2025 Q4") == "FY2025Q4"
+    assert canonical_period("fy2024q2") == "FY2024Q2"
+    spans = find_spans("- period: FY2025Q1", canonical_value="FY2025Q1", role="period")
+    assert len(spans) == 1
+    assert spans[0].text == "FY2025Q1"
+
+
+def test_currency_atom_and_pipe_matching():
+    assert canonical_numeric("$14") == "USD14"
+    assert canonical_numeric("$127.2|million") == "USD127200000"
+    spans = find_spans("- numeric: $14", canonical_value="$14", role="numeric")
+    assert len(spans) == 1
+    assert spans[0].text == "$14"
+    spans = find_spans(
+        "- numeric: $127.2|million", canonical_value="$127.2|million", role="numeric"
+    )
+    assert len(spans) == 1
+    spans_natural = find_spans(
+        "revenue was $127.2 million in FY2024", canonical_value="$127.2|million", role="numeric"
+    )
+    assert len(spans_natural) == 1
+    assert spans_natural[0].text == "$127.2 million"
+
+
+def test_numeric_span_leading_whitespace_not_captured():
+    msg = "revenue: 69.8%/75.8%"
+    spans = find_spans(msg, canonical_value="69.8%", role="numeric")
+    assert len(spans) == 1
+    assert spans[0].text == "69.8%"
+    assert msg[spans[0].start : spans[0].end] == "69.8%"
