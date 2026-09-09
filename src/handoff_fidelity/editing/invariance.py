@@ -43,8 +43,8 @@ def _collapse(text: str) -> str:
 _CLEANUP: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"[ \t]{2,}"), " "),
     (re.compile(r"\s+([,.;:%])"), r"\1"),
-    (re.compile(r"([(\[])\s+"), r"\1"),
-    (re.compile(r"\s+([)\]])"), r"\1"),
+    (re.compile(r"([(\[“\"‘])\s+"), r"\1"),
+    (re.compile(r"\s+([)\]”\"’])"), r"\1"),
     (re.compile(r"\(\s*\)"), ""),
     (re.compile(r",\s*,"), ","),
     (re.compile(r"\s+\n"), "\n"),

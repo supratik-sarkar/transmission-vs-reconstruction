@@ -38,19 +38,26 @@ class OpenAIAdapter(BaseProviderAdapter):
         start_time = time.perf_counter()
 
         model_name = request.model or self.model
-        is_reasoning = any(prefix in model_name for prefix in ("gpt-5.6", "gpt-6", "o1", "o3"))
+        is_reasoning_only = any(prefix in model_name for prefix in ("gpt-5.6", "gpt-6", "o1", "o3"))
+        is_gpt51_or_52 = any(prefix in model_name for prefix in ("gpt-5.1", "gpt-5.2"))
         kwargs: dict[str, Any] = {
             "model": model_name,
             "messages": [{"role": "user", "content": request.prompt}],
         }
-        if is_reasoning:
+        if is_reasoning_only:
             kwargs["max_completion_tokens"] = request.max_output_tokens
+        elif is_gpt51_or_52:
+            kwargs["max_completion_tokens"] = request.max_output_tokens
+            kwargs["reasoning_effort"] = (request.metadata or {}).get("reasoning_effort", "none")
+            kwargs["temperature"] = request.temperature
+            kwargs["top_p"] = request.top_p
         else:
             kwargs["max_tokens"] = request.max_output_tokens
             kwargs["temperature"] = request.temperature
             kwargs["top_p"] = request.top_p
-            if request.seed is not None:
-                kwargs["seed"] = request.seed
+
+        if request.seed is not None:
+            kwargs["seed"] = int(request.seed) % 9223372036854775807
 
         if request.stop:
             kwargs["stop"] = list(request.stop)

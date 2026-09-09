@@ -240,3 +240,10 @@ def test_insertion_of_quarterly_period_and_currency_atoms():
         rendered="- numeric: $127.2|million",
     )
     assert is_transmitted(out_c2.text, canonical_value="$127.2|million", role="numeric") is True
+
+
+def test_deletion_with_quoted_atom_cleanup():
+    msg = "Fiscal year ended November 3, 2024 (“fiscal year 2024”)."
+    out = delete_atom(msg, document_id="d", atom_id="a", canonical_value="FY2024", role="period")
+    assert is_transmitted(out.text, canonical_value="FY2024", role="period") is False
+    assert "“ ”" not in out.text
