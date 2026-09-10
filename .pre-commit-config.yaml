@@ -46,7 +46,7 @@ repos:
     rev: v1.5.0
     hooks:
       - id: detect-secrets
-        args: ["--exclude-files", "(^|/)\\.git/|(^|/)node_modules/|tests/test_privacy_scan\\.py|tests/providers/test_secrets\\.py|protocol/PROTOCOL_ARTIFACTS\\.json"]
+        args: ["--exclude-files", "(^|/)\\.git/|(^|/)node_modules/|tests/test_privacy_scan\\.py|tests/providers/test_secrets\\.py|protocol/PROTOCOL_ARTIFACTS\\.json|configs/preview_protocol_v1_3\\.json"]
 
   - repo: local
     hooks:

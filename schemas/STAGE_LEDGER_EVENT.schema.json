@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "actions_performed": {
+      "type": "array"
+    },
+    "api_cost_usd": {
+      "maximum": 0.0,
+      "type": "number"
+    },
+    "attempt_number": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "blockers": {
+      "type": "array"
+    },
+    "end_utc": {
+      "type": "string"
+    },
+    "entry_gate_status": {
+      "type": "string"
+    },
+    "files_created": {
+      "type": "array"
+    },
+    "files_forbidden_from_modification": {
+      "type": "array"
+    },
+    "files_modified": {
+      "type": "array"
+    },
+    "git_status_after": {
+      "type": "object"
+    },
+    "git_status_before": {
+      "type": "object"
+    },
+    "inconsistencies_discovered": {
+      "type": "array"
+    },
+    "invariants_checked": {
+      "type": "array"
+    },
+    "logical_evaluation_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "next_permitted_stages": {
+      "type": "array"
+    },
+    "output_hashes": {
+      "type": "object"
+    },
+    "partitions_accessed": {
+      "type": "array"
+    },
+    "physical_call_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "protocol_version": {
+      "type": "string"
+    },
+    "provider_model_calls": {
+      "type": "array"
+    },
+    "repair_cycle_number": {
+      "maximum": 2,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "repairs_made": {
+      "type": "array"
+    },
+    "source_hashes": {
+      "type": "object"
+    },
+    "stage_id": {
+      "pattern": "^S(0[0-9]|1[01])$"
+    },
+    "stage_name": {
+      "type": "string"
+    },
+    "stage_status": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "BLOCKED",
+        "RESUMABLE_FREE_QUOTA_EXHAUSTED"
+      ]
+    },
+    "start_utc": {
+      "type": "string"
+    },
+    "test_results": {
+      "type": "object"
+    },
+    "upstream_artifact_hashes": {
+      "type": "object"
+    },
+    "upstream_stage_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "stage_id",
+    "stage_name",
+    "protocol_version",
+    "attempt_number",
+    "repair_cycle_number",
+    "start_utc",
+    "end_utc",
+    "entry_gate_status",
+    "upstream_stage_ids",
+    "upstream_artifact_hashes",
+    "source_hashes",
+    "actions_performed",
+    "files_created",
+    "files_modified",
+    "files_forbidden_from_modification",
+    "partitions_accessed",
+    "provider_model_calls",
+    "physical_call_count",
+    "logical_evaluation_count",
+    "api_cost_usd",
+    "test_results",
+    "invariants_checked",
+    "inconsistencies_discovered",
+    "repairs_made",
+    "output_hashes",
+    "stage_status",
+    "blockers",
+    "next_permitted_stages",
+    "git_status_before",
+    "git_status_after"
+  ],
+  "title": "MASTER_STAGE_LEDGER_EVENT",
+  "type": "object"
+}

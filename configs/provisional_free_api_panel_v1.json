@@ -1,0 +1,150 @@
+{
+  "api_spend_ceiling_usd": 0.0,
+  "models": [
+    {
+      "api": "OpenAI-compatible Chat Completions",
+      "base_url": "https://api.groq.com/openai/v1",
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "free_quota": {
+        "rpd": 1000,
+        "rpm": 30,
+        "tpd": 200000,
+        "tpm": 8000
+      },
+      "identity_semantics": "production model ID; record returned model/backend metadata per call",
+      "key": "groq_gpt_oss_120b",
+      "official_sources": [
+        "https://console.groq.com/docs/models",
+        "https://console.groq.com/docs/rate-limits",
+        "https://console.groq.com/docs/structured-outputs",
+        "https://console.groq.com/docs/api-reference"
+      ],
+      "panel_role": "PRIMARY_PREVIEW_RELAY_RECEIVER_AND_LABELER",
+      "provider": "groq",
+      "reasoning": {
+        "reasoning_effort": "low",
+        "reasoning_format": "hidden"
+      },
+      "requested_model_id": "openai/gpt-oss-120b",
+      "sampling": {
+        "temperature": 0.0,
+        "top_p": 1.0
+      },
+      "structured_output": "strict JSON schema supported; use only where schema is scientifically required",
+      "tool_policy": {
+        "tool_choice": "none",
+        "tools": []
+      }
+    },
+    {
+      "api": "OpenAI-compatible Chat Completions",
+      "base_url": "https://api.groq.com/openai/v1",
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "free_quota": {
+        "rpd": 1000,
+        "rpm": 30,
+        "tpd": 200000,
+        "tpm": 8000
+      },
+      "identity_semantics": "hosted model ID; record returned model/backend metadata per call",
+      "key": "groq_qwen38_27b",
+      "official_sources": [
+        "https://console.groq.com/docs/models",
+        "https://console.groq.com/docs/rate-limits",
+        "https://console.groq.com/docs/structured-outputs",
+        "https://console.groq.com/docs/api-reference"
+      ],
+      "panel_role": "ROBUSTNESS_RELAY_RECEIVER",
+      "provider": "groq",
+      "reasoning": {
+        "reasoning_effort": "none"
+      },
+      "requested_model_id": "qwen/qwen3.8-27b",
+      "sampling": {
+        "temperature": 0.0,
+        "top_p": 1.0
+      },
+      "structured_output": "strict JSON schema supported",
+      "tool_policy": {
+        "tool_choice": "none",
+        "tools": []
+      }
+    },
+    {
+      "api": "Gemini GenerateContent API",
+      "endpoint_template": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+      "free_quota": {
+        "pricing": "input/output free of charge on Free Tier as currently documented",
+        "rate_limits": "account/project-specific; inspect AI Studio Limits/Usage and runtime headers; do not invent a static number"
+      },
+      "free_tier_data_use": "provider states Free Tier content may be used to improve products; preview may send public SEC source material only",
+      "identity_semantics": "stable GA model ID; record returned model/version metadata per call",
+      "key": "google_gemini38_flash",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "https://ai.google.dev/gemini-api/docs/thinking",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
+      ],
+      "panel_role": "ROBUSTNESS_RELAY_RECEIVER",
+      "provider": "google",
+      "reasoning": {
+        "thinking_level": "low",
+        "thinking_summaries": "none"
+      },
+      "requested_model_id": "gemini-3.8-flash",
+      "sampling": {
+        "temperature": 0.0
+      },
+      "structured_output": "JSON Schema structured outputs supported by Gemini API; use only if needed",
+      "tool_policy": {
+        "tools_field": "OMITTED"
+      }
+    },
+    {
+      "api": "Gemini GenerateContent API",
+      "endpoint_template": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+      "free_quota": {
+        "pricing": "Gemma 4 input/output free of charge via Gemini API as currently documented",
+        "rate_limits": "account/project-specific; inspect AI Studio Limits/Usage and runtime headers"
+      },
+      "free_tier_data_use": "provider states Free Tier content may be used to improve products; preview may send public SEC source material only",
+      "identity_semantics": "hosted Gemma 4 model ID; record returned model/version metadata per call",
+      "key": "google_gemma4_31b",
+      "official_sources": [
+        "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/rate-limits"
+      ],
+      "panel_role": "ROBUSTNESS_RELAY_RECEIVER",
+      "provider": "google",
+      "reasoning": {
+        "thinking_level": "minimal"
+      },
+      "requested_model_id": "gemma-4-31b-it",
+      "sampling": {
+        "temperature": 0.0
+      },
+      "structured_output": "not required by the scientific receiver contract; validate canonical text response",
+      "tool_policy": {
+        "tools_field": "OMITTED"
+      }
+    }
+  ],
+  "no_substitution_after_freeze": true,
+  "panel_id": "PROF_REVIEW_FREE_API_PANEL_V1",
+  "panel_width": 4,
+  "primary_preview_model_key": "groq_gpt_oss_120b",
+  "selection_basis": [
+    "zero-dollar hosted access currently documented",
+    "text-generation capability suitable for relay/receiver roles",
+    "provider/API stability adequate for provisional professor-review evidence",
+    "architecture diversity",
+    "no large local model-weight requirement",
+    "tooling can be disabled or omitted"
+  ],
+  "status": "FROZEN_BEFORE_NEW_PREVIEW_SCIENTIFIC_CALLS",
+  "verified_date_utc": "2026-09-10",
+  "why_not_7": "The golden manuscript does not define a seven-model experiment. It defines a pinned relay/receiver configuration plus a model-family robustness sweep. Four hosted model families are therefore frozen for the preview rather than inventing a seven-model panel."
+}

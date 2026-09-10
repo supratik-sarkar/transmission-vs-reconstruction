@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "ci_high": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ci_low": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "dataset_id": {
+      "const": "PROF_REVIEW_PREVIEW_V1"
+    },
+    "denominator": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "estimate": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "evidence_status": {
+      "enum": [
+        "PROF_REVIEW_PREVIEW",
+        "STAGE1_DISCOVERY",
+        "PENDING",
+        "NOT_ESTIMABLE"
+      ]
+    },
+    "inference_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metric": {
+      "type": "string"
+    },
+    "metric_version": {
+      "type": "string"
+    },
+    "model_key": {
+      "type": "string"
+    },
+    "n_documents": {
+      "type": "integer"
+    },
+    "n_evaluable": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "numerator": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "provider": {
+      "type": "string"
+    },
+    "requested_model": {
+      "type": "string"
+    },
+    "result_id": {
+      "type": "string"
+    },
+    "returned_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "seed_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_artifact_sha256": {
+      "type": "string"
+    },
+    "system_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "result_id",
+    "model_key",
+    "dataset_id",
+    "system_id",
+    "metric",
+    "estimate",
+    "n_documents",
+    "metric_version",
+    "source_artifact_sha256",
+    "evidence_status"
+  ],
+  "title": "CanonicalProfessorReviewResultRow",
+  "type": "object"
+}

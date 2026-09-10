@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "configuration_hash": {
+      "type": "string"
+    },
+    "dataset_partition": {
+      "type": "string"
+    },
+    "is_independent_replicate": {
+      "type": "boolean"
+    },
+    "logical_eval_id": {
+      "type": "string"
+    },
+    "prompt_hash": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "requested_model": {
+      "type": "string"
+    },
+    "retry_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tool_policy": {
+      "const": "DISABLED"
+    }
+  },
+  "required": [
+    "request_id",
+    "logical_eval_id",
+    "provider",
+    "requested_model",
+    "prompt_hash",
+    "configuration_hash",
+    "dataset_partition",
+    "tool_policy",
+    "attempt",
+    "is_independent_replicate"
+  ],
+  "title": "REQUEST_MANIFEST_RECORD",
+  "type": "object"
+}
