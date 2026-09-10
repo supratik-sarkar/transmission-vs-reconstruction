@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "api_cost_usd": {
+      "maximum": 0.0,
+      "type": "number"
+    },
+    "cell_id": {
+      "type": "string"
+    },
+    "config_hash": {
+      "type": "string"
+    },
+    "dataset_id": {
+      "const": "PROF_REVIEW_PREVIEW_V1"
+    },
+    "logical_evaluation_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "model_key": {
+      "type": "string"
+    },
+    "panel_id": {
+      "const": "PROF_REVIEW_FREE_API_PANEL_V1"
+    },
+    "physical_call_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "protocol_id": {
+      "const": "TVR_PROF_REVIEW_PREVIEW_V1_3_TARGETING"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "requested_model": {
+      "type": "string"
+    },
+    "returned_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_manifest_hash": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "PLANNED",
+        "RUNNING",
+        "COMPLETE",
+        "SCIENTIFIC_FAILURE",
+        "PROVIDER_FAILURE",
+        "RESUMABLE_FREE_QUOTA_EXHAUSTED",
+        "BLOCKED"
+      ]
+    },
+    "system_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "cell_id",
+    "panel_id",
+    "model_key",
+    "provider",
+    "requested_model",
+    "dataset_id",
+    "system_id",
+    "protocol_id",
+    "config_hash",
+    "source_manifest_hash",
+    "status"
+  ],
+  "title": "CELL_MANIFEST",
+  "type": "object"
+}

@@ -1,0 +1,51 @@
+{
+  "golden_reference": "golden_reference/causal_replay_iclr2027_v2-0.tex",
+  "items": [
+    {
+      "effect": "Experiment C/CausalRelay cannot be called post-gate under the old protocol; professor preview needs explicit v1.3 redirection.",
+      "golden_state": "pre-run TBD",
+      "superseding_state": "STAGE1_GATE_FINAL_FAIL",
+      "topic": "Stage-1 mechanism gate"
+    },
+    {
+      "golden_state": [
+        "Provence",
+        "Adaptive QuerySelect",
+        "CPC",
+        "LLMLingua-2"
+      ],
+      "history": {
+        "Adaptive QuerySelect": "RETIRED_PRE_OUTCOME",
+        "CPC": "WEIGHT_LICENSE_BLOCKED",
+        "Provence": "LICENSING_BLOCKED"
+      },
+      "superseding_state": [
+        "LLMLingua-2",
+        "DAC",
+        "LongLLMLingua"
+      ],
+      "topic": "primary SOTA comparator set"
+    },
+    {
+      "golden_state": "older deterministic language appears in pre-run source",
+      "superseding_state": "typed operational audit: NOT_AUDITED | D_CONFIRMED | S_CONFIRMED",
+      "topic": "receiver regime assignment"
+    },
+    {
+      "scope": "Stage-1 discovery only; not the original intended final panel",
+      "superseding_state": "openai/gpt-5.1-2025-11-13, S_CONFIRMED, m*=2",
+      "topic": "Stage-1 low-cost model"
+    },
+    {
+      "superseding_state": {
+        "A": "E[Y_obs], endpoint fidelity",
+        "C_comm": "A - Rbar0",
+        "C_recon": "E[(1-T) R_minus]",
+        "Rbar0": "E[R_minus], mechanism-average focal-omission baseline",
+        "covariance": "assignment-effect/targeting alignment, not competence"
+      },
+      "topic": "semantic definitions"
+    }
+  ],
+  "rule": "golden manuscript is read-only; newer explicitly frozen artifacts supersede only listed items"
+}

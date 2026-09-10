@@ -1,0 +1,28 @@
+{
+  "canonical_results": [
+    "artifacts/prof_review_preview_v1/results/PROF_REVIEW_PREVIEW_RESULTS.csv",
+    "artifacts/prof_review_preview_v1/results/PROF_REVIEW_PREVIEW_RESULTS.json"
+  ],
+  "cell_layout": "artifacts/prof_review_preview_v1/cells/<model_key>/<dataset_id>/<system_id>/",
+  "cell_required_files": [
+    "CELL_MANIFEST.json",
+    "REQUEST_MANIFEST.jsonl",
+    "RAW_RESPONSES.jsonl",
+    "LOGICAL_EVALUATIONS.jsonl",
+    "METRICS.json",
+    "CELL_REPORT.json",
+    "SHA256SUMS.txt"
+  ],
+  "controller_root": "artifacts/prof_review_preview_v1/master_forward_controller",
+  "manuscript_binding": "artifacts/prof_review_preview_v1/manuscript/MANUSCRIPT_ARTIFACT_BINDING.json",
+  "required_controller_files": [
+    "MASTER_STAGE_LEDGER.jsonl",
+    "MASTER_STATE.json",
+    "MASTER_DEPENDENCY_GRAPH.json",
+    "MASTER_INVARIANT_REGISTRY.json",
+    "MASTER_ARTIFACT_INDEX.json",
+    "MASTER_CHAIN_CONSISTENCY_REPORT.json",
+    "MASTER_SHA256SUMS.txt"
+  ],
+  "runtime_artifact_root": "artifacts/prof_review_preview_v1"
+}

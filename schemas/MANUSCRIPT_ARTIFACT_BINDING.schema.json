@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "all_empirical_claims_artifact_bound": {
+      "const": "PASS"
+    },
+    "bindings": {
+      "items": {
+        "properties": {
+          "artifact_path": {
+            "type": "string"
+          },
+          "artifact_sha256": {
+            "type": "string"
+          },
+          "binding_id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "macro",
+              "table",
+              "figure",
+              "headline_claim"
+            ]
+          },
+          "manuscript_target": {
+            "type": "string"
+          },
+          "result_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "binding_id",
+          "kind",
+          "manuscript_target",
+          "artifact_path",
+          "artifact_sha256"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "manuscript_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "manuscript_id",
+    "bindings",
+    "all_empirical_claims_artifact_bound"
+  ],
+  "title": "MANUSCRIPT_ARTIFACT_BINDING",
+  "type": "object"
+}

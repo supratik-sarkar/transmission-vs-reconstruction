@@ -1,0 +1,28 @@
+{
+  "datasets": [
+    "PROF_REVIEW_PREVIEW_V1"
+  ],
+  "fixed_message_rule": "CausalRelay, Uniform, Head, FullContext and local compressor outputs are frozen per source/budget before receiver evaluation. Any query-aware comparator sees only the same global downstream task.",
+  "logical_system_blocks": 32,
+  "matrix_id": "PROF_REVIEW_PREVIEW_V1_MATRIX",
+  "model_dataset_cells": 4,
+  "models": [
+    "groq_gpt_oss_120b",
+    "groq_qwen38_27b",
+    "google_gemini38_flash",
+    "google_gemma4_31b"
+  ],
+  "no_cell_dropping": true,
+  "primary_training_rule": "CausalRelay utility predictor is trained once on primary-preview-model Development labels, then frozen. The same learned source-only policy is evaluated across robustness receiver rows. Robustness rows do not reselect the predictor family.",
+  "systems_per_cell": [
+    "CausalRelay",
+    "UniformAtomsSameRenderer",
+    "HeadTruncation",
+    "VanillaRelay",
+    "FullContextReference",
+    "LLMLingua2",
+    "DAC",
+    "LongLLMLingua"
+  ],
+  "vanilla_rule": "VanillaRelay is generated separately by each model row."
+}
