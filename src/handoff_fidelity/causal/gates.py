@@ -29,13 +29,17 @@ DEFAULT_ELIGIBLE_CLASSES: tuple[str, ...] = ("scope", "period", "numeric")
 def evaluate_stage1_gate(
     *,
     reconstruction_contribution: float,
-    prior_effects: Mapping[str, float],
+    prior_effects: Mapping[str, float | None],
     eligible_prior_classes: Sequence[str] = DEFAULT_ELIGIBLE_CLASSES,
     reconstruction_gate: float = RECONSTRUCTION_GATE,
     prior_gate: float = PRIOR_GATE,
 ) -> GateResult:
     eligible = tuple(eligible_prior_classes)
-    cleared = [c for c in eligible if prior_effects.get(c, float("-inf")) >= prior_gate]
+    cleared = [
+        c
+        for c in eligible
+        if prior_effects.get(c) is not None and float(prior_effects[c]) >= prior_gate  # type: ignore[arg-type]
+    ]
     prior_pass = bool(cleared)
     recon_pass = reconstruction_contribution >= reconstruction_gate
     proceed = prior_pass or recon_pass

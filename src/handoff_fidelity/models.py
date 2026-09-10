@@ -192,7 +192,7 @@ class MatchedSkeletonRecord:
 @dataclass(frozen=True, slots=True)
 class GateResult:
     reconstruction_contribution: float
-    prior_effects: dict[str, float]
+    prior_effects: dict[str, float | None]
     reconstruction_gate: float
     prior_gate: float
     eligible_prior_classes: tuple[str, ...]

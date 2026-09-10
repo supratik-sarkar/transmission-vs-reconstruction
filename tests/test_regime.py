@@ -157,6 +157,51 @@ def test_replication_rule_is_frozen_and_picks_the_smallest_sufficient_m():
     assert select_replication(0.45, 1.0).m_star == 5
 
 
+def test_exact_replication_grid_selector_with_gpt51_audit_values():
+    """Regression test of the exact frozen grid selector:
+    m* = min {m in [1, 2, 3, 5] : sigma_decode^2 / m <= 0.10 * sigma_document^2}
+
+    Under GPT-5.1 receiver audit values:
+      sigma_decode^2 = 0.014100
+      sigma_document^2 = 0.138416
+      threshold = 0.10 * 0.138416 = 0.0138416
+
+    Mechanical candidate evaluation:
+      m=1: 0.014100 / 1 = 0.014100 > 0.0138416 (ratio = 0.101867 > 0.10) -> FAILS
+      m=2: 0.014100 / 2 = 0.007050 <= 0.0138416 (ratio = 0.050933 <= 0.10) -> SATISFIED -> m* = 2
+      m=3: 0.014100 / 3 = 0.004700 <= 0.0138416
+      m=5: 0.014100 / 5 = 0.002820 <= 0.0138416
+
+    Explicitly verify distinction:
+      raw variance ratio: sigma_decode^2 / sigma_document^2 = 0.101867 (10.19% > 10%)
+      post-replication ratio: (sigma_decode^2 / m*) / sigma_document^2 = 0.050933 (5.09% <= 10%)
+    """
+    sigma2_decode = 0.014100
+    sigma2_document = 0.138416
+
+    # 1. Raw variance ratio is ~0.101867 > 0.10
+    raw_ratio = sigma2_decode / sigma2_document
+    assert abs(raw_ratio - 0.101866836) < 1e-6
+    assert raw_ratio > 0.10
+
+    # 2. Candidate-by-candidate evaluations
+    grid = [1, 2, 3, 5]
+    threshold = 0.10 * sigma2_document
+    evaluations = {m: (sigma2_decode / m) <= threshold for m in grid}
+    assert evaluations == {1: False, 2: True, 3: True, 5: True}
+
+    # 3. Grid selector picks the smallest m that satisfies the inequality -> m* = 2
+    decision = select_replication(sigma2_decode, sigma2_document)
+    assert decision.m_star == 2
+    assert decision.criterion_met is True
+    assert decision.hierarchical_bootstrap_required is False
+
+    # 4. Post-replication variance ratio is ~0.050933 <= 0.10
+    post_ratio = (sigma2_decode / decision.m_star) / sigma2_document
+    assert abs(post_ratio - 0.0509334) < 1e-6
+    assert post_ratio <= 0.10
+
+
 def test_when_no_m_suffices_the_bootstrap_keeps_the_decode_level():
     decision = select_replication(5.0, 1.0)
     assert decision.m_star == 5

@@ -249,6 +249,48 @@ def test_gate_halts_only_if_both_fail():
     assert "Halt" in gate.reason
 
 
+def test_reconstruction_gate_must_use_c_recon_not_rbar0():
+    """Regression test: discovery gate must evaluate C_recon = E[(1-T)R^-] >= 0.10,
+    NOT Rbar_0 >= 0.10.
+
+    If an erroneous implementation substitutes Rbar_0 (e.g. 0.12) when C_recon is below
+    the threshold (e.g. 0.02 because Tbar is high or (1-T)*R^- is small), substituting
+    Rbar_0 would erroneously pass the gate. The gate must evaluate C_recon and fail.
+    """
+    r_bar_0 = 0.12  # would pass if erroneously used as gate quantity
+    c_recon = 0.02  # true quantity E[(1-T)R^-], fails threshold of 0.10
+
+    # True evaluation using C_recon: must FAIL
+    gate_true = evaluate_stage1_gate(
+        reconstruction_contribution=c_recon,
+        prior_effects={"scope": 0.0, "period": 0.0, "numeric": 0.0},
+    )
+    assert gate_true.proceed is False
+    assert "Halt" in gate_true.reason
+    assert gate_true.reconstruction_contribution == c_recon
+
+    # Erroneous evaluation using Rbar_0: would incorrectly PASS
+    gate_erroneous = evaluate_stage1_gate(
+        reconstruction_contribution=r_bar_0,
+        prior_effects={"scope": 0.0, "period": 0.0, "numeric": 0.0},
+    )
+    assert gate_erroneous.proceed is True
+
+    # Assert that substituting Rbar_0 for C_recon flips the gate verdict
+    assert gate_true.proceed != gate_erroneous.proceed
+
+
+def test_gate_handles_not_estimable_strata_without_raising():
+    """When a class is NOT_ESTIMABLE (mapped to None), evaluate_stage1_gate
+    must treat it as not cleared rather than raising TypeError or treating it as zero."""
+    res = evaluate_stage1_gate(
+        reconstruction_contribution=0.0042,
+        prior_effects={"scope": 0.0, "period": None, "numeric": None},
+    )
+    assert res.proceed is False
+    assert "Halt" in res.reason
+
+
 def test_gate_ignores_classes_outside_the_predeclared_set():
     """Allowing any class to clear the gate would be optional stopping across
     atom classes."""

@@ -69,7 +69,7 @@ def canonical_numeric(value: str) -> str:
             return f"{_trim(d)}%"
 
     m = re.search(
-        r"(\$|usd|eur|gbp|£|€)\s*(-?\d[\d,]*(?:\.\d+)?)\s*"
+        r"(\$|usd|eur|gbp|£|€)\s*(-?\d[\d,]*(?:\.\d+)?)\s*(?:\|)?\s*"
         r"(billion|million|thousand|bn|mm|m|k)?",
         low,
     )
@@ -82,7 +82,7 @@ def canonical_numeric(value: str) -> str:
             ]
             return f"{sym}{_trim(d * mult)}"
 
-    m = re.search(r"(-?\d[\d,]*(?:\.\d+)?)\s*(billion|million|thousand|bn|mm|m|k)?", low)
+    m = re.search(r"(-?\d[\d,]*(?:\.\d+)?)\s*(?:\|)?\s*(billion|million|thousand|bn|mm|m|k)?", low)
     if m:
         d = _decimal(m.group(1))
         if d is not None:
@@ -101,6 +101,9 @@ def canonical_period(value: str) -> str:
     v = unicodedata.normalize("NFKC", value).strip().casefold()
     v = v.replace("fiscal year", "fy").replace("fiscal", "fy")
 
+    m = re.search(r"(?:fy)\s*(\d{4})\s*q([1-4])", v)
+    if m:
+        return f"FY{m.group(1)}Q{m.group(2)}"
     m = re.search(r"q([1-4])\s*(?:of\s*)?(?:fy)?\s*(\d{4})", v)
     if m:
         return f"FY{m.group(2)}Q{m.group(1)}"

@@ -40,12 +40,36 @@ def _collapse(text: str) -> str:
     return _WS.sub(" ", text).strip()
 
 
+_CLEANUP: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"[ \t]{2,}"), " "),
+    (re.compile(r"\s+([,.;:%])"), r"\1"),
+    (re.compile(r"([(\[“\"‘])\s+"), r"\1"),
+    (re.compile(r"\s+([)\]”\"’])"), r"\1"),
+    (re.compile(r"\(\s*\)"), ""),
+    (re.compile(r",\s*,"), ","),
+    (re.compile(r"\s+\n"), "\n"),
+    (re.compile(r"[ \t]+$", re.MULTILINE), ""),
+)
+
+
+def _cleanup(text: str) -> str:
+    for _ in range(5):
+        orig = text
+        for pattern, repl in _CLEANUP:
+            text = pattern.sub(repl, text)
+        if text == orig:
+            break
+    return text.strip()
+
+
 def non_focal_invariant(natural: str, edited: str, *, canonical_value: str, role: str) -> bool:
     a = _collapse(mask_focal(natural, canonical_value=canonical_value, role=role))
     b = _collapse(mask_focal(edited, canonical_value=canonical_value, role=role))
     a = _collapse(a.replace(MASK, " "))
     b = _collapse(b.replace(MASK, " "))
-    return a == b
+    if a == b:
+        return True
+    return _cleanup(a) == _cleanup(b)
 
 
 def diff_summary(natural: str, edited: str) -> dict[str, int]:
