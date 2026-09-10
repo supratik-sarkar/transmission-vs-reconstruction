@@ -18,21 +18,21 @@ Measuring only endpoint correctness cannot separate the two mechanisms: an item 
 * **Transmitted information** persists across out-of-distribution entities and domain shifts.
 * **Reconstructed information** degrades sharply when applied to unfamiliar domains, proprietary context, or private data.
 
-**`handoff-fidelity`** models intermediate handoffs as **non-ignorable assignment mechanisms** and uses causal interventions (counterfactual availability ablation) to decompose endpoint accuracy $A$ without residual:
-
-$$A = \bar{R}_0 + \bar{T}\cdot\bar{\Delta} + \text{Cov}(T, \Delta)$$
-
-$$\underbrace{A}_{\text{Endpoint Accuracy}} = \underbrace{\bar{R}_0}_{\text{Reconstruction Baseline}} + \underbrace{\bar{T}\cdot\bar{\Delta}}_{\text{Transmission Volume}} + \underbrace{\text{Cov}(T, \Delta)}_{\text{Assignment--Effect Alignment}}$$
+**`handoff-fidelity`** provides evaluation harnesses and counterfactual ablation tooling to measure communication fidelity across intermediate handoffs:
+* **Transmission Measurement**: Tracking which specific factual units survive lossy handoffs and summarization boundaries.
+* **Reconstruction Baseline**: Isolating background guessing and prior-driven reconstruction through counterfactual ablation.
+* **Fidelity Scoring**: Computing calibrated communication effectiveness and channel contribution across chained language-model relays.
+* **Relay Benchmarking**: Evaluating multi-hop relays across diverse context compression ratios and model pairings.
 
 ```
 +-------------------------------------------------------------------------------------------------+
-|                                    CAUSAL TRANSMISSION FLOW                                     |
+|                                    COMMUNICATION FIDELITY FLOW                                  |
 |                                                                                                 |
-|   [ Source Document ]        [ Information Atomizer ]          [ Counterfactual Interventions ] |
-|   • Raw text context         • Atomic Fact Extraction          • Focal Atom Present: D^+        |
-|   • Document paragraphs ---> • Type Classification        ---> • Focal Atom Absent:  R^-        |
-|                              • Entity Relationships            • Transmission Surplus: Delta    |
-|                                                                • Causal Identity Evaluation     |
+|   [ Source Document ]        [ Information Atomizer ]          [ Counterfactual Evaluation ]    |
+|   • Raw text context         • Atomic Fact Extraction          • Present in Handoff Condition   |
+|   • Document paragraphs ---> • Proposition Classification ---> • Ablated Context Condition      |
+|                              • Entity Relationships            • Net Transmission Differential  |
+|                                                                • Channel Fidelity Evaluation    |
 +-------------------------------------------------------------------------------------------------+
 ```
 
@@ -47,20 +47,20 @@ flowchart LR
         UNITS["Atomic Proposition Units\n(Taxonomy & Schema)"]
     end
 
-    subgraph Intervene["3. Causal Intervention Engine"]
+    subgraph Intervene["3. Counterfactual Probing"]
         PROBE["Counterfactual Probe\n(src/handoff_fidelity/interventions/)"]
-        D_PLUS["Condition D^+\n(Atom Present)"]
-        R_MINUS["Condition R^-\n(Atom Ablated)"]
+        PRES["Transmission Condition\n(Information Present)"]
+        ABL["Ablation Baseline\n(Information Withheld)"]
     end
 
-    subgraph Decomp["4. Causal Decomposition"]
-        DELTA["Transmission Surplus Delta\n(D^+ - R^-)"]
-        COV["Covariance Alignment\nCov(T, Delta)"]
-        DECOMP["Exact Identity\nA = R_0 + T*Delta + Cov(T, Delta)"]
+    subgraph Decomp["4. Channel Evaluation"]
+        DELTA["Fidelity Differential\n(Net Transmission Gain)"]
+        CHAN["Channel Alignment\n(Relay Sensitivity Analysis)"]
+        EVAL["Calibrated Assessment\n(src/handoff_fidelity/policy/)"]
     end
 
     DOC --> ATOM --> UNITS --> PROBE
-    PROBE --> D_PLUS & R_MINUS --> DELTA --> COV --> DECOMP
+    PROBE --> PRES & ABL --> DELTA --> CHAN --> EVAL
 ```
 
 ---
@@ -79,25 +79,11 @@ flowchart LR
 | Subsystem | Module | Description |
 | :--- | :--- | :--- |
 | **Information Atomizer** | `src/handoff_fidelity/atomizer/` | Decomposes documents into atomic propositions, schema types, and verify rules. |
-| **Causal Interventions**| `src/handoff_fidelity/interventions/` | Evaluates counterfactual availabilities ($D^+$ vs $R^-$) and budget-neutral probes. |
+| **Intervention Probes**| `src/handoff_fidelity/interventions/` | Evaluates counterfactual availabilities and baseline estimation engines. |
 | **Relay Orchestration** | `src/handoff_fidelity/relay/` | Executes multi-hop model handoffs across diverse context compression ratios. |
-| **Decision Policy Engine**| `src/handoff_fidelity/policy/` | Threshold-based decision logic and risk routing based on causal transmission scores. |
+| **Decision Policy Engine**| `src/handoff_fidelity/policy/` | Threshold-based decision logic and routing based on verified communication fidelity. |
 | **Telemetry & Observability** | `src/handoff_fidelity/telemetry/` | OpenTelemetry and LangSmith tracing for span-level inspection across relays. |
-| **Export & Reporting** | `src/handoff_fidelity/export/` | Publication-ready tabular summaries, LaTeX exports, and distribution figures. |
-
----
-
-## Key Mathematical Quantities
-
-| Symbol | Definition | Causal Meaning |
-| :--- | :--- | :--- |
-| $R^-$ | Recovery under ablation | Probability the receiver produces the atom when it is **absent** from the handoff. |
-| $D^+$ | Recovery under transmission | Probability the receiver produces the atom when it is **present** in the handoff. |
-| $\Delta^{\text{avail}}$ | $D^+ - R^-$ | The availability transmission surplus (net factual information transferred). |
-| $\bar{T}$ | Transmission rate | Proportion of source information atoms surviving the compression relay. |
-| $\bar{R}_0$ | Prior baseline | Unconditional background reconstruction rate across the target population. |
-| $C_{\text{comm}}$ | $A - \bar{R}_0$ | Signed net causal contribution of the communication channel. |
-| $\text{Cov}(T, \Delta)$ | Assignment covariance | Alignment between sender selection and receiver sensitivity. |
+| **Export & Reporting** | `src/handoff_fidelity/export/` | Publication-ready tabular summaries, reporting exports, and distribution figures. |
 
 ---
 
@@ -136,19 +122,19 @@ pytest tests/ -q
 ```text
 transmission-vs-reconstruction/
 ├── configs/            # Experiment configurations and model parameter sets
-├── docs/               # Protocol definitions and mathematical methodology runbooks
+├── docs/               # Protocol definitions and evaluation runbooks
 ├── policies/           # Verification policies and threshold schemas
 ├── schemas/            # JSON Schema definitions for atom inventories and records
 ├── src/
 │   └── handoff_fidelity/
 │       ├── atomizer/       # Atomic fact extraction, validation, and taxonomies
 │       ├── baselines/      # Control baselines and external comparison harnesses
-│       ├── export/         # Figure generation, table formatting, and manuscript checks
+│       ├── export/         # Figure generation, table formatting, and reporting checks
 │       ├── interventions/  # Counterfactual prior probes and ablation engines
-│       ├── policy/         # Causal decision routing and threshold engines
+│       ├── policy/         # Decision routing and threshold engines
 │       ├── relay/          # Multi-agent handoff task runners
 │       └── telemetry/      # OpenTelemetry and LangSmith instrumentation
-├── tests/              # Comprehensive test suite covering atomic units and causal math
+├── tests/              # Comprehensive test suite covering atomic units and measurement harnesses
 ├── pyproject.toml      # Build metadata (name: handoff-fidelity v0.2.0)
 └── LICENSE             # MIT License
 ```
