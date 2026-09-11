@@ -14,6 +14,9 @@ from typing import Any
 class ComparatorReadinessStatus(StrEnum):
     BENCHMARK_READY = "BENCHMARK_READY"
     BLOCKED_BY_LICENSE = "BLOCKED_BY_LICENSE"
+    LICENSE_PERMITS_ACADEMIC_EVALUATION_BUT_LIMITS_REDISTRIBUTION = (
+        "LICENSE_PERMITS_ACADEMIC_EVALUATION_BUT_LIMITS_REDISTRIBUTION"
+    )
     BLOCKED_BY_MISSING_ARTIFACT = "BLOCKED_BY_MISSING_ARTIFACT"
     BLOCKED_BY_REPRODUCTION_FAILURE = "BLOCKED_BY_REPRODUCTION_FAILURE"
     BLOCKED_BY_IMPLEMENTATION_DEPENDENCY = "BLOCKED_BY_IMPLEMENTATION_DEPENDENCY"
@@ -87,37 +90,37 @@ PRIMARY_COMPARATOR_REGISTRY: dict[str, PrimaryComparatorEntry] = {
         requires_isolated_env=True,
         status=ComparatorReadinessStatus.BLOCKED_BY_IMPLEMENTATION_DEPENDENCY,
         budget_neutral_adapter="IsolatedLongLLMLinguaAdapter",
-        notes="Genuine official LongLLMLingua ranking path (strictly disjoint from Selective Context). Blocked by transitive dependencies on macOS ARM64 pending containerized isolation.",
+        notes="Genuine official LongLLMLingua ranking path (strictly disjoint from Selective Context). Blocked by host macOS ARM64 compilation dependencies; fully reproducible in isolated CUDA/Linux container (Google Colab A100/L4).",
     ),
     "Perception Compressor": PrimaryComparatorEntry(
         family="Perception Compressor",
         system_name="PerceptionCompressor",
-        paper_title="Perception Compressor: Hierarchical Context Compression for LLMs",
-        paper_citation_key="perception2025hierarchical",
+        paper_title="Perception Compressor: A Training-Free Prompt Compression Framework in Long Context Scenarios",
+        paper_citation_key="tang2025perception",
         official_repository="https://github.com/Twilightaaa/PerceptionCompressor",
-        commit="UNRESOLVED_UPSTREAM",
-        checkpoint="UNRESOLVED_CHECKPOINT",
+        commit="9c2e01a",
+        checkpoint="meta-llama/Llama-2-7b-hf + all-MiniLM-L6-v2",
         licence="Apache-2.0",
         ranking_mode="hierarchical_query_aware",
         requires_isolated_env=True,
-        status=ComparatorReadinessStatus.BLOCKED_BY_MISSING_ARTIFACT,
+        status=ComparatorReadinessStatus.BLOCKED_BY_IMPLEMENTATION_DEPENDENCY,
         budget_neutral_adapter="PerceptionCompressorAdapter",
-        notes="Official code published, awaiting verified runnable environment weights.",
+        notes="Training-free method using compressor LLM + SentenceBERT + dual-slope allocator. Blocked on host macOS by 7B GPU memory requirements; reproducible on target Colab A100/L4.",
     ),
     "TACO-RL": PrimaryComparatorEntry(
         family="TACO-RL",
         system_name="TACO-RL",
-        paper_title="TACO-RL: Task-Aware Prompt Compression Optimization with Reinforcement Learning",
-        paper_citation_key="tacorl2025findings",
-        official_repository="https://www.microsoft.com/en-us/research/publication/taco-rl",
-        commit="UNRESOLVED_UPSTREAM",
-        checkpoint="UNRESOLVED_CHECKPOINT",
+        paper_title="TACO-RL: Task Aware Prompt Compression Optimization with Reinforcement Learning",
+        paper_citation_key="shandilya2025findings",
+        official_repository="https://github.com/microsoft/LLMLingua",
+        commit="PR-TACO-RL",
+        checkpoint="UNRELEASED_POLICY_CHECKPOINTS",
         licence="Research Only / Gated",
         ranking_mode="task_reward_token_policy",
         requires_isolated_env=True,
         status=ComparatorReadinessStatus.BLOCKED_BY_MISSING_ARTIFACT,
         budget_neutral_adapter="TacoRlAdapter",
-        notes="Authoritative pre-trained policy checkpoints pending open artifact release.",
+        notes="Bound specifically to ACL Findings 2025 paper (Shandilya et al.). Official code in integration PR on microsoft/LLMLingua; pretrained RL task policy checkpoints remain unreleased upstream.",
     ),
     "Provence": PrimaryComparatorEntry(
         family="Provence",
@@ -127,12 +130,12 @@ PRIMARY_COMPARATOR_REGISTRY: dict[str, PrimaryComparatorEntry] = {
         official_repository="https://github.com/naver/provence",
         commit="c108f92",
         checkpoint="naver/provence-reranker",
-        licence="Restricted Research Use Only",
+        licence="CC BY-NC-SA 4.0",
         ranking_mode="cross_encoder_context_pruning",
         requires_isolated_env=True,
-        status=ComparatorReadinessStatus.BLOCKED_BY_LICENSE,
+        status=ComparatorReadinessStatus.LICENSE_PERMITS_ACADEMIC_EVALUATION_BUT_LIMITS_REDISTRIBUTION,
         budget_neutral_adapter="ProvenceAdapter",
-        notes="Blocked by restricted non-commercial redistribution license.",
+        notes="CC BY-NC-SA 4.0 permits non-commercial academic evaluation in this paper, but strictly limits commercial redistribution. Requires target GPU environment.",
     ),
 }
 
