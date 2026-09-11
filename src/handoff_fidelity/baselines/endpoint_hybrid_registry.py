@@ -58,7 +58,7 @@ ENDPOINT_HYBRID_REGISTRY: dict[str, EndpointHybridEntry] = {
         representation=EndpointRepresentation.LATENT,
         applicable_metrics=APPLICABLE_COMMON_METRICS,
         inapplicable_metrics=INAPPLICABLE_ATOM_METRICS,
-        status="IMPLEMENTATION_ADAPTER_DEFINED",
+        status="IMPLEMENTATION_READY",
         notes="Latent merged memory representation. Discrete atom transmission and surplus are mathematically undefined.",
     ),
     "RAM": EndpointHybridEntry(
@@ -70,7 +70,7 @@ ENDPOINT_HYBRID_REGISTRY: dict[str, EndpointHybridEntry] = {
         representation=EndpointRepresentation.HYBRID,
         applicable_metrics=APPLICABLE_COMMON_METRICS,
         inapplicable_metrics=INAPPLICABLE_ATOM_METRICS,
-        status="IMPLEMENTATION_ADAPTER_DEFINED",
+        status="IMPLEMENTATION_READY",
         notes="Hybrid text and compact summary vectors. Discrete atom transmission and surplus are mathematically undefined.",
     ),
     "GMSA": EndpointHybridEntry(
@@ -82,7 +82,7 @@ ENDPOINT_HYBRID_REGISTRY: dict[str, EndpointHybridEntry] = {
         representation=EndpointRepresentation.LATENT,
         applicable_metrics=APPLICABLE_COMMON_METRICS,
         inapplicable_metrics=INAPPLICABLE_ATOM_METRICS,
-        status="IMPLEMENTATION_ADAPTER_DEFINED",
+        status="IMPLEMENTATION_READY",
         notes="Soft token encoder-decoder compression. Discrete atom transmission and surplus are mathematically undefined.",
     ),
     "SARA": EndpointHybridEntry(
@@ -94,7 +94,7 @@ ENDPOINT_HYBRID_REGISTRY: dict[str, EndpointHybridEntry] = {
         representation=EndpointRepresentation.HYBRID,
         applicable_metrics=APPLICABLE_COMMON_METRICS,
         inapplicable_metrics=INAPPLICABLE_ATOM_METRICS,
-        status="IMPLEMENTATION_ADAPTER_DEFINED",
+        status="IMPLEMENTATION_READY",
         notes="Hybrid RAG with retained text plus semantic vectors. Discrete atom transmission and surplus are mathematically undefined.",
     ),
 }
