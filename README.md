@@ -70,7 +70,7 @@ flowchart LR
 * **Classification**: `ONGOING RESEARCH` (Collaborative research implementation).
 * **Collaboration Context**: Collaborative research exploration associated with Indian Statistical Institute (ISI) Kolkata.
 * **Status**: Active research implementation and evaluation framework (`handoff-fidelity v0.2.0`).
-* **Double-Blind Review Notice**: To comply with double-blind review conventions, this repository provides open-source measurement software, intervention harnesses, and validation runbooks. Anonymous manuscript drafts, confidential submission identifiers, and private review artifacts are intentionally omitted.
+* **Open-Source Distribution Notice**: To comply with standard open-source conventions, this repository provides measurement software, intervention harnesses, and validation runbooks. Manuscript drafts, submission materials, and private review artifacts are intentionally maintained separately.
 
 ---
 
