@@ -4,7 +4,6 @@
 [![Python: >=3.12,<3.13](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](pyproject.toml)
 [![Research Status: Active](https://img.shields.io/badge/Research-Ongoing%20Implementation-blueviolet.svg)](#research-status--scope)
 [![Package: handoff-fidelity v0.2.0](https://img.shields.io/badge/Package-handoff--fidelity%20v0.2.0-informational.svg)](pyproject.toml)
-[![X: @SupratikSarkar_](https://img.shields.io/badge/X-@SupratikSarkar__-black.svg?logo=x&logoColor=white)](https://x.com/SupratikSarkar_)
 
 > **A causal measurement and benchmarking toolkit for distinguishing genuine transmitted information from prior-based hallucination and reconstruction in chained language-model workflows.**
 
@@ -138,13 +137,3 @@ transmission-vs-reconstruction/
 ├── pyproject.toml      # Build metadata (name: handoff-fidelity v0.2.0)
 └── LICENSE             # MIT License
 ```
-
----
-
-## Portfolio Navigation
-
-Part of the **Research Systems Portfolio** by [Supratik Sarkar](https://github.com/supratik-sarkar):
-* [transmission-vs-reconstruction](https://github.com/supratik-sarkar/transmission-vs-reconstruction) — Channel-theoretic analysis of generative representation models.
-* [proof-carrying-multi-agents](https://github.com/supratik-sarkar/proof-carrying-multi-agents) — Proof-carrying generation and verification in multi-agent systems.
-* [quantifying-hallucinations](https://github.com/supratik-sarkar/quantifying-hallucinations) — Spectral hypergraph diffusion for multimodal hallucination bounding.
-* [safe-discharge-summary](https://github.com/supratik-sarkar/safe-discharge-summary) — Grounding and clinical safety audit frameworks.
