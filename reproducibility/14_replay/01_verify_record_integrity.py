@@ -4,6 +4,7 @@
 Cryptographically verifies that all protocol specifications, manifests, schemas,
 and receipt records match the sealed release manifest and SHA256 sums.
 """
+
 from __future__ import annotations
 
 import subprocess

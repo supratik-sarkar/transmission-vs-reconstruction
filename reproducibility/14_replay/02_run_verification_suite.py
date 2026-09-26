@@ -5,6 +5,7 @@ Executes the project unit, property, and regression test suites to verify
 the measurement algorithms, atomizer extraction, causal interventions,
 matching contracts, and privacy boundaries.
 """
+
 from __future__ import annotations
 
 import subprocess

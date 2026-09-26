@@ -435,7 +435,7 @@
     },
     "14_replay/01_verify_record_integrity.py": {
       "category": "REPLAY_RUNNER",
-      "public_sha256": "0249a12585f7c31ef0c171574f0b35011c4d5dec99c671b315af20041ce52f6c",
+      "public_sha256": "683efdb829bdad88ca49578c18255289bba712ac1c47a2c0028c44774626d7b8",
       "scientific_role": "Executable runner verifying the cryptographic integrity of the reproducibility record.",
       "source_historical_path": null,
       "source_sha256": null,
@@ -444,7 +444,7 @@
     },
     "14_replay/02_run_verification_suite.py": {
       "category": "REPLAY_RUNNER",
-      "public_sha256": "d8b4b94fec0af7292f595a253fe47bd1a015d0e6e5eab28e37cc581b95946943",
+      "public_sha256": "5e654f60b103fc95a88d5dbd633e60c72f2d4a6362e5cc2904065b616f566a12",
       "scientific_role": "Executable runner executing full unit, property, and regression test suites.",
       "source_historical_path": null,
       "source_sha256": null,
@@ -471,7 +471,7 @@
     },
     "tools/seal_record.py": {
       "category": "INTEGRITY_TOOL",
-      "public_sha256": "34906ad5dac6428794cde5ffbb92abca7d439b747d2bf13de9df161d51175415",
+      "public_sha256": "3a57869f7d3fac419f46f764d83b1bd56b898d0a3b452e700841ac7b98c02e76",
       "scientific_role": "Utility to compute SHA-256 manifest and cryptographic seal across reproducibility assets, with --verify capability.",
       "source_historical_path": "tools/seal_record.py",
       "source_sha256": "15a117335df3e5953051410940bb2be73eb8b072213e9ec47f42ef48cc8185d9",

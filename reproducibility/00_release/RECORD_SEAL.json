@@ -1,7 +1,7 @@
 {
-  "record_manifest_sha256": "e02c6fd52667353de8e47864492ca58d179934d364636af957cd9a5d6e3ad55f",
+  "record_manifest_sha256": "bfde943f5dfcc2d35cf21e159e529017618e5572b950343bf6c619a43c5dc9ab",
   "schema": "causalrelay_record_seal_v1",
   "seal_scope": "CAUSALRELAY_PUBLIC_REPRODUCIBILITY_RECORD",
-  "sha256sums_sha256": "3cc704b2817de5db16d2b291e8ae4422d70cd41d013d4b65d6eb657486e35659",
+  "sha256sums_sha256": "332c14c14979b11b68591fc28565bfc80186340e5596a54985563554459fae5f",
   "status": "SEALED_STANDALONE_RECORD"
 }

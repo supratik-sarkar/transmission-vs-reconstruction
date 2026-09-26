@@ -5,10 +5,11 @@ Usage:
     python seal_record.py           # Generate hashes and seal the record
     python seal_record.py --verify  # Verify existing record against disk
 """
-from pathlib import Path
+
 import hashlib
 import json
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDE = {
@@ -43,9 +44,13 @@ def verify_record() -> int:
         actual_sha = compute_sha256(full_path)
         actual_bytes = full_path.stat().st_size
         if actual_sha != meta["sha256"]:
-            errors.append(f"HASH_MISMATCH: {rel_path} (expected {meta['sha256']}, got {actual_sha})")
+            errors.append(
+                f"HASH_MISMATCH: {rel_path} (expected {meta['sha256']}, got {actual_sha})"
+            )
         if actual_bytes != meta["bytes"]:
-            errors.append(f"BYTE_MISMATCH: {rel_path} (expected {meta['bytes']}, got {actual_bytes})")
+            errors.append(
+                f"BYTE_MISMATCH: {rel_path} (expected {meta['bytes']}, got {actual_bytes})"
+            )
 
     # Verify seal hashes
     seal = json.loads(seal_path.read_text(encoding="utf-8"))
@@ -53,9 +58,13 @@ def verify_record() -> int:
     computed_sha_sha = hashlib.sha256(sha_path.read_bytes()).hexdigest()
 
     if computed_manifest_sha != seal.get("record_manifest_sha256"):
-        errors.append(f"SEAL_MANIFEST_MISMATCH: expected {seal.get('record_manifest_sha256')}, got {computed_manifest_sha}")
+        errors.append(
+            f"SEAL_MANIFEST_MISMATCH: expected {seal.get('record_manifest_sha256')}, got {computed_manifest_sha}"
+        )
     if computed_sha_sha != seal.get("sha256sums_sha256"):
-        errors.append(f"SEAL_SHA256SUMS_MISMATCH: expected {seal.get('sha256sums_sha256')}, got {computed_sha_sha}")
+        errors.append(
+            f"SEAL_SHA256SUMS_MISMATCH: expected {seal.get('sha256sums_sha256')}, got {computed_sha_sha}"
+        )
 
     if errors:
         print(f"VERIFICATION FAILED with {len(errors)} error(s):", file=sys.stderr)
@@ -72,8 +81,11 @@ def seal_record() -> int:
     for p in sorted(ROOT.rglob("*")):
         if not p.is_file():
             continue
+        parts = p.relative_to(ROOT).parts
+        if any(part.startswith(".") for part in parts) or "__pycache__" in parts:
+            continue
         rel = p.relative_to(ROOT).as_posix()
-        if rel in EXCLUDE or rel.endswith("/.gitkeep") or rel == ".gitkeep":
+        if rel in EXCLUDE:
             continue
         b = p.read_bytes()
         files[rel] = {"bytes": len(b), "sha256": hashlib.sha256(b).hexdigest()}
@@ -93,7 +105,9 @@ def seal_record() -> int:
         "sha256sums_sha256": hashlib.sha256(sha.encode()).hexdigest(),
         "status": "SEALED_STANDALONE_RECORD",
     }
-    (ROOT / "00_release/RECORD_SEAL.json").write_text(json.dumps(seal, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (ROOT / "00_release/RECORD_SEAL.json").write_text(
+        json.dumps(seal, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     print(f"SEALED_FILES {len(files)}")
     return 0
 
