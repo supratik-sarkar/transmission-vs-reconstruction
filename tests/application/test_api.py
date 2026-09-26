@@ -6,6 +6,7 @@ import pytest
 
 pytest.importorskip("starlette")
 pytest.importorskip("fastapi")
+pytest.importorskip("httpx")
 
 from handoff_api.app import create_app
 from handoff_api.config import ApiSettings
