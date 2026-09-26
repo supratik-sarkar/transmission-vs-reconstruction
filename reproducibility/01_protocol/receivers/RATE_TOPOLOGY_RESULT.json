@@ -1,0 +1,1818 @@
+{
+  "oc1_status": "PASS_MEASURED",
+  "same_key": "YES",
+  "observation_minutes": 15.51,
+  "observation_seconds": 930.45,
+  "total_provider_calls_steady_state": 173,
+  "total_provider_calls_including_warmup": 177,
+  "concurrent_aggregate_rpm": 9.6727,
+  "sum_isolated_attested_rpm": 9.715,
+  "parallelism_efficiency": 0.9956,
+  "http_429_total": 0,
+  "other_failure_total": 23,
+  "schema_valid_total": 150,
+  "rate_limit_topology": "AMBIGUOUS",
+  "projected_d1b_provider_wallclock_hours": 93.05,
+  "receiver_metrics": {
+    "nvidia_muse_glimmer_30b": {
+      "receiver_id": "nvidia_muse_glimmer_30b",
+      "api_model": "meta/muse-glimmer-30b",
+      "d1b_units": 11060,
+      "isolated_attested_rpm": 4.255,
+      "target_rpm": 4.5,
+      "measured_steady_state_elapsed_s": 930.45,
+      "attempts": 67,
+      "successes": 65,
+      "http_429_count": 0,
+      "other_failure_count": 2,
+      "schema_valid_count": 65,
+      "concurrent_rpm": 4.1915,
+      "projected_hours": 43.98
+    },
+    "nvidia_gpt_oss_20b": {
+      "receiver_id": "nvidia_gpt_oss_20b",
+      "api_model": "openai/gpt-oss-20b",
+      "d1b_units": 3600,
+      "isolated_attested_rpm": 2.75,
+      "target_rpm": 3.0,
+      "measured_steady_state_elapsed_s": 930.45,
+      "attempts": 46,
+      "successes": 46,
+      "http_429_count": 0,
+      "other_failure_count": 0,
+      "schema_valid_count": 46,
+      "concurrent_rpm": 2.9663,
+      "projected_hours": 20.23
+    },
+    "google_diffusiongemma_26b_a4b_it": {
+      "receiver_id": "google_diffusiongemma_26b_a4b_it",
+      "api_model": "google/diffusiongemma-26b-a4b-it",
+      "d1b_units": 3600,
+      "isolated_attested_rpm": 1.35,
+      "target_rpm": 1.5,
+      "measured_steady_state_elapsed_s": 930.45,
+      "attempts": 15,
+      "successes": 10,
+      "http_429_count": 0,
+      "other_failure_count": 5,
+      "schema_valid_count": 10,
+      "concurrent_rpm": 0.6448,
+      "projected_hours": 93.05
+    },
+    "nvidia_nemotron3_super_120b_a12b": {
+      "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+      "api_model": "nvidia/nemotron-3-super-120b-a12b",
+      "d1b_units": 3600,
+      "isolated_attested_rpm": 1.36,
+      "target_rpm": 1.5,
+      "measured_steady_state_elapsed_s": 930.45,
+      "attempts": 45,
+      "successes": 29,
+      "http_429_count": 0,
+      "other_failure_count": 16,
+      "schema_valid_count": 29,
+      "concurrent_rpm": 1.8701,
+      "projected_hours": 32.08
+    }
+  },
+  "all_calls": {
+    "nvidia_muse_glimmer_30b": [
+      {
+        "ts": "2026-09-20T08:41:14.963747+00:00",
+        "status": 200,
+        "latency_s": 2.968,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 1,
+        "duration_s": 2.969
+      },
+      {
+        "ts": "2026-09-20T08:41:28.300241+00:00",
+        "status": 200,
+        "latency_s": 0.84,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 2,
+        "duration_s": 0.84
+      },
+      {
+        "ts": "2026-09-20T08:41:41.637036+00:00",
+        "status": 200,
+        "latency_s": 1.367,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 3,
+        "duration_s": 1.367
+      },
+      {
+        "ts": "2026-09-20T08:41:54.974435+00:00",
+        "status": 200,
+        "latency_s": 0.986,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 4,
+        "duration_s": 0.987
+      },
+      {
+        "ts": "2026-09-20T08:42:08.311902+00:00",
+        "status": 200,
+        "latency_s": 1.687,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 5,
+        "duration_s": 1.687
+      },
+      {
+        "ts": "2026-09-20T08:42:21.648628+00:00",
+        "status": 200,
+        "latency_s": 1.119,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 6,
+        "duration_s": 1.12
+      },
+      {
+        "ts": "2026-09-20T08:42:34.993384+00:00",
+        "status": 200,
+        "latency_s": 1.184,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 7,
+        "duration_s": 1.184
+      },
+      {
+        "ts": "2026-09-20T08:42:48.337191+00:00",
+        "status": 200,
+        "latency_s": 2.173,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 8,
+        "duration_s": 2.173
+      },
+      {
+        "ts": "2026-09-20T08:43:01.681344+00:00",
+        "status": 200,
+        "latency_s": 0.633,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 9,
+        "duration_s": 0.634
+      },
+      {
+        "ts": "2026-09-20T08:43:15.025190+00:00",
+        "status": 200,
+        "latency_s": 1.304,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 10,
+        "duration_s": 1.304
+      },
+      {
+        "ts": "2026-09-20T08:43:28.364676+00:00",
+        "status": 200,
+        "latency_s": 2.125,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 11,
+        "duration_s": 2.125
+      },
+      {
+        "ts": "2026-09-20T08:43:41.704440+00:00",
+        "status": 500,
+        "latency_s": 12.79,
+        "schema_valid": false,
+        "error_detail": "{\"type\":\"urn:nvcf-worker-service:problem-details:internal-server-error\",\"title\":\"Internal Server Error\",\"status\":500,\"detail\":\"Internal error while making inference request\"}",
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 12,
+        "duration_s": 12.792
+      },
+      {
+        "ts": "2026-09-20T08:43:55.045734+00:00",
+        "status": 200,
+        "latency_s": 12.861,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 13,
+        "duration_s": 12.861
+      },
+      {
+        "ts": "2026-09-20T08:44:08.384118+00:00",
+        "status": 500,
+        "latency_s": 6.107,
+        "schema_valid": false,
+        "error_detail": "{\"type\":\"urn:nvcf-worker-service:problem-details:internal-server-error\",\"title\":\"Internal Server Error\",\"status\":500,\"detail\":\"Internal error while making inference request\"}",
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 14,
+        "duration_s": 6.109
+      },
+      {
+        "ts": "2026-09-20T08:44:21.726592+00:00",
+        "status": 200,
+        "latency_s": 31.153,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 15,
+        "duration_s": 31.154
+      },
+      {
+        "ts": "2026-09-20T08:44:52.881588+00:00",
+        "status": 200,
+        "latency_s": 0.539,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 16,
+        "duration_s": 0.539
+      },
+      {
+        "ts": "2026-09-20T08:45:06.220831+00:00",
+        "status": 200,
+        "latency_s": 0.451,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 17,
+        "duration_s": 0.451
+      },
+      {
+        "ts": "2026-09-20T08:45:19.562040+00:00",
+        "status": 200,
+        "latency_s": 0.42,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 18,
+        "duration_s": 0.42
+      },
+      {
+        "ts": "2026-09-20T08:45:32.903421+00:00",
+        "status": 200,
+        "latency_s": 0.57,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 19,
+        "duration_s": 0.57
+      },
+      {
+        "ts": "2026-09-20T08:45:46.238258+00:00",
+        "status": 200,
+        "latency_s": 1.614,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 20,
+        "duration_s": 1.614
+      },
+      {
+        "ts": "2026-09-20T08:45:59.580715+00:00",
+        "status": 200,
+        "latency_s": 3.034,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 21,
+        "duration_s": 3.036
+      },
+      {
+        "ts": "2026-09-20T08:46:12.924601+00:00",
+        "status": 200,
+        "latency_s": 0.48,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 22,
+        "duration_s": 0.48
+      },
+      {
+        "ts": "2026-09-20T08:46:26.263110+00:00",
+        "status": 200,
+        "latency_s": 0.801,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 23,
+        "duration_s": 0.802
+      },
+      {
+        "ts": "2026-09-20T08:46:39.604134+00:00",
+        "status": 200,
+        "latency_s": 1.908,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 24,
+        "duration_s": 1.909
+      },
+      {
+        "ts": "2026-09-20T08:46:52.945483+00:00",
+        "status": 200,
+        "latency_s": 1.244,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 25,
+        "duration_s": 1.245
+      },
+      {
+        "ts": "2026-09-20T08:47:06.289532+00:00",
+        "status": 200,
+        "latency_s": 8.353,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 26,
+        "duration_s": 8.353
+      },
+      {
+        "ts": "2026-09-20T08:47:19.633646+00:00",
+        "status": 200,
+        "latency_s": 0.46,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 27,
+        "duration_s": 0.46
+      },
+      {
+        "ts": "2026-09-20T08:47:32.973132+00:00",
+        "status": 200,
+        "latency_s": 0.783,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 28,
+        "duration_s": 0.783
+      },
+      {
+        "ts": "2026-09-20T08:47:46.308336+00:00",
+        "status": 200,
+        "latency_s": 0.884,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 29,
+        "duration_s": 0.885
+      },
+      {
+        "ts": "2026-09-20T08:47:59.651548+00:00",
+        "status": 200,
+        "latency_s": 0.763,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 30,
+        "duration_s": 0.764
+      },
+      {
+        "ts": "2026-09-20T08:48:12.994764+00:00",
+        "status": 200,
+        "latency_s": 2.745,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 31,
+        "duration_s": 2.745
+      },
+      {
+        "ts": "2026-09-20T08:48:26.339854+00:00",
+        "status": 200,
+        "latency_s": 1.387,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 32,
+        "duration_s": 1.388
+      },
+      {
+        "ts": "2026-09-20T08:48:39.683614+00:00",
+        "status": 200,
+        "latency_s": 0.764,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 33,
+        "duration_s": 0.764
+      },
+      {
+        "ts": "2026-09-20T08:48:53.024674+00:00",
+        "status": 200,
+        "latency_s": 1.255,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 34,
+        "duration_s": 1.256
+      },
+      {
+        "ts": "2026-09-20T08:49:06.370325+00:00",
+        "status": 200,
+        "latency_s": 1.701,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 35,
+        "duration_s": 1.701
+      },
+      {
+        "ts": "2026-09-20T08:49:19.713092+00:00",
+        "status": 200,
+        "latency_s": 0.451,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 36,
+        "duration_s": 0.451
+      },
+      {
+        "ts": "2026-09-20T08:49:33.057682+00:00",
+        "status": 200,
+        "latency_s": 1.372,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 37,
+        "duration_s": 1.372
+      },
+      {
+        "ts": "2026-09-20T08:49:46.400055+00:00",
+        "status": 200,
+        "latency_s": 1.653,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 38,
+        "duration_s": 1.654
+      },
+      {
+        "ts": "2026-09-20T08:49:59.739062+00:00",
+        "status": 200,
+        "latency_s": 3.439,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 39,
+        "duration_s": 3.439
+      },
+      {
+        "ts": "2026-09-20T08:50:13.078945+00:00",
+        "status": 200,
+        "latency_s": 1.675,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 40,
+        "duration_s": 1.675
+      },
+      {
+        "ts": "2026-09-20T08:50:26.416075+00:00",
+        "status": 200,
+        "latency_s": 1.577,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 41,
+        "duration_s": 1.577
+      },
+      {
+        "ts": "2026-09-20T08:50:39.754991+00:00",
+        "status": 200,
+        "latency_s": 6.233,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 42,
+        "duration_s": 6.233
+      },
+      {
+        "ts": "2026-09-20T08:50:53.095796+00:00",
+        "status": 200,
+        "latency_s": 2.265,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 43,
+        "duration_s": 2.265
+      },
+      {
+        "ts": "2026-09-20T08:51:06.431482+00:00",
+        "status": 200,
+        "latency_s": 3.582,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 44,
+        "duration_s": 3.583
+      },
+      {
+        "ts": "2026-09-20T08:51:19.768349+00:00",
+        "status": 200,
+        "latency_s": 0.475,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 45,
+        "duration_s": 0.476
+      },
+      {
+        "ts": "2026-09-20T08:51:33.107114+00:00",
+        "status": 200,
+        "latency_s": 0.496,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 46,
+        "duration_s": 0.496
+      },
+      {
+        "ts": "2026-09-20T08:51:46.443329+00:00",
+        "status": 200,
+        "latency_s": 4.67,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 47,
+        "duration_s": 4.67
+      },
+      {
+        "ts": "2026-09-20T08:51:59.783950+00:00",
+        "status": 200,
+        "latency_s": 0.545,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 48,
+        "duration_s": 0.545
+      },
+      {
+        "ts": "2026-09-20T08:52:13.122964+00:00",
+        "status": 200,
+        "latency_s": 0.522,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 49,
+        "duration_s": 0.523
+      },
+      {
+        "ts": "2026-09-20T08:52:26.460440+00:00",
+        "status": 200,
+        "latency_s": 1.825,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 50,
+        "duration_s": 1.825
+      },
+      {
+        "ts": "2026-09-20T08:52:39.798963+00:00",
+        "status": 200,
+        "latency_s": 2.688,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 51,
+        "duration_s": 2.688
+      },
+      {
+        "ts": "2026-09-20T08:52:53.137965+00:00",
+        "status": 200,
+        "latency_s": 3.307,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 52,
+        "duration_s": 3.308
+      },
+      {
+        "ts": "2026-09-20T08:53:06.476612+00:00",
+        "status": 200,
+        "latency_s": 0.722,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 53,
+        "duration_s": 0.722
+      },
+      {
+        "ts": "2026-09-20T08:53:19.813625+00:00",
+        "status": 200,
+        "latency_s": 0.9,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 54,
+        "duration_s": 0.9
+      },
+      {
+        "ts": "2026-09-20T08:53:33.152825+00:00",
+        "status": 200,
+        "latency_s": 2.819,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 55,
+        "duration_s": 2.819
+      },
+      {
+        "ts": "2026-09-20T08:53:46.488274+00:00",
+        "status": 200,
+        "latency_s": 1.466,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 56,
+        "duration_s": 1.466
+      },
+      {
+        "ts": "2026-09-20T08:53:59.826511+00:00",
+        "status": 200,
+        "latency_s": 3.693,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 57,
+        "duration_s": 3.693
+      },
+      {
+        "ts": "2026-09-20T08:54:13.164225+00:00",
+        "status": 200,
+        "latency_s": 0.806,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 58,
+        "duration_s": 0.806
+      },
+      {
+        "ts": "2026-09-20T08:54:26.502728+00:00",
+        "status": 200,
+        "latency_s": 0.669,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 59,
+        "duration_s": 0.669
+      },
+      {
+        "ts": "2026-09-20T08:54:39.841045+00:00",
+        "status": 200,
+        "latency_s": 2.081,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 60,
+        "duration_s": 2.081
+      },
+      {
+        "ts": "2026-09-20T08:54:53.180111+00:00",
+        "status": 200,
+        "latency_s": 3.689,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 61,
+        "duration_s": 3.689
+      },
+      {
+        "ts": "2026-09-20T08:55:06.517162+00:00",
+        "status": 200,
+        "latency_s": 1.513,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 62,
+        "duration_s": 1.513
+      },
+      {
+        "ts": "2026-09-20T08:55:19.855831+00:00",
+        "status": 200,
+        "latency_s": 2.166,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 63,
+        "duration_s": 2.167
+      },
+      {
+        "ts": "2026-09-20T08:55:33.191606+00:00",
+        "status": 200,
+        "latency_s": 8.042,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 64,
+        "duration_s": 8.042
+      },
+      {
+        "ts": "2026-09-20T08:55:46.528324+00:00",
+        "status": 200,
+        "latency_s": 2.045,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 65,
+        "duration_s": 2.045
+      },
+      {
+        "ts": "2026-09-20T08:55:59.865533+00:00",
+        "status": 200,
+        "latency_s": 2.335,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 66,
+        "duration_s": 2.335
+      },
+      {
+        "ts": "2026-09-20T08:56:13.200166+00:00",
+        "status": 200,
+        "latency_s": 2.995,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "call_idx": 67,
+        "duration_s": 2.996
+      }
+    ],
+    "nvidia_gpt_oss_20b": [
+      {
+        "ts": "2026-09-20T08:41:14.968816+00:00",
+        "status": 200,
+        "latency_s": 7.311,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 1,
+        "duration_s": 7.312
+      },
+      {
+        "ts": "2026-09-20T08:41:34.974256+00:00",
+        "status": 200,
+        "latency_s": 8.596,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 2,
+        "duration_s": 8.596
+      },
+      {
+        "ts": "2026-09-20T08:41:54.978290+00:00",
+        "status": 200,
+        "latency_s": 6.81,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 3,
+        "duration_s": 6.81
+      },
+      {
+        "ts": "2026-09-20T08:42:14.980740+00:00",
+        "status": 200,
+        "latency_s": 7.351,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 4,
+        "duration_s": 7.352
+      },
+      {
+        "ts": "2026-09-20T08:42:34.989528+00:00",
+        "status": 200,
+        "latency_s": 7.106,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 5,
+        "duration_s": 7.106
+      },
+      {
+        "ts": "2026-09-20T08:42:54.999871+00:00",
+        "status": 200,
+        "latency_s": 9.365,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 6,
+        "duration_s": 9.365
+      },
+      {
+        "ts": "2026-09-20T08:43:15.005771+00:00",
+        "status": 200,
+        "latency_s": 8.648,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 7,
+        "duration_s": 8.648
+      },
+      {
+        "ts": "2026-09-20T08:43:35.015886+00:00",
+        "status": 200,
+        "latency_s": 7.359,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 8,
+        "duration_s": 7.36
+      },
+      {
+        "ts": "2026-09-20T08:43:55.025051+00:00",
+        "status": 200,
+        "latency_s": 7.071,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 9,
+        "duration_s": 7.071
+      },
+      {
+        "ts": "2026-09-20T08:44:15.032333+00:00",
+        "status": 200,
+        "latency_s": 8.462,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 10,
+        "duration_s": 8.462
+      },
+      {
+        "ts": "2026-09-20T08:44:35.040938+00:00",
+        "status": 200,
+        "latency_s": 6.698,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 11,
+        "duration_s": 6.699
+      },
+      {
+        "ts": "2026-09-20T08:44:55.045657+00:00",
+        "status": 200,
+        "latency_s": 7.284,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 12,
+        "duration_s": 7.284
+      },
+      {
+        "ts": "2026-09-20T08:45:15.054486+00:00",
+        "status": 200,
+        "latency_s": 7.305,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 13,
+        "duration_s": 7.305
+      },
+      {
+        "ts": "2026-09-20T08:45:35.063256+00:00",
+        "status": 200,
+        "latency_s": 8.089,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 14,
+        "duration_s": 8.09
+      },
+      {
+        "ts": "2026-09-20T08:45:55.073610+00:00",
+        "status": 200,
+        "latency_s": 6.69,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 15,
+        "duration_s": 6.69
+      },
+      {
+        "ts": "2026-09-20T08:46:15.083434+00:00",
+        "status": 200,
+        "latency_s": 7.241,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 16,
+        "duration_s": 7.241
+      },
+      {
+        "ts": "2026-09-20T08:46:35.089583+00:00",
+        "status": 200,
+        "latency_s": 7.597,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 17,
+        "duration_s": 7.597
+      },
+      {
+        "ts": "2026-09-20T08:46:55.091589+00:00",
+        "status": 200,
+        "latency_s": 7.371,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 18,
+        "duration_s": 7.371
+      },
+      {
+        "ts": "2026-09-20T08:47:15.102136+00:00",
+        "status": 200,
+        "latency_s": 9.636,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 19,
+        "duration_s": 9.636
+      },
+      {
+        "ts": "2026-09-20T08:47:35.105839+00:00",
+        "status": 200,
+        "latency_s": 8.456,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 20,
+        "duration_s": 8.456
+      },
+      {
+        "ts": "2026-09-20T08:47:55.116242+00:00",
+        "status": 200,
+        "latency_s": 7.231,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 21,
+        "duration_s": 7.231
+      },
+      {
+        "ts": "2026-09-20T08:48:15.126779+00:00",
+        "status": 200,
+        "latency_s": 7.41,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 22,
+        "duration_s": 7.41
+      },
+      {
+        "ts": "2026-09-20T08:48:35.137239+00:00",
+        "status": 200,
+        "latency_s": 7.747,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 23,
+        "duration_s": 7.747
+      },
+      {
+        "ts": "2026-09-20T08:48:55.142391+00:00",
+        "status": 200,
+        "latency_s": 6.627,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 24,
+        "duration_s": 6.628
+      },
+      {
+        "ts": "2026-09-20T08:49:15.152336+00:00",
+        "status": 200,
+        "latency_s": 8.734,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 25,
+        "duration_s": 8.738
+      },
+      {
+        "ts": "2026-09-20T08:49:35.159881+00:00",
+        "status": 200,
+        "latency_s": 7.27,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 26,
+        "duration_s": 7.27
+      },
+      {
+        "ts": "2026-09-20T08:49:55.169931+00:00",
+        "status": 200,
+        "latency_s": 7.022,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 27,
+        "duration_s": 7.023
+      },
+      {
+        "ts": "2026-09-20T08:50:15.170854+00:00",
+        "status": 200,
+        "latency_s": 7.457,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 28,
+        "duration_s": 7.457
+      },
+      {
+        "ts": "2026-09-20T08:50:35.176077+00:00",
+        "status": 200,
+        "latency_s": 7.915,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 29,
+        "duration_s": 7.915
+      },
+      {
+        "ts": "2026-09-20T08:50:55.178487+00:00",
+        "status": 200,
+        "latency_s": 8.273,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 30,
+        "duration_s": 8.274
+      },
+      {
+        "ts": "2026-09-20T08:51:15.183861+00:00",
+        "status": 200,
+        "latency_s": 7.496,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 31,
+        "duration_s": 7.497
+      },
+      {
+        "ts": "2026-09-20T08:51:35.188947+00:00",
+        "status": 200,
+        "latency_s": 9.398,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 32,
+        "duration_s": 9.399
+      },
+      {
+        "ts": "2026-09-20T08:51:55.193850+00:00",
+        "status": 200,
+        "latency_s": 8.209,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 33,
+        "duration_s": 8.209
+      },
+      {
+        "ts": "2026-09-20T08:52:15.198342+00:00",
+        "status": 200,
+        "latency_s": 8.48,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 34,
+        "duration_s": 8.48
+      },
+      {
+        "ts": "2026-09-20T08:52:35.201568+00:00",
+        "status": 200,
+        "latency_s": 7.624,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 35,
+        "duration_s": 7.624
+      },
+      {
+        "ts": "2026-09-20T08:52:55.203617+00:00",
+        "status": 200,
+        "latency_s": 7.24,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 36,
+        "duration_s": 7.24
+      },
+      {
+        "ts": "2026-09-20T08:53:15.208774+00:00",
+        "status": 200,
+        "latency_s": 11.446,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 37,
+        "duration_s": 11.446
+      },
+      {
+        "ts": "2026-09-20T08:53:35.209779+00:00",
+        "status": 200,
+        "latency_s": 9.671,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 38,
+        "duration_s": 9.671
+      },
+      {
+        "ts": "2026-09-20T08:53:55.210236+00:00",
+        "status": 200,
+        "latency_s": 8.311,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 39,
+        "duration_s": 8.311
+      },
+      {
+        "ts": "2026-09-20T08:54:15.215236+00:00",
+        "status": 200,
+        "latency_s": 8.095,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 40,
+        "duration_s": 8.095
+      },
+      {
+        "ts": "2026-09-20T08:54:35.220650+00:00",
+        "status": 200,
+        "latency_s": 7.981,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 41,
+        "duration_s": 7.981
+      },
+      {
+        "ts": "2026-09-20T08:54:55.225281+00:00",
+        "status": 200,
+        "latency_s": 11.272,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 42,
+        "duration_s": 11.272
+      },
+      {
+        "ts": "2026-09-20T08:55:15.230292+00:00",
+        "status": 200,
+        "latency_s": 8.141,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 43,
+        "duration_s": 8.141
+      },
+      {
+        "ts": "2026-09-20T08:55:35.233114+00:00",
+        "status": 200,
+        "latency_s": 7.103,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 44,
+        "duration_s": 7.103
+      },
+      {
+        "ts": "2026-09-20T08:55:55.238362+00:00",
+        "status": 200,
+        "latency_s": 8.347,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 45,
+        "duration_s": 8.348
+      },
+      {
+        "ts": "2026-09-20T08:56:03.586807+00:00",
+        "status": 200,
+        "latency_s": 38.756,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "call_idx": 46,
+        "duration_s": 38.756
+      }
+    ],
+    "google_diffusiongemma_26b_a4b_it": [
+      {
+        "ts": "2026-09-20T08:41:14.973154+00:00",
+        "status": null,
+        "latency_s": 90.055,
+        "schema_valid": false,
+        "error_detail": "timeout",
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 1,
+        "duration_s": 90.056
+      },
+      {
+        "ts": "2026-09-20T08:42:45.026843+00:00",
+        "status": 200,
+        "latency_s": 40.1,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 2,
+        "duration_s": 40.101
+      },
+      {
+        "ts": "2026-09-20T08:43:25.127564+00:00",
+        "status": 200,
+        "latency_s": 13.234,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 3,
+        "duration_s": 13.234
+      },
+      {
+        "ts": "2026-09-20T08:44:05.137607+00:00",
+        "status": null,
+        "latency_s": 90.047,
+        "schema_valid": false,
+        "error_detail": "timeout",
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 4,
+        "duration_s": 90.047
+      },
+      {
+        "ts": "2026-09-20T08:45:35.185056+00:00",
+        "status": 200,
+        "latency_s": 70.876,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 5,
+        "duration_s": 70.876
+      },
+      {
+        "ts": "2026-09-20T08:46:46.062153+00:00",
+        "status": 200,
+        "latency_s": 34.352,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 6,
+        "duration_s": 34.352
+      },
+      {
+        "ts": "2026-09-20T08:47:26.070470+00:00",
+        "status": 200,
+        "latency_s": 18.341,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 7,
+        "duration_s": 18.341
+      },
+      {
+        "ts": "2026-09-20T08:48:06.081130+00:00",
+        "status": 200,
+        "latency_s": 24.55,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 8,
+        "duration_s": 24.55
+      },
+      {
+        "ts": "2026-09-20T08:48:46.090674+00:00",
+        "status": 200,
+        "latency_s": 64.599,
+        "schema_valid": true,
+        "completion_tokens": 31,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 9,
+        "duration_s": 64.6
+      },
+      {
+        "ts": "2026-09-20T08:49:50.691559+00:00",
+        "status": null,
+        "latency_s": 90.036,
+        "schema_valid": false,
+        "error_detail": "timeout",
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 10,
+        "duration_s": 90.038
+      },
+      {
+        "ts": "2026-09-20T08:51:20.730156+00:00",
+        "status": null,
+        "latency_s": 90.039,
+        "schema_valid": false,
+        "error_detail": "timeout",
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 11,
+        "duration_s": 90.041
+      },
+      {
+        "ts": "2026-09-20T08:52:50.772180+00:00",
+        "status": 200,
+        "latency_s": 74.631,
+        "schema_valid": true,
+        "completion_tokens": 31,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 12,
+        "duration_s": 74.631
+      },
+      {
+        "ts": "2026-09-20T08:54:05.404005+00:00",
+        "status": null,
+        "latency_s": 90.037,
+        "schema_valid": false,
+        "error_detail": "timeout",
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 13,
+        "duration_s": 90.037
+      },
+      {
+        "ts": "2026-09-20T08:55:35.441983+00:00",
+        "status": 200,
+        "latency_s": 37.306,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 14,
+        "duration_s": 37.306
+      },
+      {
+        "ts": "2026-09-20T08:56:12.750971+00:00",
+        "status": 200,
+        "latency_s": 32.663,
+        "schema_valid": true,
+        "completion_tokens": 27,
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "call_idx": 15,
+        "duration_s": 32.663
+      }
+    ],
+    "nvidia_nemotron3_super_120b_a12b": [
+      {
+        "ts": "2026-09-20T08:41:14.977370+00:00",
+        "status": 200,
+        "latency_s": 1.038,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 1,
+        "duration_s": 1.038
+      },
+      {
+        "ts": "2026-09-20T08:41:54.978356+00:00",
+        "status": 200,
+        "latency_s": 1.091,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 2,
+        "duration_s": 1.091
+      },
+      {
+        "ts": "2026-09-20T08:42:34.979597+00:00",
+        "status": 200,
+        "latency_s": 14.022,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 3,
+        "duration_s": 14.022
+      },
+      {
+        "ts": "2026-09-20T08:43:14.984147+00:00",
+        "status": 200,
+        "latency_s": 0.828,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 4,
+        "duration_s": 0.828
+      },
+      {
+        "ts": "2026-09-20T08:43:54.993062+00:00",
+        "status": 200,
+        "latency_s": 5.333,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 5,
+        "duration_s": 5.333
+      },
+      {
+        "ts": "2026-09-20T08:44:35.000879+00:00",
+        "status": 200,
+        "latency_s": 1.932,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 6,
+        "duration_s": 1.932
+      },
+      {
+        "ts": "2026-09-20T08:45:15.005949+00:00",
+        "status": 200,
+        "latency_s": 1.682,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 7,
+        "duration_s": 1.682
+      },
+      {
+        "ts": "2026-09-20T08:45:55.013426+00:00",
+        "status": 503,
+        "latency_s": 0.198,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 8,
+        "duration_s": 0.199
+      },
+      {
+        "ts": "2026-09-20T08:46:35.021322+00:00",
+        "status": 200,
+        "latency_s": 3.45,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 9,
+        "duration_s": 3.45
+      },
+      {
+        "ts": "2026-09-20T08:47:15.031971+00:00",
+        "status": 200,
+        "latency_s": 2.364,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 10,
+        "duration_s": 2.364
+      },
+      {
+        "ts": "2026-09-20T08:47:55.041667+00:00",
+        "status": 503,
+        "latency_s": 0.203,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 11,
+        "duration_s": 0.205
+      },
+      {
+        "ts": "2026-09-20T08:48:35.051708+00:00",
+        "status": 200,
+        "latency_s": 3.741,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 12,
+        "duration_s": 3.742
+      },
+      {
+        "ts": "2026-09-20T08:49:15.058274+00:00",
+        "status": 200,
+        "latency_s": 2.047,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 13,
+        "duration_s": 2.047
+      },
+      {
+        "ts": "2026-09-20T08:49:55.066555+00:00",
+        "status": 200,
+        "latency_s": 1.09,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 14,
+        "duration_s": 1.09
+      },
+      {
+        "ts": "2026-09-20T08:50:35.071250+00:00",
+        "status": 200,
+        "latency_s": 3.874,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 15,
+        "duration_s": 3.874
+      },
+      {
+        "ts": "2026-09-20T08:51:15.076806+00:00",
+        "status": 200,
+        "latency_s": 1.683,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 16,
+        "duration_s": 1.684
+      },
+      {
+        "ts": "2026-09-20T08:51:55.082211+00:00",
+        "status": 200,
+        "latency_s": 0.994,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 17,
+        "duration_s": 0.994
+      },
+      {
+        "ts": "2026-09-20T08:52:35.084423+00:00",
+        "status": 200,
+        "latency_s": 2.621,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 18,
+        "duration_s": 2.621
+      },
+      {
+        "ts": "2026-09-20T08:53:15.090208+00:00",
+        "status": 200,
+        "latency_s": 1.198,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 19,
+        "duration_s": 1.198
+      },
+      {
+        "ts": "2026-09-20T08:53:55.093743+00:00",
+        "status": 200,
+        "latency_s": 3.101,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 20,
+        "duration_s": 3.101
+      },
+      {
+        "ts": "2026-09-20T08:54:35.099836+00:00",
+        "status": 503,
+        "latency_s": 0.298,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 21,
+        "duration_s": 0.3
+      },
+      {
+        "ts": "2026-09-20T08:55:15.104957+00:00",
+        "status": 503,
+        "latency_s": 0.219,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 22,
+        "duration_s": 0.221
+      },
+      {
+        "ts": "2026-09-20T08:55:55.108962+00:00",
+        "status": 503,
+        "latency_s": 0.194,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 23,
+        "duration_s": 0.196
+      },
+      {
+        "ts": "2026-09-20T08:55:55.305922+00:00",
+        "status": 503,
+        "latency_s": 0.193,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 24,
+        "duration_s": 0.195
+      },
+      {
+        "ts": "2026-09-20T08:55:55.501815+00:00",
+        "status": 503,
+        "latency_s": 0.192,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 25,
+        "duration_s": 0.194
+      },
+      {
+        "ts": "2026-09-20T08:55:55.697013+00:00",
+        "status": 200,
+        "latency_s": 1.306,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 26,
+        "duration_s": 1.306
+      },
+      {
+        "ts": "2026-09-20T08:55:57.004098+00:00",
+        "status": 503,
+        "latency_s": 0.197,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 27,
+        "duration_s": 0.199
+      },
+      {
+        "ts": "2026-09-20T08:55:57.203806+00:00",
+        "status": 200,
+        "latency_s": 1.309,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 28,
+        "duration_s": 1.309
+      },
+      {
+        "ts": "2026-09-20T08:55:58.513817+00:00",
+        "status": 200,
+        "latency_s": 2.867,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 29,
+        "duration_s": 2.867
+      },
+      {
+        "ts": "2026-09-20T08:56:01.381851+00:00",
+        "status": 200,
+        "latency_s": 3.994,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 30,
+        "duration_s": 3.994
+      },
+      {
+        "ts": "2026-09-20T08:56:05.376776+00:00",
+        "status": 503,
+        "latency_s": 0.211,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 31,
+        "duration_s": 0.214
+      },
+      {
+        "ts": "2026-09-20T08:56:05.591403+00:00",
+        "status": 503,
+        "latency_s": 0.198,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 32,
+        "duration_s": 0.2
+      },
+      {
+        "ts": "2026-09-20T08:56:05.792319+00:00",
+        "status": 503,
+        "latency_s": 0.193,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 33,
+        "duration_s": 0.195
+      },
+      {
+        "ts": "2026-09-20T08:56:05.987405+00:00",
+        "status": 200,
+        "latency_s": 1.231,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 34,
+        "duration_s": 1.231
+      },
+      {
+        "ts": "2026-09-20T08:56:07.219484+00:00",
+        "status": 503,
+        "latency_s": 0.199,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 35,
+        "duration_s": 0.201
+      },
+      {
+        "ts": "2026-09-20T08:56:07.421481+00:00",
+        "status": 200,
+        "latency_s": 1.331,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 36,
+        "duration_s": 1.332
+      },
+      {
+        "ts": "2026-09-20T08:56:08.753391+00:00",
+        "status": 200,
+        "latency_s": 1.619,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 37,
+        "duration_s": 1.62
+      },
+      {
+        "ts": "2026-09-20T08:56:10.374324+00:00",
+        "status": 503,
+        "latency_s": 0.196,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 38,
+        "duration_s": 0.201
+      },
+      {
+        "ts": "2026-09-20T08:56:10.575696+00:00",
+        "status": 503,
+        "latency_s": 0.204,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 39,
+        "duration_s": 0.207
+      },
+      {
+        "ts": "2026-09-20T08:56:10.783645+00:00",
+        "status": 200,
+        "latency_s": 0.846,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 40,
+        "duration_s": 0.847
+      },
+      {
+        "ts": "2026-09-20T08:56:11.631155+00:00",
+        "status": 503,
+        "latency_s": 0.193,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 41,
+        "duration_s": 0.194
+      },
+      {
+        "ts": "2026-09-20T08:56:11.825946+00:00",
+        "status": 200,
+        "latency_s": 0.924,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 42,
+        "duration_s": 0.924
+      },
+      {
+        "ts": "2026-09-20T08:56:12.756858+00:00",
+        "status": 200,
+        "latency_s": 1.243,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 43,
+        "duration_s": 1.243
+      },
+      {
+        "ts": "2026-09-20T08:56:14.000127+00:00",
+        "status": 503,
+        "latency_s": 0.19,
+        "schema_valid": false,
+        "error_detail": "{\"error\":{\"message\":\"Service temporarily overloaded\",\"type\":\"Service Unavailable\",\"code\":503}}",
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 44,
+        "duration_s": 0.191
+      },
+      {
+        "ts": "2026-09-20T08:56:14.191433+00:00",
+        "status": 200,
+        "latency_s": 0.808,
+        "schema_valid": true,
+        "completion_tokens": 96,
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "call_idx": 45,
+        "duration_s": 0.808
+      }
+    ]
+  }
+}

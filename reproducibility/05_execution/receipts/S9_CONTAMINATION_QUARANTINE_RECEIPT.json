@@ -1,0 +1,29 @@
+{
+  "schema": "TVR_S9_CONTAMINATION_QUARANTINE_RECEIPT/v1",
+  "tests": {
+    "T35_S9_MOCK_IN_LIVE_DIR": {
+      "status": "PASS",
+      "assertion": "--mock in live S9 directory is blocked immediately before write",
+      "guard_message": "ABORT: --mock is forbidden in the live S9 directory. Use --out-dir pointing to a scratch directory."
+    },
+    "T36_S9_MODE_MIXED_RESUME": {
+      "status": "PASS",
+      "assertion": "Resuming existing REAL_PROVIDER responses under MOCK_TEST mode is forbidden",
+      "guard_message": "ABORT: existing S9 response SYNTH-a has execution_mode=REAL_PROVIDER; requested MOCK_TEST"
+    },
+    "T37_S9_SCRATCH_MOCK": {
+      "status": "PASS",
+      "assertion": "--mock against scratch directory generates 600 cases without touching live S9"
+    },
+    "T38_S9_CERTIFY_REQUIRE_REAL": {
+      "status": "PASS",
+      "assertion": "s9_certify --require-real-provider rejects mock responses"
+    },
+    "T39_RUN_TO_HUMAN_AUDIT_QUARANTINE": {
+      "status": "PASS",
+      "assertion": "RUN_TO_HUMAN_AUDIT.sh verifies and archives any pre-existing S9 directory before executing real provider",
+      "quarantine_archive_pattern": "S9_TEST_ARTIFACTS_ARCHIVE"
+    }
+  },
+  "timestamp_utc": "2026-09-20T21:25:52.050627+00:00"
+}

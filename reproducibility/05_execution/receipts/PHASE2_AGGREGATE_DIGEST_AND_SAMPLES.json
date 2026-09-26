@@ -1,0 +1,84 @@
+{
+  "schema": "TVR_PHASE2_BYTE_AUDIT_SUMMARY/v1",
+  "total_units": 1800,
+  "aggregate_sha256": "9cc083e78c691c2c589689a771cd43184ba9d9cad0d27dbc5ce300f939d97982",
+  "receipt": {
+    "schema": "TVR_PHASE2_PREPARATION_RECEIPT/v1",
+    "units": 1800,
+    "aggregate_sha256": "9cc083e78c691c2c589689a771cd43184ba9d9cad0d27dbc5ce300f939d97982",
+    "materializer_version": "TVR_PHASE2_MATERIALIZER/v2"
+  },
+  "deterministic_samples": [
+    {
+      "unit_id": "policy_SEC-0000004962-26-000080_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "06a5928eabf9ee440f789d3a6c7b50041c0842d65500897f9efef96569b8ef7a",
+      "treatment_sha256": "d0b15c4ba6a1c8ea431d7b8c210b42856970f91335b9f999f7d054a9cfe1c44c",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: Consumer\n- scope: Services\n- scope: Commercial\n- numeric: $65949\n- numeric: 10%\n- numeric: 9%\n- numeric: 25%\n- numeric: 18%\n- numeric: 13%\n- numeric: 4%\n- numeric: $132\n- numeric: 7%\n- numeri"
+    },
+    {
+      "unit_id": "policy_SEC-0000062709-26-000022_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "ad3926e0dc02f27cd68af87df0192dbf1a83881bc7928941becc7c20fbffc72c",
+      "treatment_sha256": "1debd8152d7b85cdb754e2ac808cea67f5db3cd98389f643a837eae66dc3290f",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: Services\n- provenance: Part Ii\n- provenance: Item 7\n- scope: United States\n- numeric: 10%\n- numeric: 4%\n- numeric: 7%\n- numeric: 3%\n- numeric: 12%\n- numeric: 15%\n- numeric: 6%\n- numeric: 5%\n-"
+    },
+    {
+      "unit_id": "policy_SEC-0000764180-26-000017_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "0393c43bb012b8a3a5da2caf0b2d2d6f438628ecc156272b7439bef72a4fdc82",
+      "treatment_sha256": "b8937824317a98be70312e022605cff9f44a28e15fb7683cf8824b06b298bf17",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Item 7\n- scope: United States\n- numeric: 10%\n- numeric: 1.8%\n- numeric: 5.5%\n- provenance: Note 18\n- provenance: Item 8\n- provenance: Note 15\n- provenance: Item 10\n- numeric: 98.4%\n- num"
+    },
+    {
+      "unit_id": "policy_SEC-0000886982-26-000091_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "4e02c8b2f804a0cdc375575d9a04ddf88c5462b7bf2ed86665615d027600e61b",
+      "treatment_sha256": "cf05b49f057a3c318e323292876e24c7fa8a3235338cf92eaa2c07a9e6eab073",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part Ii\n- provenance: Item 8\n- provenance: Part I\n- provenance: Item 1A\n- numeric: $40.54\n- numeric: 15%\n- numeric: 12.7%\n- numeric: $357.6\n- numeric: 6.2%\n- numeric: 9%\n- numeric: $2.26"
+    },
+    {
+      "unit_id": "policy_SEC-0001097864-26-000006_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "facadb33949409d13d864624651c82102d7db27fd4e9b5ffee945558b19e48eb",
+      "treatment_sha256": "d2587af2d2538139b14580138a6080a6735a445abe0526237a27531d1ee63876",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- numeric: $121|million\n- numeric: 33.1%\n- scope: Manufacturing\n- numeric: $121\n- numeric: 37.7%\n- numeric: 15.5%\n- numeric: 15.9%\n- numeric: 100%\n- numeric: 52.8%\n- numeric: $153.8\n- numeric: 33.7%\n-"
+    },
+    {
+      "unit_id": "policy_SEC-0001193125-26-051668_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "743d185e42ef80b901209cfffcfdb9638e57b3140ac9c37ab703c1243cb33bdc",
+      "treatment_sha256": "a3a3e908ffed853aa845a22e8ae3f00b39d2edb51b9abeb906150e75e30948e9",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: Retail\n- numeric: 96.5%\n- entity: The Company\n- numeric: 98%\n- numeric: 93.2%\n- numeric: 93%\n- numeric: $15.73\n- numeric: $17.37\n- numeric: $41.67\n- numeric: $18.48\n- numeric: $6.81\n- numeric"
+    },
+    {
+      "unit_id": "policy_SEC-0001276187-26-000013_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "9f0a8f731846024e63f1fa835212e8fd62ff6bb0e58d850b389a3e012b1eb805",
+      "treatment_sha256": "2434ad0582a95dd1879ab12e837426367859a8a68cca4f9de7208a6967dc69cb",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: United States\n- entity: Lone Star NGL LLC\n- entity: Sunoco LP\n- numeric: 67.5%\n- entity: Explorer Pipeline Company\n- entity: Florida Gas Transmission Company\n- entity: Charles LNG Lake Charle"
+    },
+    {
+      "unit_id": "policy_SEC-0001576280-26-000013_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "79f31d372b8d1b838205b67d7a9be46a7d6fb1e4f75a2d93a480f31f7d196b59",
+      "treatment_sha256": "e21063f817b123bb8f89c64e61ce0a44399976fa934d5150e92e2dd6974b35e5",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part I\n- provenance: Item 1A\n- provenance: Part Ii\n- provenance: Item 7\n- provenance: Note 2\n- numeric: $982|million\n- numeric: $739|million\n- numeric: $563.9|million\n- numeric: $416.3|m"
+    },
+    {
+      "unit_id": "policy_SEC-0001628280-26-012555_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "1ef3b80e8aff70f784129fbaadc929066d5a2fcddb0fc4a17ccee357e3ecb4ef",
+      "treatment_sha256": "663e53c1ac05fcc2ced63d5ae85245a41cd51a74c2b83a939d90f0721aa1ebf5",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: North America\n- scope: South America\n- scope: Europe\n- scope: Australia\n- entity: WestRock Company\n- period: FY2025\n- period: FY2024\n- provenance: Note 2\n- scope: APAC\n- provenance: Note 3\n- "
+    },
+    {
+      "unit_id": "policy_SEC-0001781335-26-000011_nvidia_gpt_oss_20b_causalrelay_b119",
+      "prompt_sha256": "7627e1f8cf7e2a4d180440baab82de501d9bb773a5e45359777cec39f3de7e45",
+      "treatment_sha256": "51fb4ae732cdccfb5ca8f1550e8d567030b7621083c5ed656608d5597f1f313f",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- entity: Our Company\n- provenance: Item 1\n- numeric: $18|million\n- entity: The Company\n- numeric: $76\n- numeric: $31\n- numeric: $25\n- numeric: $145\n- numeric: $96\n- numeric: $41\n- numeric: $150|milli"
+    }
+  ],
+  "timestamp_utc": "2026-09-20T21:25:52.050155+00:00"
+}

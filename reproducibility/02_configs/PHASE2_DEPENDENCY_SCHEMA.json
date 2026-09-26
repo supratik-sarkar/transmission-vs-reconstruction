@@ -1,0 +1,88 @@
+{
+  "schema": "TVR_PHASE2_DEPENDENCY_SCHEMA/v1",
+  "scientific_release": "v3.1",
+  "description": "Formal specification of Phase-2 outcome-dependent units and their Phase-1 causal prerequisites",
+  "total_dependent_units": 1800,
+  "methods": {
+    "delta_av_targeting": {
+      "unit_count": 300,
+      "receiver": "nvidia_gpt_oss_20b",
+      "budgets": [
+        89,
+        119,
+        200
+      ],
+      "prerequisite_block": "reference_receiver_delta_av",
+      "prerequisite_receiver": "nvidia_gpt_oss_20b",
+      "ranking_formula": "Delta^av_{iz} = Y_{iz}(D^+) - Y_{iz}(R^-)",
+      "artifact_file_template": "{doc_id}_delta_av_ranking.json"
+    },
+    "delta_bu_oracle": {
+      "unit_count": 100,
+      "receiver": "nvidia_gpt_oss_20b",
+      "budgets": [
+        89
+      ],
+      "prerequisite_block": "reference_receiver_delta_bu",
+      "prerequisite_receiver": "nvidia_gpt_oss_20b",
+      "ranking_formula": "Delta^bu_{iz}(B*) = Y_{iz}(natural) - Y_{iz}(counterfactual)",
+      "artifact_file_template": "{doc_id}_delta_bu_ranking.json"
+    },
+    "delta_bu_ranking_transfer_89": {
+      "unit_count": 200,
+      "receiver": "nvidia_gpt_oss_20b",
+      "budgets": [
+        119,
+        200
+      ],
+      "prerequisite_block": "reference_receiver_delta_bu",
+      "prerequisite_receiver": "nvidia_gpt_oss_20b",
+      "ranking_formula": "Transferred Delta^bu ranking evaluated at budgets 119 and 200",
+      "artifact_file_template": "{doc_id}_delta_bu_ranking.json"
+    },
+    "causalrelay": {
+      "unit_count": 600,
+      "receivers": [
+        "nvidia_gpt_oss_20b",
+        "nvidia_nemotron3_super_120b_a12b"
+      ],
+      "budgets": [
+        89,
+        119,
+        200
+      ],
+      "training_target": "Measured Delta^bu at B*=89 with authentic provenance",
+      "features": "Pre-treatment atom features only via handoff_fidelity.causalrelay.features.extract",
+      "cross_fitting": "5 outer grouped folds, 4 inner grouped folds; nested cross-fit",
+      "leakage_guard": "Zero receiver outcome leakage; held-out out-of-fold predictions per document",
+      "artifact_file_template": "{doc_id}_causalrelay_scores.json",
+      "completion_flag": "causalrelay_trained.done"
+    },
+    "reference_delta_av_transfer": {
+      "unit_count": 300,
+      "receiver": "nvidia_nemotron3_super_120b_a12b",
+      "budgets": [
+        89,
+        119,
+        200
+      ],
+      "prerequisite_block": "reference_receiver_delta_av",
+      "prerequisite_receiver": "nvidia_gpt_oss_20b",
+      "ranking_formula": "Transferred reference Delta^av ranking to non-reference receiver",
+      "artifact_file_template": "{doc_id}_delta_av_ranking.json"
+    },
+    "reference_delta_bu_transfer": {
+      "unit_count": 300,
+      "receiver": "nvidia_nemotron3_super_120b_a12b",
+      "budgets": [
+        89,
+        119,
+        200
+      ],
+      "prerequisite_block": "reference_receiver_delta_bu",
+      "prerequisite_receiver": "nvidia_gpt_oss_20b",
+      "ranking_formula": "Transferred reference Delta^bu ranking to non-reference receiver",
+      "artifact_file_template": "{doc_id}_delta_bu_ranking.json"
+    }
+  }
+}

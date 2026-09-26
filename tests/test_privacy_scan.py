@@ -35,6 +35,22 @@ def test_credential_patterns_are_flagged():
         assert rule in {f.rule for f in scan_text("src/x.py", line)}, rule
 
 
+def test_openai_key_does_not_flag_risk_underwriting_or_sandisk():
+    clean_lines = [
+        "entity = 'stewart-specialty-risk-underwriting-ltd'",
+        "vendor = 'sandisk-corporation'",
+        "policy = 'risk-underwriting'",
+        "item = 'desk-setup'",
+    ]
+    for line in clean_lines:
+        findings = scan_text("src/x.py", line)
+        assert not any(f.rule == "openai_key" for f in findings), f"False positive on: {line}"
+
+    leak_line = "api_key = 'sk-abcdefghijklmnopqrstuvwxyz123'"
+    leak_findings = scan_text("src/x.py", leak_line)
+    assert any(f.rule == "openai_key" for f in leak_findings)
+
+
 def test_real_email_flagged_but_placeholders_allowed():
     assert scan_text("docs/x.md", "contact: real.person@somewhere.org")
     assert not [

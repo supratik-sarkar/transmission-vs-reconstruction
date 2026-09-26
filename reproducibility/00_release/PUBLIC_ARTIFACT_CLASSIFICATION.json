@@ -1,0 +1,483 @@
+{
+  "metadata": {
+    "anonymity_status": "DOUBLE_BLIND_COMPLIANT",
+    "classification_date": "2026-09-27",
+    "focal_omission_definition": "Focal-omission recovery is defined strictly as R^-; no distinct R^0 or R_0 quantity is introduced in v1-1.",
+    "policy": "Cryptographic source-to-derivative provenance tracking; separation of genuine protocol/manifests from pending empirical results; zero mock result leakage.",
+    "provenance_standard": "Cryptographic source-to-public linkage against highest-authority historical certified artifacts.",
+    "public_snapshot": "v1-1",
+    "scientific_contract_identifier": "v3.1",
+    "versioning_architecture": "Public repository snapshot v1-1; underlying scientific contract identifier v3.1."
+  },
+  "omitted_and_purged_artifacts": {
+    "06_human_audit/blinded_inputs/BLINDED_REVIEW_SHEET_ANNOTATOR_A.csv": {
+      "action": "REMOVED_PENDING_CERTIFICATION",
+      "destination": "Private development repository (outside public release)",
+      "reason": "Live human review input sheet removed from public Git tree during active review; final consensus labels will be published upon S9 protocol completion.",
+      "source_sha256": "e8a5aa914be396d646123529f5c6b0a36c6053a11ee3472e5d59f03226dcd190"
+    },
+    "06_human_audit/blinded_inputs/BLINDED_REVIEW_SHEET_ANNOTATOR_B.csv": {
+      "action": "REMOVED_PENDING_CERTIFICATION",
+      "destination": "Private development repository (outside public release)",
+      "reason": "Live human review input sheet removed from public Git tree during active review; final consensus labels will be published upon S9 protocol completion.",
+      "source_sha256": "e8a5aa914be396d646123529f5c6b0a36c6053a11ee3472e5d59f03226dcd190"
+    },
+    "06_human_audit/blinded_inputs/S9_RESERVE_MANIFEST.json": {
+      "action": "REMOVED_PENDING_CERTIFICATION",
+      "destination": "Private development repository (outside public release)",
+      "reason": "Active reserve manifest maintained in private development workspace until human review is finalized.",
+      "source_sha256": "45898c9c2ef6f9a52a9ce7ffd85f64edcb0177f7d1916ab3b973a8aeda07633d"
+    },
+    "06_human_audit/blinded_inputs/S9_RESERVE_RESPONSES.jsonl": {
+      "action": "REMOVED_PENDING_CERTIFICATION",
+      "destination": "Private development repository (outside public release)",
+      "reason": "Uncertified raw provider outputs awaiting human consensus review; removed to avoid premature publication before certification.",
+      "source_sha256": "c9a641d8ee2a7f35a5d2a83a6e810a049bfc8bf4d1f1834560beba12256cb4f5"
+    },
+    "06_human_audit/blinded_inputs/S9_RESERVE_SHA256.txt": {
+      "action": "REMOVED_PENDING_CERTIFICATION",
+      "destination": "Private development repository (outside public release)",
+      "reason": "Checksums of active audit inputs; maintained alongside inputs in private workspace.",
+      "source_sha256": "041477755b6826622bc13d50fa3a918f625076cf996944e83c7ce4226d9c3f25"
+    },
+    "06_human_audit/blinded_inputs/S9_RUN_META.json": {
+      "action": "REMOVED_PENDING_CERTIFICATION",
+      "destination": "Private development repository (outside public release)",
+      "reason": "Execution metadata for reserve run; maintained with reserve inputs.",
+      "source_sha256": "11ff0a202a0a256aa253907c134bfb44c20790104618e4726fe3d3a049652a2d"
+    },
+    "09_results/figure_data/figure_data_causal_value_targeting_atlas_v3.json": {
+      "action": "PURGED_MOCK_RESULT",
+      "reason": "Derived from exploratory mock runs prior to confirmatory execution; purged to ensure public empirical honesty.",
+      "source_sha256": "73e0e7450e02685c74749ede3b4bb9acea2ef02454b4a7119cd5a02145d6c927"
+    },
+    "09_results/figure_data/figure_data_causalrelay_learnability_v3.json": {
+      "action": "PURGED_MOCK_RESULT",
+      "reason": "Derived from exploratory mock runs; purged from public release.",
+      "source_sha256": "23c2d50576dfd5452111f866834bc122e73ed98da3849ae1da9b8f416f0bbdaf"
+    },
+    "09_results/figure_data/figure_data_hero_causal_handoff_v3.json": {
+      "action": "PURGED_MOCK_RESULT",
+      "reason": "Derived from exploratory mock runs; purged from public release.",
+      "source_sha256": "8ce961916065917e73c3efa1a639d48d7b6cebed183f6b28a76be61e5cfe3ee5"
+    },
+    "09_results/figure_data/figure_data_policy_frontier_sota_v3.json": {
+      "action": "PURGED_MOCK_RESULT",
+      "reason": "Derived from exploratory mock runs; purged from public release.",
+      "source_sha256": "b3f566ae884741e68bbe046c99d9d9acd91ca3bc12472b9fc0bd2011fa7f3f62"
+    },
+    "09_results/figure_data/figure_data_robustness_failure_multihop_v3.json": {
+      "action": "PURGED_MOCK_RESULT",
+      "reason": "Derived from exploratory mock runs; purged from public release.",
+      "source_sha256": "152f96c93d73088914590751f6e61b95986d2a7844e1c97ebffde4f49b75118a"
+    },
+    "10_artifacts/figures/causal_value_targeting_atlas_v3.pdf": {
+      "action": "PURGED_MOCK_FIGURE",
+      "reason": "Vector plot of mock empirical data; purged to avoid misrepresenting unconfirmed data as verified findings.",
+      "source_sha256": "075c5cb047e2402b7018cf5ddda3dd16e5430cbb2174e4c0554ef98f1fc2d87d"
+    },
+    "10_artifacts/figures/causalrelay_learnability_v3.pdf": {
+      "action": "PURGED_MOCK_FIGURE",
+      "reason": "Vector plot of mock empirical data; purged from public release.",
+      "source_sha256": "3ec3aff5be2138e4da5e6019afd12506d1a985b0ae824df88f5cc660512f72a5"
+    },
+    "10_artifacts/figures/hero_causal_handoff_v3.pdf": {
+      "action": "PURGED_MOCK_FIGURE",
+      "reason": "Vector plot of mock empirical data; purged from public release.",
+      "source_sha256": "cab56219875bc09cf701db6e416ac6ae801fb3cfc60651608c497e7b1635f19e"
+    },
+    "10_artifacts/figures/policy_frontier_sota_v3.pdf": {
+      "action": "PURGED_MOCK_FIGURE",
+      "reason": "Vector plot of mock empirical data; purged from public release.",
+      "source_sha256": "22c01f3869be5f99d400117be5be7269db775d908ad9cd77a06dddc47177dadd"
+    },
+    "10_artifacts/figures/robustness_failure_multihop_v3.pdf": {
+      "action": "PURGED_MOCK_FIGURE",
+      "reason": "Vector plot of mock empirical data; purged from public release.",
+      "source_sha256": "7785ed807224c7e166d2d8c4d304c4d20cafa6bfa816c6cd6cccccc4dedda7b2"
+    },
+    "10_artifacts/tables/discovery_summary_v3.tex": {
+      "action": "PURGED_MOCK_TABLE",
+      "reason": "LaTeX table populated with mock discovery statistics; purged from public release.",
+      "source_sha256": "ea98d75bfcb29920063df6b798c1b24f4555242fce24f3a41f261a26e5c35977"
+    },
+    "10_artifacts/tables/empirical_macros_v3.tex": {
+      "action": "PURGED_MOCK_TABLE",
+      "reason": "LaTeX macro definitions encoding mock numerical estimates; purged from public release.",
+      "source_sha256": "7b0ba031bece9e77b8389ff406071562aa0c507f201e58317929c86acc8020bd"
+    },
+    "13_change_control/CONTRACT_CONSISTENCY_AUDIT.json": {
+      "action": "OMITTED_INTERNAL_SPEC",
+      "reason": "Internal certifier development audit report; preserved in private workspace.",
+      "source_sha256": "d5f55c2fddcb5ff039bb72aff2560411aa066f467b2ae4711f1d97e4361a0921"
+    },
+    "13_change_control/DECISION_MATRIX.csv": {
+      "action": "OMITTED_INTERNAL_SPEC",
+      "reason": "Internal development parameter decision matrix; preserved in private workspace.",
+      "source_sha256": "c5743fd0be316aa9a795984f1c65970b7af9571724effd63d36064f96e82e867"
+    },
+    "13_change_control/FINAL_CLOSURE_SPEC.md": {
+      "action": "OMITTED_INTERNAL_SPEC",
+      "reason": "Internal research-management and procedural closure instruction memo; omitted from public release.",
+      "source_sha256": "6ca6051b8d676628a57605813ff3395deb08a139c9563ec61f9f0c95eaaff7be"
+    },
+    "13_change_control/SCIENTIFIC_AUTHORITY_LOCK_CANDIDATE.json": {
+      "action": "OMITTED_INTERNAL_SPEC",
+      "reason": "Internal certifier gate lock configuration; preserved in private workspace.",
+      "source_sha256": "7c246f7076d6e2c4b12165be262ba4216ca459143e806cea5372aeaaeb184aa9"
+    },
+    "13_change_control/STATIC_AUDIT_SUMMARY.json": {
+      "action": "OMITTED_INTERNAL_SPEC",
+      "reason": "Internal static audit summary memo; preserved in private workspace.",
+      "source_sha256": "4b69b42bfa45640a52c84cb801581d802e5c760c9905c9eec47dde7e1346cd8e"
+    },
+    "14_replay/01_verify_static_closure.py": {
+      "action": "REPLACED_HISTORICAL_RUNNER",
+      "reason": "Historical private gate script targeting deleted shadow directories; replaced by 01_verify_record_integrity.py.",
+      "source_sha256": "bfbf17bf7b7ce042ffc063cf4eb49ce968c9be95754681604a11f56860fe3613"
+    },
+    "14_replay/02_run_acceptance_tests.py": {
+      "action": "REPLACED_HISTORICAL_RUNNER",
+      "reason": "Historical acceptance matrix targeting private multi-directory paths; replaced by 02_run_verification_suite.py.",
+      "source_sha256": "fae89df9d8b6da44b0365eb26fc26829775338148b61172be32f86ee3c545366"
+    },
+    "14_replay/03_test_byte_sync_adversarial.py": {
+      "action": "REPLACED_HISTORICAL_RUNNER",
+      "reason": "Historical adversarial test script targeting private prelaunch paths; covered by standard test suite.",
+      "source_sha256": "b2f51f50a3b68079d356885dfb958dfca0dfef8f6920f012c8ff6e655cf3c9ce"
+    },
+    "14_replay/04_verify_prelaunch_bytes.py": {
+      "action": "REPLACED_HISTORICAL_RUNNER",
+      "reason": "Historical script hardcoding private package directories; covered by record sealing tools.",
+      "source_sha256": "e931ca876fbdf1b4a116cfc9c7f66a2e9d2948eb9946452be886fa7f0794c48a"
+    },
+    "14_replay/05_confirmatory_runner.py": {
+      "action": "OMITTED_HISTORICAL_RUNNER",
+      "reason": "Historical runner importing non-public backend packages; live execution harness managed via canonical CLI.",
+      "source_sha256": "e01a88b5e913a48eef8cf9698d578619bc9170e5b72e5192bb3b7d142106198f"
+    },
+    "DONOR_ADAPTATION_MAP.md": {
+      "action": "OMITTED_INTERNAL_SPEC",
+      "reason": "Internal cross-project donor adaptation notes; omitted to prevent out-of-scope donor project references.",
+      "source_sha256": "90999335ef00a94371e16c90538a798f5a6206122d106fb3c0c1ae027e8b6932"
+    }
+  },
+  "retained_artifacts": {
+    "00_release/RECORD_MANIFEST.template.json": {
+      "category": "RELEASE_TEMPLATE",
+      "public_sha256": "a4249e9b4505c50ebad12143593d22eb4f0ef6ce41ed572ba61c1fb058128b18",
+      "scientific_role": "Schema template for release manifest generation.",
+      "source_historical_path": "00_release/RECORD_MANIFEST.template.json",
+      "source_sha256": "a4249e9b456885df42b0ce814d481da65ff86cb3566ebdfebbf86c12b07e5c54",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "00_release/RECORD_SEAL.template.json": {
+      "category": "RELEASE_TEMPLATE",
+      "public_sha256": "8bcb7245249862d96ce6e989a44a4268f9b7995fec7acea452f9cf007127b24b",
+      "scientific_role": "Schema template for cryptographic seal generation.",
+      "source_historical_path": "00_release/RECORD_SEAL.template.json",
+      "source_sha256": "8bcb724524c55208f2a58d601ff3a8ea08cfa3a6e921d78216c84cbe204859a1",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/budgets/BUDGET_CALIBRATION_RECEIPT_TWO_RECEIVER.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "19f139db35ad499134c520b61969b042a239a1dd3d1673d2570c7dd844651bbb",
+      "scientific_role": "Calibration receipt for two-receiver budget grid and context length boundaries.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/BUDGET_CALIBRATION_RECEIPT_TWO_RECEIVER.json",
+      "source_sha256": "7010d1b47eacb77eec993adf056332a0dd9f82bc13a470c712dacb3f50b2efd6",
+      "transformation_rationale": "Path sanitization: redacted local development filesystem paths to relative path ./ to preserve repository anonymity.",
+      "transformation_type": "PUBLIC_DERIVATIVE"
+    },
+    "01_protocol/budgets/FINAL_BUDGET_GRID.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "79174b8648f2af7f00e283c1fc6a3ef238e4744a072d3c5476b8c595b3ce9bb0",
+      "scientific_role": "Authoritative budget grid specifying token compression budgets per regime.",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/FINAL_BUDGET_GRID.json",
+      "source_sha256": "79174b8648f2af7f00e283c1fc6a3ef238e4744a072d3c5476b8c595b3ce9bb0",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/estimands/ATTRIBUTE_DERIVATION_CONTRACT.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "1bc5552d05571b200236329e805b318739528e854b555194f1db5baf177d06e2",
+      "scientific_role": "Contract defining attribute derivation rules from atomic facts.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/ATTRIBUTE_DERIVATION_CONTRACT.json",
+      "source_sha256": "1bc5552d05571b200236329e805b318739528e854b555194f1db5baf177d06e2",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/estimands/CORRECTED_SLOT_ATTRIBUTE_MAP.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "ce704d868d92b359deac8f73d7412d6bacb46aa2da39fc0a52ad64fcc658ecb7",
+      "scientific_role": "Ground-truth mapping between slots and attribute identifiers with canonical entity names.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/CORRECTED_SLOT_ATTRIBUTE_MAP.json",
+      "source_sha256": "ce704d868d92b359deac8f73d7412d6bacb46aa2da39fc0a52ad64fcc658ecb7",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/estimands/PROSPECTIVE_SCIENTIFIC_CONTRACT_FINAL.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "cd4489dd71461e30b1e805f764abd671a2d263f7ae5404f6ad2aaf7a3f8fca7f",
+      "scientific_role": "Final preregistered causal estimands (A, R^-, T_bar, D_bar, Cov, C_comm, C_recon).",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/PROSPECTIVE_SCIENTIFIC_CONTRACT_FINAL.json",
+      "source_sha256": "cd4489dd71461e30b1e805f764abd671a2d263f7ae5404f6ad2aaf7a3f8fca7f",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/receivers/RATE_TOPOLOGY_RESULT.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "467c172abce2cb85228b1ac12c19a911cffb171d6a4d0cd5f8ddafa9f7a64c08",
+      "scientific_role": "Empirical rate topology evaluation over receiver candidates.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/OC1_RATE_TOPOLOGY_RESULT.json",
+      "source_sha256": "467c172abce2cb85228b1ac12c19a911cffb171d6a4d0cd5f8ddafa9f7a64c08",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/receivers/RECEIVER_OPERATIONAL_EVIDENCE.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "7ed07cccd49a8cdeefbcbb07a5a390c459cdcbdc756703e56892e8207401cdce",
+      "scientific_role": "Operational logs certifying model invocation formats and token limits.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/FINAL_RECEIVER_OPERATIONAL_EVIDENCE_R05.json",
+      "source_sha256": "7ed07cccd49a8cdeefbcbb07a5a390c459cdcbdc756703e56892e8207401cdce",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/receivers/RECEIVER_QUALIFICATION_RESULT.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "94da9bd20314c69fda646afc20349884a0593f3d51ab5c0bbe68008ba549cae4",
+      "scientific_role": "Qualification decision records for reference and nonreference receiver panel.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/RECEIVER_QUALIFICATION_RESULT.json",
+      "source_sha256": "59fff4e9e64f205d9a65cedea8177f91768113bb3b8e1d2cb8c1dd366f651986",
+      "transformation_rationale": "Path sanitization: redacted local development filesystem paths to relative path ./ to preserve repository anonymity.",
+      "transformation_type": "PUBLIC_DERIVATIVE"
+    },
+    "01_protocol/sampling/FINAL_TWO_RECEIVER_GRAPH.json": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "373dbac36aca4bd42db8286f7511c58c252350c8d14e21a68909b0001b25b54f",
+      "scientific_role": "Preregistered sampling graph defining 14,860 unit allocations across evaluation conditions.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/FINAL_TWO_RECEIVER_GRAPH.json",
+      "source_sha256": "373dbac36aca4bd42db8286f7511c58c252350c8d14e21a68909b0001b25b54f",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "01_protocol/sampling/PREREGISTRATION_v1.2.md": {
+      "category": "PROTOCOL_SPECIFICATION",
+      "public_sha256": "f7c2677992530c45356e7239b1f91099831f5fa9ea7033d92e1e6afe85b87db0",
+      "scientific_role": "Formal preregistration text specifying hypothesis tests, sample sizes, and estimand equations.",
+      "source_historical_path": "01_protocol/sampling/PREREGISTRATION_v1.2.md",
+      "source_sha256": "f7c2677992789f81ce5b50f75e921d74384da1e17d6ee246fba4c44a7f9fa693",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "02_configs/PHASE2_DEPENDENCY_SCHEMA.json": {
+      "category": "CONFIGURATION_SCHEMA",
+      "public_sha256": "77587c35a7b71e90bf8f8391ee8d9da749876442c98a36c8f81bc1eceae14d26",
+      "scientific_role": "JSON schema constraining Phase-2 dependency structures.",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/PHASE2_DEPENDENCY_SCHEMA.json",
+      "source_sha256": "77587c35a7b71e90bf8f8391ee8d9da749876442c98a36c8f81bc1eceae14d26",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "03_inputs/source_manifest/DOCUMENT_LEVEL_FOCAL.json": {
+      "category": "INPUT_MANIFEST",
+      "public_sha256": "6ff1c4adc71c5cca9a17b589a6dc64121ad38c99d8f9d3af07ed618c45bd1c1f",
+      "scientific_role": "Document-level focal candidate inventory for atomic extraction.",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/PRELAUNCH/DOCUMENT_LEVEL_FOCAL.json",
+      "source_sha256": "6ff1c4adc71c5cca9a17b589a6dc64121ad38c99d8f9d3af07ed618c45bd1c1f",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "03_inputs/source_manifest/FOCAL_SELECTIONS.json": {
+      "category": "INPUT_MANIFEST",
+      "public_sha256": "221fa4f0c9682486f8c71ac309629a408a8060fdb78b07189fd03fd7a703e07e",
+      "scientific_role": "Preregistered focal unit sample selections for availability interventions.",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/PRELAUNCH/FOCAL_SELECTIONS.json",
+      "source_sha256": "221fa4f0c9682486f8c71ac309629a408a8060fdb78b07189fd03fd7a703e07e",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "04_interventions/validity/NOT_ESTIMABLE_RECORDS.jsonl": {
+      "category": "INTERVENTION_SPECIFICATION",
+      "public_sha256": "3dfaf9a9ae0b630b18e6a4f2f073324d91fb59d8763f36e6cecd235c2369049a",
+      "scientific_role": "Preregistered specification gap units terminalizing locally without provider invocation.",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/PRELAUNCH/NOT_ESTIMABLE_RECORDS.jsonl",
+      "source_sha256": "3dfaf9a9aef902bca81352aeb9693e5066914619d08ea3be5a570c9dd68c13b1",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "05_execution/receipts/CERTIFIER_AUDIT_RECEIPT.json": {
+      "category": "EXECUTION_RECEIPT",
+      "public_sha256": "37fb3a1b444a0392dcad0eeefa64a99e3104074ec54f355304b002afe297ebf6",
+      "scientific_role": "Cryptographic receipt of certifier integrity check across contracts and code.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/FINAL_CERTIFIER_AUDIT_RECEIPT.json",
+      "source_sha256": "48d586d826006f650caaaa8c4491bf13ddbc45d179c792553bffef23077bd252",
+      "transformation_rationale": "Path sanitization: redacted local development filesystem paths to relative path ./artifacts/ to preserve repository anonymity.",
+      "transformation_type": "PUBLIC_DERIVATIVE"
+    },
+    "05_execution/receipts/PACKAGE_REPRODUCIBILITY_RECEIPT.json": {
+      "category": "EXECUTION_RECEIPT",
+      "public_sha256": "5e27478ae95665c90d01ca187a8889661ec1c15d2ce2c1453a4c83abe60b0deb",
+      "scientific_role": "Reproducibility receipt pinning runtime hashes.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/PACKAGE_REPRODUCIBILITY_RECEIPT.json",
+      "source_sha256": "5e27478ae95665c97042a98e945c71b689a79fafe72a5a5444ca32e9be4a9efb",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "05_execution/receipts/PHASE1_AGGREGATE_DIGEST_AND_SAMPLES.json": {
+      "category": "EXECUTION_RECEIPT",
+      "public_sha256": "5ada58d1b6b70a6b7151d92955fb2e0ca095912da1baea4218726d574cdda7a2",
+      "scientific_role": "Cryptographic digest and representative samples of Phase-1 prompt and treatment bytes.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/PHASE1_AGGREGATE_DIGEST_AND_SAMPLES.json",
+      "source_sha256": "5ada58d1b6cfdfddaa1567baebf66bb6b3e8a7199c0cbff4c7d0d048d08cb58f",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "05_execution/receipts/PHASE2_AGGREGATE_DIGEST_AND_SAMPLES.json": {
+      "category": "EXECUTION_RECEIPT",
+      "public_sha256": "4dc882485d6743a1795fd704689142a358d3de9ca56cfcb076b9d62275909c87",
+      "scientific_role": "Cryptographic digest and representative samples of Phase-2 intervention records.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/PHASE2_AGGREGATE_DIGEST_AND_SAMPLES.json",
+      "source_sha256": "4dc882485dfd720b57117e30d4b06b9b3e0c034d612fc996d91295ea7f2f11b4",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "05_execution/receipts/S9_CONTAMINATION_QUARANTINE_RECEIPT.json": {
+      "category": "EXECUTION_RECEIPT",
+      "public_sha256": "b66b67cf7f34558f132353824a850236573a426e284b0e1e77a43b749a0669f3",
+      "scientific_role": "Audit receipt certifying isolation between mock audit artifacts and live reserve evaluation.",
+      "source_historical_path": "CausalRelay_v3_1_STEP5_FINAL_CLOSURE/S9_CONTAMINATION_QUARANTINE_RECEIPT.json",
+      "source_sha256": "b66b67cf7f34558f62fa2277d3aa05047b864a781ba4f7831f501e74f391a8e0",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "06_human_audit/README.md": {
+      "category": "DOCUMENTATION",
+      "public_sha256": "a01f4b00b309e1a7e8f715e36a456df704005ec65d3235acb6f86f1de7ba0ff5",
+      "scientific_role": "Human audit protocol definition and PENDING_REAL_HUMAN_S9 status declaration.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Public notice declaring frozen S9 protocol and segregating active review sheets during live audit pass.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "09_results/README.md": {
+      "category": "DOCUMENTATION",
+      "public_sha256": "37bc162a695ed06402d5adb30da9becaf4ffd9356ffe92516872ce230d628b04",
+      "scientific_role": "Scope notice documenting confirmatory execution boundaries and purge of mock data.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Public notice distinguishing preliminary/mock data from preregistered confirmatory results.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "09_results/figure_data/figure_data_theory_method_workflow_v3.json": {
+      "category": "METHODOLOGICAL_FIGURE_DATA",
+      "public_sha256": "e5c87a0f98b889f2089da9f79a5e939dbe522b6724a264944d6e6b4abdba8734",
+      "scientific_role": "Workflow diagram layout coordinates for theoretical transmission model.",
+      "source_historical_path": "09_results/figure_data/figure_data_theory_method_workflow_v3.json",
+      "source_sha256": "e5c87a0f98b889f2089da9f79a5e939dbe522b6724a264944d6e6b4abdba8734",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "10_artifacts/README.md": {
+      "category": "DOCUMENTATION",
+      "public_sha256": "06417337590122a74c896baa86766714bd3e0593c612b7032962243ffbb6d9ef",
+      "scientific_role": "Scope notice distinguishing conceptual diagrams from confirmatory outcome artifacts.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Public notice documenting presentation artifacts.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "10_artifacts/figures/theory_method_workflow_v3.pdf": {
+      "category": "METHODOLOGICAL_DIAGRAM",
+      "public_sha256": "8c36bc98878d19384abda12bd16547452f19e400bf60eb6526ddaabdac64ad0d",
+      "scientific_role": "Publication-ready vector diagram illustrating causal availability vs reconstruction framework.",
+      "source_historical_path": "10_artifacts/figures/theory_method_workflow_v3.pdf",
+      "source_sha256": "8c36bc9887d19384abda12bd16547452f19e400bf60eb6526ddaabdac64ad0d",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "11_environment/pyproject.toml": {
+      "category": "ENVIRONMENT_SPECIFICATION",
+      "public_sha256": "28e86a8ca960940763c20071c7cebe120d8343c5357b8944555c97a4e9fc0330",
+      "scientific_role": "Package dependencies and Python environment constraints.",
+      "source_historical_path": "11_environment/pyproject.toml",
+      "source_sha256": "28e86a8ca9e285a81ca04df45e0dbe1e13cb3bf902aa85871f3918a38ae455dc",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "11_environment/requirements.txt": {
+      "category": "ENVIRONMENT_SPECIFICATION",
+      "public_sha256": "673c4b26ca9f93734c42ea67f65f5470bee0b309c9950da91883f6eee7002825",
+      "scientific_role": "Pinned pip package requirements.",
+      "source_historical_path": "11_environment/requirements.txt",
+      "source_sha256": "673c4b26ca75cc84beff76e8283a0c0a9691b16ee8922c0702c2f90aebbc5a2c",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "12_code_provenance/SHA256_MANIFEST.txt": {
+      "category": "PROVENANCE_MANIFEST",
+      "public_sha256": "eaba4de39a49149c5a51b89cef90c5bb8689397ff5ba20b02bc0112cab65e617",
+      "scientific_role": "Historical SHA-256 digest of contract and script components.",
+      "source_historical_path": "CausalRelay_v3_1_PROSPECTIVE_CONTRACT/SHA256_MANIFEST.txt",
+      "source_sha256": "eaba4de39ad42055ae776f827a3d3c757c9e06180579e0ba3aa575dc8e3295c4",
+      "transformation_rationale": null,
+      "transformation_type": "EXACT_MATCH"
+    },
+    "13_change_control/README.md": {
+      "category": "DOCUMENTATION",
+      "public_sha256": "0a7a8e5ad3b74da477a360864488a41e0a5178cbd8c36c556bb7f1663b302731",
+      "scientific_role": "Documentation of change-control boundaries between public release and private history.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Documentation of change-control boundary.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "14_replay/01_verify_record_integrity.py": {
+      "category": "REPLAY_RUNNER",
+      "public_sha256": "0249a12585f7c31ef0c171574f0b35011c4d5dec99c671b315af20041ce52f6c",
+      "scientific_role": "Executable runner verifying the cryptographic integrity of the reproducibility record.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Standalone public verification runner verifying sealed SHA-256 manifest.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "14_replay/02_run_verification_suite.py": {
+      "category": "REPLAY_RUNNER",
+      "public_sha256": "d8b4b94fec0af7292f595a253fe47bd1a015d0e6e5eab28e37cc581b95946943",
+      "scientific_role": "Executable runner executing full unit, property, and regression test suites.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Standalone public verification runner executing pytest test matrix.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "14_replay/README.md": {
+      "category": "DOCUMENTATION",
+      "public_sha256": "34de7832d4ef0a8341266aaed878c319e3edd07b9d03787f49b3b1c59d17b0ec",
+      "scientific_role": "Replay runbook instructions for reproduction and verification.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Public reproduction runbook instructions.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "README.md": {
+      "category": "DOCUMENTATION",
+      "public_sha256": "ab129e09019d832b1972d39253a01be20aa423a9940b4dceb8ea43ea0541347e",
+      "scientific_role": "Comprehensive directory overview, versioning architecture, and verification instructions.",
+      "source_historical_path": null,
+      "source_sha256": null,
+      "transformation_rationale": "Documentation explaining reproducibility architecture and v1-1 snapshot vs v3.1 scientific contract.",
+      "transformation_type": "PUBLIC_RELEASE_ADDITION"
+    },
+    "tools/seal_record.py": {
+      "category": "INTEGRITY_TOOL",
+      "public_sha256": "34906ad5dac6428794cde5ffbb92abca7d439b747d2bf13de9df161d51175415",
+      "scientific_role": "Utility to compute SHA-256 manifest and cryptographic seal across reproducibility assets, with --verify capability.",
+      "source_historical_path": "tools/seal_record.py",
+      "source_sha256": "15a117335df3e5953051410940bb2be73eb8b072213e9ec47f42ef48cc8185d9",
+      "transformation_rationale": "Enhanced script to support both --verify validation mode and sealing mode.",
+      "transformation_type": "PUBLIC_DERIVATIVE"
+    }
+  },
+  "schema": "tvr_public_artifact_classification/v2"
+}

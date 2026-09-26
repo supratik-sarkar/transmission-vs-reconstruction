@@ -1,5 +1,5 @@
 {
-  "golden_reference": "golden_reference/causal_replay_iclr2027_v2-0.tex",
+  "golden_reference": "golden_reference/causal_replay_v2-0.tex",
   "items": [
     {
       "effect": "Experiment C/CausalRelay cannot be called post-gate under the old protocol; professor preview needs explicit v1.3 redirection.",

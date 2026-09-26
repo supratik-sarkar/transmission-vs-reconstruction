@@ -1,0 +1,7 @@
+{
+  "schema": "causalrelay_record_seal_v1",
+  "status": "UNSEALED",
+  "record_manifest_sha256": null,
+  "sha256sums_sha256": null,
+  "seal_scope": "CAUSALRELAY_PUBLIC_REPRODUCIBILITY_RECORD"
+}

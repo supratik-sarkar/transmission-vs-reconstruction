@@ -1,0 +1,2608 @@
+{
+  "stage_label": "S5_FOCAL_V1",
+  "master_seed": 20260907,
+  "k": 3,
+  "pi_iz_formula": "(k/m_i)*(1/n_is)",
+  "documents": {
+    "SEC-0000004962-26-000080": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000004962-26-000080:period:fy2025q3",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000004962-26-000080:provenance:note-15",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000004962-26-000080:scope:commercial",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 2.25
+    },
+    "SEC-0000005272-26-000023": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000005272-26-000023:entity:cvc-capital-partners-plc",
+          "role": "entity",
+          "n_is": 6,
+          "pi_iz": 0.125
+        },
+        {
+          "candidate_id": "SEC-0000005272-26-000023:provenance:note-1",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000005272-26-000023:scope:europe",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 1.0625
+    },
+    "SEC-0000006281-25-000153": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000006281-25-000153:period:fy2024",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000006281-25-000153:provenance:item-7",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000006281-25-000153:scope:france",
+          "role": "scope",
+          "n_is": 5,
+          "pi_iz": 0.15000000000000002
+        }
+      ],
+      "sum_pi_check": 1.65
+    },
+    "SEC-0000017843-26-000034": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000017843-26-000034:numeric:7-48",
+          "role": "numeric",
+          "n_is": 24,
+          "pi_iz": 0.03125
+        },
+        {
+          "candidate_id": "SEC-0000017843-26-000034:period:fy2026",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000017843-26-000034:provenance:item-7",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.53125
+    },
+    "SEC-0000033213-26-000018": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000033213-26-000018:entity:arrow-land-company-llc",
+          "role": "entity",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0000033213-26-000018:numeric:2039-million",
+          "role": "numeric",
+          "n_is": 14,
+          "pi_iz": 0.05357142857142857
+        },
+        {
+          "candidate_id": "SEC-0000033213-26-000018:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 0.991071
+    },
+    "SEC-0000036270-26-000010": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000036270-26-000010:numeric:773-million",
+          "role": "numeric",
+          "n_is": 26,
+          "pi_iz": 0.028846153846153848
+        },
+        {
+          "candidate_id": "SEC-0000036270-26-000010:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000036270-26-000010:scope:canada",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.153846
+    },
+    "SEC-0000040987-26-000003": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000040987-26-000003:numeric:151-million",
+          "role": "numeric",
+          "n_is": 13,
+          "pi_iz": 0.046153846153846156
+        },
+        {
+          "candidate_id": "SEC-0000040987-26-000003:period:fy2025q4",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0000040987-26-000003:scope:mexico",
+          "role": "scope",
+          "n_is": 10,
+          "pi_iz": 0.06
+        }
+      ],
+      "sum_pi_check": 0.706154
+    },
+    "SEC-0000045012-26-000015": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000045012-26-000015:numeric:10",
+          "role": "numeric",
+          "n_is": 4,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0000045012-26-000015:provenance:item-7",
+          "role": "provenance",
+          "n_is": 4,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0000045012-26-000015:scope:europe",
+          "role": "scope",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        }
+      ],
+      "sum_pi_check": 0.642857
+    },
+    "SEC-0000049071-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000049071-26-000009:entity:executive-overview-general-humana-inc",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000049071-26-000009:numeric:9-98",
+          "role": "numeric",
+          "n_is": 21,
+          "pi_iz": 0.03571428571428571
+        },
+        {
+          "candidate_id": "SEC-0000049071-26-000009:scope:commercial",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.25
+        }
+      ],
+      "sum_pi_check": 0.660714
+    },
+    "SEC-0000051253-26-000006": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000051253-26-000006:entity:overview-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0000051253-26-000006:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0000051253-26-000006:scope:consumer",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 1.2
+    },
+    "SEC-0000062709-26-000022": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000062709-26-000022:period:fy2023",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0000062709-26-000022:provenance:item-7",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.19999999999999998
+        },
+        {
+          "candidate_id": "SEC-0000062709-26-000022:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 1.4
+    },
+    "SEC-0000062996-26-000005": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000062996-26-000005:numeric:7650",
+          "role": "numeric",
+          "n_is": 23,
+          "pi_iz": 0.03260869565217391
+        },
+        {
+          "candidate_id": "SEC-0000062996-26-000005:provenance:item-7",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000062996-26-000005:scope:products",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 0.595109
+    },
+    "SEC-0000073124-26-000016": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000073124-26-000016:entity:the-northern-trust-company",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000073124-26-000016:numeric:10",
+          "role": "numeric",
+          "n_is": 25,
+          "pi_iz": 0.03
+        },
+        {
+          "candidate_id": "SEC-0000073124-26-000016:scope:europe",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.78
+    },
+    "SEC-0000077476-26-000007": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000077476-26-000007:numeric:50",
+          "role": "numeric",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000077476-26-000007:provenance:item-7",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000077476-26-000007:scope:canada",
+          "role": "scope",
+          "n_is": 10,
+          "pi_iz": 0.07500000000000001
+        }
+      ],
+      "sum_pi_check": 1.2
+    },
+    "SEC-0000091440-26-000045": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000091440-26-000045:entity:snap-on-credit-llc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0000091440-26-000045:numeric:1-3",
+          "role": "numeric",
+          "n_is": 20,
+          "pi_iz": 0.03
+        },
+        {
+          "candidate_id": "SEC-0000091440-26-000045:period:fy2023",
+          "role": "period",
+          "n_is": 3,
+          "pi_iz": 0.19999999999999998
+        }
+      ],
+      "sum_pi_check": 0.83
+    },
+    "SEC-0000100517-26-000023": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000100517-26-000023:entity:united-the-company",
+          "role": "entity",
+          "n_is": 9,
+          "pi_iz": 0.1111111111111111
+        },
+        {
+          "candidate_id": "SEC-0000100517-26-000023:numeric:100",
+          "role": "numeric",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0000100517-26-000023:scope:latin-america",
+          "role": "scope",
+          "n_is": 9,
+          "pi_iz": 0.1111111111111111
+        }
+      ],
+      "sum_pi_check": 0.722222
+    },
+    "SEC-0000202058-26-000015": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000202058-26-000015:numeric:70",
+          "role": "numeric",
+          "n_is": 9,
+          "pi_iz": 0.1111111111111111
+        },
+        {
+          "candidate_id": "SEC-0000202058-26-000015:period:fy2026",
+          "role": "period",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0000202058-26-000015:provenance:note-15",
+          "role": "provenance",
+          "n_is": 6,
+          "pi_iz": 0.16666666666666666
+        }
+      ],
+      "sum_pi_check": 0.611111
+    },
+    "SEC-0000310158-26-000063": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000310158-26-000063:entity:the-company",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0000310158-26-000063:provenance:item-7",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000310158-26-000063:scope:japan",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 1.0
+    },
+    "SEC-0000316709-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000316709-26-000009:numeric:10-billion",
+          "role": "numeric",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0000316709-26-000009:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 10,
+          "pi_iz": 0.07500000000000001
+        },
+        {
+          "candidate_id": "SEC-0000316709-26-000009:scope:wholesale",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 0.45
+    },
+    "SEC-0000352541-26-000007": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000352541-26-000007:entity:atc-holdings",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000352541-26-000007:numeric:1-6-billion",
+          "role": "numeric",
+          "n_is": 11,
+          "pi_iz": 0.06818181818181818
+        },
+        {
+          "candidate_id": "SEC-0000352541-26-000007:provenance:note-12",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 1.193182
+    },
+    "SEC-0000764180-26-000017": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000764180-26-000017:numeric:98-5",
+          "role": "numeric",
+          "n_is": 6,
+          "pi_iz": 0.16666666666666666
+        },
+        {
+          "candidate_id": "SEC-0000764180-26-000017:provenance:note-15",
+          "role": "provenance",
+          "n_is": 5,
+          "pi_iz": 0.2
+        },
+        {
+          "candidate_id": "SEC-0000764180-26-000017:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.366667
+    },
+    "SEC-0000796343-26-000003": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000796343-26-000003:numeric:5-86-billion",
+          "role": "numeric",
+          "n_is": 10,
+          "pi_iz": 0.07500000000000001
+        },
+        {
+          "candidate_id": "SEC-0000796343-26-000003:provenance:item-7",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000796343-26-000003:scope:united-states",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 0.6375
+    },
+    "SEC-0000798354-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000798354-26-000009:entity:stonecastle-trust-co",
+          "role": "entity",
+          "n_is": 8,
+          "pi_iz": 0.09375
+        },
+        {
+          "candidate_id": "SEC-0000798354-26-000009:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0000798354-26-000009:scope:europe",
+          "role": "scope",
+          "n_is": 6,
+          "pi_iz": 0.125
+        }
+      ],
+      "sum_pi_check": 0.46875
+    },
+    "SEC-0000815556-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000815556-26-000009:entity:cumulative-total-return-among-fastenal-company",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0000815556-26-000009:numeric:9-4",
+          "role": "numeric",
+          "n_is": 23,
+          "pi_iz": 0.03260869565217391
+        },
+        {
+          "candidate_id": "SEC-0000815556-26-000009:period:fy2024q4",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.657609
+    },
+    "SEC-0000820318-26-000020": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000820318-26-000020:entity:the-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0000820318-26-000020:period:fy2026q2",
+          "role": "period",
+          "n_is": 6,
+          "pi_iz": 0.09999999999999999
+        },
+        {
+          "candidate_id": "SEC-0000820318-26-000020:scope:germany",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 1.0
+    },
+    "SEC-0000822416-26-000007": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000822416-26-000007:numeric:17318521",
+          "role": "numeric",
+          "n_is": 24,
+          "pi_iz": 0.03125
+        },
+        {
+          "candidate_id": "SEC-0000822416-26-000007:period:fy2023",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000822416-26-000007:scope:services",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.15625
+    },
+    "SEC-0000864749-26-000015": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000864749-26-000015:numeric:32-5",
+          "role": "numeric",
+          "n_is": 18,
+          "pi_iz": 0.041666666666666664
+        },
+        {
+          "candidate_id": "SEC-0000864749-26-000015:provenance:note-1",
+          "role": "provenance",
+          "n_is": 6,
+          "pi_iz": 0.125
+        },
+        {
+          "candidate_id": "SEC-0000864749-26-000015:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 0.916667
+    },
+    "SEC-0000882095-26-000006": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000882095-26-000006:entity:asegua-therapeutics-llc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0000882095-26-000006:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 5,
+          "pi_iz": 0.2
+        },
+        {
+          "candidate_id": "SEC-0000882095-26-000006:scope:products",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 2.2
+    },
+    "SEC-0000882184-25-000081": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000882184-25-000081:numeric:3-6-billion",
+          "role": "numeric",
+          "n_is": 27,
+          "pi_iz": 0.037037037037037035
+        },
+        {
+          "candidate_id": "SEC-0000882184-25-000081:period:fy2024",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0000882184-25-000081:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.537037
+    },
+    "SEC-0000882835-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000882835-26-000009:entity:the-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0000882835-26-000009:numeric:21-2",
+          "role": "numeric",
+          "n_is": 6,
+          "pi_iz": 0.125
+        },
+        {
+          "candidate_id": "SEC-0000882835-26-000009:provenance:note-9",
+          "role": "provenance",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 1.0625
+    },
+    "SEC-0000886982-26-000091": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000886982-26-000091:entity:operations-introduction-the-goldman-sachs-group",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0000886982-26-000091:numeric:1-35-billion",
+          "role": "numeric",
+          "n_is": 22,
+          "pi_iz": 0.045454545454545456
+        },
+        {
+          "candidate_id": "SEC-0000886982-26-000091:provenance:note-20",
+          "role": "provenance",
+          "n_is": 6,
+          "pi_iz": 0.16666666666666666
+        }
+      ],
+      "sum_pi_check": 0.712121
+    },
+    "SEC-0000898174-26-000006": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0000898174-26-000006:numeric:156-6-billion",
+          "role": "numeric",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000898174-26-000006:provenance:item-1",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0000898174-26-000006:scope:latin-america",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 0.9375
+    },
+    "SEC-0001001250-26-000041": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001001250-26-000041:numeric:1416",
+          "role": "numeric",
+          "n_is": 26,
+          "pi_iz": 0.038461538461538464
+        },
+        {
+          "candidate_id": "SEC-0001001250-26-000041:period:fy2026",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001001250-26-000041:scope:americas",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.038462
+    },
+    "SEC-0001004980-26-000009": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001004980-26-000009:entity:pg-e-corporation",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001004980-26-000009:numeric:61-million",
+          "role": "numeric",
+          "n_is": 9,
+          "pi_iz": 0.1111111111111111
+        },
+        {
+          "candidate_id": "SEC-0001004980-26-000009:provenance:note-3",
+          "role": "provenance",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        }
+      ],
+      "sum_pi_check": 0.587302
+    },
+    "SEC-0001034054-26-000002": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001034054-26-000002:numeric:36-million",
+          "role": "numeric",
+          "n_is": 17,
+          "pi_iz": 0.058823529411764705
+        },
+        {
+          "candidate_id": "SEC-0001034054-26-000002:provenance:note-15",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001034054-26-000002:scope:canada",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.25
+        }
+      ],
+      "sum_pi_check": 0.808824
+    },
+    "SEC-0001037976-26-000037": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001037976-26-000037:numeric:10",
+          "role": "numeric",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001037976-26-000037:provenance:item-8",
+          "role": "provenance",
+          "n_is": 5,
+          "pi_iz": 0.2
+        },
+        {
+          "candidate_id": "SEC-0001037976-26-000037:scope:software",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.2
+    },
+    "SEC-0001053507-26-000035": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001053507-26-000035:numeric:3",
+          "role": "numeric",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        },
+        {
+          "candidate_id": "SEC-0001053507-26-000035:provenance:note-21",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001053507-26-000035:scope:france",
+          "role": "scope",
+          "n_is": 10,
+          "pi_iz": 0.1
+        }
+      ],
+      "sum_pi_check": 1.242857
+    },
+    "SEC-0001069157-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001069157-26-000009:entity:mizuho-bank-ltd",
+          "role": "entity",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0001069157-26-000009:numeric:75",
+          "role": "numeric",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0001069157-26-000009:scope:china",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.25
+        }
+      ],
+      "sum_pi_check": 0.625
+    },
+    "SEC-0001090872-25-000087": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001090872-25-000087:numeric:1789-million",
+          "role": "numeric",
+          "n_is": 13,
+          "pi_iz": 0.07692307692307693
+        },
+        {
+          "candidate_id": "SEC-0001090872-25-000087:period:fy2025",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001090872-25-000087:provenance:part-i",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.076923
+    },
+    "SEC-0001093557-26-000027": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001093557-26-000027:numeric:50-1-million",
+          "role": "numeric",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001093557-26-000027:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 5,
+          "pi_iz": 0.2
+        },
+        {
+          "candidate_id": "SEC-0001093557-26-000027:scope:north-america",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.7
+    },
+    "SEC-0001097864-26-000006": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001097864-26-000006:entity:on-semiconductor-corporation",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001097864-26-000006:provenance:note-7",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001097864-26-000006:scope:manufacturing",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 2.25
+    },
+    "SEC-0001099219-26-000013": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001099219-26-000013:numeric:75",
+          "role": "numeric",
+          "n_is": 15,
+          "pi_iz": 0.04
+        },
+        {
+          "candidate_id": "SEC-0001099219-26-000013:period:fy2025q4",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001099219-26-000013:scope:emea",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 0.94
+    },
+    "SEC-0001100682-26-000022": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001100682-26-000022:period:fy2025",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0001100682-26-000022:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001100682-26-000022:scope:services",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.25
+        }
+      ],
+      "sum_pi_check": 0.875
+    },
+    "SEC-0001104659-26-013549": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001104659-26-013549:entity:amphenol-corporation",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-013549:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 7,
+          "pi_iz": 0.10714285714285714
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-013549:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.107143
+    },
+    "SEC-0001104659-26-020831": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001104659-26-020831:entity:the-coca-cola-bottling-company",
+          "role": "entity",
+          "n_is": 7,
+          "pi_iz": 0.10714285714285714
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-020831:numeric:43",
+          "role": "numeric",
+          "n_is": 18,
+          "pi_iz": 0.041666666666666664
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-020831:scope:united-states",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.52381
+    },
+    "SEC-0001104659-26-020881": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001104659-26-020881:numeric:3",
+          "role": "numeric",
+          "n_is": 26,
+          "pi_iz": 0.038461538461538464
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-020881:provenance:item-8",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-020881:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.371795
+    },
+    "SEC-0001104659-26-032325": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001104659-26-032325:numeric:10",
+          "role": "numeric",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-032325:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001104659-26-032325:scope:mexico",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 2.5
+    },
+    "SEC-0001138118-26-000005": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001138118-26-000005:entity:cbre-group",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001138118-26-000005:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001138118-26-000005:scope:commercial",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 2.25
+    },
+    "SEC-0001159152-26-000045": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001159152-26-000045:entity:overview-james-hardie-industries-plc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001159152-26-000045:period:fy2026",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001159152-26-000045:provenance:item-1",
+          "role": "provenance",
+          "n_is": 4,
+          "pi_iz": 0.15
+        }
+      ],
+      "sum_pi_check": 1.05
+    },
+    "SEC-0001193125-26-051433": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-051433:entity:the-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-051433:numeric:10",
+          "role": "numeric",
+          "n_is": 26,
+          "pi_iz": 0.038461538461538464
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-051433:provenance:part-i",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        }
+      ],
+      "sum_pi_check": 1.371795
+    },
+    "SEC-0001193125-26-051668": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-051668:numeric:6-77",
+          "role": "numeric",
+          "n_is": 27,
+          "pi_iz": 0.027777777777777776
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-051668:provenance:item-2",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-051668:scope:retail",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.527778
+    },
+    "SEC-0001193125-26-059002": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-059002:period:fy2025q1",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-059002:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 4,
+          "pi_iz": 0.15
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-059002:scope:germany",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 0.75
+    },
+    "SEC-0001193125-26-059193": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-059193:entity:the-west-group",
+          "role": "entity",
+          "n_is": 8,
+          "pi_iz": 0.09375
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-059193:numeric:990-million",
+          "role": "numeric",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-059193:scope:united-states",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.65625
+    },
+    "SEC-0001193125-26-066820": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-066820:entity:overview-mks-inc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-066820:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-066820:scope:china",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 1.3125
+    },
+    "SEC-0001193125-26-067161": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-067161:numeric:4-84",
+          "role": "numeric",
+          "n_is": 18,
+          "pi_iz": 0.05555555555555555
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-067161:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-067161:scope:north-america",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.055556
+    },
+    "SEC-0001193125-26-071575": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-071575:entity:nucor-corporation",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-071575:numeric:85",
+          "role": "numeric",
+          "n_is": 5,
+          "pi_iz": 0.15000000000000002
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-071575:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 1.275
+    },
+    "SEC-0001193125-26-071966": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-071966:entity:aperio-group",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-071966:numeric:6310191",
+          "role": "numeric",
+          "n_is": 23,
+          "pi_iz": 0.02608695652173913
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-071966:provenance:item-7",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 0.926087
+    },
+    "SEC-0001193125-26-082824": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001193125-26-082824:entity:lavazza-group",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-082824:numeric:8972",
+          "role": "numeric",
+          "n_is": 15,
+          "pi_iz": 0.05
+        },
+        {
+          "candidate_id": "SEC-0001193125-26-082824:scope:china",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.05
+    },
+    "SEC-0001232524-26-000013": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001232524-26-000013:entity:overview-jazz-pharmaceuticals-plc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001232524-26-000013:provenance:item-1",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001232524-26-000013:scope:australia",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.833333
+    },
+    "SEC-0001260221-25-000081": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001260221-25-000081:entity:total-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001260221-25-000081:numeric:1481",
+          "role": "numeric",
+          "n_is": 26,
+          "pi_iz": 0.023076923076923078
+        },
+        {
+          "candidate_id": "SEC-0001260221-25-000081:period:fy2026",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 1.223077
+    },
+    "SEC-0001276187-26-000013": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001276187-26-000013:entity:energy-transfer-parkland-parkland-corporation",
+          "role": "entity",
+          "n_is": 26,
+          "pi_iz": 0.028846153846153848
+        },
+        {
+          "candidate_id": "SEC-0001276187-26-000013:numeric:67-5",
+          "role": "numeric",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0001276187-26-000013:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.153846
+    },
+    "SEC-0001281761-26-000019": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001281761-26-000019:numeric:2-1-billion",
+          "role": "numeric",
+          "n_is": 18,
+          "pi_iz": 0.05555555555555555
+        },
+        {
+          "candidate_id": "SEC-0001281761-26-000019:period:fy2022q2",
+          "role": "period",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        },
+        {
+          "candidate_id": "SEC-0001281761-26-000019:provenance:note-14",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.198413
+    },
+    "SEC-0001289490-26-000011": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001289490-26-000011:numeric:90",
+          "role": "numeric",
+          "n_is": 5,
+          "pi_iz": 0.2
+        },
+        {
+          "candidate_id": "SEC-0001289490-26-000011:provenance:item-8",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001289490-26-000011:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 2.2
+    },
+    "SEC-0001324424-26-000008": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001324424-26-000008:numeric:417-million",
+          "role": "numeric",
+          "n_is": 7,
+          "pi_iz": 0.0857142857142857
+        },
+        {
+          "candidate_id": "SEC-0001324424-26-000008:period:fy2024q4",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001324424-26-000008:scope:latin-america",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 0.985714
+    },
+    "SEC-0001423902-26-000030": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001423902-26-000030:numeric:42",
+          "role": "numeric",
+          "n_is": 22,
+          "pi_iz": 0.03409090909090909
+        },
+        {
+          "candidate_id": "SEC-0001423902-26-000030:period:fy2025q1",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001423902-26-000030:scope:mexico",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.534091
+    },
+    "SEC-0001437107-26-000020": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001437107-26-000020:entity:warner-bros-television-group",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0001437107-26-000020:numeric:4100",
+          "role": "numeric",
+          "n_is": 11,
+          "pi_iz": 0.06818181818181818
+        },
+        {
+          "candidate_id": "SEC-0001437107-26-000020:provenance:note-23",
+          "role": "provenance",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 0.630682
+    },
+    "SEC-0001468174-26-000007": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001468174-26-000007:entity:hyatt-hotels-corporation",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001468174-26-000007:numeric:66-7",
+          "role": "numeric",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0001468174-26-000007:provenance:note-19",
+          "role": "provenance",
+          "n_is": 7,
+          "pi_iz": 0.10714285714285714
+        }
+      ],
+      "sum_pi_check": 1.044643
+    },
+    "SEC-0001489393-26-000012": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001489393-26-000012:numeric:82",
+          "role": "numeric",
+          "n_is": 11,
+          "pi_iz": 0.06818181818181818
+        },
+        {
+          "candidate_id": "SEC-0001489393-26-000012:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001489393-26-000012:scope:germany",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.568182
+    },
+    "SEC-0001535527-26-000010": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001535527-26-000010:period:fy2025",
+          "role": "period",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0001535527-26-000010:provenance:note-1",
+          "role": "provenance",
+          "n_is": 8,
+          "pi_iz": 0.09375
+        },
+        {
+          "candidate_id": "SEC-0001535527-26-000010:scope:cloud",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.03125
+    },
+    "SEC-0001551152-26-000008": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001551152-26-000008:entity:abbvie-inc",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.375
+        },
+        {
+          "candidate_id": "SEC-0001551152-26-000008:numeric:7-4-billion",
+          "role": "numeric",
+          "n_is": 10,
+          "pi_iz": 0.07500000000000001
+        },
+        {
+          "candidate_id": "SEC-0001551152-26-000008:scope:services",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.25
+        }
+      ],
+      "sum_pi_check": 0.7
+    },
+    "SEC-0001576280-26-000013": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001576280-26-000013:numeric:436-4-million",
+          "role": "numeric",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        },
+        {
+          "candidate_id": "SEC-0001576280-26-000013:provenance:part-i",
+          "role": "provenance",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        },
+        {
+          "candidate_id": "SEC-0001576280-26-000013:scope:services",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.285714
+    },
+    "SEC-0001628280-26-006268": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-006268:entity:norfolk-southern-corporation",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-006268:numeric:12180",
+          "role": "numeric",
+          "n_is": 28,
+          "pi_iz": 0.03571428571428571
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-006268:provenance:item-8",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 2.035714
+    },
+    "SEC-0001628280-26-008322": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-008322:numeric:1992",
+          "role": "numeric",
+          "n_is": 27,
+          "pi_iz": 0.037037037037037035
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-008322:provenance:note-14",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-008322:scope:commercial",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.537037
+    },
+    "SEC-0001628280-26-008461": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-008461:numeric:13-5-million",
+          "role": "numeric",
+          "n_is": 27,
+          "pi_iz": 0.037037037037037035
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-008461:period:fy2024",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-008461:provenance:item-7",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.537037
+    },
+    "SEC-0001628280-26-008819": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-008819:numeric:26",
+          "role": "numeric",
+          "n_is": 22,
+          "pi_iz": 0.03409090909090909
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-008819:period:fy2025",
+          "role": "period",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-008819:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.034091
+    },
+    "SEC-0001628280-26-009059": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-009059:entity:environmental-resource-holdings",
+          "role": "entity",
+          "n_is": 5,
+          "pi_iz": 0.15000000000000002
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009059:numeric:3-2-billion",
+          "role": "numeric",
+          "n_is": 19,
+          "pi_iz": 0.039473684210526314
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009059:period:fy2025",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.564474
+    },
+    "SEC-0001628280-26-009136": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-009136:entity:the-company",
+          "role": "entity",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009136:numeric:10",
+          "role": "numeric",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009136:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 1.2
+    },
+    "SEC-0001628280-26-009546": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-009546:numeric:1-96",
+          "role": "numeric",
+          "n_is": 28,
+          "pi_iz": 0.03571428571428571
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009546:provenance:note-12",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009546:scope:mexico",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 2.035714
+    },
+    "SEC-0001628280-26-009842": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-009842:numeric:1-9-billion",
+          "role": "numeric",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009842:period:fy2025q3",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-009842:provenance:note-26",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        }
+      ],
+      "sum_pi_check": 1.833333
+    },
+    "SEC-0001628280-26-010047": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-010047:entity:united-states-the-company",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-010047:provenance:item-7",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-010047:scope:united-states",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        }
+      ],
+      "sum_pi_check": 1.0
+    },
+    "SEC-0001628280-26-012555": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-012555:entity:smurfit-kappa-group-plc",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.19999999999999998
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-012555:period:fy2025",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-012555:scope:apac",
+          "role": "scope",
+          "n_is": 5,
+          "pi_iz": 0.12
+        }
+      ],
+      "sum_pi_check": 0.92
+    },
+    "SEC-0001628280-26-039136": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-039136:numeric:787-5-million",
+          "role": "numeric",
+          "n_is": 8,
+          "pi_iz": 0.09375
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-039136:provenance:note-13",
+          "role": "provenance",
+          "n_is": 7,
+          "pi_iz": 0.10714285714285714
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-039136:scope:services",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.575893
+    },
+    "SEC-0001628280-26-057406": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001628280-26-057406:numeric:1-5-billion",
+          "role": "numeric",
+          "n_is": 8,
+          "pi_iz": 0.075
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-057406:period:fy2025",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001628280-26-057406:provenance:item-8",
+          "role": "provenance",
+          "n_is": 8,
+          "pi_iz": 0.075
+        }
+      ],
+      "sum_pi_check": 0.45
+    },
+    "SEC-0001645590-25-000130": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001645590-25-000130:entity:hewlett-packard-enterprise-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001645590-25-000130:numeric:15",
+          "role": "numeric",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001645590-25-000130:provenance:item-7",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 1.5
+    },
+    "SEC-0001652044-26-000018": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001652044-26-000018:entity:contents-alphabet-inc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001652044-26-000018:provenance:item-1",
+          "role": "provenance",
+          "n_is": 8,
+          "pi_iz": 0.125
+        },
+        {
+          "candidate_id": "SEC-0001652044-26-000018:scope:cloud",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        }
+      ],
+      "sum_pi_check": 1.458333
+    },
+    "SEC-0001658566-26-000035": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001658566-26-000035:numeric:20",
+          "role": "numeric",
+          "n_is": 7,
+          "pi_iz": 0.14285714285714285
+        },
+        {
+          "candidate_id": "SEC-0001658566-26-000035:provenance:note-13",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001658566-26-000035:scope:united-states",
+          "role": "scope",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        }
+      ],
+      "sum_pi_check": 0.809524
+    },
+    "SEC-0001730168-25-000121": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001730168-25-000121:period:fy2024",
+          "role": "period",
+          "n_is": 2,
+          "pi_iz": 0.3
+        },
+        {
+          "candidate_id": "SEC-0001730168-25-000121:provenance:note-10",
+          "role": "provenance",
+          "n_is": 6,
+          "pi_iz": 0.09999999999999999
+        },
+        {
+          "candidate_id": "SEC-0001730168-25-000121:scope:cloud",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 1.0
+    },
+    "SEC-0001743881-26-000009": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001743881-26-000009:numeric:619-3-million",
+          "role": "numeric",
+          "n_is": 12,
+          "pi_iz": 0.0625
+        },
+        {
+          "candidate_id": "SEC-0001743881-26-000009:provenance:part-i",
+          "role": "provenance",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001743881-26-000009:scope:japan",
+          "role": "scope",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        }
+      ],
+      "sum_pi_check": 0.5
+    },
+    "SEC-0001758730-26-000015": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001758730-26-000015:numeric:93-2-million",
+          "role": "numeric",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001758730-26-000015:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 4,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001758730-26-000015:scope:united-states",
+          "role": "scope",
+          "n_is": 5,
+          "pi_iz": 0.2
+        }
+      ],
+      "sum_pi_check": 1.45
+    },
+    "SEC-0001769628-26-000104": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001769628-26-000104:numeric:15-1-billion",
+          "role": "numeric",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001769628-26-000104:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.5
+        },
+        {
+          "candidate_id": "SEC-0001769628-26-000104:scope:cloud",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 1.833333
+    },
+    "SEC-0001781335-26-000011": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001781335-26-000011:entity:rtx-corporation",
+          "role": "entity",
+          "n_is": 3,
+          "pi_iz": 0.3333333333333333
+        },
+        {
+          "candidate_id": "SEC-0001781335-26-000011:numeric:70-million",
+          "role": "numeric",
+          "n_is": 21,
+          "pi_iz": 0.047619047619047616
+        },
+        {
+          "candidate_id": "SEC-0001781335-26-000011:provenance:note-15",
+          "role": "provenance",
+          "n_is": 6,
+          "pi_iz": 0.16666666666666666
+        }
+      ],
+      "sum_pi_check": 0.547619
+    },
+    "SEC-0001819994-26-000013": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001819994-26-000013:numeric:806-million",
+          "role": "numeric",
+          "n_is": 3,
+          "pi_iz": 0.25
+        },
+        {
+          "candidate_id": "SEC-0001819994-26-000013:period:fy2026q4",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001819994-26-000013:scope:services",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.75
+    },
+    "SEC-0001834584-26-000024": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001834584-26-000024:entity:farfetch-holdings-plc",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0001834584-26-000024:numeric:224",
+          "role": "numeric",
+          "n_is": 22,
+          "pi_iz": 0.02727272727272727
+        },
+        {
+          "candidate_id": "SEC-0001834584-26-000024:period:fy2026q1",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 1.227273
+    },
+    "SEC-0001841666-26-000015": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001841666-26-000015:numeric:315-million",
+          "role": "numeric",
+          "n_is": 15,
+          "pi_iz": 0.04
+        },
+        {
+          "candidate_id": "SEC-0001841666-26-000015:provenance:item-1a",
+          "role": "provenance",
+          "n_is": 7,
+          "pi_iz": 0.0857142857142857
+        },
+        {
+          "candidate_id": "SEC-0001841666-26-000015:scope:united-states",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 0.725714
+    },
+    "SEC-0001849253-26-000006": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001849253-26-000006:entity:usqrisk-holdings",
+          "role": "entity",
+          "n_is": 7,
+          "pi_iz": 0.0857142857142857
+        },
+        {
+          "candidate_id": "SEC-0001849253-26-000006:numeric:80-million",
+          "role": "numeric",
+          "n_is": 3,
+          "pi_iz": 0.19999999999999998
+        },
+        {
+          "candidate_id": "SEC-0001849253-26-000006:provenance:note-4",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 0.885714
+    },
+    "SEC-0001868275-26-000032": {
+      "eligible": true,
+      "m_i": 3,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001868275-26-000032:numeric:70",
+          "role": "numeric",
+          "n_is": 1,
+          "pi_iz": 1.0
+        },
+        {
+          "candidate_id": "SEC-0001868275-26-000032:provenance:note-1",
+          "role": "provenance",
+          "n_is": 5,
+          "pi_iz": 0.2
+        },
+        {
+          "candidate_id": "SEC-0001868275-26-000032:scope:retail",
+          "role": "scope",
+          "n_is": 1,
+          "pi_iz": 1.0
+        }
+      ],
+      "sum_pi_check": 2.2
+    },
+    "SEC-0001878848-26-000052": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001878848-26-000052:entity:public-service-company",
+          "role": "entity",
+          "n_is": 4,
+          "pi_iz": 0.1875
+        },
+        {
+          "candidate_id": "SEC-0001878848-26-000052:numeric:100",
+          "role": "numeric",
+          "n_is": 1,
+          "pi_iz": 0.75
+        },
+        {
+          "candidate_id": "SEC-0001878848-26-000052:provenance:note-2",
+          "role": "provenance",
+          "n_is": 1,
+          "pi_iz": 0.75
+        }
+      ],
+      "sum_pi_check": 1.6875
+    },
+    "SEC-0001964738-26-000007": {
+      "eligible": true,
+      "m_i": 4,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0001964738-26-000007:numeric:0-5",
+          "role": "numeric",
+          "n_is": 7,
+          "pi_iz": 0.10714285714285714
+        },
+        {
+          "candidate_id": "SEC-0001964738-26-000007:provenance:note-1",
+          "role": "provenance",
+          "n_is": 5,
+          "pi_iz": 0.15000000000000002
+        },
+        {
+          "candidate_id": "SEC-0001964738-26-000007:scope:india",
+          "role": "scope",
+          "n_is": 2,
+          "pi_iz": 0.375
+        }
+      ],
+      "sum_pi_check": 0.632143
+    },
+    "SEC-0002011641-25-000027": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0002011641-25-000027:entity:the-company",
+          "role": "entity",
+          "n_is": 1,
+          "pi_iz": 0.6
+        },
+        {
+          "candidate_id": "SEC-0002011641-25-000027:numeric:1735",
+          "role": "numeric",
+          "n_is": 25,
+          "pi_iz": 0.024
+        },
+        {
+          "candidate_id": "SEC-0002011641-25-000027:provenance:part-ii",
+          "role": "provenance",
+          "n_is": 2,
+          "pi_iz": 0.3
+        }
+      ],
+      "sum_pi_check": 0.924
+    },
+    "SEC-0002046386-26-000009": {
+      "eligible": true,
+      "m_i": 5,
+      "k": 3,
+      "focal": [
+        {
+          "candidate_id": "SEC-0002046386-26-000009:entity:medline-holdings",
+          "role": "entity",
+          "n_is": 4,
+          "pi_iz": 0.15
+        },
+        {
+          "candidate_id": "SEC-0002046386-26-000009:numeric:290-million",
+          "role": "numeric",
+          "n_is": 19,
+          "pi_iz": 0.03157894736842105
+        },
+        {
+          "candidate_id": "SEC-0002046386-26-000009:period:fy2026",
+          "role": "period",
+          "n_is": 1,
+          "pi_iz": 0.6
+        }
+      ],
+      "sum_pi_check": 0.781579
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "TVR_PACKAGE_REPRODUCIBILITY_RECEIPT/v1",
+  "scientific_release": "v3.1",
+  "gate_revision": "gate-r05",
+  "base_package": "pkg-r08-14",
+  "target_package": "pkg-r08-15",
+  "reproducibility_status": "DETERMINISTIC_REPRODUCIBILITY_VERIFIED",
+  "build_path": "build_pkg_r08_15.py (authoritative deterministic builder)",
+  "d4_collision_candidates_independently_derived": 2,
+  "affected_units_independently_derived": 8,
+  "phase2_dependencies_on_unresolved": 0,
+  "artifacts": {
+    "DEV1_BOUND_WORK_MANIFEST.json": {
+      "old_pkg14": "539cb8bfa09705e7497847654b682df8a8b05596cd940bd6ab3965579c9738e4",
+      "current_pkg15": "34d46eeec2465a1f6b93c6b98e82cf4b49e003e65a6329fb0a0b3d81dbc3be54",
+      "fresh_rebuild": "34d46eeec2465a1f6b93c6b98e82cf4b49e003e65a6329fb0a0b3d81dbc3be54",
+      "match": true
+    },
+    "PREPARATION_LEDGER.jsonl": {
+      "old_pkg14": "4bc0cf7935c0a21ebfe3a00f9c18be1340695b14895170c2803eef08b09037e6",
+      "current_pkg15": "c1faaf46f625efcd5392e179a75ac4e191684d8cca826179df037972f97b0cb9",
+      "fresh_rebuild": "c1faaf46f625efcd5392e179a75ac4e191684d8cca826179df037972f97b0cb9",
+      "match": true
+    },
+    "REPLAY_VERIFICATION.json": {
+      "old_pkg14": "53a7d27ea6a6f4c48f4197fa055ad6e74e7d5d3d2f496745d55c64b8ce89df1f",
+      "current_pkg15": "fcc7477d7bfabc247409fba9d0672b87346fc1e93fb617c9382844767fb4fb3d",
+      "fresh_rebuild": "fcc7477d7bfabc247409fba9d0672b87346fc1e93fb617c9382844767fb4fb3d",
+      "match": true
+    },
+    "materialize_outcome_dependent.py": {
+      "old_pkg14": "bc52ea3742e4fe330a013ea3ae0edecdf4a383ae64001a95999fc894dd6a6c3c",
+      "current_pkg15": "c962b5e920d97b84f4b956a8e6bfbcb616bf4d5f31631bbbb0cc2665ca8c8ad2",
+      "fresh_rebuild": "c962b5e920d97b84f4b956a8e6bfbcb616bf4d5f31631bbbb0cc2665ca8c8ad2",
+      "match": true
+    },
+    "aggregate_prompt_bytes_digest": {
+      "old_pkg14": "29c5e72fee632c7e10ce01fd313df433ef4691360073e3e044672144b97a4410",
+      "current_pkg15": "6988ba7432e7342bc03e33799cf0f1de01505ecb745ce59a175944cdac3c8fd6",
+      "fresh_rebuild": "6988ba7432e7342bc03e33799cf0f1de01505ecb745ce59a175944cdac3c8fd6",
+      "match": true
+    },
+    "aggregate_treatment_bytes_digest": {
+      "old_pkg14": "b74c2c48e42c4007ff23ffb722ba6464d8dc5c23c7fa194eb03fcbc755b28b56",
+      "current_pkg15": "e6265acbe9db73da4f47188557fc32ada0583f49050e8b5b9fd92fbea9a6cbfa",
+      "fresh_rebuild": "e6265acbe9db73da4f47188557fc32ada0583f49050e8b5b9fd92fbea9a6cbfa",
+      "match": true
+    }
+  },
+  "verified_utc": "2026-09-21T00:24:52.335035+00:00"
+}

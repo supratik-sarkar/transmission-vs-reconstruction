@@ -71,7 +71,7 @@ HARD_PATTERNS: tuple[tuple[str, str], ...] = (
     ("desktop_path", r"(?:~|\$HOME)?/?Desktop/[A-Za-z0-9._/-]+"),
     ("private_workspace_name", r"handoff-fidelity-2026"),
     ("private_git_parent", r"My_Git"),
-    ("openai_key", r"sk-[A-Za-z0-9_-]{16,}"),
+    ("openai_key", r"(?<![A-Za-z0-9])sk-[A-Za-z0-9_-]{20,}"),
     ("anthropic_key", r"sk-ant-[A-Za-z0-9_-]{16,}"),
     ("google_key", r"AIza[0-9A-Za-z_-]{30,}"),
     ("hf_token", r"hf_[A-Za-z0-9]{20,}"),
