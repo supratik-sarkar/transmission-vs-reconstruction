@@ -1,0 +1,607 @@
+{
+  "stage_label": "DOCUMENT_LEVEL_FOCAL_V1",
+  "master_seed": 20260907,
+  "amendment": "D1-b second-stage selection; one atom per document reused across policies, comparators, sham, budgets and receivers",
+  "documents": {
+    "SEC-0000004962-26-000080": {
+      "candidate_id": "SEC-0000004962-26-000080:period:fy2025q3",
+      "role": "period",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000005272-26-000023": {
+      "candidate_id": "SEC-0000005272-26-000023:entity:cvc-capital-partners-plc",
+      "role": "entity",
+      "pi_iz_effective": 0.041666666666666664,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000006281-25-000153": {
+      "candidate_id": "SEC-0000006281-25-000153:scope:france",
+      "role": "scope",
+      "pi_iz_effective": 0.05000000000000001,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000017843-26-000034": {
+      "candidate_id": "SEC-0000017843-26-000034:numeric:7-48",
+      "role": "numeric",
+      "pi_iz_effective": 0.010416666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000033213-26-000018": {
+      "candidate_id": "SEC-0000033213-26-000018:numeric:2039-million",
+      "role": "numeric",
+      "pi_iz_effective": 0.017857142857142856,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000036270-26-000010": {
+      "candidate_id": "SEC-0000036270-26-000010:scope:canada",
+      "role": "scope",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000040987-26-000003": {
+      "candidate_id": "SEC-0000040987-26-000003:period:fy2025q4",
+      "role": "period",
+      "pi_iz_effective": 0.19999999999999998,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000045012-26-000015": {
+      "candidate_id": "SEC-0000045012-26-000015:scope:europe",
+      "role": "scope",
+      "pi_iz_effective": 0.047619047619047616,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000049071-26-000009": {
+      "candidate_id": "SEC-0000049071-26-000009:entity:executive-overview-general-humana-inc",
+      "role": "entity",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000051253-26-000006": {
+      "candidate_id": "SEC-0000051253-26-000006:scope:consumer",
+      "role": "scope",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000062709-26-000022": {
+      "candidate_id": "SEC-0000062709-26-000022:provenance:item-7",
+      "role": "provenance",
+      "pi_iz_effective": 0.06666666666666667,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000062996-26-000005": {
+      "candidate_id": "SEC-0000062996-26-000005:provenance:item-7",
+      "role": "provenance",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000073124-26-000016": {
+      "candidate_id": "SEC-0000073124-26-000016:scope:europe",
+      "role": "scope",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000077476-26-000007": {
+      "candidate_id": "SEC-0000077476-26-000007:numeric:50",
+      "role": "numeric",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000091440-26-000045": {
+      "candidate_id": "SEC-0000091440-26-000045:numeric:1-3",
+      "role": "numeric",
+      "pi_iz_effective": 0.01,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000100517-26-000023": {
+      "candidate_id": "SEC-0000100517-26-000023:scope:latin-america",
+      "role": "scope",
+      "pi_iz_effective": 0.037037037037037035,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000202058-26-000015": {
+      "candidate_id": "SEC-0000202058-26-000015:period:fy2026",
+      "role": "period",
+      "pi_iz_effective": 0.1111111111111111,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000310158-26-000063": {
+      "candidate_id": "SEC-0000310158-26-000063:provenance:item-7",
+      "role": "provenance",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000316709-26-000009": {
+      "candidate_id": "SEC-0000316709-26-000009:provenance:part-ii",
+      "role": "provenance",
+      "pi_iz_effective": 0.025000000000000005,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000352541-26-000007": {
+      "candidate_id": "SEC-0000352541-26-000007:provenance:note-12",
+      "role": "provenance",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000764180-26-000017": {
+      "candidate_id": "SEC-0000764180-26-000017:provenance:note-15",
+      "role": "provenance",
+      "pi_iz_effective": 0.06666666666666667,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000796343-26-000003": {
+      "candidate_id": "SEC-0000796343-26-000003:scope:united-states",
+      "role": "scope",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000798354-26-000009": {
+      "candidate_id": "SEC-0000798354-26-000009:entity:stonecastle-trust-co",
+      "role": "entity",
+      "pi_iz_effective": 0.03125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000815556-26-000009": {
+      "candidate_id": "SEC-0000815556-26-000009:entity:cumulative-total-return-among-fastenal-company",
+      "role": "entity",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000820318-26-000020": {
+      "candidate_id": "SEC-0000820318-26-000020:period:fy2026q2",
+      "role": "period",
+      "pi_iz_effective": 0.03333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000822416-26-000007": {
+      "candidate_id": "SEC-0000822416-26-000007:period:fy2023",
+      "role": "period",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000864749-26-000015": {
+      "candidate_id": "SEC-0000864749-26-000015:scope:united-states",
+      "role": "scope",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000882095-26-000006": {
+      "candidate_id": "SEC-0000882095-26-000006:provenance:part-ii",
+      "role": "provenance",
+      "pi_iz_effective": 0.06666666666666667,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000882184-25-000081": {
+      "candidate_id": "SEC-0000882184-25-000081:numeric:3-6-billion",
+      "role": "numeric",
+      "pi_iz_effective": 0.012345679012345678,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000882835-26-000009": {
+      "candidate_id": "SEC-0000882835-26-000009:entity:the-company",
+      "role": "entity",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000886982-26-000091": {
+      "candidate_id": "SEC-0000886982-26-000091:numeric:1-35-billion",
+      "role": "numeric",
+      "pi_iz_effective": 0.015151515151515152,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0000898174-26-000006": {
+      "candidate_id": "SEC-0000898174-26-000006:scope:latin-america",
+      "role": "scope",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001001250-26-000041": {
+      "candidate_id": "SEC-0001001250-26-000041:numeric:1416",
+      "role": "numeric",
+      "pi_iz_effective": 0.012820512820512822,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001004980-26-000009": {
+      "candidate_id": "SEC-0001004980-26-000009:numeric:61-million",
+      "role": "numeric",
+      "pi_iz_effective": 0.037037037037037035,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001034054-26-000002": {
+      "candidate_id": "SEC-0001034054-26-000002:numeric:36-million",
+      "role": "numeric",
+      "pi_iz_effective": 0.0196078431372549,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001037976-26-000037": {
+      "candidate_id": "SEC-0001037976-26-000037:numeric:10",
+      "role": "numeric",
+      "pi_iz_effective": 0.16666666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001053507-26-000035": {
+      "candidate_id": "SEC-0001053507-26-000035:numeric:3",
+      "role": "numeric",
+      "pi_iz_effective": 0.047619047619047616,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001069157-26-000009": {
+      "candidate_id": "SEC-0001069157-26-000009:scope:china",
+      "role": "scope",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001090872-25-000087": {
+      "candidate_id": "SEC-0001090872-25-000087:provenance:part-i",
+      "role": "provenance",
+      "pi_iz_effective": 0.16666666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001093557-26-000027": {
+      "candidate_id": "SEC-0001093557-26-000027:scope:north-america",
+      "role": "scope",
+      "pi_iz_effective": 0.3333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001097864-26-000006": {
+      "candidate_id": "SEC-0001097864-26-000006:provenance:note-7",
+      "role": "provenance",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001099219-26-000013": {
+      "candidate_id": "SEC-0001099219-26-000013:numeric:75",
+      "role": "numeric",
+      "pi_iz_effective": 0.013333333333333334,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001100682-26-000022": {
+      "candidate_id": "SEC-0001100682-26-000022:provenance:item-1a",
+      "role": "provenance",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001104659-26-013549": {
+      "candidate_id": "SEC-0001104659-26-013549:scope:united-states",
+      "role": "scope",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001104659-26-020831": {
+      "candidate_id": "SEC-0001104659-26-020831:scope:united-states",
+      "role": "scope",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001104659-26-020881": {
+      "candidate_id": "SEC-0001104659-26-020881:numeric:3",
+      "role": "numeric",
+      "pi_iz_effective": 0.012820512820512822,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001104659-26-032325": {
+      "candidate_id": "SEC-0001104659-26-032325:scope:mexico",
+      "role": "scope",
+      "pi_iz_effective": 0.16666666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001138118-26-000005": {
+      "candidate_id": "SEC-0001138118-26-000005:scope:commercial",
+      "role": "scope",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001159152-26-000045": {
+      "candidate_id": "SEC-0001159152-26-000045:provenance:item-1",
+      "role": "provenance",
+      "pi_iz_effective": 0.049999999999999996,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-051433": {
+      "candidate_id": "SEC-0001193125-26-051433:numeric:10",
+      "role": "numeric",
+      "pi_iz_effective": 0.012820512820512822,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-051668": {
+      "candidate_id": "SEC-0001193125-26-051668:numeric:6-77",
+      "role": "numeric",
+      "pi_iz_effective": 0.009259259259259259,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-059002": {
+      "candidate_id": "SEC-0001193125-26-059002:period:fy2025q1",
+      "role": "period",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-059193": {
+      "candidate_id": "SEC-0001193125-26-059193:numeric:990-million",
+      "role": "numeric",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-066820": {
+      "candidate_id": "SEC-0001193125-26-066820:provenance:part-ii",
+      "role": "provenance",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-067161": {
+      "candidate_id": "SEC-0001193125-26-067161:provenance:part-ii",
+      "role": "provenance",
+      "pi_iz_effective": 0.16666666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-071575": {
+      "candidate_id": "SEC-0001193125-26-071575:entity:nucor-corporation",
+      "role": "entity",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-071966": {
+      "candidate_id": "SEC-0001193125-26-071966:entity:aperio-group",
+      "role": "entity",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001193125-26-082824": {
+      "candidate_id": "SEC-0001193125-26-082824:entity:lavazza-group",
+      "role": "entity",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001232524-26-000013": {
+      "candidate_id": "SEC-0001232524-26-000013:entity:overview-jazz-pharmaceuticals-plc",
+      "role": "entity",
+      "pi_iz_effective": 0.3333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001260221-25-000081": {
+      "candidate_id": "SEC-0001260221-25-000081:period:fy2026",
+      "role": "period",
+      "pi_iz_effective": 0.19999999999999998,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001276187-26-000013": {
+      "candidate_id": "SEC-0001276187-26-000013:entity:energy-transfer-parkland-parkland-corporation",
+      "role": "entity",
+      "pi_iz_effective": 0.009615384615384616,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001281761-26-000019": {
+      "candidate_id": "SEC-0001281761-26-000019:period:fy2022q2",
+      "role": "period",
+      "pi_iz_effective": 0.047619047619047616,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001289490-26-000011": {
+      "candidate_id": "SEC-0001289490-26-000011:provenance:item-8",
+      "role": "provenance",
+      "pi_iz_effective": 0.3333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001324424-26-000008": {
+      "candidate_id": "SEC-0001324424-26-000008:scope:latin-america",
+      "role": "scope",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001423902-26-000030": {
+      "candidate_id": "SEC-0001423902-26-000030:numeric:42",
+      "role": "numeric",
+      "pi_iz_effective": 0.011363636363636362,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001437107-26-000020": {
+      "candidate_id": "SEC-0001437107-26-000020:provenance:note-23",
+      "role": "provenance",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001468174-26-000007": {
+      "candidate_id": "SEC-0001468174-26-000007:entity:hyatt-hotels-corporation",
+      "role": "entity",
+      "pi_iz_effective": 0.25,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001489393-26-000012": {
+      "candidate_id": "SEC-0001489393-26-000012:numeric:82",
+      "role": "numeric",
+      "pi_iz_effective": 0.022727272727272724,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001535527-26-000010": {
+      "candidate_id": "SEC-0001535527-26-000010:period:fy2025",
+      "role": "period",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001551152-26-000008": {
+      "candidate_id": "SEC-0001551152-26-000008:entity:abbvie-inc",
+      "role": "entity",
+      "pi_iz_effective": 0.125,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001576280-26-000013": {
+      "candidate_id": "SEC-0001576280-26-000013:scope:services",
+      "role": "scope",
+      "pi_iz_effective": 0.3333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-006268": {
+      "candidate_id": "SEC-0001628280-26-006268:numeric:12180",
+      "role": "numeric",
+      "pi_iz_effective": 0.011904761904761904,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-008322": {
+      "candidate_id": "SEC-0001628280-26-008322:provenance:note-14",
+      "role": "provenance",
+      "pi_iz_effective": 0.16666666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-008461": {
+      "candidate_id": "SEC-0001628280-26-008461:period:fy2024",
+      "role": "period",
+      "pi_iz_effective": 0.16666666666666666,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-008819": {
+      "candidate_id": "SEC-0001628280-26-008819:period:fy2025",
+      "role": "period",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-009059": {
+      "candidate_id": "SEC-0001628280-26-009059:numeric:3-2-billion",
+      "role": "numeric",
+      "pi_iz_effective": 0.013157894736842105,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-009136": {
+      "candidate_id": "SEC-0001628280-26-009136:numeric:10",
+      "role": "numeric",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-009546": {
+      "candidate_id": "SEC-0001628280-26-009546:numeric:1-96",
+      "role": "numeric",
+      "pi_iz_effective": 0.011904761904761904,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-009842": {
+      "candidate_id": "SEC-0001628280-26-009842:numeric:1-9-billion",
+      "role": "numeric",
+      "pi_iz_effective": 0.1111111111111111,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-010047": {
+      "candidate_id": "SEC-0001628280-26-010047:provenance:item-7",
+      "role": "provenance",
+      "pi_iz_effective": 0.1111111111111111,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-012555": {
+      "candidate_id": "SEC-0001628280-26-012555:scope:apac",
+      "role": "scope",
+      "pi_iz_effective": 0.04,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-039136": {
+      "candidate_id": "SEC-0001628280-26-039136:provenance:note-13",
+      "role": "provenance",
+      "pi_iz_effective": 0.03571428571428571,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001628280-26-057406": {
+      "candidate_id": "SEC-0001628280-26-057406:provenance:item-8",
+      "role": "provenance",
+      "pi_iz_effective": 0.024999999999999998,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001645590-25-000130": {
+      "candidate_id": "SEC-0001645590-25-000130:provenance:item-7",
+      "role": "provenance",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001652044-26-000018": {
+      "candidate_id": "SEC-0001652044-26-000018:provenance:item-1",
+      "role": "provenance",
+      "pi_iz_effective": 0.041666666666666664,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001658566-26-000035": {
+      "candidate_id": "SEC-0001658566-26-000035:scope:united-states",
+      "role": "scope",
+      "pi_iz_effective": 0.1111111111111111,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001730168-25-000121": {
+      "candidate_id": "SEC-0001730168-25-000121:period:fy2024",
+      "role": "period",
+      "pi_iz_effective": 0.09999999999999999,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001743881-26-000009": {
+      "candidate_id": "SEC-0001743881-26-000009:scope:japan",
+      "role": "scope",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001758730-26-000015": {
+      "candidate_id": "SEC-0001758730-26-000015:provenance:part-ii",
+      "role": "provenance",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001769628-26-000104": {
+      "candidate_id": "SEC-0001769628-26-000104:numeric:15-1-billion",
+      "role": "numeric",
+      "pi_iz_effective": 0.1111111111111111,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001781335-26-000011": {
+      "candidate_id": "SEC-0001781335-26-000011:numeric:70-million",
+      "role": "numeric",
+      "pi_iz_effective": 0.015873015873015872,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001819994-26-000013": {
+      "candidate_id": "SEC-0001819994-26-000013:numeric:806-million",
+      "role": "numeric",
+      "pi_iz_effective": 0.08333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001834584-26-000024": {
+      "candidate_id": "SEC-0001834584-26-000024:numeric:224",
+      "role": "numeric",
+      "pi_iz_effective": 0.00909090909090909,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001841666-26-000015": {
+      "candidate_id": "SEC-0001841666-26-000015:scope:united-states",
+      "role": "scope",
+      "pi_iz_effective": 0.19999999999999998,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001849253-26-000006": {
+      "candidate_id": "SEC-0001849253-26-000006:provenance:note-4",
+      "role": "provenance",
+      "pi_iz_effective": 0.19999999999999998,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001868275-26-000032": {
+      "candidate_id": "SEC-0001868275-26-000032:numeric:70",
+      "role": "numeric",
+      "pi_iz_effective": 0.3333333333333333,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001878848-26-000052": {
+      "candidate_id": "SEC-0001878848-26-000052:entity:public-service-company",
+      "role": "entity",
+      "pi_iz_effective": 0.0625,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0001964738-26-000007": {
+      "candidate_id": "SEC-0001964738-26-000007:numeric:0-5",
+      "role": "numeric",
+      "pi_iz_effective": 0.03571428571428571,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0002011641-25-000027": {
+      "candidate_id": "SEC-0002011641-25-000027:numeric:1735",
+      "role": "numeric",
+      "pi_iz_effective": 0.008,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    },
+    "SEC-0002046386-26-000009": {
+      "candidate_id": "SEC-0002046386-26-000009:period:fy2026",
+      "role": "period",
+      "pi_iz_effective": 0.19999999999999998,
+      "derivation": "pi_iz_effective = (k/m_i)*(1/n_is)*(1/k) = 1/(m_i*n_is)"
+    }
+  }
+}

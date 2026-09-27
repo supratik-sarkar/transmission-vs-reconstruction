@@ -1,0 +1,19 @@
+{
+  "rule_id": "SENTENCE_CONTEXT_MASK_V1",
+  "status": "FROZEN",
+  "context_boundary_algorithm": "SENTENCE_BOUNDARY",
+  "boundary_parameters": {
+    "sentence_max_chars": 512,
+    "fallback_window_chars": 160
+  },
+  "focal_masking_rule": {
+    "mask_token": "<TARGET>"
+  },
+  "whitespace_normalization_rule": "COLLAPSE_SPACES_STRIP",
+  "ambiguity_rule": "FAIL_ON_COLLISION",
+  "canonical_equivalent_redaction_rule": {
+    "rule": "REDACT_ALL_CANONICAL_EQUIVALENTS",
+    "replacement_token": "<EQUIV_REDACTED>"
+  },
+  "canonical_equivalent_redaction_token": "<EQUIV_REDACTED>"
+}

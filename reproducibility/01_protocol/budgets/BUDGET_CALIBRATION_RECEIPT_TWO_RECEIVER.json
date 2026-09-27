@@ -1,0 +1,57 @@
+{
+  "b_star": 89,
+  "calibration_artifact_sha256": "ef7209abcc87ab4f9f2ba66aa93d98234b97e0b45614b0e2f32f26a89f501dd4",
+  "candidate_grid_pre_outcome": [
+    89,
+    119,
+    200
+  ],
+  "f_star": 178.0,
+  "frozen_frame_sha256": "b348c8f397f0d3500dfe59a9c1d8bbd886c01f3ab3a92be9f3e7f3789d0287fd",
+  "harness": "budget_calibration_two_receiver",
+  "median_F_per_receiver": {
+    "nvidia_gpt_oss_20b": 169.0,
+    "nvidia_nemotron3_super_120b_a12b": 187.0
+  },
+  "method_version": "tvr-v3.1-budget-calibration-1",
+  "n_documents": 100,
+  "provider_generation_calls": 0,
+  "realized_median_rho": 2.0,
+  "receivers": [
+    "nvidia_gpt_oss_20b",
+    "nvidia_nemotron3_super_120b_a12b"
+  ],
+  "rho_by_receiver_by_budget": {
+    "nvidia_gpt_oss_20b": {
+      "119": 1.4202,
+      "200": 0.845,
+      "89": 1.8989
+    },
+    "nvidia_nemotron3_super_120b_a12b": {
+      "119": 1.5714,
+      "200": 0.935,
+      "89": 2.1011
+    }
+  },
+  "run_utc": "2026-09-20T17:59:43.307500+00:00",
+  "stage1_csv_sha256": "4ed951bec7fd4ac96838e9d2fa8faf6cdee614d8c279299399cff8725fdbcbf8",
+  "target_rho": 2.0,
+  "tokenizer_binding": {
+    "nvidia_gpt_oss_20b": {
+      "artifact_sha256": "69eb0ef5c507d43a17c732939928f5b136a556086b29e975eca5cbb5c3a7ebdc",
+      "canonical_token_count": 36,
+      "kind": "local_artifact",
+      "loader": "tokenizers.Tokenizer",
+      "path_or_endpoint": "./TVR_V3_5_TOKENIZER_CORRECTION_WORKSPACE/tokenizer_artifacts/nvidia_gpt_oss_20b",
+      "tokenizer_id": "nvidia_gpt_oss_20b"
+    },
+    "nvidia_nemotron3_super_120b_a12b": {
+      "artifact_sha256": "9f06710e05f9074066da0e2b14bcd4ea5ae345ea7d0c8c4af33a7313e45a549d",
+      "canonical_token_count": 41,
+      "kind": "local_artifact",
+      "loader": "tokenizers.Tokenizer",
+      "path_or_endpoint": "./TVR_V3_5_TOKENIZER_CORRECTION_WORKSPACE/tokenizer_artifacts/nvidia_nemotron3_super_120b_a12b",
+      "tokenizer_id": "nvidia_nemotron3_super_120b_a12b"
+    }
+  }
+}

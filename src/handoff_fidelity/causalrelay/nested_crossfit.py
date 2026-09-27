@@ -120,7 +120,7 @@ def run_nested_grouped_crossfit(
     if n_unique < n_outer_folds:
         raise ValueError(f"Fewer unique documents ({n_unique}) than outer folds ({n_outer_folds})")
 
-    outer_folds = grouped_folds(doc_arr, n_splits=n_outer_folds)
+    outer_folds = grouped_folds(document_ids, n_splits=n_outer_folds)
     fold_results: list[CrossFitFoldResult] = []
     predictions: dict[str, float] = {}
 

@@ -1,0 +1,69 @@
+{
+  "schema": "FINAL_RECEIVER_OPERATIONAL_EVIDENCE_R05/v1",
+  "status": "FROZEN_CANDIDATE_NOT_INSTALLED",
+  "scientific_release": "v3.1",
+  "basis": "Existing pre-outcome OC1 rate-topology evidence + completed OC2 visible-answer qualification. No additional provider calls.",
+  "deadline_is_scientific_hard_stop": false,
+  "oc1_artifact_sha256": "467c172abce2cb85228b1ac12c19a911cffb171d6a4d0cd5f8ddafa9f7a64c08",
+  "oc2_artifact_sha256": "59fff4e9e64f205d9a65cedea8177f91768113bb3b8e1d2cb8c1dd366f651986",
+  "oc1": {
+    "status": "PASS_MEASURED",
+    "same_key": "YES",
+    "parallelism_efficiency": 0.9956,
+    "http_429_total": 0,
+    "rate_limit_topology": "AMBIGUOUS",
+    "final_receiver_metrics": {
+      "nvidia_gpt_oss_20b": {
+        "receiver_id": "nvidia_gpt_oss_20b",
+        "api_model": "openai/gpt-oss-20b",
+        "d1b_units": 3600,
+        "isolated_attested_rpm": 2.75,
+        "target_rpm": 3.0,
+        "measured_steady_state_elapsed_s": 930.45,
+        "attempts": 46,
+        "successes": 46,
+        "http_429_count": 0,
+        "other_failure_count": 0,
+        "schema_valid_count": 46,
+        "concurrent_rpm": 2.9663,
+        "projected_hours": 20.23
+      },
+      "nvidia_nemotron3_super_120b_a12b": {
+        "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+        "api_model": "nvidia/nemotron-3-super-120b-a12b",
+        "d1b_units": 3600,
+        "isolated_attested_rpm": 1.36,
+        "target_rpm": 1.5,
+        "measured_steady_state_elapsed_s": 930.45,
+        "attempts": 45,
+        "successes": 29,
+        "http_429_count": 0,
+        "other_failure_count": 16,
+        "schema_valid_count": 29,
+        "concurrent_rpm": 1.8701,
+        "projected_hours": 32.08
+      }
+    }
+  },
+  "oc2": {
+    "threshold": 48,
+    "total_cases": 50,
+    "final_receiver_results": {
+      "nvidia_gpt_oss_20b": {
+        "qualified": true,
+        "selected_cap": 2048
+      },
+      "nvidia_nemotron3_super_120b_a12b": {
+        "qualified": true,
+        "selected_cap": 512
+      }
+    }
+  },
+  "r05_blocking_rules": {
+    "both_final_receivers_oc2_qualified": true,
+    "no_oc1_http_429": true,
+    "positive_measured_concurrent_rpm": true,
+    "schema_valid_count_equals_successes": true,
+    "transient_non_429_transport_failures": "DISCLOSED_NONBLOCKING_BECAUSE_DEADLINE_WITHDRAWN_AND_RUNNER_IS_RESUMABLE"
+  }
+}

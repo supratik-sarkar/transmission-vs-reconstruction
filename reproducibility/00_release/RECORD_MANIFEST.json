@@ -1,0 +1,150 @@
+{
+  "files": {
+    "00_release/PUBLIC_ARTIFACT_CLASSIFICATION.json": {
+      "bytes": 30276,
+      "sha256": "d41f22b0c89989fa9099260d8edc3eb1e0c00e2525a2b1e1b388348912be3991"
+    },
+    "00_release/RECORD_MANIFEST.template.json": {
+      "bytes": 218,
+      "sha256": "a4249e9b4505c50ebad12143593d22eb4f0ef6ce41ed572ba61c1fb058128b18"
+    },
+    "00_release/RECORD_SEAL.template.json": {
+      "bytes": 193,
+      "sha256": "8bcb7245249862d96ce6e989a44a4268f9b7995fec7acea452f9cf007127b24b"
+    },
+    "01_protocol/budgets/BUDGET_CALIBRATION_RECEIPT_TWO_RECEIVER.json": {
+      "bytes": 1932,
+      "sha256": "19f139db35ad499134c520b61969b042a239a1dd3d1673d2570c7dd844651bbb"
+    },
+    "01_protocol/budgets/FINAL_BUDGET_GRID.json": {
+      "bytes": 1694,
+      "sha256": "79174b8648f2af7f00e283c1fc6a3ef238e4744a072d3c5476b8c595b3ce9bb0"
+    },
+    "01_protocol/estimands/ATTRIBUTE_DERIVATION_CONTRACT.json": {
+      "bytes": 578,
+      "sha256": "1bc5552d05571b200236329e805b318739528e854b555194f1db5baf177d06e2"
+    },
+    "01_protocol/estimands/CORRECTED_SLOT_ATTRIBUTE_MAP.json": {
+      "bytes": 654554,
+      "sha256": "ce704d868d92b359deac8f73d7412d6bacb46aa2da39fc0a52ad64fcc658ecb7"
+    },
+    "01_protocol/estimands/PROSPECTIVE_SCIENTIFIC_CONTRACT_FINAL.json": {
+      "bytes": 28153,
+      "sha256": "cd4489dd71461e30b1e805f764abd671a2d263f7ae5404f6ad2aaf7a3f8fca7f"
+    },
+    "01_protocol/receivers/RATE_TOPOLOGY_RESULT.json": {
+      "bytes": 53879,
+      "sha256": "467c172abce2cb85228b1ac12c19a911cffb171d6a4d0cd5f8ddafa9f7a64c08"
+    },
+    "01_protocol/receivers/RECEIVER_OPERATIONAL_EVIDENCE.json": {
+      "bytes": 2352,
+      "sha256": "7ed07cccd49a8cdeefbcbb07a5a390c459cdcbdc756703e56892e8207401cdce"
+    },
+    "01_protocol/receivers/RECEIVER_QUALIFICATION_RESULT.json": {
+      "bytes": 207732,
+      "sha256": "94da9bd20314c69fda646afc20349884a0593f3d51ab5c0bbe68008ba549cae4"
+    },
+    "01_protocol/sampling/FINAL_TWO_RECEIVER_GRAPH.json": {
+      "bytes": 3447,
+      "sha256": "373dbac36aca4bd42db8286f7511c58c252350c8d14e21a68909b0001b25b54f"
+    },
+    "01_protocol/sampling/PREREGISTRATION_v1.2.md": {
+      "bytes": 19125,
+      "sha256": "f7c2677992530c45356e7239b1f91099831f5fa9ea7033d92e1e6afe85b87db0"
+    },
+    "02_configs/PHASE2_DEPENDENCY_SCHEMA.json": {
+      "bytes": 3127,
+      "sha256": "77587c35a7b71e90bf8f8391ee8d9da749876442c98a36c8f81bc1eceae14d26"
+    },
+    "03_inputs/source_manifest/DOCUMENT_LEVEL_FOCAL.json": {
+      "bytes": 25647,
+      "sha256": "6ff1c4adc71c5cca9a17b589a6dc64121ad38c99d8f9d3af07ed618c45bd1c1f"
+    },
+    "03_inputs/source_manifest/FOCAL_SELECTIONS.json": {
+      "bytes": 66586,
+      "sha256": "221fa4f0c9682486f8c71ac309629a408a8060fdb78b07189fd03fd7a703e07e"
+    },
+    "04_interventions/validity/NOT_ESTIMABLE_RECORDS.jsonl": {
+      "bytes": 105130,
+      "sha256": "3dfaf9a9ae0b630b18e6a4f2f073324d91fb59d8763f36e6cecd235c2369049a"
+    },
+    "05_execution/receipts/CERTIFIER_AUDIT_RECEIPT.json": {
+      "bytes": 6268,
+      "sha256": "37fb3a1b444a0392dcad0eeefa64a99e3104074ec54f355304b002afe297ebf6"
+    },
+    "05_execution/receipts/PACKAGE_REPRODUCIBILITY_RECEIPT.json": {
+      "bytes": 2555,
+      "sha256": "5e27478ae95665c90d01ca187a8889661ec1c15d2ce2c1453a4c83abe60b0deb"
+    },
+    "05_execution/receipts/PHASE1_AGGREGATE_DIGEST_AND_SAMPLES.json": {
+      "bytes": 15731,
+      "sha256": "5ada58d1b6b70a6b7151d92955fb2e0ca095912da1baea4218726d574cdda7a2"
+    },
+    "05_execution/receipts/PHASE2_AGGREGATE_DIGEST_AND_SAMPLES.json": {
+      "bytes": 8131,
+      "sha256": "4dc882485d6743a1795fd704689142a358d3de9ca56cfcb076b9d62275909c87"
+    },
+    "05_execution/receipts/S9_CONTAMINATION_QUARANTINE_RECEIPT.json": {
+      "bytes": 1257,
+      "sha256": "b66b67cf7f34558f132353824a850236573a426e284b0e1e77a43b749a0669f3"
+    },
+    "06_human_audit/README.md": {
+      "bytes": 1571,
+      "sha256": "a01f4b00b309e1a7e8f715e36a456df704005ec65d3235acb6f86f1de7ba0ff5"
+    },
+    "09_results/README.md": {
+      "bytes": 576,
+      "sha256": "37bc162a695ed06402d5adb30da9becaf4ffd9356ffe92516872ce230d628b04"
+    },
+    "09_results/figure_data/figure_data_theory_method_workflow_v3.json": {
+      "bytes": 463,
+      "sha256": "e5c87a0f98b889f2089da9f79a5e939dbe522b6724a264944d6e6b4abdba8734"
+    },
+    "10_artifacts/README.md": {
+      "bytes": 524,
+      "sha256": "06417337590122a74c896baa86766714bd3e0593c612b7032962243ffbb6d9ef"
+    },
+    "10_artifacts/figures/theory_method_workflow_v3.pdf": {
+      "bytes": 47819,
+      "sha256": "8c36bc98878d19384abda12bd16547452f19e400bf60eb6526ddaabdac64ad0d"
+    },
+    "11_environment/pyproject.toml": {
+      "bytes": 3724,
+      "sha256": "28e86a8ca960940763c20071c7cebe120d8343c5357b8944555c97a4e9fc0330"
+    },
+    "11_environment/requirements.txt": {
+      "bytes": 192,
+      "sha256": "673c4b26ca9f93734c42ea67f65f5470bee0b309c9950da91883f6eee7002825"
+    },
+    "12_code_provenance/SHA256_MANIFEST.txt": {
+      "bytes": 10798,
+      "sha256": "eaba4de39a49149c5a51b89cef90c5bb8689397ff5ba20b02bc0112cab65e617"
+    },
+    "13_change_control/README.md": {
+      "bytes": 380,
+      "sha256": "0a7a8e5ad3b74da477a360864488a41e0a5178cbd8c36c556bb7f1663b302731"
+    },
+    "14_replay/01_verify_record_integrity.py": {
+      "bytes": 913,
+      "sha256": "683efdb829bdad88ca49578c18255289bba712ac1c47a2c0028c44774626d7b8"
+    },
+    "14_replay/02_run_verification_suite.py": {
+      "bytes": 923,
+      "sha256": "5e654f60b103fc95a88d5dbd633e60c72f2d4a6362e5cc2904065b616f566a12"
+    },
+    "14_replay/README.md": {
+      "bytes": 724,
+      "sha256": "34de7832d4ef0a8341266aaed878c319e3edd07b9d03787f49b3b1c59d17b0ec"
+    },
+    "README.md": {
+      "bytes": 2361,
+      "sha256": "ab129e09019d832b1972d39253a01be20aa423a9940b4dceb8ea43ea0541347e"
+    },
+    "tools/seal_record.py": {
+      "bytes": 4209,
+      "sha256": "3a57869f7d3fac419f46f764d83b1bd56b898d0a3b452e700841ac7b98c02e76"
+    }
+  },
+  "schema": "causalrelay_release_manifest_v1",
+  "status": "UNSEALED"
+}

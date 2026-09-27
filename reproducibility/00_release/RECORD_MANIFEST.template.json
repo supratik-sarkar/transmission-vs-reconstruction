@@ -1,0 +1,9 @@
+{
+  "schema": "causalrelay_release_manifest_v1",
+  "scientific_release": "v3.1",
+  "created_utc": null,
+  "status": "UNSEALED",
+  "files": {},
+  "canonical_result_store_sha256": null,
+  "manuscript_pdf_sha256": null
+}

@@ -3,35 +3,75 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python: >=3.12,<3.13](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](pyproject.toml)
 [![Research Status: Active](https://img.shields.io/badge/Research-Ongoing%20Implementation-blueviolet.svg)](#research-status--scope)
-[![Package: handoff-fidelity v0.2.0](https://img.shields.io/badge/Package-handoff--fidelity%20v0.2.0-informational.svg)](pyproject.toml)
+[![Research Snapshot: v1-1](https://img.shields.io/badge/Research%20Snapshot-v1--1-informational.svg)](#research-status--scope)
 
-> **A causal measurement and benchmarking toolkit for distinguishing genuine transmitted information from prior-based hallucination and reconstruction in chained language-model workflows.**
+> **A causal measurement and benchmarking toolkit for separating information that was actually available across an LLM handoff from information reconstructed by the receiving model after omission.**
 
 ---
 
 ## Overview
 
-When one language model hands work to another in a chained or multi-agent workflow, the receiving model routinely states facts the sending model never communicated. Because modern foundation models are trained on massive corpora, a receiver often **reconstructs** plausible claims from surrounding context and its own internal parametric memory.
+Language-model systems increasingly pass intermediate work between agents, models, and context-processing stages. A downstream answer can be correct even when some of the supporting information never crossed the handoff: the receiving model may reconstruct it from the remaining context or from its own learned priors.
 
-Measuring only endpoint correctness cannot separate the two mechanisms: an item that survived a handoff and an item that was dropped and subsequently guessed produce identical downstream outputs. However, their failure modes are fundamentally distinct:
-* **Transmitted information** persists across out-of-distribution entities and domain shifts.
-* **Reconstructed information** degrades sharply when applied to unfamiliar domains, proprietary context, or private data.
+That makes endpoint correctness an incomplete measure of communication fidelity. `handoff-fidelity` provides intervention-based tooling for asking a more specific question:
 
-**`handoff-fidelity`** provides evaluation harnesses and counterfactual ablation tooling to measure communication fidelity across intermediate handoffs:
-* **Transmission Measurement**: Tracking which specific factual units survive lossy handoffs and summarization boundaries.
-* **Reconstruction Baseline**: Isolating background guessing and prior-driven reconstruction through counterfactual ablation.
-* **Fidelity Scoring**: Computing calibrated communication effectiveness and channel contribution across chained language-model relays.
-* **Relay Benchmarking**: Evaluating multi-hop relays across diverse context compression ratios and model pairings.
+> **What did the downstream model recover because the information was available in the handoff, and what could it recover even when that information was withheld?**
 
-```
+The v1-1 research snapshot supports four closely related capabilities:
+
+- **Transmission / Availability Measurement** — estimate how downstream recovery changes when a focal information unit is made available versus withheld while the relevant non-focal context is controlled.
+- **Focal-Omission Reconstruction Measurement** — quantify what the receiver can still recover when the focal information unit is removed from the handoff.
+- **Budget-Neutral Value Measurement** — distinguish information that matters in principle from information worth preserving when communication capacity is fixed and one retained unit may displace another.
+- **Relay Benchmarking** — compare handoff and compression policies under controlled intervention, budget, and receiver conditions.
+
+---
+
+## Why This Problem Matters
+
+Modern AI systems are increasingly modular: one model retrieves, another summarizes, another reasons, and another produces the final answer. In these pipelines, a successful endpoint does not necessarily imply a faithful intermediate communication channel.
+
+This ambiguity matters most when the receiver's prior knowledge is least trustworthy: new facts, changed values, proprietary context, unfamiliar entities, or information that post-dates model training. A system that appears reliable on familiar examples can therefore depend on reconstruction without exposing that dependence in ordinary accuracy metrics.
+
+There is also a measurement problem. Real relays do not omit information randomly: they may preferentially retain salient, surprising, or apparently important content and drop information that looks predictable. Measuring only naturally omitted content can therefore confound **what the relay chose to send** with **what the receiver could reconstruct**.
+
+`handoff-fidelity` is designed to make those mechanisms experimentally separable.
+
+---
+
+## What Is Distinctive Here?
+
+Most compression and relay evaluations ask whether the final task still succeeds, whether a summary is semantically similar, or how much text can be removed. Those questions are useful, but they do not identify why a downstream model succeeded.
+
+This project focuses on a different layer of the problem:
+
+1. **Causal availability rather than surface similarity**
+   The core measurement comes from controlled availability interventions on focal information units, not from semantic overlap alone.
+
+2. **Reconstruction is measured under focal omission**
+   Recovery after withholding a focal unit is treated as its own observable outcome, rather than being silently counted as successful transmission.
+
+3. **Availability value and budget value are different quantities**
+   An information unit can matter when added while still being a poor use of scarce communication capacity. The toolkit therefore separates causal availability effects from matched-budget displacement/allocation effects.
+
+4. **The relay is treated as an assignment mechanism**
+   Because a sender or compressor chooses what survives, natural handoff data can be selection-biased. The intervention harness is built to evaluate that mechanism explicitly.
+
+5. **Measurement, policy evaluation, and provenance are kept separate**
+   Experiment configuration, intervention records, receiver conditions, and reporting artifacts are structured so that causal measurements can be inspected independently of downstream policy comparisons.
+
+---
+
+## Communication Fidelity Flow
+
+```text
 +-------------------------------------------------------------------------------------------------+
 |                                    COMMUNICATION FIDELITY FLOW                                  |
 |                                                                                                 |
-|   [ Source Document ]        [ Information Atomizer ]          [ Counterfactual Evaluation ]    |
-|   • Raw text context         • Atomic Fact Extraction          • Present in Handoff Condition   |
-|   • Document paragraphs ---> • Proposition Classification ---> • Ablated Context Condition      |
-|                              • Entity Relationships            • Net Transmission Differential  |
-|                                                                • Channel Fidelity Evaluation    |
+|   [ Source Document ]        [ Information Atomizer ]          [ Causal Evaluation ]            |
+|   • Raw text context         • Atomic Fact Extraction          • Focal Present Condition        |
+|   • Document paragraphs ---> • Proposition Classification ---> • Focal Withheld Condition       |
+|                              • Entity Relationships            • Availability Effect            |
+|                                                                • Budget-Neutral Comparison      |
 +-------------------------------------------------------------------------------------------------+
 ```
 
@@ -46,30 +86,34 @@ flowchart LR
         UNITS["Atomic Proposition Units\n(Taxonomy & Schema)"]
     end
 
-    subgraph Intervene["3. Counterfactual Probing"]
-        PROBE["Counterfactual Probe\n(src/handoff_fidelity/interventions/)"]
-        PRES["Transmission Condition\n(Information Present)"]
-        ABL["Ablation Baseline\n(Information Withheld)"]
+    subgraph Intervene["3. Controlled Intervention"]
+        PROBE["Intervention Harness\n(src/handoff_fidelity/interventions/)"]
+        PRES["Focal Information Available"]
+        ABL["Focal Information Withheld"]
+        SWAP["Matched-Budget Insert / Displace"]
     end
 
-    subgraph Decomp["4. Channel Evaluation"]
-        DELTA["Fidelity Differential\n(Net Transmission Gain)"]
-        CHAN["Channel Alignment\n(Relay Sensitivity Analysis)"]
-        EVAL["Calibrated Assessment\n(src/handoff_fidelity/policy/)"]
+    subgraph Decomp["4. Causal Evaluation"]
+        AV["Availability Effect"]
+        BU["Budget-Neutral Value"]
+        EVAL["Policy & Fidelity Assessment\n(src/handoff_fidelity/policy/)"]
     end
 
     DOC --> ATOM --> UNITS --> PROBE
-    PROBE --> PRES & ABL --> DELTA --> CHAN --> EVAL
+    PROBE --> PRES & ABL --> AV
+    PROBE --> SWAP --> BU
+    AV & BU --> EVAL
 ```
 
 ---
 
 ## Research Status & Scope
 
-* **Classification**: `ONGOING RESEARCH` (Collaborative research implementation).
-* **Collaboration Context**: Collaborative research exploration associated with Indian Statistical Institute (ISI) Kolkata.
-* **Status**: Active research implementation and evaluation framework (`handoff-fidelity v0.2.0`).
-* **Open-Source Distribution Notice**: To comply with standard open-source conventions, this repository provides measurement software, intervention harnesses, and validation runbooks. Manuscript drafts, submission materials, and private review artifacts are intentionally maintained separately.
+- **Classification**: `ONGOING RESEARCH`.
+- **Status**: Active research implementation and evaluation framework; current public research snapshot: **v1-1**.
+- **Scope**: Causal measurement of information availability, focal-omission reconstruction, and value-aware allocation across language-model handoffs.
+- **Open-Source Distribution Notice**: This repository provides measurement software, intervention harnesses, experiment configuration, validation tooling, and reproducibility-oriented utilities. Manuscript drafts, submission materials, and private review artifacts are intentionally maintained separately.
+- **Interpretation Boundary**: Results produced by this toolkit are conditional on the specified intervention, receiver, task, and communication-budget design. The repository should not be interpreted as establishing universal guarantees across models, domains, or deployment settings.
 
 ---
 
@@ -77,22 +121,24 @@ flowchart LR
 
 | Subsystem | Module | Description |
 | :--- | :--- | :--- |
-| **Information Atomizer** | `src/handoff_fidelity/atomizer/` | Decomposes documents into atomic propositions, schema types, and verify rules. |
-| **Intervention Probes**| `src/handoff_fidelity/interventions/` | Evaluates counterfactual availabilities and baseline estimation engines. |
-| **Relay Orchestration** | `src/handoff_fidelity/relay/` | Executes multi-hop model handoffs across diverse context compression ratios. |
-| **Decision Policy Engine**| `src/handoff_fidelity/policy/` | Threshold-based decision logic and routing based on verified communication fidelity. |
-| **Telemetry & Observability** | `src/handoff_fidelity/telemetry/` | OpenTelemetry and LangSmith tracing for span-level inspection across relays. |
-| **Export & Reporting** | `src/handoff_fidelity/export/` | Publication-ready tabular summaries, reporting exports, and distribution figures. |
+| **Information Atomizer** | `src/handoff_fidelity/atomizer/` | Decomposes documents into atomic propositions, schema types, and verification records. |
+| **Intervention Probes** | `src/handoff_fidelity/interventions/` | Constructs controlled focal-availability, omission, and counterfactual intervention conditions. |
+| **Relay Orchestration** | `src/handoff_fidelity/relay/` | Executes language-model handoff tasks across controlled context and communication-budget conditions. |
+| **Decision Policy Engine** | `src/handoff_fidelity/policy/` | Evaluates routing and information-selection policies using measured handoff quantities. |
+| **Telemetry & Observability** | `src/handoff_fidelity/telemetry/` | Provides span-level instrumentation for inspecting relay execution and experiment traces. |
+| **Export & Reporting** | `src/handoff_fidelity/export/` | Produces tabular summaries, reporting artifacts, figures, and consistency checks. |
 
 ---
 
 ## Quick Start & Usage
 
 ### 1. Installation
+
 Requires Python 3.12:
+
 ```bash
-# Clone the repository
-git clone https://github.com/supratik-sarkar/transmission-vs-reconstruction.git
+# Clone the anonymous/public repository
+git clone <repository-url>
 cd transmission-vs-reconstruction
 
 # Create and activate environment
@@ -104,14 +150,23 @@ pip install -e .
 ```
 
 ### 2. Running an Intervention Audit
+
 Execute the command-line evaluation runner:
+
 ```bash
 python -m handoff_fidelity --help
 ```
 
 ### 3. Running Unit and Regression Tests
+
 ```bash
 pytest tests/ -q
+```
+
+### 4. Verifying Reproducibility Record Integrity
+
+```bash
+python reproducibility/tools/seal_record.py --verify
 ```
 
 ---
@@ -123,17 +178,24 @@ transmission-vs-reconstruction/
 ├── configs/            # Experiment configurations and model parameter sets
 ├── docs/               # Protocol definitions and evaluation runbooks
 ├── policies/           # Verification policies and threshold schemas
+├── reproducibility/    # Protocol contracts, sampling manifests, receipts, and replay runbooks
 ├── schemas/            # JSON Schema definitions for atom inventories and records
 ├── src/
 │   └── handoff_fidelity/
 │       ├── atomizer/       # Atomic fact extraction, validation, and taxonomies
 │       ├── baselines/      # Control baselines and external comparison harnesses
 │       ├── export/         # Figure generation, table formatting, and reporting checks
-│       ├── interventions/  # Counterfactual prior probes and ablation engines
-│       ├── policy/         # Decision routing and threshold engines
-│       ├── relay/          # Multi-agent handoff task runners
-│       └── telemetry/      # OpenTelemetry and LangSmith instrumentation
-├── tests/              # Comprehensive test suite covering atomic units and measurement harnesses
-├── pyproject.toml      # Build metadata (name: handoff-fidelity v0.2.0)
+│       ├── interventions/  # Controlled availability and counterfactual intervention engines
+│       ├── policy/         # Policy evaluation and information-selection logic
+│       ├── relay/          # Language-model handoff task runners
+│       └── telemetry/      # Experiment tracing and observability instrumentation
+├── tests/              # Unit and regression tests for measurement and intervention tooling
+├── pyproject.toml      # Python build metadata and package configuration
 └── LICENSE             # MIT License
 ```
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).

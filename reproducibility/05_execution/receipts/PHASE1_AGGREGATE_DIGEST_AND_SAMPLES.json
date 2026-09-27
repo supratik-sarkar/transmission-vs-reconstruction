@@ -1,0 +1,148 @@
+{
+  "schema": "TVR_PHASE1_BYTE_AUDIT_SUMMARY/v1",
+  "total_units": 12852,
+  "aggregate_deterministic_digest": "61b3af5e4b5ce45bb93c04180363f64b4f22ec977311c169332275112195cff0",
+  "formula": "sha256(concat(f'{unit_id}|{prompt_sha}|{treatment_sha}\n' for sorted unit_ids))",
+  "deterministic_samples": [
+    {
+      "unit_id": "comparator_SEC-0000004962-26-000080_nvidia_gpt_oss_20b_dac",
+      "prompt_sha256": "134660547c8e965f7a9a9c668b81636f37807899e2df78fd4f58629040c1b575",
+      "treatment_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": ""
+    },
+    {
+      "unit_id": "nonref_delta_av_SEC-0001097864-26-000006_SEC-0001097864-26-000006:numeric:100_nvidia_nemotron3_super_120b_a12b_presence",
+      "prompt_sha256": "4ed7f3afa05bd2a76163c8541442ae8cfff6157548e4f830e57a3e7976cd2b2e",
+      "treatment_sha256": "f893268b2f572af5a0485e330916d2a9bb660fae5c9c923f982f6c3ec3cf561c",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- numeric: $5995.4|million\n- numeric: 15.3%\n- numeric: $7082.3|million\n- numeric: $121|million\n- numeric: $1572.8|million\n- numeric: $84.2|million\n- numeric: $1767.7|million\n- numeric: 33.1%\n- numeric"
+    },
+    {
+      "unit_id": "nonref_delta_bu_SEC-0001138118-26-000005_SEC-0001138118-26-000005:numeric:0-2_nvidia_nemotron3_super_120b_a12b_natural",
+      "prompt_sha256": "e0f65dd28c656d2d163bfec1dc27746eaecaa70233acb0b3423a6d87e52ec312",
+      "treatment_sha256": "771f43b027727e02e0e0bd4d2a1d739fc76716308f870818be1a35b7e2c2c467",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: Services\n- provenance: Item 1\n- numeric: 60%\n- numeric: 51%\n- numeric: 19%\n- numeric: 2%\n- scope: Commercial\n- numeric: 0%\n- numeric: 40%\n- numeric: 14%\n- numeric: 4%\n- numeric: 0.2%\n- entity"
+    },
+    {
+      "unit_id": "policy_SEC-0000077476-26-000007_nvidia_nemotron3_super_120b_a12b_random_b119",
+      "prompt_sha256": "595c6470c24e251ec4c2d9dccc51fd0b175b2c7084f51d3fc59076e91379784b",
+      "treatment_sha256": "920baa3e2dc3d6f9429418601e4d77c6820bcf8964a343c876dd3fa39175853a",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Item 1\n- provenance: Item 7\n- scope: North America\n- scope: United States\n- scope: Canada\n- scope: Europe\n- scope: EMEA\n- scope: Latin America\n- scope: China\n- scope: Australia\n- scope: "
+    },
+    {
+      "unit_id": "policy_SEC-0001097864-26-000006_nvidia_gpt_oss_20b_salience_b200",
+      "prompt_sha256": "2e5798ede7b57e69f39979b205a99b60158eaeba9eacf8ead3c0a465b34fdaef",
+      "treatment_sha256": "8858a456eebfd92939038bd7a331dba5818d964be18bc97823c3ba21743d02bf",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- numeric: $121|million\n- scope: Manufacturing\n- provenance: Note 7\n- entity: ON Semiconductor Corporation\n- numeric: $121\n- numeric: $1572.8\n- numeric: 37.7%\n- numeric: 36.8%\n- numeric: 15.5%\n- numer"
+    },
+    {
+      "unit_id": "policy_SEC-0001489393-26-000012_nvidia_gpt_oss_20b_random_b89",
+      "prompt_sha256": "39dd0a34d9c60320586e07a30c27d2fb122deef3f68aa423c447aa4fd566448f",
+      "treatment_sha256": "56db41dcae309aebc8a5b1e97bb2eb146c0180fea12931b63be4b55be978421d",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- numeric: $241|million\n- numeric: $235|million\n- numeric: 32%\n- numeric: 30%\n- scope: Germany\n- numeric: 100%\n- period: FY2025Q1\n- provenance: Item 1A\n- numeric: 7%\n- numeric: 33%\n- numeric: 25%\n- nu"
+    },
+    {
+      "unit_id": "policy_SEC-0001841666-26-000015_nvidia_nemotron3_super_120b_a12b_salience_b89",
+      "prompt_sha256": "856c5f2a201b9ee03775b74ad86745f2906f1e7db27b936076771f2031cf72cc",
+      "treatment_sha256": "d5c641f6858365d57d5853cdab6de2fc0c2f9675c080c79d089e79e58a99099b",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part Iv\n- provenance: Item 15\n- provenance: Part I\n- provenance: Item 1A\n- provenance: Part Ii\n- provenance: Item 7A\n- provenance: Item 7\n- entity: The Company\n- period: FY2021Q4\n- entit"
+    },
+    {
+      "unit_id": "ref_delta_av_SEC-0000051253-26-000006_SEC-0000051253-26-000006:numeric:11484_presence",
+      "prompt_sha256": "98cf28cb1ab9eb4d44c94e399e47548ae11277de7643c31c080d0d5df43ed16c",
+      "treatment_sha256": "76ea854a41ba67a5e5b1a6a577b0626dd4dcaba17cf14d30f347720ad6e2cfba",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- entity: OVERVIEW Company\n- scope: Consumer\n- period: FY2025Q1\n- numeric: $1.153|billion\n- provenance: Note 12\n- numeric: $64|million\n- numeric: $2.623|billion\n- provenance: Item 1A\n- numeric: $10.89"
+    },
+    {
+      "unit_id": "ref_delta_av_SEC-0000815556-26-000009_SEC-0000815556-26-000009:numeric:1258-4_presence",
+      "prompt_sha256": "cc1e7ad2749c7e0d616de12fc0add75f0e7d78b39806657c88c231eb57ac8049",
+      "treatment_sha256": "dedf2224e9535c04dc007f237a2ab60836cccba1a17c058cd6986dbf5ba36a5d",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- entity: Contents Fastenal Company\n- scope: Industrial\n- numeric: $100\n- entity: Fastenal Company\n- entity: Cumulative Total Return Among Fastenal Company\n- entity: Zacks SEC Compliance Services Grou"
+    },
+    {
+      "unit_id": "ref_delta_av_SEC-0001090872-25-000087_SEC-0001090872-25-000087:numeric:2-billion_removal",
+      "prompt_sha256": "5d9134492d15e7979d60288ef737afd25689ff08c15049a2d5756bf882217cc0",
+      "treatment_sha256": "8d3e300bd57c733c1306e97d54b773cb05740702868bf931442e8736ba600a6e",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part I\n- provenance: Item 1A\n- period: FY2025\n- period: FY2026\n- numeric: $6948|million\n- numeric: $6510|million\n- numeric: $1303|million\n- numeric: $1289|million\n- numeric: $1240|millio"
+    },
+    {
+      "unit_id": "ref_delta_av_SEC-0001193125-26-059193_SEC-0001193125-26-059193:numeric:990-million_presence",
+      "prompt_sha256": "c976b780a2d7354a11a5d6510dad691b3308fb1e711ba3e6eb1ea09d73949539",
+      "treatment_sha256": "8098477a3f6afc6ba2c455e5f79f5643cb408638b2c25deebee3a6a6dddf4c90",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- numeric: $6.2|billion\n- numeric: $990|million\n- scope: Canada\n- entity: The Company\n- provenance: Part Ii\n- provenance: Item 7\n- entity: East Group\n- entity: West Group. The East Group\n- entity: The"
+    },
+    {
+      "unit_id": "ref_delta_av_SEC-0001535527-26-000010_SEC-0001535527-26-000010:period:fy2026q4_presence",
+      "prompt_sha256": "d67850dfc8c192b208359ade753af3a65e29f79a2236fafd84a6ce261d0086db",
+      "treatment_sha256": "4376fd24e06ac906dd6b5c9e357dceacbdf3e6fb860e5c9616e80e03db370fa6",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Item 8\n- period: FY2026\n- period: FY2024\n- period: FY2025\n- provenance: Part Ii\n- provenance: Item 7\n- provenance: Note 1\n- provenance: Note 16\n- period: FY2026Q4\n- provenance: Part I\n- "
+    },
+    {
+      "unit_id": "ref_delta_av_SEC-0001628280-26-057406_SEC-0001628280-26-057406:scope:cloud_removal",
+      "prompt_sha256": "09feaa98bac4ced6555319d9c661be31117ff9d1ddcd762c053e3a4b1a4eff32",
+      "treatment_sha256": "d75f426709a96f210cf399a33d44202dc82a968db803a6fd6578872c67837c1c",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part Ii\n- provenance: Item 8\n- provenance: Part I\n- provenance: Item 1\n- period: FY2025\n- provenance: Item 7\n- entity: Sandisk Corporation\n- scope: Consumer\n- entity: The Company\n- perio"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0000004962-26-000080_SEC-0000004962-26-000080:numeric:3-28_natural",
+      "prompt_sha256": "df4a01631ca1057141fb54f866906fd86a030fa53dad64212d42f60189b47d20",
+      "treatment_sha256": "f658e218129d5088a2d6928e314cc284a99c76294ae19d6fdbfde181fcc6df3b",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: Consumer\n- scope: Services\n- scope: Commercial\n- numeric: 10%\n- numeric: 25%\n- numeric: 18%\n- numeric: 13%\n- numeric: 4%\n- numeric: $3.28\n- numeric: 17%\n- numeric: $132\n- numeric: 5%\n- numeri"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0000073124-26-000016_SEC-0000073124-26-000016:numeric:1107-3_counterfactual",
+      "prompt_sha256": "b1f8d63c02a08274fe3e28d3fa88b963a7f9cbec21a52c257cf3a394ddf917ae",
+      "treatment_sha256": "41a9ae44cba2f3b2abbc4119f922841519ff8adeef21b8fbce295482ea505708",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- entity: BUSINESS OVERVIEW The Corporation\n- entity: The Corporation\n- scope: Canada\n- scope: Europe\n- numeric: 28%\n- numeric: 22%\n- numeric: 82%\n- numeric: 83%\n- numeric: 87%\n- numeric: 93%\n- numeri"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0000864749-26-000015_SEC-0000864749-26-000015:numeric:15_natural",
+      "prompt_sha256": "467dd0fff8af55580d47a2ef0182488ff17f4af7b23ff4b8868c23ec7383e726",
+      "treatment_sha256": "58f36169b9d9cf88c44c25fedafa4ae48fb7917699082b56b790d5cfec5cafe0",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part Ii\n- provenance: Item 7\n- provenance: Item 1\n- numeric: 6%\n- numeric: 14%\n- numeric: 79%\n- numeric: 76%\n- numeric: 28.5%\n- numeric: 4%\n- numeric: 15%\n- scope: United States\n- proven"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0001104659-26-013549_SEC-0001104659-26-013549:entity:contents-company_natural",
+      "prompt_sha256": "25c6259bb1fdaa7265eef2066815805e86e79488c5305a637c0c531b6037c4b0",
+      "treatment_sha256": "079d7e00f9737996a696d8f3b80dfbc91adaea11c8c73fbebfe24b5c27a10b4a",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part Ii\n- provenance: Item 8\n- scope: United States\n- provenance: Item 7\n- provenance: Part I\n- numeric: 65%\n- entity: The Company\n- provenance: Note 13\n- entity: Contents Company\n- nume"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0001193125-26-071966_SEC-0001193125-26-071966:numeric:5342360_counterfactual",
+      "prompt_sha256": "e444bb2359f059c384a475dd33a8bafe61c754594b5ffc957cb8d06b750ae097",
+      "treatment_sha256": "764167ee7220c99020e074738e1f5330707c3c123fe45b19873d81f9317b04f8",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- numeric: 12%\n- numeric: 4%\n- numeric: 13%\n- numeric: 22%\n- numeric: 17%\n- numeric: 10%\n- numeric: $10008995\n- numeric: $14\n- entity: The Company\n- scope: Retail\n- scope: Americas\n- scope: Europe\n- s"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0001628280-26-008322_SEC-0001628280-26-008322:numeric:2053_counterfactual",
+      "prompt_sha256": "9c02e69776007eb5b8796a7861d879ca11100ae4f89a96c4db58bb736756ccc6",
+      "treatment_sha256": "d3fd83e20ad4624be9fc7268dc3d9c99e6e7a29bfe83d95de6c40f25d8cc26ab",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- scope: Commercial\n- provenance: Part I\n- provenance: Item 1\n- numeric: 30%\n- scope: United States\n- numeric: $16310\n- numeric: $15405\n- numeric: $14984\n- numeric: $905\n- numeric: $421\n- numeric: $10"
+    },
+    {
+      "unit_id": "ref_delta_bu_SEC-0001758730-26-000015_SEC-0001758730-26-000015:provenance:part-ii_natural",
+      "prompt_sha256": "6b8a306ac385f814d2ed524024ee8e15f4578d73be2eabaae02bd9a67315b678",
+      "treatment_sha256": "a571b5f6fdfb9abba949e9871fc388b1b7cb62c6a0d475eabca06e46e993a6db",
+      "prompt_bytes_sample": "You are given a handoff note written by another analyst. Answer the question using the note. If the note does not state the answer, give your best single answer anyway. Reply with the requested field ",
+      "treatment_bytes_sample": "- provenance: Part Ii\n- provenance: Item 7\n- scope: South America\n- scope: Europe\n- scope: Australia\n- numeric: $93.2|million\n- scope: United States\n- provenance: Part I\n- provenance: Item 1"
+    }
+  ]
+}

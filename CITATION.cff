@@ -7,9 +7,8 @@ abstract: >-
   interventions, design-based estimation and a matched-budget comparison
   protocol.
 type: software
-version: 0.2.0
+version: "v1-1"
 license: MIT
-repository-code: "https://github.com/supratik-sarkar/transmission-vs-reconstruction"
 keywords:
   - causal inference
   - information transmission

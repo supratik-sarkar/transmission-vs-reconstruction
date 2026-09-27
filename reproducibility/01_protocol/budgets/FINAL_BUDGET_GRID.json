@@ -1,0 +1,38 @@
+{
+  "schema": "FINAL_BUDGET_GRID/v1",
+  "status": "HARNESS_REVERIFIED",
+  "panel": [
+    "nvidia_gpt_oss_20b",
+    "nvidia_nemotron3_super_120b_a12b"
+  ],
+  "calibrated_for_receiver": "nvidia_gpt_oss_20b",
+  "method": "F_ir = tokenizer_r.count(render_message(atomize(doc_i))); F* = median_r(median_i F_ir); B1=round(F*/2); B2=round(F*/1.5); B3=200",
+  "median_F_per_receiver": {
+    "nvidia_gpt_oss_20b": 169.0,
+    "nvidia_nemotron3_super_120b_a12b": 187.0
+  },
+  "f_star": 178.0,
+  "b_star": 89,
+  "candidate_grid_pre_outcome": [
+    89,
+    119,
+    200
+  ],
+  "rho_at_b_star": {
+    "nvidia_gpt_oss_20b": 1.8989,
+    "nvidia_nemotron3_super_120b_a12b": 2.1011
+  },
+  "realized_median_rho": 2.0,
+  "provider_generation_calls": 0,
+  "n_documents": 100,
+  "independence_note": "B* was recomputed from the two surviving receivers' own per-receiver median token counts, which are receiver-specific and unaffected by panel membership. Only the outer median changes. The result coincides with the historical Muse-panel value of 89; this is an independent recalculation that happens to agree, NOT a reuse of the Muse-calibrated constant.",
+  "reverification_required": "harness_budget_calibration.py --receivers nvidia_gpt_oss_20b nvidia_nemotron3_super_120b_a12b  (must be run on the Mac under Python 3.12; this file records the arithmetic only)",
+  "superseded": {
+    "b_star": 89,
+    "panel": "4-receiver, Muse-Glimmer reference",
+    "realized_median_rho": 2.0056
+  },
+  "receipt_file": "BUDGET_CALIBRATION_RECEIPT_TWO_RECEIVER.json",
+  "receipt_sha256": "7010d1b47eacb77eec993adf056332a0dd9f82bc13a470c712dacb3f50b2efd6",
+  "harness_reverification_utc": "2026-09-20T17:59:43.307500+00:00"
+}

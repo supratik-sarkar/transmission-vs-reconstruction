@@ -1,0 +1,580 @@
+{
+  "_README": [
+    "TVR / CausalRelay v3.1 FINAL PROSPECTIVE SCIENTIFIC CONTRACT.",
+    "Authored by the certifier. NOT YET FROZEN and NOT in GATE/. Becomes binding when",
+    "the scientific authority sets status FROZEN and the certifier pins its sha256.",
+    "Every value is pre-outcome. No confirmatory result was inspected."
+  ],
+  "contract_version": "FINAL",
+  "scientific_release": "v3.1",
+  "gate_revision_required": "gate-r05",
+  "status": "FROZEN",
+  "authored_utc": "2026-09-20T17:00:00+05:30",
+  "deviations_from_proposal": [
+    {
+      "id": "DEV-1",
+      "item": "D1",
+      "proposed": "k=3 focal questions for policy/comparators/sham -> 41,060 provider units",
+      "adopted": "D1-b: one focal atom per document-level unit -> 21,860 provider units",
+      "reason": "FEASIBILITY. Measured attested RPMs give 103.7 h parallel / 160.8 h serial for the x3 plan: 4.3-6.7 days of provider execution alone, before qualification, S9 generation, annotation or analysis. The authority's window is 2-3 days from 2026-09-20T14:00 IST. The x3 plan is not executable in it.",
+      "cost": "Wider confidence intervals on Experiment C endpoint A. Delta^av and Delta^bu are unaffected.",
+      "commensurability": "PRESERVED. All document-level blocks use one focal atom, so policy, comparators and sham remain mutually comparable. The commensurability objection applies only to tripling policy alone."
+    },
+    {
+      "id": "DEV-2",
+      "item": "D6",
+      "proposed": "two annotators + third human adjudicator",
+      "adopted": "two annotators + BLINDED_CONSENSUS_ADJUDICATION with HUMAN_UNRESOLVED fallback",
+      "reason": "The authority has two annotators available, not three.",
+      "superseded_wording": "two annotators + prespecified mechanical tie-break",
+      "superseded_reason": "The earlier DROP_AND_ADVANCE tie-break discarded every disagreement, which preferentially removes ambiguous cases and makes the audit easier than deployment. D6 is authoritative."
+    }
+  ],
+  "execution_graph": {
+    "total_graph_units": 14860,
+    "provider_executed_units": 14660,
+    "not_estimable_units": 200,
+    "units_per_block": {
+      "direct_text_comparators": 400,
+      "interaction_diagnostic": 200,
+      "nonreference_focal_delta_av": 600,
+      "nonreference_focal_delta_bu": 600,
+      "policy_evaluation": 4200,
+      "reference_receiver_delta_av": 4330,
+      "reference_receiver_delta_bu": 4330,
+      "sham": 200
+    },
+    "units_per_receiver": {
+      "nvidia_gpt_oss_20b": 11060,
+      "nvidia_nemotron3_super_120b_a12b": 3600
+    },
+    "units_per_budget": {
+      "119": 1400,
+      "200": 1400,
+      "89": 6730,
+      "None": 5130
+    },
+    "units_per_method": {
+      "causalrelay": 600,
+      "dac": 200,
+      "delta_av_targeting": 300,
+      "delta_bu_oracle": 100,
+      "delta_bu_ranking_transfer_89": 200,
+      "interaction_diagnostic": 200,
+      "llmlingua_2": 200,
+      "natural_policy_imitation": 600,
+      "nonreference_focal_delta_av": 600,
+      "nonreference_focal_delta_bu": 600,
+      "random": 600,
+      "reference_delta_av_transfer": 300,
+      "reference_delta_bu_transfer": 300,
+      "reference_receiver_delta_av": 4330,
+      "reference_receiver_delta_bu": 4330,
+      "role_only": 600,
+      "salience": 600,
+      "sham": 200
+    },
+    "role_preserving_rule": {
+      "reference_causal_blocks": "reassigned to the new reference (role-bound, not model-bound)",
+      "reference_role_policies": [
+        "delta_av_targeting",
+        "delta_bu_oracle",
+        "delta_bu_ranking_transfer_89"
+      ],
+      "reference_role_policies_note": "delta_bu_oracle, delta_av_targeting and delta_bu_ranking_transfer_89 were bound exclusively to nvidia_muse_glimmer_30b because it HELD THE REFERENCE ROLE, not because they are Muse-specific. Naive receiver filtering deletes them, which would silently remove the ORACLE that D12's oracle sanity criterion depends on. They follow the reference role.",
+      "transfer_policies": [
+        "reference_delta_av_transfer",
+        "reference_delta_bu_transfer"
+      ],
+      "transfer_policies_note": "reference_delta_*_transfer carries the reference ranking TO a nonreference receiver. On the reference itself it is degenerate, so it is retained only for the nonreference receiver.",
+      "disqualified_receivers": [
+        "google_diffusiongemma_26b_a4b_it",
+        "nvidia_muse_glimmer_30b"
+      ],
+      "disqualified_reason": "DISQUALIFIED_BY_PREOUTCOME_RECEIVER_QUALIFICATION"
+    },
+    "derivation": "Mechanically derived from the frozen DEV1_BOUND_WORK_MANIFEST under a ROLE-PRESERVING receiver transformation."
+  },
+  "D1_endpoint_dimensionality": {
+    "decision": "D1-b",
+    "rule": "S5 yields k=3 focal atoms per document. A SECOND stage selects exactly ONE of those three as the DOCUMENT-LEVEL FOCAL ATOM. That single atom is reused across every single-focal document-level evaluation of that document.",
+    "amendment_required": true,
+    "pi_iz": "pi_iz_effective = (k / m_i) * (1 / n_is) * (1 / k) = 1 / (m_i * n_is)",
+    "amendment_note": "The second stage is a prospective design amendment, not an implementation of S5. It must be recorded as such. Hajek estimation is unchanged; only the inclusion probability carries the extra factor.",
+    "seed_stage_label": "DOCUMENT_LEVEL_FOCAL_V1",
+    "reused_across": [
+      "policy_evaluation",
+      "direct_text_comparators",
+      "sham",
+      "all budgets",
+      "all eligible receivers"
+    ],
+    "why_once_per_document": "If each unit sampled its focal atom independently, two policies evaluated on the same document at the same budget would target different atoms and the paired comparison would no longer be paired. Choosing once per document preserves pairing and commensurability across policies, comparators, sham, budgets and receivers.",
+    "applies_to_blocks": [
+      "policy_evaluation",
+      "direct_text_comparators",
+      "sham"
+    ]
+  },
+  "D4_slot_derivation": {
+    "rule_id": "SENTENCE_CONTEXT_MASK_V1",
+    "steps": [
+      "1. Use frozen source text and frozen atom char_start/char_end.",
+      "2. Sentence boundary is deterministic: document edge, blank-line boundary, or '.', '?' or '!' followed by whitespace or end-of-document.",
+      "3. Select the smallest such segment containing the focal span.",
+      "4. If that segment exceeds 512 characters, fall back to exactly 160 characters left + 160 right, clipped at document boundaries.",
+      "5. Replace the exact focal span with <TARGET>.",
+      "6. Replace every remaining canonical-equivalent occurrence, located by the frozen matcher find_spans() semantics, with <EQUIV_REDACTED>.",
+      "7. Normalise CRLF and CR to LF after extraction; collapse whitespace runs to one ASCII space; strip outer whitespace.",
+      "8. Emit the question template verbatim.",
+      "9. On deterministic failure or residual ambiguity emit ATTRIBUTE_NOT_DETERMINISTICALLY_RESOLVABLE. Never hand-write a replacement."
+    ],
+    "question_template": "Context: {masked_context}\nQuestion: What content should replace <TARGET>?\nAnswer with only the missing content.",
+    "fallback_window_chars": 160,
+    "sentence_max_chars": 512,
+    "prereg_basis": "S7 requires enough identity and context to ask a well-defined question while withholding the focal value; bare slots are forbidden."
+  },
+  "D5_s9_reserve": {
+    "reserve_size": 600,
+    "ordering_seed": {
+      "master_seed": 20260907,
+      "stage_label": "S9_RESERVE_V1"
+    },
+    "arm_composition": {
+      "presence_arm": 450,
+      "absence_arm": 150
+    },
+    "arm_composition_rationale": "Human-truth presence requires the receiver to actually reproduce the value, which is far rarer than the presence arm itself. A presence-heavy reserve is needed to reach 100 true-presence cases. This is OPERATIONAL SIZING ONLY: the arm is a design variable, not a matcher output, and it does not enter case selection, labelling or estimation.",
+    "selection_rule": [
+      "Freeze the complete ordered reserve BEFORE any annotation.",
+      "Annotate strictly in frozen reserve order.",
+      "Final audit = first 100 adjudicated human-truth presence + first 100 adjudicated human-truth absence, in that order.",
+      "Matcher predictions MUST NOT be computed or inspected until those 200 ids are permanently fixed.",
+      "Reserve exhausts before either stratum reaches 100 -> FAIL CLOSED."
+    ]
+  },
+  "D6_annotation": {
+    "annotators": 2,
+    "independent": true,
+    "blinded": true,
+    "adjudicator": null,
+    "tie_break_rule": "BLINDED_CONSENSUS_ADJUDICATION",
+    "tie_break_detail": [
+      "1. Two independent blinded labels per case.",
+      "2. On disagreement, BOTH humans perform a second-pass consensus adjudication, still blinded to all matcher output.",
+      "3. Consensus reached -> that label is the truth label.",
+      "4. Genuinely unresolved -> HUMAN_UNRESOLVED; the case is excluded and the next reserve case is taken."
+    ],
+    "tie_break_rationale": "The earlier DROP_AND_ADVANCE rule discarded every disagreement, which preferentially removes the ambiguous and hard cases and thereby makes the matcher audit easier than deployment. A blinded consensus pass retains the hard cases without making either annotator authoritative.",
+    "must_report": [
+      "initial_agreement_rate",
+      "cohens_kappa",
+      "disagreement_count",
+      "consensus_resolved_count",
+      "human_unresolved_count"
+    ],
+    "agreement_is_blocking": false,
+    "human_authorship": "PROCEDURAL_ATTESTATION_NOT_CRYPTOGRAPHIC_PROOF"
+  },
+  "D7_audit_pool_allocation": {
+    "construct_after": "FINAL_RECEIVER_PANEL_FROZEN",
+    "construct_after_reason": "Equal receiver representation is impossible to honour if the panel changes after generation.",
+    "role_allocation": "deployment-proportional using EXACT role counts from FROZEN_SAMPLING_FRAME, not rounded percentages",
+    "receiver_allocation": "equal across the final qualified panel",
+    "arm_allocation": "per D5 arm_composition",
+    "document_cap": 16,
+    "source_pool": "source_manifests/CALIBRATION.csv",
+    "source_pool_verified": {
+      "calibration_issuers": 50,
+      "calibration_documents": 50,
+      "intersect_stage1_issuers": 0,
+      "intersect_stage1_documents": 0,
+      "intersect_stage2_test_issuers": 0,
+      "intersect_stage2_test_documents": 0
+    }
+  },
+  "D9_D10_qualification": {
+    "run_after": [
+      "D4_frozen",
+      "content_validity_contract_frozen"
+    ],
+    "run_after_reason": "Qualifying on a transient prompt is the error that produced the historical panel.",
+    "cap_ladder": [
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "sample_per_receiver": 50,
+    "sample_rule": "one case per calibration document, deterministic",
+    "sample_seed": {
+      "master_seed": 20260907,
+      "stage_label": "RECEIVER_QUAL_V1"
+    },
+    "identical_cases_across_caps": true,
+    "threshold": "at least 48 of 50 USABLE_ANSWER",
+    "cap_selection": "smallest cap meeting the threshold",
+    "reasoning_effort_manipulation": false,
+    "hidden_reasoning_extraction": false,
+    "muse_glimmer_rule": "Retain only if it qualifies. If it fails all four caps, remove it without consulting any scientific effect.",
+    "replacement_rule": "Replacement must come from a receiver backup list frozen before scientific outcomes. If no authoritative eligible backup list exists, FAIL CLOSED before S9 response generation, B* recalibration and capacity qualification rather than improvising a model.",
+    "on_reference_change": [
+      "recalibrate B*",
+      "recompute budget grid",
+      "re-run capacity qualification"
+    ]
+  },
+  "D10_content_validity": {
+    "module": "02_backend/runtime/content_validity.py",
+    "symbols": [
+      "classify_response",
+      "is_scientifically_usable"
+    ],
+    "classes": [
+      "USABLE_ANSWER",
+      "EMPTY_CONTENT",
+      "NULL_CONTENT",
+      "MISSING_CONTENT",
+      "REASONING_ONLY",
+      "TOKEN_CAP_NO_ANSWER"
+    ],
+    "scoreable": [
+      "USABLE_ANSWER"
+    ],
+    "non_usable_terminal_state": "HARNESS_ERROR",
+    "never_scored_as_zero": [
+      "EMPTY_CONTENT",
+      "NULL_CONTENT",
+      "MISSING_CONTENT",
+      "REASONING_ONLY",
+      "TOKEN_CAP_NO_ANSWER"
+    ],
+    "runner_binding": "unit_runner.CONTENT_CLASSIFIER must be classify_response defined in that exact file; enforced by gate-r05 G20b"
+  },
+  "D11_interaction": {
+    "decision": "NOT_ESTIMABLE_SPECIFICATION_GAP",
+    "units": 200,
+    "provider_calls": 0,
+    "numerical_claim": null,
+    "reporting_requirement": "Reported explicitly as a specification gap in the manuscript, never as a null or a zero."
+  },
+  "D12_sanity_criteria": {
+    "note": "These are implementation sanity guards, not efficacy thresholds. A genuine null on Delta^av/Delta^bu remains fully publishable under the frozen null-result contract.",
+    "oracle": {
+      "delta": 0.02,
+      "units": "absolute endpoint-A probability",
+      "primary_estimate": "weighted-pooled endpoint A",
+      "statistic": "D = oracle - deployable_policy, per policy",
+      "hypothesis": {
+        "H0": "D >= -0.02",
+        "H1": "D < -0.02",
+        "sidedness": "one-sided material-inversion test"
+      },
+      "inference": "paired document bootstrap, 10000 replicates",
+      "multiplicity_procedure": "Holm adjustment across deployable policies",
+      "familywise_alpha": 0.05,
+      "stratum_specific": "reported, NONBLOCKING",
+      "fail_condition": "Holm-adjusted one-sided test rejects H0 for any deployable policy"
+    },
+    "sham": {
+      "epsilon": 0.05,
+      "units": "absolute endpoint-A probability",
+      "primary_estimate": "weighted-pooled sham effect",
+      "test": "TOST at alpha = 0.05, equivalence bounds [-0.05, +0.05]",
+      "inference": "document-clustered",
+      "operational_criterion": "90% CI lies wholly inside [-0.05, +0.05]",
+      "stratum_specific": "reported, NONBLOCKING"
+    }
+  },
+  "preserved_frozen_requirements": {
+    "prereg_S5": {
+      "k": 3,
+      "pi_iz": "(k/m_i)*(1/n_is)",
+      "master_seed": 20260907,
+      "sampling_before_relay": true,
+      "eligibility": "m_i >= k, excluded pre-treatment"
+    },
+    "prereg_S7": "well-defined subject and attribute; bare slots forbidden",
+    "prereg_S9": {
+      "design": "HUMAN_TRUTH_STRATIFIED",
+      "estimator": "FROZEN_VALIDATION_SCORE_V1",
+      "n": 200,
+      "strata": {
+        "presence": 100,
+        "absence": 100
+      },
+      "precision_floor": 0.95,
+      "recall_floor": 0.95,
+      "blinded": true
+    },
+    "prereg_S13": {
+      "estimator": "Hajek",
+      "ht_where_n_known": true,
+      "stratum_specific_and_pooled_both_reported": true,
+      "unweighted_pooled_alone": false,
+      "bootstrap_replicates": 10000,
+      "cluster": "document",
+      "paired_comparisons_share_document_draw": true
+    },
+    "null_result_contract": "a null or weak effect is published as a preregistered negative result",
+    "matcher_domain": "receiver response.text; single non-test call site at orchestration/nodes.py:240",
+    "provenance": "exact prompt and treatment bytes persisted; sha256 re-derived from bytes",
+    "state_algebra": "NOT_ESTIMABLE, NOT_APPLICABLE and HARNESS_ERROR are first-class states, never zero"
+  },
+  "execution_sequence": [
+    {
+      "step": 1,
+      "action": "OC-1 four-way concurrent rate-topology test",
+      "provider_calls": "~240",
+      "hours": 0.25,
+      "blocking": true
+    },
+    {
+      "step": 2,
+      "action": "implement D4 rule + content_validity.py + runner binding",
+      "provider_calls": 0,
+      "hours": 3
+    },
+    {
+      "step": 3,
+      "action": "OC-2 receiver qualification D9/D10",
+      "provider_calls": 800,
+      "hours": 2.5
+    },
+    {
+      "step": 4,
+      "action": "freeze final receiver panel; recalibrate B*/grid/capacity if reference changed",
+      "provider_calls": "~500 if changed",
+      "hours": 1
+    },
+    {
+      "step": 5,
+      "action": "generate 600-case S9 reserve on CALIBRATION across the final TWO-receiver panel",
+      "provider_calls": 600,
+      "hours": 1.9
+    },
+    {
+      "step": 6,
+      "action": "blinded annotation by two humans + blinded consensus pass",
+      "provider_calls": 0,
+      "hours": 9,
+      "note": "SERIAL AND HUMAN. Concurrent with step 7 only, which is provider-free."
+    },
+    {
+      "step": 7,
+      "action": "derive 2165 attributes; build focal/evaluation/pi_iz binding; persist prompt+treatment bytes",
+      "provider_calls": 0,
+      "hours": 1,
+      "concurrent_with": [
+        6
+      ]
+    },
+    {
+      "step": 8,
+      "action": "certify matcher; G19 MUST PASS",
+      "provider_calls": 0,
+      "blocking": true
+    },
+    {
+      "step": 9,
+      "action": "gate-r05 full run; ALL checks must PASS",
+      "provider_calls": 0,
+      "blocking": true
+    },
+    {
+      "step": 10,
+      "action": "LAUNCH CONFIRMATORY RUN",
+      "provider_calls": 14660,
+      "runtime_is_not_a_scientific_constant": true,
+      "operational_planning_only": {
+        "reference_calls": 11060,
+        "reference_rpm_isolated": 2.75,
+        "projected_reference_hours": 67.0,
+        "nonreference_calls": 3600,
+        "nonreference_rpm_isolated": 1.36,
+        "projected_nonreference_hours": 44.1,
+        "note": "planning metadata only; not a scientific constant and not a deadline"
+      }
+    },
+    {
+      "step": 11,
+      "action": "score with the certified matcher",
+      "provider_calls": 0
+    },
+    {
+      "step": 12,
+      "action": "STATE 6 independent numerical audit",
+      "provider_calls": 0
+    }
+  ],
+  "hard_stops": [
+    "G19 MUST PASS BEFORE THE CONFIRMATORY RUN LAUNCHES. No exception, no deferral, no gate modification.",
+    "The matcher constructs the stimulus via D4 find_spans() redaction, so an uncertified matcher contaminates prompts, not merely scores.",
+    "If the matcher fails S9, repair it without reference to confirmatory outcomes and re-audit on FRESH blinded cases. Never reuse labelled cases.",
+    "If the 600-case reserve exhausts before either truth stratum reaches 100, FAIL CLOSED.",
+    "Receiver replacement is CLOSED. A further receiver failure is a scientific halt, not a substitution.",
+    "gate-r05 must PASS in full before launch.",
+    "B* must be re-verified by harness_budget_calibration.py on the two-receiver panel before freeze."
+  ],
+  "withdrawn_deviations": [
+    {
+      "id": "DEV-3",
+      "item": "G19 sequencing",
+      "status": "WITHDRAWN",
+      "was": "matcher certification blocks CLAIMS, not LAUNCH",
+      "now": "matcher certification BLOCKS LAUNCH. No deferral. No gate modification.",
+      "why_withdrawn": "D4 step 6 uses the frozen matcher find_spans() to redact canonical equivalents from the prompt, so the matcher CONSTRUCTS THE STIMULUS, not merely the score. An under-detecting matcher leaks the answer into the question and inflates recovery. If S9 later fails and the matcher is repaired, the repaired matcher can reveal that already-generated prompts were leaky; rescoring the same responses cannot repair a contaminated stimulus and the run would have to be regenerated. Separately, installed gate-r05 has no deferral mechanism: G19 FAIL means GATE=FAIL and DO NOT LAUNCH. Honouring DEV-3 would have required either ignoring the authoritative gate or editing it again.",
+      "cost": "The blinded annotation returns to the serial critical path, roughly +8 h."
+    }
+  ],
+  "projected_critical_path_hours": {
+    "reference_gpt_oss_calls": 11060,
+    "reference_rpm_isolated": 2.75,
+    "reference_hours": 67.0,
+    "nonreference_nemotron_calls": 3600,
+    "nonreference_rpm_isolated": 1.36,
+    "nonreference_hours": 44.1,
+    "parallel_critical_path_hours": 67.0,
+    "parallel_critical_path_days": 2.79,
+    "basis": "OC-1 measured parallelism efficiency 0.9956, so per-receiver isolated rates are usable for projection.",
+    "note": "Not a deadline. Recorded for planning only."
+  },
+  "receiver_panel": {
+    "status": "CLOSED",
+    "reference": {
+      "receiver_id": "nvidia_gpt_oss_20b",
+      "provider_model": "openai/gpt-oss-20b",
+      "qualified_output_cap": 2048,
+      "oc2_result": "QUALIFIED 50/50"
+    },
+    "nonreference": {
+      "receiver_id": "nvidia_nemotron3_super_120b_a12b",
+      "provider_model": "nvidia/nemotron-3-super-120b-a12b",
+      "qualified_output_cap": 512,
+      "oc2_result": "QUALIFIED 50/50"
+    },
+    "disqualified": [
+      {
+        "receiver_id": "nvidia_muse_glimmer_30b",
+        "state": "DISQUALIFIED_BY_PREOUTCOME_RECEIVER_QUALIFICATION",
+        "not_a_scientific_result": true
+      },
+      {
+        "receiver_id": "google_diffusiongemma_26b_a4b_it",
+        "state": "DISQUALIFIED_BY_PREOUTCOME_RECEIVER_QUALIFICATION",
+        "not_a_scientific_result": true
+      }
+    ],
+    "reference_selection_basis": "Of the two qualified receivers, the faster one carries the reference role, which bears the largest workload. Operational criterion only; no scientific outcome was consulted.",
+    "oc2_artifact": "CausalRelay_v3_1_FINAL_PROVENANCE/RECEIVER_QUALIFICATION/RECEIVER_QUALIFICATION_RESULT.json",
+    "oc2_sha256": "59fff4e9e64f205d9a65cedea8177f91768113bb3b8e1d2cb8c1dd366f651986",
+    "no_further_qualification": "Receiver replacement is CLOSED. No additional receiver may be sought, qualified or introduced."
+  },
+  "budget": {
+    "schema": "FINAL_BUDGET_GRID/v1",
+    "status": "RECOMPUTED_FROM_CALIBRATION_ARITHMETIC_PENDING_HARNESS_REVERIFICATION",
+    "panel": [
+      "nvidia_gpt_oss_20b",
+      "nvidia_nemotron3_super_120b_a12b"
+    ],
+    "calibrated_for_receiver": "nvidia_gpt_oss_20b",
+    "method": "F_ir = tokenizer_r.count(render_message(atomize(doc_i))); F* = median_r(median_i F_ir); B1=round(F*/2); B2=round(F*/1.5); B3=200",
+    "median_F_per_receiver": {
+      "nvidia_gpt_oss_20b": 169.0,
+      "nvidia_nemotron3_super_120b_a12b": 187.0
+    },
+    "f_star": 178.0,
+    "b_star": 89,
+    "candidate_grid_pre_outcome": [
+      89,
+      119,
+      200
+    ],
+    "rho_at_b_star": {
+      "nvidia_gpt_oss_20b": 1.8989,
+      "nvidia_nemotron3_super_120b_a12b": 2.1011
+    },
+    "realized_median_rho": 2.0,
+    "provider_generation_calls": 0,
+    "n_documents": 100,
+    "independence_note": "B* was recomputed from the two surviving receivers' own per-receiver median token counts, which are receiver-specific and unaffected by panel membership. Only the outer median changes. The result coincides with the historical Muse-panel value of 89; this is an independent recalculation that happens to agree, NOT a reuse of the Muse-calibrated constant.",
+    "reverification_required": "harness_budget_calibration.py --receivers nvidia_gpt_oss_20b nvidia_nemotron3_super_120b_a12b  (must be run on the Mac under Python 3.12; this file records the arithmetic only)",
+    "superseded": {
+      "b_star": 89,
+      "panel": "4-receiver, Muse-Glimmer reference",
+      "realized_median_rho": 2.0056
+    }
+  },
+  "operational_conditions_closed": {
+    "OC-1": {
+      "status": "CLOSED",
+      "finding": "concurrent aggregate 9.6727 RPM vs 9.715 isolated; parallelism efficiency 0.9956",
+      "topology": "EFFECTIVELY_PER_MODEL",
+      "consequence": "Throughput is additive; the earlier 93 h projection was a workload-distribution problem, not a shared-key ceiling."
+    },
+    "OC-2": {
+      "status": "CLOSED",
+      "finding": "gpt_oss QUALIFIED cap 2048 50/50; nemotron QUALIFIED cap 512 50/50; muse_glimmer DISQUALIFIED; diffusiongemma DISQUALIFIED",
+      "must_not_repeat": true
+    }
+  },
+  "deadline_status": {
+    "former_window": "2-3 days from 2026-09-20T14:00 IST",
+    "status": "WITHDRAWN_BY_AUTHORITY",
+    "authority_decision": "Option A: preserve scientific scope as far as the qualified infrastructure permits; execution time is not a scientific hard stop.",
+    "is_a_scientific_hard_stop": false
+  },
+  "certifier_flags_requiring_authority_confirmation": [
+    {
+      "id": "FLAG-1",
+      "severity": "HIGH",
+      "issue": "Reference-role policies followed the reference role rather than being deleted.",
+      "detail": "delta_bu_oracle (100), delta_av_targeting (300) and delta_bu_ranking_transfer_89 (200) were bound exclusively to nvidia_muse_glimmer_30b BECAUSE IT HELD THE REFERENCE ROLE. Naive receiver filtering deletes all 600, silently removing the ORACLE on which D12's oracle sanity criterion depends. This contract reassigns them to nvidia_gpt_oss_20b. Totals are unchanged at 14,860 / 14,660 either way, so the error would not have shown up in any count.",
+      "requires": "authority confirmation that reference-role policies are role-bound, not model-bound",
+      "authority_decision": "CONFIRMED — reference-role policies follow the reference role; delta_av_targeting, delta_bu_oracle, delta_bu_ranking_transfer_89 rebound to nvidia_gpt_oss_20b"
+    },
+    {
+      "id": "FLAG-2",
+      "severity": "MEDIUM",
+      "issue": "reference_delta_*_transfer retained only on the nonreference receiver.",
+      "detail": "These carry the reference ranking TO a nonreference receiver. On the reference itself the transfer is degenerate. 300 units each retained for nemotron; the gpt_oss copies are dropped.",
+      "requires": "authority confirmation",
+      "authority_decision": "CONFIRMED — reference_delta_*_transfer retained only on the nonreference receiver"
+    },
+    {
+      "id": "FLAG-3",
+      "severity": "MEDIUM",
+      "issue": "B* recomputed to 89, identical to the superseded Muse-panel value.",
+      "detail": "median(169, 187) = 178; round(178/2) = 89. Receiver-specific median token counts are unaffected by panel membership; only the outer median changes. This is an independent recalculation that coincides, not a reuse. Must still be re-verified by running the locked harness on the two-receiver panel.",
+      "requires": "harness re-verification before freeze",
+      "authority_decision": "CONDITIONALLY CONFIRMED — B*=89 accepted provisionally; MUST be reproduced by the locked Python 3.12 harness before freeze; on disagreement FAIL CLOSED and report, never silently retain 89"
+    },
+    {
+      "id": "FLAG-4",
+      "severity": "MEDIUM",
+      "issue": "Single nonreference receiver.",
+      "detail": "The design assumed three nonreference receivers; one survives. Receiver heterogeneity in Delta^av/Delta^bu can no longer be estimated, and nonreference generalisation rests on n=1 receiver. This is a genuine reduction in external validity that the manuscript must state.",
+      "requires": "authority acknowledgement in the limitations section",
+      "authority_decision": "ACKNOWLEDGED — exactly one nonreference receiver survives; receiver heterogeneity is NOT ESTIMABLE in the confirmatory design and must be stated as an external-validity limitation in the manuscript"
+    }
+  ],
+  "authority_decisions_recorded": {
+    "FLAG-1": "CONFIRMED — reference-role policies follow the reference role; delta_av_targeting, delta_bu_oracle, delta_bu_ranking_transfer_89 rebound to nvidia_gpt_oss_20b",
+    "FLAG-2": "CONFIRMED — reference_delta_*_transfer retained only on the nonreference receiver",
+    "FLAG-3": "CONDITIONALLY CONFIRMED — B*=89 accepted provisionally; MUST be reproduced by the locked Python 3.12 harness before freeze; on disagreement FAIL CLOSED and report, never silently retain 89",
+    "FLAG-4": "ACKNOWLEDGED — exactly one nonreference receiver survives; receiver heterogeneity is NOT ESTIMABLE in the confirmatory design and must be stated as an external-validity limitation in the manuscript"
+  },
+  "frozen_utc": "2026-09-20T21:01:03.403445+00:00",
+  "final_panel_execution_amendment": {
+    "status": "FROZEN_PRE_OUTCOME",
+    "reason": "Receiver qualification reduced the final panel to the two receivers that passed the frozen qualification rule; no confirmatory outcome was inspected.",
+    "reference_receiver": "nvidia_gpt_oss_20b",
+    "nonreference_receiver": "nvidia_nemotron3_super_120b_a12b",
+    "graph_total": 14860,
+    "provider_units": 14660,
+    "local_not_estimable_units": 200,
+    "phase1_provider_units": 12860,
+    "phase2_provider_units": 1800,
+    "gate_revision": "gate-r05"
+  }
+}

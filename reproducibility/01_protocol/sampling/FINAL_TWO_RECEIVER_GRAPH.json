@@ -1,0 +1,86 @@
+{
+  "schema": "FINAL_TWO_RECEIVER_GRAPH/v1",
+  "derivation": "Mechanically derived from the frozen DEV1_BOUND_WORK_MANIFEST under a ROLE-PRESERVING receiver transformation.",
+  "role_preserving_rule": {
+    "reference_causal_blocks": "reassigned to the new reference (role-bound, not model-bound)",
+    "reference_role_policies": [
+      "delta_av_targeting",
+      "delta_bu_oracle",
+      "delta_bu_ranking_transfer_89"
+    ],
+    "reference_role_policies_note": "delta_bu_oracle, delta_av_targeting and delta_bu_ranking_transfer_89 were bound exclusively to nvidia_muse_glimmer_30b because it HELD THE REFERENCE ROLE, not because they are Muse-specific. Naive receiver filtering deletes them, which would silently remove the ORACLE that D12's oracle sanity criterion depends on. They follow the reference role.",
+    "transfer_policies": [
+      "reference_delta_av_transfer",
+      "reference_delta_bu_transfer"
+    ],
+    "transfer_policies_note": "reference_delta_*_transfer carries the reference ranking TO a nonreference receiver. On the reference itself it is degenerate, so it is retained only for the nonreference receiver.",
+    "disqualified_receivers": [
+      "google_diffusiongemma_26b_a4b_it",
+      "nvidia_muse_glimmer_30b"
+    ],
+    "disqualified_reason": "DISQUALIFIED_BY_PREOUTCOME_RECEIVER_QUALIFICATION"
+  },
+  "reference_receiver": "nvidia_gpt_oss_20b",
+  "nonreference_receiver": "nvidia_nemotron3_super_120b_a12b",
+  "total_graph_units": 14860,
+  "provider_executed_units": 14660,
+  "not_estimable_units": 200,
+  "units_per_block": {
+    "direct_text_comparators": 400,
+    "interaction_diagnostic": 200,
+    "nonreference_focal_delta_av": 600,
+    "nonreference_focal_delta_bu": 600,
+    "policy_evaluation": 4200,
+    "reference_receiver_delta_av": 4330,
+    "reference_receiver_delta_bu": 4330,
+    "sham": 200
+  },
+  "units_per_receiver": {
+    "nvidia_gpt_oss_20b": 11060,
+    "nvidia_nemotron3_super_120b_a12b": 3600
+  },
+  "units_per_budget": {
+    "119": 1400,
+    "200": 1400,
+    "89": 6730,
+    "None": 5130
+  },
+  "units_per_method": {
+    "causalrelay": 600,
+    "dac": 200,
+    "delta_av_targeting": 300,
+    "delta_bu_oracle": 100,
+    "delta_bu_ranking_transfer_89": 200,
+    "interaction_diagnostic": 200,
+    "llmlingua_2": 200,
+    "natural_policy_imitation": 600,
+    "nonreference_focal_delta_av": 600,
+    "nonreference_focal_delta_bu": 600,
+    "random": 600,
+    "reference_delta_av_transfer": 300,
+    "reference_delta_bu_transfer": 300,
+    "reference_receiver_delta_av": 4330,
+    "reference_receiver_delta_bu": 4330,
+    "role_only": 600,
+    "salience": 600,
+    "sham": 200
+  },
+  "dropped_units": {
+    "direct_text_comparators/google_diffusiongemma_26b_a4b_it": 200,
+    "direct_text_comparators/nvidia_muse_glimmer_30b": 200,
+    "nonreference_focal_delta_av/google_diffusiongemma_26b_a4b_it": 600,
+    "nonreference_focal_delta_av/nvidia_gpt_oss_20b": 600,
+    "nonreference_focal_delta_bu/google_diffusiongemma_26b_a4b_it": 600,
+    "nonreference_focal_delta_bu/nvidia_gpt_oss_20b": 600,
+    "policy_evaluation/google_diffusiongemma_26b_a4b_it": 1500,
+    "policy_evaluation/nvidia_muse_glimmer_30b": 1500,
+    "sham/google_diffusiongemma_26b_a4b_it": 100,
+    "sham/nvidia_muse_glimmer_30b": 100,
+    "transfer/google_diffusiongemma_26b_a4b_it": 600,
+    "transfer/nvidia_gpt_oss_20b": 600
+  },
+  "moved_units": {
+    "reference_causal": 8660,
+    "reference_role_policy": 600
+  }
+}
